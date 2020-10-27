@@ -1,5 +1,6 @@
 ﻿using Behlog.Core.Models.Content;
 using Behlog.Services.Dto.Content;
+using Behlog.Services.Dto.System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,6 +33,23 @@ namespace Behlog.Services.Extensions
                     Slug = postTag.Tag.Slug,
                     Title = postTag.Tag.Title
                 }); 
+            }
+
+            return result;
+        }
+
+        public static string GetTagsAsString(this IEnumerable<TagDto> tags) {
+            string result = string.Empty;
+            if (tags == null || !tags.Any())
+                return result;
+
+            int totalCount = tags.Count();
+            int i = 1;
+            foreach (var tag in tags) {
+                result += $"'{tag.Title}'";
+                if (i < totalCount)
+                    result += ",";
+                i++;
             }
 
             return result;

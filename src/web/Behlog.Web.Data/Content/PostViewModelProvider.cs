@@ -5,6 +5,8 @@ using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.System;
 using Behlog.Factories.Contracts.System;
 using Behlog.Services.Contracts.Content;
+using Behlog.Services.Contracts.System;
+using Behlog.Services.Extensions;
 using Behlog.Web.Data.System;
 using Behlog.Web.ViewModels.Content;
 using Mapster;
@@ -17,12 +19,14 @@ namespace Behlog.Web.Data.Content
         private readonly IPostTypeService _postTypeService;
         private readonly IPostService _postService;
         private readonly CategoryViewModelProvider _categoryProvider;
+        private readonly ITagService _tagService;
 
         public PostViewModelProvider(
             LanguageViewModelProvider languageProvider,
             IPostTypeService postTypeService,
             IPostService postService,
-            CategoryViewModelProvider categoryProvider
+            CategoryViewModelProvider categoryProvider,
+            ITagService tagService
         ) {
 
             postTypeService.CheckArgumentIsNull();
@@ -36,6 +40,9 @@ namespace Behlog.Web.Data.Content
 
             categoryProvider.CheckArgumentIsNull();
             _categoryProvider = categoryProvider;
+
+            tagService.CheckArgumentIsNull(nameof(tagService));
+            _tagService = tagService;
         }
 
         /// <summary>
@@ -45,11 +52,15 @@ namespace Behlog.Web.Data.Content
         private async Task setBaseDataAsync(PostEditViewModel model) {
             model.LanguageSelectList = await _languageViewModelProvider
                 .GetSelectListAsync(model.LangId);
+
             model.CategorySelectList = await _categoryProvider
                 .GetSelectListAsync(model.PostTypeId,
                     model.LangId,
                     model.CategoryId
                 );
+
+            var tags = await _tagService.LoadAsync();
+            model.TagsSource = tags.GetTagsAsString();
         }
 
         /// <summary>
@@ -60,8 +71,10 @@ namespace Behlog.Web.Data.Content
             int? langId = null;
             if (model.LangId > 0)
                 langId = model.LangId;
+
             model.LanguageSelectList = await _languageViewModelProvider
                 .GetSelectListAsync(langId);
+
             if(!langId.HasValue) {
                 model.LangId = int.Parse(model.LanguageSelectList[0].Value);
             }
@@ -75,6 +88,9 @@ namespace Behlog.Web.Data.Content
                     model.LangId, 
                     selectedCategoryId: categoryId
                 );
+
+            var tags = await _tagService.LoadAsync();
+            model.TagsSource = tags.GetTagsAsString();
         }
 
         /// <summary>
@@ -129,6 +145,7 @@ namespace Behlog.Web.Data.Content
             var post = await _postService.GetResultByIdAsync(id: postId);
             post.CheckReferenceIsNull();
             var model = post.Adapt<PostEditViewModel>();
+            
             await setBaseDataAsync(model);
 
             return await Task.FromResult(model);

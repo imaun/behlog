@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Behlog.Core;
 using Behlog.Storage.Core;
@@ -39,7 +40,6 @@ using Behlog.Services.Dto;
 using Behlog.Services.Feature;
 using Behlog.Extensions;
 using Behlog.Web.Common.Filters;
-using Microsoft.AspNetCore.Builder;
 using Behlog.Web.Common.Middlewares;
 using Behlog.Validation.Contracts.Feature;
 using Behlog.Validation.Feature;
@@ -50,12 +50,14 @@ namespace Microsoft.Extensions.DependencyInjection {
 
     public static class ServiceDependencyExtensions {
         
-        private static void AddHttpServices(this IServiceCollection services) {
+        private static void AddHttpServices(
+            this IServiceCollection services) {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         }
 
-        private static void AddSecurityServices(this IServiceCollection services) 
+        private static void AddSecurityServices(
+            this IServiceCollection services) 
         {
             services.AddScoped<IPrincipal>(_ =>
                 _.GetRequiredService<IHttpContextAccessor>()
@@ -87,9 +89,12 @@ namespace Microsoft.Extensions.DependencyInjection {
             
         }
 
-        private static void AddDynamicPermissions(this IServiceCollection services) 
+        private static void AddDynamicPermissions(
+            this IServiceCollection services) 
         {
-            services.AddScoped<IAuthorizationHandler, DynamicPermissionsAuthorizationHandler>();
+            services.AddScoped<IAuthorizationHandler, 
+                DynamicPermissionsAuthorizationHandler>();
+
             services.AddAuthorization(_ => {
                 _.AddPolicy(
                     name: ConstantPolicies.DynamicPermission,
@@ -99,7 +104,6 @@ namespace Microsoft.Extensions.DependencyInjection {
                     }
                 );
             });
-
         }
 
         private static void AddFactories(this IServiceCollection services) {
@@ -125,7 +129,9 @@ namespace Microsoft.Extensions.DependencyInjection {
 
         }
 
-        private static void AddRepositories(this IServiceCollection services) {
+        private static void AddRepositories(
+            this IServiceCollection services) {
+
             //Content
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<ILinkRepository, LinkRepository>();
@@ -202,7 +208,6 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<TagsLoader>();
         }
 
-        
         public static void AddBehlogServices(
             this IServiceCollection services, 
             IConfiguration configuration) {
@@ -231,12 +236,14 @@ namespace Microsoft.Extensions.DependencyInjection {
             });
 
             MappingConfig.AddDtoMappingConfig();
+            Behlog.Web.Mapping.MappingConfig.AddViewModelMappingConfig();
         }
 
         public static BehlogSetting GetAppSetting(this IServiceCollection services) {
             var provider = services.BuildServiceProvider();
             var options = provider.GetRequiredService<IOptionsSnapshot<BehlogSetting>>();
             var appSetting = options.Value;
+
             if(appSetting == null)
                 throw new ArgumentNullException(nameof(appSetting));
 

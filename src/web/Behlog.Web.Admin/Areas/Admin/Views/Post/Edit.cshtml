@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = Model.Title + " - ویرایش نوشته";
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
-    var tags = await tagLoader.GetAllTags();
+    //var tags = await tagLoader.GetAllTags();
 }
 
 
@@ -233,7 +233,7 @@
                         <div class="form-group">
                             <label asp-for="Tags" class="col-md-2 control-label"></label>
                             <div class="col-md-10">
-                                <input type="hidden" id="select_tags" asp-for="Tags" value="@Model.CurrentTags" class="form-control" />
+                                <input type="hidden" id="select_tags" asp-for="Tags" value="@Model.Tags" class="form-control" />
                                 <span asp-validation-for="Tags" class="help-block"></span>
                             </div>
                         </div>
@@ -250,6 +250,8 @@
     <link href="~/assets/admin/datepicker/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/admin/datepicker/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="~/assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5-rtl.css" />
+    @*@if(Model.ShowNotification)*@
+    <link src="~/assets/plugins/bootstrap-toastr/toastr-rtl.min.css" />
 }
 
 
@@ -258,6 +260,10 @@
         <link src="~/assets/plugins/bootstrap-toastr/toastr-rtl.min.css" />
         <script src="~/assets/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
     }
+
+    <script src="~/assets/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
+    <script src="~/assets/admin/scripts/bootstrap-editor.js" type="text/javascript"></script>
     <script src="~/assets/admin/datepicker/js/jalaali.js" type="text/javascript"></script>
     <script src="~/assets/admin/datepicker/js/PersianDateTimePicker.js" type="text/javascript"></script>
     @*<script type="text/javascript">
@@ -276,6 +282,28 @@
         });
     </script>
 
+    <script src="~/assets/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr["success"]("نوشته با موفقیت افزوده شد.");
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-left",
+                "preventDuplicates": true,
+                "showDuration": "2000",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        });
+    </script>
     @if (Model.ShowNotification) {
         <script type="text/javascript">
             $(document).ready(function () {
@@ -306,13 +334,13 @@
                 $(this)
                     .contents()
                     .find("body")
-                    .css({ 'direction': 'rtl', 'font-family': 'Tahoma, "IRANsans"' });
+                    .css({ 'direction': 'rtl', 'font-family': "'IRANsans', 'Tahoma'" });
             });
         })
     </script>
     <script type="text/javascript">
             $('#select_tags').select2({
-                tags: [ @Html.Raw(tags) ]
+                tags: [ @Html.Raw(Model.TagsSource) ]
             });
     </script>
 

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\" />
+    <Folder Include="ViewComponents\Admin\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\" />
   </ItemGroup>
 

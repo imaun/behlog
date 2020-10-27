@@ -84,6 +84,7 @@ namespace Behlog.Web.ViewModels.Content {
         public IList<SelectListItem> StatusSelectList => Status.ToSelectListItems();
         public IList<SelectListItem> CategorySelectList { get; set; }
         public IList<SelectListItem> LanguageSelectList { get; set; }
+        public string TagsSource { get; set; }
 
         #endregion
     }
@@ -156,6 +157,7 @@ namespace Behlog.Web.ViewModels.Content {
         public IList<SelectListItem> StatusSelectList => Status.ToSelectListItems();
         public IList<SelectListItem> CategorySelectList { get; set; }
         public IList<SelectListItem> LanguageSelectList { get; set; }
+        public string TagsSource { get; set; }
 
         #endregion
     }

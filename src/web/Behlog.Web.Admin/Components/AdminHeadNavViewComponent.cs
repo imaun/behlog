@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Behlog.Core.Extensions;
+﻿using Behlog.Core.Extensions;
 using Behlog.Core.Security;
 using Behlog.Web.ViewModels.ViewComponents;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
-namespace Behlog.Web.ViewComponents.Admin
+namespace Behlog.Web.Admin.Components
 {
     [ViewComponent(Name = "AdminHeadNav")]
-    public class AdminHeadNavViewComponent: ViewComponent {
+    public class AdminHeadNavViewComponent : ViewComponent
+    {
 
         private readonly IUserContext _userContext;
 

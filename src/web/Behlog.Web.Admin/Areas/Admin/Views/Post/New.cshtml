@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = @Model.PostTypeTitle + " - نوشته جدید";
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
-    var tags = await tagLoader.GetAllTags();
+    //var tags = await tagLoader.GetAllTags();
 }
 
 <h3 class="page-title">
@@ -380,7 +380,7 @@
 
     <script type="text/javascript">
         $('#select_tags').select2({
-            tags : [ @Html.Raw(tags) ]
+            tags : [ @Html.Raw(Model.TagsSource) ]
         });
 
         
@@ -408,7 +408,7 @@
                 $(this)
                     .contents()
                     .find("body")
-                    .css({ 'direction': 'rtl', 'font-family': 'IRANsans' });
+                    .css({ 'direction': 'rtl', 'font-family': "'IRANsans', 'Tahoma'" });
             });
         })
     </script>
