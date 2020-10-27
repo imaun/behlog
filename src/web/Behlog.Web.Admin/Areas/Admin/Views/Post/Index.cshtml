@@ -1,0 +1,171 @@
+﻿@model Behlog.Web.ViewModels.Admin.Content.AdminPostIndexViewModel
+@{
+    ViewData["Title"] = @Model.PostTypeTitle + " - مدیریت نوشته ها";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h3 class="page-title">
+    مدیریت نوشته ها - (@Model.PostTypeTitle)
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-flag"></i>
+            <a asp-controller="Home" asp-action="Index"> داشبرد</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <i class="fa fa-flag"></i>
+            <a href="#">مدیریت @Model.PostTypeTitle </a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-file"></i>مدیریت نوشته ها
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" class="btn default btn-sm">
+                        <i class="fa fa-share icon-black"></i> Share
+                    </a>
+                    <div class="btn-group">
+                        <a class="btn btn-sm green" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-user"></i> عملیات <i class="fa fa-angle-down "></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right" style="font-family: 'IRANsans'">
+                            <li>
+                                <a asp-controller="Post" asp-action="New" asp-route-postType="@Model.PostTypeSlug">
+                                    <i class="fa fa-pencil"></i> ایجاد نوشته جدید
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-trash-o"></i> Delete
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-ban"></i> Ban
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="i"></i> Make admin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="todo-tasklist">
+
+                    @foreach (var post in Model.DataSource.Items) {
+                        string stateClassName = "todo-tasklist-item-border-yellow";
+                        string badgeClassName = "";
+                        switch(post.Status) {
+                            case Behlog.Core.Models.Enum.PostStatus.Deleted:
+                                stateClassName = "todo-tasklist-item-border-red";
+                                badgeClassName = "danger";
+                                break;
+                            case Behlog.Core.Models.Enum.PostStatus.Draft:
+                                stateClassName = "todo-tasklist-item-border-yellow";
+                                badgeClassName = "warning";
+                                break;
+                            case Behlog.Core.Models.Enum.PostStatus.Planned:
+                                stateClassName = "todo-tasklist-item-border-blue";
+                                badgeClassName = "primary";
+                                break;
+                            case Behlog.Core.Models.Enum.PostStatus.Published:
+                                stateClassName = "todo-tasklist-item-border-green";
+                                badgeClassName = "success";
+                                break;
+                        }
+
+                        <div class="todo-tasklist-item @stateClassName">
+                            <span class="pull-left"><i class="fa fa-file"></i></span>
+                            <div class="todo-tasklist-item-title">
+                                @post.Title
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <span class="todo-tasklist-date"><i class="fa fa-folder"></i>دسته بندی : @post.CategoryTitle</span>
+                                    @foreach(var tag in post.Tags) {
+                                        <span class="todo-tasklist-date"><i class="fa fa-tag"></i>@tag</span>
+                                    }
+                                </div>
+                                <div class="col-sm-4" style="text-align: left">
+                                    <a class="btn btn-success" 
+                                       asp-controller="Post" 
+                                       asp-action="Edit" 
+                                       asp-route-id="@post.Id">ویرایش <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-primary" href="#">مشاهده <i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-danger" href="#">حذف <i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                            <div class="todo-tasklist-controls pull-left">
+                                <span class="todo-tasklist-date"><i class="fa fa-user"></i> ایجادکننده : @post.CreatorUserTitle</span>
+                                <span class="todo-tasklist-date"><i class="fa fa-calendar"></i> تاریخ ایجاد :  @post.CreateDateDisplay </span>
+                                <span class="todo-tasklist-date"><i class="fa fa-calendar"></i>آخرین تعییر در @post.ModifyDateDisplay توسط @post.ModifierUserTitle</span>
+                                <span><i class="fa fa-bookmark"></i></span><span class="badge badge-@badgeClassName"> @post.StatusDisplay</span>
+                                @if (post.Status == Behlog.Core.Models.Enum.PostStatus.Published) {
+                                    <span class="todo-tasklist-date">
+                                        <i class="fa fa-calendar"></i> تاریخ انتشار : @post.PublishDateDisplay 
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+@section headSection {
+    <link href="~/assets/admin/css/todo-rtl.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/admin/datepicker/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/admin/datepicker/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" type="text/css" />
+
+    @*<script src="~/assets/plugins/ckeditor/adapters/jquery.js"></script>
+    <script src="~/assets/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/assets/plugins/ckeditor/config.js"></script>*@
+
+}
+
+
+@section footerScripts {
+
+    <script src="~/assets/admin/datepicker/js/jalaali.js" type="text/javascript"></script>
+    <script src="~/assets/admin/datepicker/js/PersianDateTimePicker.js" type="text/javascript"></script>
+    @*<script type="text/javascript">
+            $(document).ready(function() {
+                $('#PublishDateValue').pDatepicker();
+            });
+        </script>*@
+
+    <script type="text/javascript">
+        $('#PublishDateValue').MdPersianDateTimePicker({
+            Placement: 'right', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '#PublishDateValue',
+            Format: 'yyyy/mm/dd HH:MM'
+        });
+    </script>
+
+    @*<script src="~/assets/admin/scripts/datetimemask.js" type="text/javascript"></script>*@
+
+}

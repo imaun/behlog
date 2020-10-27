@@ -1,0 +1,118 @@
+﻿@model Behlog.Web.ViewModels.System.CategoryAdminViewModel
+
+@{
+    ViewData["Title"] = "مدیریت دسته بندی ها";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+<h3 class="page-title">
+    @Html.Raw(Model.PostTypeTitle) <small>لیست دسته بندی </small>
+</h3>
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="#">مدیریت دسته بندی ها</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                عملیات <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a asp-controller="Category" asp-action="Index" asp-route-postType="@Model.PostTypeSlug">
+                        <i class="fa fa-plus"></i>دسته بندی جدید
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#"><i class="fa fa-edit"></i>ویرایش</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-remove"></i>حذف</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">انتخاب همه</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" asp-for="Filter.PostTypeId" />
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-newspaper-o"></i>دسته بندی ها
+                </div>
+                <ul class="nav nav-tabs" style="float: right">
+                    @foreach (var lang in Model.Languages) {
+                        <li class="">
+                            <a href="#tab_@lang.Id" data-toggle="tab" aria-expanded="false">
+                                @lang.Title
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="portlet-body form">
+                <div class="tab-content">
+                    @foreach (var lang in Model.Languages) {
+                    <div class="tab-pane" id="tab_@lang.Id" style="float: right">
+                        <div class="row">
+                            <div class="card-group">
+                                @foreach (var cat in Model.Items.Where(_ => _.LangId == lang.Id)) {
+                                    <div class="card-header">
+                                        @cat.Title
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            @cat.Description
+                                        </p>
+                                        <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary">
+                                            ویرایش
+                                        </a>
+                                    </div>
+
+                                    <div class="card-footer text-muted">
+                                        ایجاد شده در: @cat.CreateDateDisplay
+                                    </div>
+                                }
+
+                            </div>
+
+                            
+
+                        </div>
+                    </div>
+                    }
+                </div>
+                
+                
+
+                @*@if (Model.HasPagination) {
+
+                        <div class="row">
+                            <div class="col-md-5 col-sm-12">
+                                <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-12">
+                                @Html.Raw(Model.PaginationHtmlCode(Url.Action("Index")))
+                            </div>
+                        </div>
+
+                    }*@
+            </div>
+        </div>
+    </div>
+</div>

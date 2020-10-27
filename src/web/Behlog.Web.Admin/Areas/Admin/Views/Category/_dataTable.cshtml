@@ -1,0 +1,132 @@
+﻿<table id="CategoryDataTable" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>عنوان</th>
+            <th>زیرمجموعه</th>
+            <th>وضعیت</th>
+            <th>زبان</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+<script type="text/javascript">
+
+        function loadCategoryDataTable() {
+            categoryDataTable = $('#CategoryDataTable').DataTable({
+                "info": true,
+                "paging": true,
+                "bAutoWidth": false,
+                "lengthChange": true,
+                "processing": true,
+                "serverSide": true,
+                "searching": false,
+                "sScrollY": "365px",
+                "ajax": function(data, callback, settings) { // Make the Ajax call ourselves
+                    $.ajax({
+                        url: '@Url.Action("Index", "Category", new {Area = AreaNames.AdminArea })',
+                        type: "POST",
+                        async: false,
+                        dataType: "json",
+                        data: {
+                            columns: data.columns, // Needed for paging
+                            draw: data.draw, // Needed for paging
+                            length: data.length, // Needed for paging
+                            order: data.order, // Needed for paging
+                            search: data.search, // Needed for paging
+                            start: data.start // Needed for paging
+                        }
+                    }).done(function(data, textStatus, jqXHR) {
+                        // Callback function that must be executed when the required data
+                        // has been obtained.
+                        // That data should be passed into the callback as the only parameter.
+                        callback(data);
+                    });
+                },
+                "columns": [
+                    {
+                        "name": "Title",
+                        "data": "title",
+                        "defaultContent": "",
+                        "orderable": true,
+                        "searchable": true,
+                        "width": "25%"
+                    },
+                    {
+                        "name": "ParentTitle",
+                        "data": "parentTitle",
+                        "defaultContent": "",
+                        "orderable": true,
+                        "searchable": true,
+                        "width": "30%"
+                    },
+                    {
+                        "name": "StatusText",
+                        "data": "statusText",
+                        "defaultContent": "",
+                        "orderable": true,
+                        "searchable": true,
+                        "width": "15%"
+                    },
+                    {
+                        "name": "LanguageTitle",
+                        "data": "languageTitle",
+                        "defaultContent": "",
+                        "orderable": true,
+                        "searchable": true,
+                        "width": "15%"
+                    },
+                    {
+                        "name": "operationColumn",
+                        "data": null,
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "15%",
+                        "defaultContent": "",
+                        "class": "col-operation"
+                    }
+                ],
+                "dom":
+                    "<'row'<'col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0'f><'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0 dis-none'l>>" +
+                        "<'row'<'col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0'tr>>" +
+                        "<'row'<'col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0'p><'col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 p-0'i>>",
+                "rowCallback": function(row, data, index) {
+                    var btnEdit = btnDelete = btnContextMenu = '';
+
+                    btnEdit = "<a class='td-fa' href='" +
+                        '@Url.Action("Edit", "Category")' +
+                        '?recordId=' +
+                        data.recordId +
+                        "' title='ویرایش'><i class='fa fa-pencil-alt co-blue'></i></a>";
+
+                    btnDelete = "<a class='td-fa' href='#' id='btnDelete-" +
+                        data.recordId +
+                        "' data-id='" +
+                        data.recordId +
+                        "' title='حذف'><i class='fa fa-trash-alt co-red'></i></a>";
+
+                    btnContextMenu = "<a class='td-fa' href='#' id='btnContextMenu-" +
+                        data.recordId +
+                        "' data-id='" +
+                        data.recordId +
+                        "' title='گزینه ها'><i class='fas fa-ellipsis-h co-green'></i></a>";
+
+                    $(row).children('td.col-operation').append(btnEdit + btnDelete + btnContextMenu);
+                    $(row).attr('data-id', data.recordId);
+                },
+                "drawCallback": function(settings) {
+                    createContextMenu('#CategoryDataTable tbody tr', 'right');
+                    createContextMenu('#CategoryDataTable tbody tr a[id^="btnContextMenu"]', 'left');
+                }
+            });
+    }
+
+    function reloadCategoryDataTable() {
+        categoryDataTable.ajax.reload();
+    }
+
+
+</script>
+

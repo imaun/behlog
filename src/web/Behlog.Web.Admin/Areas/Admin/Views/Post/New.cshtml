@@ -1,0 +1,415 @@
+﻿@model Behlog.Web.ViewModels.Content.PostCreateViewModel
+@inject Behlog.Web.Admin.Core.TagsLoader tagLoader 
+@{
+    ViewData["Title"] = @Model.PostTypeTitle + " - نوشته جدید";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+    var tags = await tagLoader.GetAllTags();
+}
+
+<h3 class="page-title">
+    مطلب جدید
+    (@Model.PostTypeTitle)
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-flag"></i>
+            <a asp-controller="Home" asp-action="Index"> داشبرد</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <i class="fa fa-flag"></i>
+            <a asp-controller="Post" asp-action="Index" asp-route-postType="@Model.PostTypeSlug">مدیریت @Model.PostTypeTitle </a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <span>نوشته جدید</span>
+        </li>
+
+    </ul>
+    @*<div class="page-toolbar">
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                    عملیات <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#">Action</a>
+                    </li>
+                    <li>
+                        <a href="#">Another action</a>
+                    </li>
+                    <li>
+                        <a href="#">Something else here</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">Separated link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>*@
+</div>
+
+<div class="row">
+    <form id="myform" asp-controller="Post"
+          asp-action="New"
+          asp-antiforgery="true"
+          class="form-horizontal"
+          enctype="multipart/form-data"
+          method="post">
+        <input type="hidden" asp-for="PostTypeId" />
+        <div class="col-md-8">
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-plus"></i>ایجاد مطلب جدید
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                    </div>
+                </div>
+
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label asp-for="Title" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Title" class="form-control" />
+                                <span asp-validation-for="Title" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Slug" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Slug" class="form-control" />
+                                <span class="help-block">URL نوشته</span>
+                                <span asp-validation-for="Slug" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Body" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <textarea class="wysihtml5 form-control" rows="30" asp-for="Body"></textarea>
+                                <span class="btn-block" asp-validation-for="Body"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Summary" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <textarea asp-for="Summary" class="wysihtml5 form-control" rows="10">
+                                </textarea>
+                                <span asp-validation-for="Summary" class="help-block"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group last">
+                            <label asp-for="CoverPhoto" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="CoverPhotoFile" onchange="previewCoverPhoto()" style="width: 400px; margin: 6px 10px" />
+                                <img src="~/assets/img/defpic.png" id="imgUpload" style="height: 75px; float: left; margin: 0px 0px 10px 25px;" />
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        @if (Model.HasError) {
+                                            <span style="color: red">@Model.ModelMessage</span>
+                                        }
+                                        else if (Model.ModelAdded) {
+                                            <span style="color: blue">@Model.ModelMessage</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" id="btnSubmit" class="btn green">
+                                    <span class="md-click-circle md-click-animate"></span>
+                                    <i class="fa fa-check"></i> ذخیره
+                                </button>
+                                <a asp-controller="Post" asp-action="Index" class="btn default">
+                                    <i class="fa fa-remove"></i> انصراف
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="portlet box green-meadow">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gear"></i> تنظیمات
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label asp-for="LangId" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <select asp-for="LangId"
+                                        asp-items="Model.LanguageSelectList"
+                                        class="form-control input-medium">
+                                </select>
+                                <span class="btn-block" asp-validation-for="LangId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <select asp-for="CategoryId"
+                                        asp-items="Model.CategorySelectList"
+                                        class="form-control input-medium">
+                                </select>
+                                <span class="btn-block" asp-validation-for="CategoryId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AltTitle" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="AltTitle" class="form-control input-large" />
+                                <span asp-validation-for="AltTitle" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Status" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <select asp-for="Status"
+                                        asp-items="Model.StatusSelectList"
+                                        class="form-control">
+                                </select>
+                                <span asp-validation-for="Status" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PublishDateValue" class="col-md-2 control-label"></label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                                <input asp-for="PublishDateValue" class="form-control input-large" placeholder="تاریخ انتشار" />
+                            </div>
+                            @*<div class="col-md-4">
+
+                            </div>*@
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="Commenting" class="col-md-2 control-label"></label>*@
+                            <div class="col-md-10">
+                                <input asp-for="Commenting" class="form-control checkbox" /> فعال برای نظر دادن
+                                <span asp-validation-for="Commenting" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="Password" type="password" class="form-control portlet-input" />
+                                <span asp-validation-for="Password" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="OrderNumber" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <input asp-for="OrderNumber" type="number" class="form-control portlet-input" />
+                                <span asp-validation-for="OrderNumber" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Tags" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                @*<select id="select_tags" class="form-control"></select>*@
+                                <input type="hidden" id="select_tags" asp-for="Tags" class="form-control" />
+                                <span asp-validation-for="Tags" class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section headSection {
+
+    <link href="~/assets/admin/datepicker/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/admin/datepicker/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5-rtl.css" />
+    
+}
+
+
+@section footerScripts {
+    <script src="~/assets/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
+    <script src="~/assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
+    <script src="~/assets/admin/scripts/bootstrap-editor.js" type="text/javascript"></script>
+    <script src="~/assets/admin/datepicker/js/jalaali.js" type="text/javascript"></script>
+    <script src="~/assets/admin/datepicker/js/PersianDateTimePicker.js" type="text/javascript"></script>
+    @*<script type="text/javascript">
+        $(document).ready(function() {
+            $('#PublishDateValue').pDatepicker();
+        });
+    </script>*@
+
+    
+
+    <script type="text/javascript">
+
+        bootstrapEditor.init();
+
+        $('#PublishDateValue').MdPersianDateTimePicker({
+            Placement: 'right', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '#PublishDateValue',
+            Format: 'yyyy/mm/dd HH:MM'
+        });
+    </script>
+
+    <script type="text/javascript">
+        function previewCoverPhoto() {
+            var preview = document.querySelector('#imgUpload');
+            var file = document.querySelector('#CoverPhotoFile').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+
+        $('#myform').submit(function () {
+            if ($(this).valid()) {
+                $(this).find(':submit').attr('disabled', 'disabled');
+            }
+        });
+
+        $('#LangId').change(function () {
+            var langId = $('#LangId').val();
+            var postTypeId = $('#PostTypeId').val();
+            $.ajax({
+                url: '@Url.Action("GetCategoriesAsync")',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'postTypeId': postTypeId,
+                    'langId': langId
+                }
+            }).done(function(data) {
+                var options = $('#CategoryId');
+                options.empty();
+                $.each(data,
+                    function(i, item) {
+                        options.append($('<option />')
+                            .val(item.value)
+                            .text(item.text));
+                    });
+            }).fail(function (error) {
+                alert(error);
+            });
+        });
+
+        //$(document).ready(function () {
+        //    var form = $('#myform')
+        //        , formData = $.data(form[0])
+        //        , settings = formData.validator.settings
+        //        // Store existing event handlers in local variables
+        //        , oldErrorPlacement = settings.errorPlacement
+        //        , oldSuccess = settings.success;
+
+        //    settings.errorPlacement = function (label, element) {
+
+        //        // Call old handler so it can update the HTML
+        //        oldErrorPlacement(label, element);
+
+        //        // Add Bootstrap classes to newly added elements
+        //        label.parents('.form-group').addClass('has-error');
+        //        label.addClass('text-danger');
+        //    };
+
+        //    settings.success = function (label) {
+        //        // Remove error class from <div class="form-group">, but don't worry about
+        //        // validation error messages as the plugin is going to remove it anyway
+        //        label.parents('.form-group').removeClass('has-error');
+
+        //        // Call old handler to do rest of the work
+        //        oldSuccess(label);
+        //    };
+        //});
+
+    </script>
+
+    @*<script type="text/javascript">
+        $.validator.setDefaults({
+            showErrors: function (errorMap, errorList) {
+                this.defaultShowErrors();
+
+                // If an element is valid, it doesn't need a tooltip
+                $("." + this.settings.validClass).tooltip("destroy");
+                $("." + this.settings.validClass).parents('.form-group').removeClass('has-error');
+
+                // Add tooltips
+                for (var i = 0; i < errorList.length; i++) {
+                    var error = errorList[i];
+                    $(error.element.parents('.form-group').addClass('has-error'));
+                    $(error.element).tooltip({ trigger: "focus" }) // Activate the tooltip on focus
+                        .attr("data-original-title", error.message);
+                }
+            }
+        });
+    </script>*@
+
+    <script type="text/javascript">
+        $('#select_tags').select2({
+            tags : [ @Html.Raw(tags) ]
+        });
+
+        
+        @*$('#select_tags').select2({
+            minimumInputLength: 2,
+            ajax: {
+                url: '@Url.Action("LoadTags", "Post")',
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data.items
+                    }
+                },
+            }
+        });*@
+    </script>
+
+    <script>
+        $(window).load(function () {
+            $('iframe.wysihtml5-sandbox').each(function (i) {
+                $(this)
+                    .contents()
+                    .find("body")
+                    .css({ 'direction': 'rtl', 'font-family': 'IRANsans' });
+            });
+        })
+    </script>
+}

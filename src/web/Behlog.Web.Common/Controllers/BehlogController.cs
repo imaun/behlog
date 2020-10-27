@@ -1,0 +1,42 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Behlog.Core;
+using Behlog.Core.Security;
+using Behlog.Core.Extensions;
+using Behlog.Web.ViewModels.Settings;
+using Microsoft.Extensions.Logging;
+
+namespace Behlog.Web.Common.Controllers
+{
+    public class BehlogController: Controller
+    {
+        private readonly IWebsiteInfo _websiteInfo;
+        private readonly IUserContext _userContext;
+        private readonly IOptionsSnapshot<BehlogSetting> _setting;
+        private readonly ILogger<Controller> _logger;
+
+        protected BehlogController(IWebsiteInfo websiteInfo,
+            IUserContext userContext,
+            IOptionsSnapshot<BehlogSetting> setting,
+            ILogger<Controller> logger
+        ) {
+            websiteInfo.CheckArgumentIsNull(nameof(websiteInfo));
+            _websiteInfo = websiteInfo;
+
+            userContext.CheckArgumentIsNull(nameof(userContext));
+            _userContext = userContext;
+
+            setting.CheckArgumentIsNull(nameof(setting));
+            _setting = setting;
+
+            logger.CheckArgumentIsNull(nameof(logger));
+            _logger = logger;
+        }
+
+        public BehlogSetting Options => _setting.Value;
+
+        public IWebsiteInfo WebsiteInfo => _websiteInfo;
+
+        public IUserContext UserInfo => _userContext;
+    }
+}

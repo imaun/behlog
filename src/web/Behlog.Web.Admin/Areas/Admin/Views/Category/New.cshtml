@@ -1,0 +1,168 @@
+﻿@model Behlog.Web.ViewModels.System.CategoryCreateViewModel
+@{
+    ViewData["Title"] = "دسته بندی جدید";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+<h3 class="page-title">
+    مدیریت دسته بندی ها <small>لیست دسته بندی وبلاگ</small>
+</h3>
+
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="#">مدیریت دسته بندی وبلاگ</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+                عملیات <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="@Url.Action("New")"><i class="fa fa-plus"></i>دسته بندی جدید</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#"><i class="fa fa-edit"></i>ویرایش</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-remove"></i>حذف</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#">انتخاب همه</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue-dark">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-plus"></i>ایجاد دسته بندی جدید
+                </div>
+                @*<div class="tools">
+                        <a href="javascript:;" class="collapse"></a>
+                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                        <a href="javascript:;" class="reload"></a>
+                        <a href="javascript:;" class="remove"></a>
+                    </div>*@
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <form id="myform" asp-controller="Category"
+                      asp-action="New"
+                      asp-antiforgery="true"
+                      method="post" class="form-horizontal">
+                    <partial name="_validationSummary" />
+
+                    <input asp-for="PostTypeId" type="hidden" />
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label asp-for="Title" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                <input asp-for="Title" class="form-control input-circle-right" />
+                                <span asp-validation-for="Title" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Slug" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                <input asp-for="Slug" class="form-control input-circle-right" />
+                                <span asp-validation-for="Slug" class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LangId" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                <select asp-for="LangId" asp-items="Model.LanguageSelectList" class="form-control input-medium">
+                                </select>
+                                <span class="help-block" asp-validation-for="LangId"></span>
+                            </div>
+                        </div>
+                        <div>
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="col-md-3 control-label"></label>
+                            <div class="col-md-6">
+                                <textarea asp-for="Description" class="form-control input-circle" style="height: 120px"></textarea>
+                                <span class="help-block" asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" id="btnSubmit" class="btn blue"><span class="md-click-circle md-click-animate"></span><i class="fa fa-check"></i>ذخیره</button>
+                                <a href="#" class="btn default"><i class="fa fa-remove"></i>انصراف</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM-->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section headSection {
+
+
+
+}
+
+
+@section footerScripts {
+    @if (Model.ShowNotification) {
+        <link rel="stylesheet" src="~/assets/plugins/bootstrap-toatsr/toastr-rtl.min.css" />
+        <script src="~/assets/plugins/bootstrap-toastr/toastr.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                toastr["success"]("دسته بندی با موفقیت افزوده شد.");
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-left",
+                    "preventDuplicates": true,
+                    "showDuration": "2000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+            });
+        </script>
+
+    }
+
+    <script type="text/javascript">
+
+        $('#myform').submit(function () {
+            if ($(this).valid()) {
+                $(this).find(':submit')
+                    .attr('disabled', 'disabled');
+            }
+        });
+    </script>
+}

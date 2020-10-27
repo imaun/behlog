@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Behlog.Core.Models\Behlog.Core.Models.csproj" />
+    <ProjectReference Include="..\..\Core\Behlog.Resources\Behlog.Resources.csproj" />
+    <ProjectReference Include="..\..\core\Behlog.Storage.Core\Behlog.Storage.Core.csproj" />
+    <ProjectReference Include="..\..\Core\Behlog.Storage.InMemory\Behlog.Storage.InMemory.csproj" />
+    <ProjectReference Include="..\..\Core\Behlog.Storage.SQLite\Behlog.Storage.SQLite.csproj" />
+    <ProjectReference Include="..\..\core\Behlog.Storage.SqlServer\Behlog.Storage.SqlServer.csproj" />
+    <ProjectReference Include="..\..\web\Behlog.Web.Admin\Behlog.Web.Admin.csproj" />
+    <ProjectReference Include="..\..\web\Behlog.Web.Common\Behlog.Web.Common.csproj" />
+    <ProjectReference Include="..\..\web\Behlog.Web.Data\Behlog.Web.Data.csproj" />
+    <ProjectReference Include="..\Behlog.Repository\Behlog.Repository.csproj" />
+    <ProjectReference Include="..\Behlog.Services\Behlog.Services.csproj" />
+  </ItemGroup>
+
+</Project>

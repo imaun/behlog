@@ -1,0 +1,267 @@
+﻿<div class="page-sidebar-wrapper">
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <div class="page-sidebar navbar-collapse collapse">
+        <!-- BEGIN SIDEBAR MENU -->
+        <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+        <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+        <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+        <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <ul class="page-sidebar-menu page-sidebar-menu-light " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+            <li class="sidebar-toggler-wrapper">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler">
+                </div>
+                <!-- END SIDEBAR TOGGLER BUTTON -->
+            </li>
+            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                <form class="sidebar-search " action="extra_search.html" method="POST">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="جستجو...">
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                        </span>
+                    </div>
+                </form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+        <li class="start ">
+            <a href="@Url.Action("Index", "Home")">
+                <i class="icon-home"></i>
+                <span class="title">داشبرد</span>
+                <span class="arrow "></span>
+            </a>
+                
+        </li>
+        <li class="heading">
+            <h3 class="uppercase">مدیریت محتوا</h3>
+        </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-paper-plane"></i>
+                    <span class="title">صفحات</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a asp-controller="Post" asp-action="New" asp-route-postType="Page">
+                            <i class="icon-plus"></i>
+                            ایجاد صفحه
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-list"></i>
+                            لیست صفحات
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Index" asp-route-postType="Page">
+                            <i class="icon-tag"></i>
+                            دسته بندی ها
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li class="active open">
+                <a href="javascript:;">
+                    <i class="icon-book-open"></i>
+                    <span class="title">وبلاگ</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a asp-controller="Post" asp-action="New" asp-route-postType="Blog">
+                            <i class="icon-plus"></i>
+                            ایجاد نوشته
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-plus"></i>
+                            لیست نوشته ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Index" asp-route-postType="blog">
+                            <i class="icon-tag"></i>
+                            دسته بندی ها
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- END ANGULARJS LINK -->
+            
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-feed"></i>
+                    <span class="title">اخبار</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a asp-controller="Post" asp-action="New" asp-route-postType="News">
+                            <i class="icon-plus"></i>
+                            ایجاد خبر
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-plus"></i>
+                            لیست خبر ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Index" asp-route-postType="news">
+                            <i class="icon-tag"></i>
+                            دسته بندی ها
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-briefcase"></i>
+                    <span class="title">خدمات</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a asp-controller="Post" asp-action="New" asp-route-postType="Service">
+                            <i class="icon-plus"></i>
+                            ایجاد صفحه خدمت
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-plus"></i>
+                            لیست خدمات
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Index" asp-route-postType="service">
+                            <i class="icon-tag"></i>
+                            دسته بندی ها
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-wallet"></i>
+                    <span class="title">مقالات</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                   
+                    <li>
+                        <a asp-controller="Post" asp-action="New" asp-route-postType="Article">
+                            <i class="icon-plus"></i>
+                            ایجاد مقاله
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon-plus"></i>
+                            لیست مقاله ها
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Index" asp-route-postType="article">
+                            <i class="icon-tag"></i>
+                            دسته بندی ها
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+        <li>
+            <a href="javascript:;">
+                <i class="icon-picture"></i>
+                <span class="title">گالری تصاویر</span>
+                <span class="arrow "></span>
+            </a>
+            <ul class="sub-menu">
+                <li>
+                    <a asp-controller="Post" asp-action="New" asp-route-postType="Gallery">
+                        <i class="icon-plus"></i>
+                        ایجاد آلبوم
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-plus"></i>
+                        لیست آلبوم ها
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Category" asp-action="Index" asp-route-postType="gallery">
+                        <i class="icon-tag"></i>
+                        دسته بندی ها
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="heading">
+            <h3 class="uppercase">مدیریت وب سایت</h3>
+        </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="icon-user"></i>
+                    <span class="title">کاربران</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="login.html">
+                            کاربر جدید
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login_2.html">
+                            نقش ها
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login_3.html">
+                            لیست کاربران
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="last ">
+                <a href="javascript:;">
+                    <i class="icon-pointer"></i>
+                    <span class="title">Maps</span>
+                    <span class="arrow "></span>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="maps_google.html">
+                            Google Maps
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps_vector.html">
+                            Vector Maps
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+    </div>
+</div>

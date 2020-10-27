@@ -1,0 +1,21 @@
+﻿@font-face {
+    font-family: 'Byekan';
+    src: url('../fonts/Byekan.eot?#') format('eot'),
+    url('../fonts/Byekan.woff') format('woff'),
+    url('../fonts/Byekan.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: 'BLotus';
+    src: url('../fonts/BLotus.eot?#') format('eot'),
+    url('../fonts/BLotus.woff') format('woff'),
+    url('../fonts/BLotus.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'BNazanin';
+    src: url('../fonts/BNazanin.eot?#') format('eot'),
+    url('../fonts/BNazanin.woff') format('woff'),
+    url('../fonts/BNazanin.ttf') format('truetype');
+}

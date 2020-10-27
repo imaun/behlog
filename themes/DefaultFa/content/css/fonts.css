@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "Yekan";
+    src: url('../fonts/Yekan.woff');
+}
+
+@font-face {
+    font-family: "Num";
+    src: url('../fonts/Num.woff');
+}
+
+@font-face {
+    font-family: Yekan;
+    src: url("../Fonts/BYekan.eot");
+    src: local("?"), 
+        url("../Fonts/BYekan.eot?") format('eot'), 
+        url("../Fonts/BYekan.woff") format("woff"), 
+        url("../Fonts/BYekan.ttf") format("truetype");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Yekan;
+    src: url("../Fonts/BYekan.eot");
+    src: local("?"), 
+        url("../Fonts/BYekan.eot?") format('eot'), 
+        url("../Fonts/BYekan.woff") format("woff"), 
+        url("../Fonts/BYekan.ttf") format("truetype");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: irsans;
+    src: url("../Fonts/irsans.eot");
+    src: local("?"), 
+        url("../Fonts/irsans.eot?") format('eot'), 
+        url("../Fonts/irsans.woff") format("woff"), 
+        url("../Fonts/irsans.ttf") format("truetype");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DroidNaskh;
+    src: url("../Fonts/DroidNaskh-Regular.eot");
+    src: local("?"), 
+        url("../Fonts/DroidNaskh-Regular.eot?") format('eot'), 
+        url("../Fonts/DroidNaskh-Regular.woff") format("woff"), 
+        url("../Fonts/DroidNaskh-Regular.ttf") format("truetype");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DroidNaskh;
+    src: url("../Fonts/DroidNaskh-Bold.eot");
+    src: local("?"), 
+        url("../Fonts/DroidNaskh-Bold.eot?") format('eot'), 
+        url("../Fonts/DroidNaskh-Bold.woff") format("woff"), 
+        url("../Fonts/DroidNaskh-Bold.ttf") format("truetype");
+    font-style: Bold;
+}
