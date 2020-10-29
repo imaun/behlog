@@ -1,11 +1,8 @@
 ﻿@model Behlog.Web.ViewModels.Content.PostEditViewModel
-@inject Behlog.Web.Admin.Core.TagsLoader tagLoader
 @{
     ViewData["Title"] = Model.Title + " - ویرایش نوشته";
     Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
-    //var tags = await tagLoader.GetAllTags();
 }
-
 
 <h3 class="page-title">
     ویرایش نوشته
@@ -28,28 +25,6 @@
         </li>
 
     </ul>
-    @*<div class="page-toolbar">
-            <div class="btn-group pull-right">
-                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
-                    عملیات <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li>
-                        <a href="#">Action</a>
-                    </li>
-                    <li>
-                        <a href="#">Another action</a>
-                    </li>
-                    <li>
-                        <a href="#">Something else here</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">Separated link</a>
-                    </li>
-                </ul>
-            </div>
-        </div>*@
 </div>
 
 <div class="row">
@@ -115,22 +90,6 @@
                             </div>
                         </div>
 
-                        @*<div class="form-group">
-
-                                <div class="col-md-4">
-                                    <div class="input-group">
-                                        @if (Model.HasError) {
-                                            <span style="color: red">@Model.ModelMessage</span>
-                                        }
-                                        else if (Model.ModelAdded) {
-                                            <span style="color: blue">@Model.ModelMessage</span>
-                                        }
-                                    </div>
-                                </div>
-                            </div>*@
-
-
-
                     </div>
                     <div class="form-actions">
                         <div class="row">
@@ -139,8 +98,10 @@
                                     <span class="md-click-circle md-click-animate"></span>
                                     <i class="fa fa-check"></i> ذخیره
                                 </button>
-                                <a asp-controller="Post" asp-action="Index" class="btn default">
-                                    <i class="fa fa-remove"></i> انصراف
+                                <a asp-controller="Post" 
+                                   asp-action="Index" 
+                                   asp-route-postType="@Model.PostTypeSlug" 
+                                   class="btn default"><i class="fa fa-remove"></i> انصراف
                                 </a>
                             </div>
                         </div>
@@ -195,7 +156,7 @@
                             <div class="col-md-4">
                                 <select asp-for="Status"
                                         asp-items="Model.StatusSelectList"
-                                        class="form-control">
+                                        class="form-control input-medium">
                                 </select>
                                 <span asp-validation-for="Status" class="help-block"></span>
                             </div>
@@ -273,6 +234,7 @@
         </script>*@
 
     <script type="text/javascript">
+        bootstrapEditor.init();
         $('#PublishDateValue').MdPersianDateTimePicker({
             Placement: 'right', // default is 'bottom'
             Trigger: 'focus', // default is 'focus',

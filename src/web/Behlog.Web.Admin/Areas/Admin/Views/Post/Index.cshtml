@@ -108,7 +108,13 @@
                                        asp-action="Edit" 
                                        asp-route-id="@post.Id">ویرایش <i class="fa fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-primary" href="#">مشاهده <i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-primary" 
+                                       asp-area="" 
+                                       asp-controller="Post"
+                                       asp-action="Detail"
+                                       asp-route-id="@post.Id"
+                                       asp-route-postType="@Model.PostTypeSlug"
+                                       asp-route-slug="@post.Slug">مشاهده <i class="fa fa-eye"></i></a>
                                     <a class="btn btn-danger" href="#">حذف <i class="fa fa-trash-o"></i></a>
                                 </div>
                             </div>
