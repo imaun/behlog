@@ -20,8 +20,6 @@ namespace Behlog.Web.ViewModels.System
         //     _dic.Values.FirstOrDefault(_ => _ == postTypeSlug.ToLower());
 
         public static string GetPostTypeDisplayName(this string postTypeSlug) {
-            if (string.IsNullOrWhiteSpace(postTypeSlug)) //TODO : Remove this shit!!!
-                return "blog";
 
             if (_dic.Any(_ => _.Key == postTypeSlug.ToLower())) {
                 return _dic.FirstOrDefault(_ => _.Key == postTypeSlug.ToLower()).Value;

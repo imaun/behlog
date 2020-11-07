@@ -6,12 +6,21 @@ using Behlog.Core.Contracts;
 using Behlog.Core.Models.System;
 using Behlog.Core.Models.Content;
 using Behlog.Core.Contracts.Repository.Content;
+using Behlog.Core.Contracts.Services.Common;
+using Behlog.Core.Extensions;
 
 namespace Behlog.Repository.Content
 {
     public class PostRepository : BaseRepository<Post, int>, IPostRepository
     {
-        public PostRepository(IBehlogContext context) : base(context) {
+        private readonly IDateService _dateService;
+
+        public PostRepository(
+            IBehlogContext context, 
+            IDateService dateService) : base(context) {
+            
+            dateService.CheckArgumentIsNull();
+            _dateService = dateService;
         }
 
         public async Task<int> GetMaxOrderNumberAsync(int categoryId) =>
@@ -48,5 +57,41 @@ namespace Behlog.Repository.Content
                 .Select(_ => _.File)
                 .ToList();
         }
+
+        public async Task<(IEnumerable<Post>, int)> FrontSearchAsync(
+            int websiteId, 
+            string searchPhrase,
+            bool paging = false,
+            int skip = 1,
+            int pageSize = 10) {
+
+            var query = _dbSet
+                .Include(_=> _.CreatorUser)
+                .Include(_ => _.PostType)
+                .Include(_ => _.Language)
+                .Include(_ => _.Category)
+                .Include(_ => _.PostTags)
+                .ThenInclude(_ => _.Tag)
+                .Where(_ => _.Status == Core.Models.Enum.PostStatus.Published)
+                .Where(_ => _.PublishDate <= _dateService.UtcNow())
+                .Where(_ => _.WebsiteId == websiteId)
+                .Where(_ => _.Title.Contains(searchPhrase) ||
+                    _.AltTitle.Contains(searchPhrase) ||
+                    _.Body.Contains(searchPhrase) ||
+                    _.Slug.Contains(searchPhrase) ||
+                    _.Summary.Contains(searchPhrase) ||
+                    _.Template.Contains(searchPhrase)
+                );
+
+            if(paging) {
+                query = query.Skip(skip).Take(pageSize);
+            }
+
+            var result = await query.ToListAsync();
+            var totalCount = await query.CountAsync();
+
+            return (result, totalCount);
+        }
+
     }
 }

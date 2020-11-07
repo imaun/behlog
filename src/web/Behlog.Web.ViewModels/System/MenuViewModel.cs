@@ -17,6 +17,7 @@ namespace Behlog.Web.ViewModels.System
 
         public List<MenuItemViewModel> GetSubItems(int? parentId = null)
             => Items.Where(_ => _.ParentId == parentId)
+                .OrderBy(_=> _.OrderNumber)
                 .ToList();
 
         public bool HasSubItems(int itemId) =>
@@ -61,7 +62,7 @@ namespace Behlog.Web.ViewModels.System
         //}
         public string RouteName { get; set; }
         public string FullActionUrl { get; set; }
-
+        public int OrderNumber { get; set; }
         public Dictionary<string, string> ParameterPairs { get; set; }
      
         private void loadParametersPairs() {

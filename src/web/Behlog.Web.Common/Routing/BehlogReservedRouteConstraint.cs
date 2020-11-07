@@ -39,7 +39,10 @@ namespace Behlog.Web.Common.Routing {
             "home",
             "index",
             "post",
-            "contact"
+            "contact",
+            "search",
+            "error",
+            
         };
     }
 }

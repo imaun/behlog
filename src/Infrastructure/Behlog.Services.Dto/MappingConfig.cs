@@ -6,8 +6,8 @@ using Behlog.Services.Dto.Content;
 using Mapster;
 using Behlog.Services.Extensions;
 
-namespace Behlog.Services.Dto
-{
+namespace Behlog.Services.Dto {
+
     public static class MappingConfig {
 
         public static void AddDtoMappingConfig() {
@@ -49,9 +49,21 @@ namespace Behlog.Services.Dto
                 .Map(d => d.CreatorUserTitle, s => s.CreatorUser != null ? s.CreatorUser.Title : "")
                 .Map(d => d.ModifierUserTitle, s => s.ModifierUser != null ? s.ModifierUser.Title : "")
                 .Map(d => d.Tags, s => s.PostTags.Any() 
-                    ? s.PostTags.Select(_ => _.Tag.Title).ToList() 
+                    ? s.PostTags.Select(_ => _.Tag.Slug).ToList() 
                     : new List<string>());
-                
+
+            TypeAdapterConfig<Post, SearchResultItemDto>
+                .NewConfig()
+                .Map(d=> d.PostId, s => s.Id)
+                .Map(d => d.CategoryTitle, s => s.CategoryId.HasValue ? s.Category.Title : "")
+                .Map(d => d.LangTitle, s => s.Language != null ? s.Language.Title : "")
+                .Map(d => d.LangKey, s => s.Language != null ? s.Language.LangKey : "")
+                .Map(d => d.CreatorUserTitle, s => s.CreatorUser != null ? s.CreatorUser.Title : "")
+                .Map(d => d.PostTypeSlug, s => s.PostType != null ? s.PostType.Slug : "")
+                .Map(d => d.PostTypeTitle, s => s.PostType != null ? s.PostType.Title : "")
+                .Map(d => d.Tags, s => s.PostTags.Any()
+                     ? s.PostTags.Select(_ => _.Tag.Slug).ToList()
+                     : new List<string>());
         }
     }
 }

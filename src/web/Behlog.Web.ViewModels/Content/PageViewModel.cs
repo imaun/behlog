@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Behlog.Core;
+using Behlog.Web.ViewModels.System;
 
 namespace Behlog.Web.ViewModels.Content
 {
@@ -15,7 +16,7 @@ namespace Behlog.Web.ViewModels.Content
         public int LangId { get; set; }
         public string LangKey { get; set; }
         public int PostTypeId { get; set; }
-        public string PostTypeTitle { get; set; }
+        public string PostTypeTitle => PostTypeSlug.GetPostTypeDisplayName();
         public string PostTypeSlug { get; set; }
         public string Title { get; set; }
         public string AltTitle { get; set; }

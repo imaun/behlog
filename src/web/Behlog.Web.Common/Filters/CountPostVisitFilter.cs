@@ -50,7 +50,7 @@ namespace Behlog.Web.Common.Filters {
             
             if(postId > 0) {
                 var cachKey = string.Format("POST-CNT-{0}", postId);
-                //Must Use cache
+                //TODO: Must Use cache
                 //var cachedResult = 
                 var data = new CreatePostVisitDto {
                     PostId = postId,

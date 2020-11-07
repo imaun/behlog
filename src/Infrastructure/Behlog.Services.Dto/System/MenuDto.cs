@@ -24,5 +24,6 @@ namespace Behlog.Services.Dto.System
         public string Controller { get; set; }
         public string Parameters { get; set; }
         public string RouteName { get; set; }
+        public int OrderNumber { get; set; }
     }
 }

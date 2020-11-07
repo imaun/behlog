@@ -33,6 +33,7 @@ namespace Behlog.Services.Dto.Content
         public string Template { get; set; }
         public IEnumerable<RelatedPageDto> RelatedPages { get; set; }
         public ParentPageDto Parent { get; set; }
+        public string TemplateResult { get; set; }
     }
 
     public class RelatedPageDto {

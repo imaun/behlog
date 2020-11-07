@@ -15,7 +15,7 @@ namespace Behlog.Web.Data.Extensions {
             int totalCount = tags.Count();
             int i = 1;
             foreach (var tag in tags) {
-                result += $"'{tag.Title}'";
+                result += $"{tag.Title}";
                 if (i < totalCount)
                     result += ",";
                 i++;

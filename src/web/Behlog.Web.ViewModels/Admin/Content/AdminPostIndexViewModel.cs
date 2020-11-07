@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
 using Behlog.Web.ViewModels.Core;
+using Behlog.Web.ViewModels.System;
 using DNTPersianUtils.Core;
-
 
 namespace Behlog.Web.ViewModels.Admin.Content
 {
@@ -15,7 +15,7 @@ namespace Behlog.Web.ViewModels.Admin.Content
         }
 
         public DataGridViewModel<AdminPostIndexItemViewModel> DataSource { get; set; }
-        public string PostTypeTitle { get; set; }
+        public string PostTypeTitle => PostTypeSlug.GetPostTypeDisplayName();
         public string PostTypeSlug { get; set; }
     }
 
@@ -52,5 +52,4 @@ namespace Behlog.Web.ViewModels.Admin.Content
         public IEnumerable<string> Tags { get; set; }
     }
 
-    
 }

@@ -14,8 +14,12 @@
     <ul class="page-breadcrumb">
         <li>
             <i class="fa fa-home"></i>
-            <a href="#">مدیریت دسته بندی ها</a>
+            <a asp-controller="Home" asp-action="Index"> داشبرد</a>
             <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <i class="fa fa-flag"></i>
+            <a href="#">مدیریت دسته بندی ها</a>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -67,51 +71,34 @@
             <div class="portlet-body form">
                 <div class="tab-content">
                     @foreach (var lang in Model.Languages) {
-                    <div class="tab-pane" id="tab_@lang.Id" style="float: right">
-                        <div class="row">
-                            <div class="card-group">
-                                @foreach (var cat in Model.Items.Where(_ => _.LangId == lang.Id)) {
-                                    <div class="card-header">
-                                        @cat.Title
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            @cat.Description
-                                        </p>
-                                        <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary">
-                                            ویرایش
-                                        </a>
-                                    </div>
+                        <div class="tab-pane" id="tab_@lang.Id" style="float: right">
+                            <div class="row">
+                                <div class="card-group">
+                                    @foreach (var cat in Model.Items.Where(_ => _.LangId == lang.Id)) {
+                                        <div class="card-header">
+                                            @cat.Title
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                @cat.Description
+                                            </p>
+                                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary">
+                                                ویرایش
+                                            </a>
+                                        </div>
 
-                                    <div class="card-footer text-muted">
-                                        ایجاد شده در: @cat.CreateDateDisplay
-                                    </div>
-                                }
+                                        <div class="card-footer text-muted">
+                                            ایجاد شده در: @cat.CreateDateDisplay
+                                        </div>
+                                    }
 
+                                </div>
                             </div>
-
-                            
-
                         </div>
-                    </div>
                     }
                 </div>
                 
-                
-
-                @*@if (Model.HasPagination) {
-
-                        <div class="row">
-                            <div class="col-md-5 col-sm-12">
-                                <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">
-                                </div>
-                            </div>
-                            <div class="col-md-7 col-sm-12">
-                                @Html.Raw(Model.PaginationHtmlCode(Url.Action("Index")))
-                            </div>
-                        </div>
-
-                    }*@
+               
             </div>
         </div>
     </div>

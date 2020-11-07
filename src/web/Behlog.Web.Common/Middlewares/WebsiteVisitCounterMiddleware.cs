@@ -22,19 +22,19 @@ namespace Behlog.Web.Common.Middlewares
         }
 
         public async Task Invoke(HttpContext context) {
-            //string visitorId = context.Request.Cookies["VisitorId"];
+            string visitorId = context.Request.Cookies["VisitorId"];
 
-            //if(visitorId == null) {
-            //    await _websiteVisitService.CreateAsync();
-            //    context.Response.Cookies.Append("VisitorId",
-            //        Guid.NewGuid().ToString(),
-            //        new CookieOptions { 
-            //            Path = "/",
-            //            HttpOnly = true,
-            //            Secure = false,
-            //            Expires = DateTime.Now.AddHours(1)
-            //    });
-            //}
+            if (visitorId == null) {
+                await _websiteVisitService.CreateAsync();
+                context.Response.Cookies.Append("VisitorId",
+                    Guid.NewGuid().ToString(),
+                    new CookieOptions {
+                        Path = "/",
+                        HttpOnly = true,
+                        Secure = false,
+                        Expires = DateTime.Now.AddHours(1)
+                    });
+            }
 
             await _requestDelegate(context);
         }

@@ -59,6 +59,20 @@ namespace Behlog.Web.ViewModels.Extensions
                 )
             };
 
-        
+        public static string GetLimitedSummary(this string what, int len = 50) {
+            if (string.IsNullOrWhiteSpace(what))
+                return string.Empty;
+
+            if (what.Length < len)
+                len = what.Length;
+
+            return what.Substring(0, len) + "...";
+        }
+
+        public static string GetFullFilePath(this string virtualPath)
+            => virtualPath != null
+                ? virtualPath.Replace("~", AppHttpContext.BaseUrl)
+                : GetDefaultImagePath();
+
     }
 }

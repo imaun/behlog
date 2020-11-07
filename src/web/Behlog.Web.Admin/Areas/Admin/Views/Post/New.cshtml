@@ -5,7 +5,7 @@
 }
 
 <h3 class="page-title">
-    مطلب جدید
+    نوشته جدید
     (@Model.PostTypeTitle)
 </h3>
 <div class="page-bar">
@@ -17,7 +17,7 @@
         </li>
         <li>
             <i class="fa fa-flag"></i>
-            <a asp-controller="Post" asp-action="Index" asp-route-postType="@Model.PostTypeSlug">مدیریت @Model.PostTypeTitle </a>
+            <a asp-controller="Post" asp-action="Index" asp-route-postType="@Model.PostTypeSlug"> مدیریت @Model.PostTypeTitle </a>
             <i class="fa fa-angle-left"></i>
         </li>
         <li>
@@ -60,43 +60,58 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_content">
                     <div class="col-md-8">
-                        <hr />
-                        <div class="form-group">
-                            <label asp-for="Title" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <input asp-for="Title" class="form-control" />
-                                <span asp-validation-for="Title" class="help-block"></span>
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icon-paper-plane font-yellow-casablanca"></i>
+                                    <span class="caption-subject bold font-yellow-casablanca uppercase">
+                                        ایجاد نوشته جدید
+                                    </span>
+                                    <span class="caption-helper"></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Slug" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <input asp-for="Slug" class="form-control" />
-                                <span class="help-block">URL نوشته</span>
-                                <span asp-validation-for="Slug" class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Body" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <textarea class="wysihtml5 form-control" rows="30" asp-for="Body"></textarea>
-                                <span class="btn-block" asp-validation-for="Body"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Summary" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <textarea asp-for="Summary" class="wysihtml5 form-control" rows="10">
-                                </textarea>
-                                <span asp-validation-for="Summary" class="help-block"></span>
-                            </div>
-                        </div>
 
-                        <div class="form-group last">
-                            <label asp-for="CoverPhoto" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <input asp-for="CoverPhotoFile" onchange="previewCoverPhoto()" style="width: 400px; margin: 6px 10px" />
-                                <img src="~/assets/img/defpic.png" id="imgUpload" style="height: 75px; float: left; margin: 0px 0px 10px 25px;" />
+                            <div class="portlet-body">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label asp-for="Title" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <input asp-for="Title" class="form-control" />
+                                            <span asp-validation-for="Title" class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Slug" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <input asp-for="Slug" class="form-control" />
+                                            <span class="help-block">URL نوشته</span>
+                                            <span asp-validation-for="Slug" class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Body" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <textarea class="wysihtml5 form-control" rows="30" asp-for="Body"></textarea>
+                                            <span class="btn-block" asp-validation-for="Body"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Summary" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <textarea asp-for="Summary" class="wysihtml5 form-control" rows="10">
+                                </textarea>
+                                            <span asp-validation-for="Summary" class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group last">
+                                        <label asp-for="CoverPhoto" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <input asp-for="CoverPhotoFile" onchange="previewCoverPhoto()" style="width: 400px; margin: 6px 10px" />
+                                            <img src="~/assets/admin/img/defpic.png" id="imgUpload" style="height: 75px; float: left; margin: 0px 0px 10px 25px;" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -115,8 +130,8 @@
                             <div class="portlet-body form">
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label asp-for="LangId" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="LangId" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             <select asp-for="LangId"
                                                     asp-items="Model.LanguageSelectList"
                                                     class="form-control input-medium">
@@ -125,8 +140,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="CategoryId" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="CategoryId" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             <select asp-for="CategoryId"
                                                     asp-items="Model.CategorySelectList"
                                                     class="form-control input-medium">
@@ -135,15 +150,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="AltTitle" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="AltTitle" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             <input asp-for="AltTitle" class="form-control input-large" />
                                             <span asp-validation-for="AltTitle" class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Status" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="Status" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             <select asp-for="Status"
                                                     asp-items="Model.StatusSelectList"
                                                     class="form-control input-medium">
@@ -152,7 +167,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="PublishDateValue" class="col-md-2 control-label"></label>
+                                        <label asp-for="PublishDateValue" class="col-md-4 control-label"></label>
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -165,28 +180,28 @@
                                     </div>
                                     <div class="form-group">
                                         @*<label asp-for="Commenting" class="col-md-2 control-label"></label>*@
-                                        <div class="col-md-10">
+                                        <div class="col-md-8">
                                             <input asp-for="Commenting" class="form-control checkbox" /> فعال برای نظر دادن
                                             <span asp-validation-for="Commenting" class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Password" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="Password" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             <input asp-for="Password" type="password" class="form-control portlet-input" />
                                             <span asp-validation-for="Password" class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="OrderNumber" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="OrderNumber" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             <input asp-for="OrderNumber" type="number" class="form-control portlet-input" />
                                             <span asp-validation-for="OrderNumber" class="help-block"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label asp-for="Tags" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
+                                        <label asp-for="Tags" class="col-md-4 control-label"></label>
+                                        <div class="col-md-8">
                                             @*<select id="select_tags" class="form-control"></select>*@
                                             <input type="hidden" id="select_tags" asp-for="Tags" class="form-control" />
                                             <span asp-validation-for="Tags" class="help-block"></span>
@@ -200,14 +215,17 @@
 
 
                 <div id="tab_gallery" class="tab-pane">
+                    <hr />
                     <p>ابتدا نوشته را ذخیره کنید تا به این قسمت دسترسی داشته باشید</p>
                 </div>
                 <div id="tab_files" class="tab-pane">
+                    <hr />
                     <p>ابتدا نوشته را ذخیره کنید تا به این قسمت دسترسی داشته باشید</p>
                 </div>
             </div>
 
         </div>
+        <hr />
         <div class="form-actions">
             <div class="row">
                 <div class="col-md-offset-2 col-md-10">

@@ -1,7 +1,4 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Behlog.Core.Contracts.Repository.System;
 using Behlog.Core.Extensions;
@@ -23,6 +20,7 @@ namespace Behlog.Services.System
         public async Task<WebsiteMenuDto> GetWebsiteMenuAsync(int websiteId) {
             var result = new WebsiteMenuDto {
                 Items = (await _menuRepository.GetEnabledByWebsiteAsync(websiteId))
+                    .OrderBy(_=> _.OrderNumber)
                     .ToList()
                     .Select(_ => _.Adapt<MenuItemDto>())
                     .ToList()

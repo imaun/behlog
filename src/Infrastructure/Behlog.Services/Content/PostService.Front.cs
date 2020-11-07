@@ -12,6 +12,7 @@ using Behlog.Services.Dto.Content;
 using Behlog.Services.Extensions;
 using Behlog.Services.Dto.Core;
 using Behlog.Services.Dto.System;
+using Behlog.Core.Contracts;
 using Mapster;
 
 //PostService
@@ -76,7 +77,6 @@ namespace Behlog.Services.Content
             string postTypeSlug,
             string lang,
             string slug) {
-            //var post = await GetResultAsync(postTypeSlug, lang, slug);
 
             var post = await buildGetDetailQuery()
                 .AddPublishedRules()
@@ -85,6 +85,8 @@ namespace Behlog.Services.Content
                                           _.Language.LangKey == lang &&
                                           _.Slug == slug);
 
+            await renderTemplateToBody(post);
+
             var postResult = post.Adapt<PostResultDto>();
             var result = new PostDetailDto();
             await addRelatedDataToPostDetailAsync(result, postResult);
@@ -92,7 +94,6 @@ namespace Behlog.Services.Content
             result.PostTypeTitle = postResult.PostTypeTitle;
 
             return await Task.FromResult(result);
-            //return await getPostDetailAsync(post);
         }
 
        
@@ -384,6 +385,8 @@ namespace Behlog.Services.Content
                 .FirstOrDefaultAsync(_ => _.PostType.Slug == postTypeSlug &&
                                           _.Slug == slug &&
                                           _.Language.LangKey == lang);
+
+            await renderTemplateToBody(post);
             return await getPageDetailAsync(post);
         }
 
@@ -395,7 +398,7 @@ namespace Behlog.Services.Content
             string lang = post.Language.LangKey;
 
             var result = post.Adapt<PageDetailDto>();
-            result.PostTypeSlug = PostType.PAGE;
+            //result.PostTypeSlug = PostType.PAGE;
             result.PostTypeTitle = post.PostType.Title;
             result.LangKey = post.Language.LangKey;
 
@@ -607,6 +610,23 @@ namespace Behlog.Services.Content
         private IQueryable<Post> includeFiles(IQueryable<Post> query) {
             return query.Include(_ => _.PostFiles)
                     .ThenInclude(_ => _.File);
+        }
+
+        private async Task renderTemplateToBody(Post post) {
+            if (string.IsNullOrWhiteSpace(post.Template))
+                return;
+
+            string result = string.Empty;
+            if(post.Template.Contains(PostTemplateFieldNames.Title)) {
+                result = post.Template
+                    .Replace(PostTemplateFieldNames.Title, post.Title);
+            }
+
+            if(post.Template.Contains(PostTemplateFieldNames.Body)) {
+                result = result.Replace(PostTemplateFieldNames.Body, post.Body);
+            }
+
+            post.Body = result;
         }
 
         #endregion

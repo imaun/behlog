@@ -137,6 +137,9 @@ namespace Behlog.Web.ViewModels.Content {
         [MaxLength(2000, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "MaxLen")]
         public string CoverPhoto { get; set; }
         public IFormFile CoverPhotoFile { get; set; }
+        public string CoverPhotoPath => CoverPhoto != null
+            ? CoverPhoto.Replace("~", AppHttpContext.BaseUrl)
+            : Extensions.Extensions.GetDefaultImagePath();
         public int? ParentId { get; set; }
         public string CategoryPath { get; set; }
 
@@ -236,15 +239,7 @@ namespace Behlog.Web.ViewModels.Content {
             set => _summary = value;
         }
 
-        public string LimitedSummary(int len) {
-            if (string.IsNullOrWhiteSpace(Summary))
-                return string.Empty;
-
-            if (Summary.Length < len)
-                len = Summary.Length;
-
-            return Summary.Substring(0, len) + "...";
-        }
+        public string LimitedSummary(int len) => Summary.GetLimitedSummary(len);
             
         public DateTime? PublishDate { get; set; }
         public string PublishDateDisplay => PublishDate?.ToPersianDateTextify();
