@@ -167,6 +167,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             //Content
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ISearchService, SearchService>();
 
             //Feature
             services.AddScoped<IContactService, ContactService>();

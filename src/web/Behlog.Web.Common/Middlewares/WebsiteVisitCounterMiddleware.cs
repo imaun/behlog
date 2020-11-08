@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Behlog.Core.Extensions;
 using Behlog.Services.Contracts.Feature;
 
-namespace Behlog.Web.Common.Middlewares
-{
-    public class WebsiteVisitCounterMiddleware
-    {
+namespace Behlog.Web.Common.Middlewares {
+
+    public class WebsiteVisitCounterMiddleware {
+
         private readonly RequestDelegate _requestDelegate;
         private readonly IWebsiteVisitService _websiteVisitService;
 
