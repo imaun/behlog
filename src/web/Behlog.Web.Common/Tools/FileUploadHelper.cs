@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Behlog.Core.Exceptions;
 using Behlog.Core.Extensions;
+using Behlog.Core.Models.Enum;
 using Behlog.Resources.Strings;
 using Behlog.Web.Core.Settings;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Behlog.Web.Common.Tools
 {
-    public class FileUploadHelper
-    {
+    public class FileUploadHelper {
         private readonly IWebHostEnvironment _webHost;
         private readonly IOptionsSnapshot<BehlogSetting> _setting;
 
@@ -39,6 +39,15 @@ namespace Behlog.Web.Common.Tools
         public string[] ValidPhotoExtensions =>
             Options.WebConfig.ValidPhotoFileExtensionsList;
 
+        public string[] ValidVideoExtensions =>
+            Options.WebConfig.ValidVideoFileExtensionsList;
+
+        public string[] ValidAudioExtensions =>
+            Options.WebConfig.ValidAudioFileExtensionsList;
+
+        public string[] ValidDocumentExtensions =>
+            Options.WebConfig.ValidDocumentFileExtensionsList;
+
         #endregion
 
         #region Methods
@@ -55,6 +64,20 @@ namespace Behlog.Web.Common.Tools
                    + "_"
                    + fileId.ToString().Substring(0, 4)
                    + Path.GetExtension(fileName);
+        }
+
+        private PostFileType getPostFileType(string fileExt) {
+            fileExt = fileExt.ToLower();
+            if (ValidPhotoExtensions.Contains(fileExt))
+                return PostFileType.Image;
+            if (ValidVideoExtensions.Contains(fileExt))
+                return PostFileType.Video;
+            if (ValidDocumentExtensions.Contains(fileExt))
+                return PostFileType.Document;
+            if (ValidAudioExtensions.Contains(fileExt))
+                return PostFileType.Audio;
+
+            return PostFileType.Common;
         }
 
         private string GetUploadUrl(string path, string filename) {
@@ -77,6 +100,8 @@ namespace Behlog.Web.Common.Tools
             };
             CheckPhotoExtension(fileInfo.FileName);
             CreateDirIfNotExist(PhotoRootPath);
+            result.FileExtension = Path.GetExtension(fileInfo.FileName);
+            result.FileType = getPostFileType(result.FileExtension);
             var filename = GetUniqueFileName(result.Id, fileInfo.FileName);
             result.UploadUrl = GetUploadUrl(Options.WebConfig.UploadPhotoPath, filename);
             result.TargetFileName = Path.Combine(PhotoRootPath, filename);
@@ -119,6 +144,8 @@ namespace Behlog.Web.Common.Tools
         public string ErrorMessage { get; set; }
         public Exception Exception { get; set; }
         public bool HasError { get; set; }
+        public string FileExtension { get; set; }
+        public PostFileType FileType { get; set; }
 
         public override string ToString() 
             => UploadUrl;

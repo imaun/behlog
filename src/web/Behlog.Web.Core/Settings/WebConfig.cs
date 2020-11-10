@@ -14,5 +14,14 @@ namespace Behlog.Web.Core.Settings
         public string ValidPhotoFileExtensions { get; set; }
         public string[] ValidPhotoFileExtensionsList => 
             ValidPhotoFileExtensions?.Split(';');
+        public string ValidVideoFileExtensions { get; set; }
+        public string[] ValidVideoFileExtensionsList =>
+            ValidVideoFileExtensions?.Split(';');
+        public string ValidAudioFileExtensions { get; set; }
+        public string[] ValidAudioFileExtensionsList =>
+            ValidAudioFileExtensions?.Split(';');
+        public string ValidDocumentFileExtensions { get; set; }
+        public string[] ValidDocumentFileExtensionsList =>
+            ValidDocumentFileExtensions?.Split(';');
     }
 }
