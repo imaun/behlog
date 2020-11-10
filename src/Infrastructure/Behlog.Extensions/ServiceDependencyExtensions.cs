@@ -14,7 +14,6 @@ using Behlog.Storage.Core;
 using Behlog.Core.Services;
 using Behlog.Services.Security;
 using Behlog.Core.Models.Security;
-using Behlog.Web.ViewModels.Settings;
 using Behlog.Services.Contracts.Security;
 using Behlog.Core.Contracts.Services.Common;
 using Behlog.Core.Contracts.Repository.System;
@@ -45,6 +44,7 @@ using Behlog.Validation.Contracts.Feature;
 using Behlog.Validation.Feature;
 using Behlog.Web.Common.Tools;
 using Behlog.Web.Admin.Core;
+using Behlog.Web.Core.Settings;
 
 namespace Microsoft.Extensions.DependencyInjection {
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Behlog.Core;
-using Behlog.Web.ViewModels.System;
+using Behlog.Web.Core.Extensions;
+using Behlog.Web.Common.Extensions;
 
 namespace Behlog.Web.ViewModels.Content
 {
@@ -23,9 +24,7 @@ namespace Behlog.Web.ViewModels.Content
         public string Body { get; set; }
         public string Summary { get; set; }
         public string CoverPhoto { get; set; }
-        public string CoverPhotoPath => CoverPhoto != null
-            ? CoverPhoto.Replace("~", AppHttpContext.BaseUrl)
-            : Extensions.Extensions.GetDefaultImagePath();
+        public string CoverPhotoPath => CoverPhoto.GetFullImagePath();
         public string HeaderImage { get; set; }
         public string PagePathDisplay { get; set; }
         public int? ParentId { get; set; }

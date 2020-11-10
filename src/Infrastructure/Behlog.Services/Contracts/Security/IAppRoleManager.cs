@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Behlog.Core.Models.Security;
-using Behlog.Web.ViewModels.Security;
+using Behlog.Web.Core.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;

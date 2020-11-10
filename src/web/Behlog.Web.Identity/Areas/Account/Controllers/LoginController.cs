@@ -9,9 +9,9 @@ using Behlog.Core.Contracts.Services.Common;
 using Behlog.Core.Models.Enum;
 using Behlog.Services.Contracts.Security;
 using Behlog.Web.Common;
-using Behlog.Web.ViewModels.Settings;
-using Behlog.Web.ViewModels.Identity;
 using Behlog.Resources.Strings;
+using Behlog.Web.Core.Settings;
+using Behlog.Web.Admin.ViewModels.Identity;
 
 // ReSharper disable once CheckNamespace
 namespace Behlog.Web.Identity.Controllers

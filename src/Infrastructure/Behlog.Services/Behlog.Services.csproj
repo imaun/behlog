@@ -16,7 +16,7 @@
     <ProjectReference Include="..\..\core\Behlog.Core.Models\Behlog.Core.Models.csproj" />
     <ProjectReference Include="..\..\core\Behlog.Core\Behlog.Core.csproj" />
     <ProjectReference Include="..\..\core\Behlog.Storage.Core\Behlog.Storage.Core.csproj" />
-    <ProjectReference Include="..\..\web\Behlog.Web.ViewModels\Behlog.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\..\web\Behlog.Web.Core\Behlog.Web.Core.csproj" />
     <ProjectReference Include="..\Behlog.Factories\Behlog.Factories.csproj" />
     <ProjectReference Include="..\Behlog.Services.Dto\Behlog.Services.Dto.csproj" />
     <ProjectReference Include="..\Behlog.Validation\Behlog.Validation.csproj" />

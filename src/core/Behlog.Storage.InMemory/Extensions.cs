@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Behlog.Storage.Core;
 using Behlog.Core.Contracts;
 using Behlog.Core.Utils.Persian;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 
 namespace Behlog.Storage.InMemory
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Behlog.Resources.Strings;
-using Behlog.Web.ViewModels.Core;
+using Behlog.Web.Core.Models;
 
 namespace Behlog.Web.ViewModels.Feature
 {

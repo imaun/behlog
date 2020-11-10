@@ -3,7 +3,7 @@ using Behlog.Core.Contracts;
 using Behlog.Core.Utils.Persian;
 using Behlog.Core.Utils.Web;
 using Behlog.Storage.Core;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

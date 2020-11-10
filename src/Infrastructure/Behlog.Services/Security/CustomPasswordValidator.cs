@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Behlog.Core.Models.Security;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 

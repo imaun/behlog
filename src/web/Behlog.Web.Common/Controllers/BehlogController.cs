@@ -3,8 +3,8 @@ using Microsoft.Extensions.Options;
 using Behlog.Core;
 using Behlog.Core.Security;
 using Behlog.Core.Extensions;
-using Behlog.Web.ViewModels.Settings;
 using Microsoft.Extensions.Logging;
+using Behlog.Web.Core.Settings;
 
 namespace Behlog.Web.Common.Controllers
 {

@@ -10,7 +10,7 @@ using Behlog.Factories.Contracts.System;
 using Behlog.Services.Contracts.System;
 using Behlog.Services.Dto.System;
 using Behlog.Services.Extensions;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 using Mapster;
 
 namespace Behlog.Services.System

@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Behlog.Storage.Core;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 
 namespace Behlog.Storage.SqlServer {
     public class SqlServerContextFactory: IDesignTimeDbContextFactory<SqlServerDbContext> {

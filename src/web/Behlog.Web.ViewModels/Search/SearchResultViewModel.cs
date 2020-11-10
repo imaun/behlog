@@ -1,5 +1,5 @@
 ﻿using Behlog.Core;
-using Behlog.Web.ViewModels.Extensions;
+using Behlog.Web.Common.Extensions;
 using DNTPersianUtils.Core;
 using System;
 using System.Collections.Generic;
@@ -31,9 +31,7 @@ namespace Behlog.Web.ViewModels.Search {
         public string LimitedSummary(int len) => Summary.GetLimitedSummary(len);
         public string Body { get; set; }
         public string CoverPhoto { get; set; }
-        public string CoverPhotoPath => CoverPhoto != null
-            ? CoverPhoto.Replace("~", AppHttpContext.BaseUrl)
-            : Extensions.Extensions.GetDefaultImagePath();
+        public string CoverPhotoPath => CoverPhoto.GetFullImagePath();
         public int PostTypeId { get; set; }
         public string PostTypeSlug { get; set; }
         public string PostTypeTitle { get; set; }

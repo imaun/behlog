@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Behlog.Core.Models.Security;
 using Behlog.Core.Security;
 using Behlog.Services.Security;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

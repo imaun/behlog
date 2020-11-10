@@ -2,6 +2,7 @@
 using Behlog.Services.Dto.Content;
 using Behlog.Web.ViewModels.Content;
 using Behlog.Web.Data.Extensions;
+using Behlog.Web.Admin.ViewModels.Content;
 
 namespace Behlog.Web.Mapping
 {

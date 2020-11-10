@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Behlog.Services.Contracts.Security;
-using Behlog.Web.ViewModels.Security;
+using Behlog.Web.Core.Security;
 using DNTCommon.Web.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

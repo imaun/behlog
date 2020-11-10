@@ -5,11 +5,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Behlog.Core.Models.Security;
-using Behlog.Web.ViewModels.Search;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
-using Behlog.Web.ViewModels.Security;
+using Behlog.Web.Core.Security;
 
 namespace Behlog.Services.Contracts.Security {
     public interface IAppUserManager: IDisposable {

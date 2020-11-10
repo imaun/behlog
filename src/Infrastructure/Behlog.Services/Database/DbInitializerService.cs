@@ -14,9 +14,9 @@ using Behlog.Core.Models.System;
 using Behlog.Services.Contracts.Security;
 using Behlog.Services.Contracts.System;
 using Behlog.Storage.Core;
-using Behlog.Web.ViewModels.Settings;
 using Mapster;
 using IdentityResult = Microsoft.AspNetCore.Identity.IdentityResult;
+using Behlog.Web.Core.Settings;
 
 namespace Behlog.Services.Database
 {

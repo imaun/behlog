@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\Infrastructure\Behlog.Factories\Behlog.Factories.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Behlog.Services.Dto\Behlog.Services.Dto.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Behlog.Services\Behlog.Services.csproj" />
+    <ProjectReference Include="..\Behlog.Web.Admin.ViewModels\Behlog.Web.Admin.ViewModels.csproj" />
     <ProjectReference Include="..\Behlog.Web.Common\Behlog.Web.Common.csproj" />
     <ProjectReference Include="..\Behlog.Web.Data\Behlog.Web.Data.csproj" />
   </ItemGroup>

@@ -3,7 +3,7 @@ using System.IO;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Security;
 using Behlog.Services.Contracts.Security;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;

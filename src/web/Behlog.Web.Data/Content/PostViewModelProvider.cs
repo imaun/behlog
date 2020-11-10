@@ -8,7 +8,7 @@ using Behlog.Services.Contracts.Content;
 using Behlog.Services.Contracts.System;
 using Behlog.Services.Extensions;
 using Behlog.Web.Data.System;
-using Behlog.Web.ViewModels.Content;
+using Behlog.Web.Admin.ViewModels.Content;
 using Mapster;
 
 namespace Behlog.Web.Data.Content

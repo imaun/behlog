@@ -4,7 +4,7 @@ using System.Linq;
 using Behlog.Core.Exceptions;
 using Behlog.Core.Extensions;
 using Behlog.Resources.Strings;
-using Behlog.Web.ViewModels.Settings;
+using Behlog.Web.Core.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;

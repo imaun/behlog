@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Data;
+﻿using System;
 using System.IO;
-using Behlog.Web.ViewModels.Settings;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
+using Behlog.Web.Core.Settings;
 
 namespace Behlog.Storage.SQLite
 {

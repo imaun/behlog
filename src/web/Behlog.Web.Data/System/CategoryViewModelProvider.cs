@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.System;
 using Behlog.Factories.Contracts.System;
 using Behlog.Services.Contracts.System;
-using Behlog.Web.ViewModels.System;
+using Behlog.Web.Admin.ViewModels.System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Behlog.Web.Data.System

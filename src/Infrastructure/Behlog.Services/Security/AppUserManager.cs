@@ -15,8 +15,7 @@ using Behlog.Core.Contracts;
 using Behlog.Core.Models.Security;
 using Behlog.Services.Contracts.Security;
 using Behlog.Storage.Core;
-using Behlog.Web.ViewModels.Search;
-using Behlog.Web.ViewModels.Security;
+using Behlog.Web.Core.Security;
 
 namespace Behlog.Services.Security {
     public class AppUserManager: UserManager<User>, IAppUserManager {

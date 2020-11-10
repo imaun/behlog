@@ -1,6 +1,6 @@
 ﻿using Behlog.Core.Extensions;
 using Behlog.Core.Security;
-using Behlog.Web.ViewModels.ViewComponents;
+using Behlog.Web.Admin.ViewModels.Components;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Feature\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Behlog.Core.Models\Behlog.Core.Models.csproj" />
+    <ProjectReference Include="..\..\core\Behlog.Core\Behlog.Core.csproj" />
+    <ProjectReference Include="..\..\Core\Behlog.Resources\Behlog.Resources.csproj" />
+    <ProjectReference Include="..\Behlog.Web.Common\Behlog.Web.Common.csproj" />
+  </ItemGroup>
+
+</Project>

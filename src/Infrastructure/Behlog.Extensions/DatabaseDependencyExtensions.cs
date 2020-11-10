@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Behlog.Core.Contracts.Services.Database;
 using Behlog.Services.Database;
-using Behlog.Web.ViewModels.Settings;
 using Behlog.Services.Security;
 using Behlog.Storage.SqlServer;
 using Behlog.Storage.InMemory;
 using Behlog.Storage.SQLite;
+using Behlog.Web.Core.Settings;
 
 namespace Behlog.Extensions
 {

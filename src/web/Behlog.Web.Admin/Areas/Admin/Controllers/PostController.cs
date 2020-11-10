@@ -11,14 +11,13 @@ using Behlog.Services.Security;
 using Behlog.Web.Common;
 using Behlog.Web.Data.Content;
 using Behlog.Web.Data.System;
-using Behlog.Web.ViewModels.Content;
-using Behlog.Web.ViewModels.Settings;
-using Behlog.Web.ViewModels.Admin.Content;
 using Mapster;
 using Behlog.Services.Dto.Admin.Content;
 using Behlog.Services.Contracts.System;
 using System.Collections.Generic;
-using Behlog.Web.ViewModels.Core;
+using Behlog.Web.Core.Settings;
+using Behlog.Web.Admin.ViewModels.Content;
+using Behlog.Web.Core.Models;
 
 namespace Behlog.Web.Admin.Controllers
 {
