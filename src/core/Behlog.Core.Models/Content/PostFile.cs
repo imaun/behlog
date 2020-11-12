@@ -12,6 +12,7 @@ namespace Behlog.Core.Models.Content {
         public int PostId { get; set; }
         public long FileId { get; set; }
         public int OrderNum { get; set; }
+        public string Title { get; set; }
         public long? RelatedFileId { get; set; }
         #endregion
 

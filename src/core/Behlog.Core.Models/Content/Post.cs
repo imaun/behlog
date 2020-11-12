@@ -49,6 +49,13 @@ namespace Behlog.Core.Models.Content {
 
         #endregion
 
+        #region SEO Related
+
+        public string MetaDescription { get; set; }
+        public string MetaRobots { get; set; }
+
+        #endregion
+
         #region Navigations
         public Website Website { get; set; }
         public User CreatorUser { get; set; }

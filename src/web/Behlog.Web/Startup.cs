@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Behlog.Core;
-using Behlog.Extensions;
 using Behlog.Core.Extensions;
 using Behlog.Web.Common.Routing;
 using DNTCommon.Web.Core;
@@ -93,8 +92,7 @@ namespace Behlog.Web {
             app.UseSession();
             app.UseAppHttpContext();
 
-            Behlog.Web.ViewModels
-                .Extensions.Extensions
+            Behlog.Web.Common.CommonHelper
                 .Configure(app.ApplicationServices);
 
             app.UseEndpoints(endpoints => {

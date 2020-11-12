@@ -89,6 +89,9 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.IconName).HasMaxLength(300).IsUnicode();
                 map.Property(_ => _.Template).HasMaxLength(4000).IsUnicode();
                 map.Property(_ => _.ViewPath).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.MetaDescription).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.MetaRobots).HasMaxLength(100).IsUnicode();
+                map.Property(_ => _.MetaDescription).HasMaxLength(1000);
 
                 map.HasOne(_=> _.Website)
                     .WithMany(_ => _.Posts)
@@ -130,6 +133,7 @@ namespace Behlog.Storage.Core.Mappings {
         public static void AddPostFileMapping(this ModelBuilder builder) {
             builder.Entity<PostFile>(map => {
                 map.ToTable(DbConst.PostFile_Table_Name).HasKey(_ => _.Id);
+                map.Property(_ => _.Title).HasMaxLength(1000).IsUnicode();
 
                 map.HasOne(_=> _.Post)
                     .WithMany(_ => _.PostFiles)

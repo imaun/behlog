@@ -12,5 +12,6 @@ namespace Behlog.Services.Dto.Admin.Content
         public string Description { get; set; }
         public string Url { get; set; }
         public int OrderNum { get; set; }
+        public long? FileId { get; set; }
     }
 }

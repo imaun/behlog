@@ -7,13 +7,13 @@ using Behlog.Services.Dto.Core;
 using Behlog.Services.Dto.Content;
 using Behlog.Web.Common.Controllers;
 using Behlog.Web.ViewModels.Content;
-using Behlog.Web.ViewModels.Settings;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Mapster;
-using Behlog.Web.ViewModels.System;
 using Behlog.Core.Models.System;
+using Behlog.Web.Core.Settings;
+using Behlog.Web.Core.Extensions;
 
 namespace Behlog.Web.Controllers
 {
