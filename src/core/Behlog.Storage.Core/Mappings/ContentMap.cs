@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Behlog.Core.Models.Content;
-using Behlog.Storage.Core;
 
 namespace Behlog.Storage.Core.Mappings {
 
