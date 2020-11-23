@@ -8,6 +8,7 @@ using Behlog.Core.Models.System;
 namespace Behlog.Core.Models.Security {
 
     public class User : IdentityUser<Guid> {
+
         public User() {
             Claims = new HashSet<UserClaim>();
             Tokens = new HashSet<UserToken>();
@@ -18,6 +19,8 @@ namespace Behlog.Core.Models.Security {
             Likes = new HashSet<PostLike>();
             Websites = new HashSet<Website>();
             Logins = new HashSet<UserLogin>();
+            AddedPostBlocks = new HashSet<PostBlock>();
+            AddedBlocks = new HashSet<Block>();
         }
 
         #region Properties
@@ -41,6 +44,9 @@ namespace Behlog.Core.Models.Security {
         public ICollection<Website> Websites { get; set; }
         public ICollection<UserLogin> Logins { get; set; }
         public ICollection<UserMeta> Meta { get; set; }
+        public ICollection<PostBlock> AddedPostBlocks { get; set; }
+        public ICollection<Block> AddedBlocks { get; set; }
+
         #endregion
 
     }

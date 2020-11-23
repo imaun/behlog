@@ -18,6 +18,7 @@ namespace Behlog.Core.Models.Content {
             PostTags = new HashSet<PostTag>();
             Visits = new HashSet<PostVisit>();
             RelatedSections = new HashSet<Section>();
+            PostBlocks = new HashSet<PostBlock>();
         }
 
         #region Properties
@@ -71,6 +72,7 @@ namespace Behlog.Core.Models.Content {
         public ICollection<PostTag> PostTags { get; set; }
         public ICollection<PostVisit> Visits { get; set; }
         public ICollection<Section> RelatedSections { get; set; }
+        public ICollection<PostBlock> PostBlocks { get; set; }
         #endregion
     }
 }

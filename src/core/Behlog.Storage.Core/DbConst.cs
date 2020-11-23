@@ -14,6 +14,9 @@ namespace Behlog.Storage.Core {
         public const string PostTag_Table_Name = "Content.Post_Tags";
         public const string SectionGroup_Table_Name = "Content.SectionGroups";
         public const string Section_Table_Name = "Content.Sections";
+        public const string Block_Table_Name = "Content.Blocks";
+        public const string PostBlock_Table_Name = "Content.Post_Blocks";
+        public const string BlockSample_Table_Name = "Content.Block_Samples";
 
         public const string Contact_Table_Name = "Feature.Contacts";
         public const string Form_Table_Name = "Feature.Forms";
@@ -44,5 +47,6 @@ namespace Behlog.Storage.Core {
         public const string RoleClaims_Table_Name = "Security.Role_Claims";
 
         public static string GetTableName(this Comment model) => Comment_Table_Name;
+        public static string GetTableName(this Block model) => Block_Table_Name;
     }
 }
