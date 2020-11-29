@@ -19,11 +19,6 @@ namespace Behlog.Web.ViewModels.System
     }
 
     
-
-    
-
-    
-
     public class CategoryItemViewModel {
         public int Id { get; set; }
         public string Title { get; set; }

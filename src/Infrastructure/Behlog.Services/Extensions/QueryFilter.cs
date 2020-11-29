@@ -4,6 +4,8 @@ using Behlog.Core.Models.System;
 using Behlog.Core.Models.Content;
 using Behlog.Services.Dto.System;
 using Behlog.Services.Dto.Admin.Content;
+using Behlog.Services.Dto.Admin.Feature;
+using Behlog.Core.Models.Feature;
 
 namespace Behlog.Services.Extensions {
     
@@ -45,5 +47,19 @@ namespace Behlog.Services.Extensions {
 
             return query;
         }
+
+        public static IQueryable<Contact> SetFilter(
+            this IQueryable<Contact> query,
+            AdminContactIndexFilter filter) {
+            
+            if (!filter.Name.IsNullOrEmpty())
+                query = query.Where(_ => _.Name.Contains(filter.Name));
+
+            if (!filter.Email.IsNullOrEmpty())
+                query = query.Where(_ => _.Email.Contains(filter.Email));
+
+            return query;
+        }
+            
     }
 }

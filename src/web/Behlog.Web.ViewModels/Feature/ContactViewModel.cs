@@ -52,4 +52,9 @@ namespace Behlog.Web.ViewModels.Feature
         public string YouTube { get; set; }
     }
 
+    public class ContactInfoWidgetViewModel {
+        public string Address { get; set; }
+        public string Phones { get; set; }
+        public string Email { get; set; }
+    }
 }

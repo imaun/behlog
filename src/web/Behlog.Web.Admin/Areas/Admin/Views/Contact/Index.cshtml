@@ -1,0 +1,123 @@
+﻿@model AdminContactIndexViewModel
+@{
+    ViewData["Title"] = "فرم تماس با ما";
+}
+
+<h3 class="page-title">
+    تماس با ما
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-flag"></i>
+            <a asp-controller="Home" asp-action="Index"> داشبرد</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <i class="fa fa-flag"></i>
+            <a href="#">فرم تماس با ما</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-file"></i> لیست پیام ها
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" class="btn default btn-sm">
+                        <i class="fa fa-share icon-black"></i> Share
+                    </a>
+                    <div class="btn-group">
+                        <a class="btn btn-sm green" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-user"></i> عملیات <i class="fa fa-angle-down "></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right" style="font-family: 'IRANsans'">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-trash-o"></i> حذف انتخاب شده ها
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-ban"></i> Ban
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="i"></i> Make admin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="todo-tasklist">
+
+                    @foreach (var contact in Model.DataSource.Items) {
+
+                    <div class="todo-tasklist-item todo-tasklist-item-border-blue">
+                        <span class="pull-left"><i class="fa fa-user-o"></i> </span>
+                        <div class="todo-tasklist-item-title">
+                            <input type="checkbox" class="form-check-input" />
+                            @contact.Name
+                        </div>
+                        <div class="todo-tasklist-item-text">
+                            @Html.Raw(contact.Message)
+                        </div>
+                        <div class="todo-tasklist-controls pull-left">
+                            <span class="todo-tasklist-date"><i class="fa fa-inbox"></i>آدرس ایمیل :<a href="mailto:@contact.Email">@contact.Email</a> </span>
+                            <span class="todo-tasklist-date"><i class="fa fa-phone"></i>شماره تماس : <a href="tel://@contact.Phone">@contact.Phone</a>  </span>
+                        </div>
+                        <div class="todo-tasklist-controls pull-right">
+                            <span class="todo-tasklist-date"><i class="fa fa-calendar"></i> تاریخ ارسال : @contact.SentDateDisplay </span>
+                            <span class="todo-tasklist-date"><i class="fa fa-user"></i> IP :  @contact.Ip </span>
+                        </div>
+                        <!--<div class="row">
+                            <div class="row">
+
+
+                            </div>
+
+                            <div class="row">
+                                <p>
+                                    
+                                </p>
+                            </div>
+                            <div class="col-sm-4" style="text-align: left">-->
+                                @*<a class="btn btn-success"
+                   asp-controller="Post"
+                   asp-action="Edit"
+                   asp-route-id="@post.Id">ویرایش <i class="fa fa-edit"></i>
+                </a>
+                <a class="btn btn-primary"
+                   asp-area=""
+                   asp-controller="Post"
+                   asp-action="Detail"
+                   asp-route-id="@post.Id"
+                   asp-route-postType="@Model.PostTypeSlug"
+                   asp-route-slug="@post.Slug">مشاهده <i class="fa fa-eye"></i></a>
+                <a class="btn btn-danger" href="#">حذف <i class="fa fa-trash-o"></i></a>*@
+                            <!--</div>
+                        </div>-->
+
+                    </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section headSection {
+    <link href="~/assets/admin/css/todo-rtl.css" rel="stylesheet" type="text/css" />
+}

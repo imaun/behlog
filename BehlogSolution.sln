@@ -59,9 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TapCo.Web", "src\projects\T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Web.Components", "src\web\Behlog.Web.Components\Behlog.Web.Components.csproj", "{0D427938-BBAE-4866-84F6-3999279643D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Web.Admin.ViewModels", "src\web\Behlog.Web.Admin.ViewModels\Behlog.Web.Admin.ViewModels.csproj", "{1D21C9F8-9332-478C-A375-E1613DA7E7C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Web.Admin.ViewModels", "src\web\Behlog.Web.Admin.ViewModels\Behlog.Web.Admin.ViewModels.csproj", "{1D21C9F8-9332-478C-A375-E1613DA7E7C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Web.Core", "src\web\Behlog.Web.Core\Behlog.Web.Core.csproj", "{67CE4457-C977-4F48-AFC4-D0D35538B3D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Web.Core", "src\web\Behlog.Web.Core\Behlog.Web.Core.csproj", "{67CE4457-C977-4F48-AFC4-D0D35538B3D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

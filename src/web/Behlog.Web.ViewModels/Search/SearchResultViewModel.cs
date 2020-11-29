@@ -23,6 +23,7 @@ namespace Behlog.Web.ViewModels.Search {
     {
         public int PostId { get; set; }
         public string Title { get; set; }
+        public string LimitedTitle(int len) => Title.GetLimitedSummary(len);
         public string AltTitle { get; set; }
         public string Slug { get; set; }
         public DateTime? PublishDate { get; set; }

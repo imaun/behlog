@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using Behlog.Web.Common;
 using Behlog.Resources.Strings;
 using Behlog.Web.Core.Settings;
 using Behlog.Web.Admin.ViewModels.Identity;
+using Behlog.Core;
 
 // ReSharper disable once CheckNamespace
 namespace Behlog.Web.Identity.Controllers
@@ -25,6 +27,7 @@ namespace Behlog.Web.Identity.Controllers
         private readonly IAppUserManager _userManager;
         private readonly IOptionsSnapshot<BehlogSetting> _appSettings;
         private readonly IDateService _dateService;
+        private readonly IWebsiteInfo _websiteInfo;
 
         public const string _RET_URL = "returnUrl";
 
@@ -33,19 +36,22 @@ namespace Behlog.Web.Identity.Controllers
             IAppSignInManager signInManager,
             IAppUserManager userManager,
             IOptionsSnapshot<BehlogSetting> appSettings,
-            IDateService dateService
+            IDateService dateService,
+            IWebsiteInfo websiteInfo
         ) {
             logger.CheckArgumentIsNull();
             signInManager.CheckArgumentIsNull();
             userManager.CheckArgumentIsNull();
             appSettings.CheckArgumentIsNull();
             dateService.CheckArgumentIsNull();
+            websiteInfo.CheckArgumentIsNull();
 
             _logger = logger;
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings;
             _dateService = dateService;
+            _websiteInfo = websiteInfo;
         }
 
 
@@ -86,6 +92,10 @@ namespace Behlog.Web.Identity.Controllers
                 model.Password,
                 model.RememberMe,
                 lockoutOnFailure: true);
+
+            await _userManager.AddClaimAsync(user, new Claim(
+                    "WebsiteId", _websiteInfo.Id.ToString()
+                ));
 
             if(result.Succeeded) {
                 _logger.LogInformation($"{model.Username} logged in on ${_dateService.UtcNow()}");

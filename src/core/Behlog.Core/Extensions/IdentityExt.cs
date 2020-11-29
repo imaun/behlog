@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -8,15 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Behlog.Core.Extensions {
     public static class IdentityExtensions {
-        //public static void AddErrorsFromResult(this ModelStateDictionary modelStat, IdentityResult result) {
-        //    foreach (var error in result.Errors) {
-        //        modelStat.AddModelError("", error.Description);
-        //    }
-        //}
 
-        /// <summary>
-        /// IdentityResult errors list to string
-        /// </summary>
         public static string DumpErrors(this IdentityResult result, bool useHtmlNewLine = false) {
             var results = new StringBuilder();
             if (!result.Succeeded) {
