@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Behlog.Core.Models.Feature;
-
+using Behlog.Core.Models.Enum;
 
 namespace Behlog.Storage.Core.Mappings {
     public static partial class TableMapper {
@@ -15,6 +15,8 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Message).HasMaxLength(4000).IsUnicode();
                 map.Property(_ => _.Ip).HasMaxLength(100).IsUnicode().IsRequired();
                 map.Property(_ => _.UserAgent).HasMaxLength(500).IsUnicode();
+                map.Property(_ => _.Title).HasMaxLength(300).IsUnicode();
+                map.Property(_ => _.Status).HasDefaultValue(ContactMessageStatus.Sent);
 
                 map.HasOne(_=> _.Website)
                     .WithMany(_ => _.Contacts)
