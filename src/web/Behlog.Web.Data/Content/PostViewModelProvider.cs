@@ -9,6 +9,7 @@ using Behlog.Services.Contracts.System;
 using Behlog.Services.Extensions;
 using Behlog.Web.Data.System;
 using Behlog.Web.Admin.ViewModels.Content;
+using Behlog.Web.Admin.ViewModels.Components;
 using Mapster;
 
 namespace Behlog.Web.Data.Content
@@ -145,7 +146,11 @@ namespace Behlog.Web.Data.Content
             var post = await _postService.GetResultByIdAsync(id: postId);
             post.CheckReferenceIsNull();
             var model = post.Adapt<PostEditViewModel>();
-            
+            if (model.Status == PostStatus.Published || model.Status == PostStatus.Planned)
+                model.PublishDateModel = new PersianDateViewModel(model.PublishDate.Value);
+            else
+                model.PublishDateModel = new PersianDateViewModel();
+
             await setBaseDataAsync(model);
 
             return await Task.FromResult(model);

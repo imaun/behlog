@@ -22,12 +22,24 @@ namespace Behlog.Web.Admin.ViewModels.Components {
 
         #region Properties
 
-        private DateTime _value;
-        public DateTime Value {
-            get => _value;
+        private DateTime? _value;
+        public DateTime? Value {
+            get {
+                if (Day == 0 || Month == 0 || Year == 0)
+                    return null;
+
+                try {
+                    _value = _calendar.ToDateTime(Year, Month, Day, 0, 0, 0,0,0);
+                    return _value;
+                }
+                catch {
+                    return null;
+                }
+            }
             set {
                 _value = value;
-                setPersianDate();
+                if (_value.HasValue) 
+                    setPersianDate();
             }
         }
 

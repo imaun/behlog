@@ -159,6 +159,7 @@ namespace Behlog.Web.Admin.ViewModels.Content
         public string Template { get; set; }
         public string Tags { get; set; }
         public string CurrentTags { get; set; }
+        public PersianDateViewModel PublishDateModel { get; set; }
 
         #region Collections
 

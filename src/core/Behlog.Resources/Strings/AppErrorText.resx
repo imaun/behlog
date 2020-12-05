@@ -135,6 +135,9 @@
   <data name="LoginUserDisabled" xml:space="preserve">
     <value>اکانت شما غیرفعال شده است.</value>
   </data>
+  <data name="PersianDate_Invalid" xml:space="preserve">
+    <value>تاریخ وارد شده اشتباه است.</value>
+  </data>
   <data name="Subscriber_Email_Exist" xml:space="preserve">
     <value>این آدرس ایمیل قبلاً ثبت شده است.</value>
   </data>

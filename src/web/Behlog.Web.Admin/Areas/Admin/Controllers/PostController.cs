@@ -112,6 +112,17 @@ namespace Behlog.Web.Admin.Controllers
                 return View(model);
             }
 
+            if(model.PublishDateModel.Value == null) {
+                ModelState.AddModelError(
+                    nameof(model.PublishDateModel),
+                    AppErrorText.PersianDate_Invalid);
+                model = await _postViewModelProvider
+                    .BuildCreateViewModelAsync(model);
+                model.ModelMessage = AppTextDisplay.ModelStateError;
+                model.HasError = true;
+                return View(model);
+            }
+
             if(model.CoverPhotoFile != null && 
                model.CoverPhotoFile.Length > 0) {
                 var uploadResult = _fileUploader.UploadPhoto(model.CoverPhotoFile);

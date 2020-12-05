@@ -115,6 +115,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تاریخ وارد شده اشتباه است..
+        /// </summary>
+        public static string PersianDate_Invalid {
+            get {
+                return ResourceManager.GetString("PersianDate_Invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to این آدرس ایمیل قبلاً ثبت شده است..
         /// </summary>
         public static string Subscriber_Email_Exist {

@@ -63,6 +63,12 @@ namespace Behlog.Factories.Content
                 post.Slug = model.Title;
             post.Slug = post.Slug.MakeSlug();
 
+            if (post.Status == PostStatus.Published || post.Status == PostStatus.Planned)
+                post.PublishDate = model.PublishDate;
+            else
+                post.PublishDate = null;
+
+
             if(!model.Tags.IsNullOrEmpty())
                 foreach (var tag in model.Tags.Split(',')) {
                     var existingTag = await _tagRepository.GetByTitleAsync(tag, _websiteInfo.Id);
@@ -89,6 +95,11 @@ namespace Behlog.Factories.Content
             post.GetData(model);
             post.ModifyDate = _dateService.UtcNow();
             post.ModifierUserId = _userContext.UserId;
+
+            if (post.Status == PostStatus.Published || post.Status == PostStatus.Planned)
+                post.PublishDate = model.PublishDate;
+            else
+                post.PublishDate = null;
 
             return await Task.FromResult(post);
         }
