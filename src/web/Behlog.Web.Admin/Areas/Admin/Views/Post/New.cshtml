@@ -21,14 +21,15 @@
             <i class="fa fa-angle-left"></i>
         </li>
         <li>
+            <i class="fa fa-plus-square-o"></i>
             <span>نوشته جدید</span>
         </li>
 
     </ul>
-    
+
 </div>
 <div class="row">
-    
+
     <form id="myform" asp-controller="Post"
           asp-action="New"
           asp-antiforgery="true"
@@ -37,211 +38,198 @@
           method="post">
         <input type="hidden" asp-for="PostTypeId" />
         <div class="form-body">
-            <div class="tabbable-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#tab_content" data-toggle="tab" aria-expanded="true">
-                            محتوا
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#tab_gallery" data-toggle="tab" aria-expanded="false">
-                            تصاویر
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#tab_files" data-toggle="tab" aria-expanded="false">
-                            فایل ها
-                        </a>
-                    </li>
-                </ul>
-            </div>
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab_content">
-                    <div class="col-md-8">
-                        <div class="portlet light">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="icon-paper-plane font-yellow-casablanca"></i>
-                                    <span class="caption-subject bold font-yellow-casablanca uppercase">
-                                        ایجاد نوشته جدید
-                                    </span>
-                                    <span class="caption-helper"></span>
+            <div class="col-md-8">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-paper-plane font-yellow-casablanca"></i>
+                            <span class="caption-subject bold font-yellow-casablanca uppercase">
+                                ایجاد نوشته جدید
+                            </span>
+                            <span class="caption-helper"></span>
+                        </div>
+                    </div>
+
+                    <div class="portlet-body">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label asp-for="Title" class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Title" class="form-control" />
+                                    <span asp-validation-for="Title" class="help-block"></span>
                                 </div>
                             </div>
-
-                            <div class="portlet-body">
-                                <div class="form-body">
-                                    <div class="form-group">
-                                        <label asp-for="Title" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
-                                            <input asp-for="Title" class="form-control" />
-                                            <span asp-validation-for="Title" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Slug" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
-                                            <input asp-for="Slug" class="form-control" />
-                                            <span class="help-block">URL نوشته</span>
-                                            <span asp-validation-for="Slug" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Body" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
-                                            <textarea class="wysihtml5 form-control" rows="30" asp-for="Body"></textarea>
-                                            <span class="btn-block" asp-validation-for="Body"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Summary" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
-                                            <textarea asp-for="Summary" class="wysihtml5 form-control" rows="10">
-                                </textarea>
-                                            <span asp-validation-for="Summary" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="form-group last">
-                                        <label asp-for="CoverPhoto" class="col-md-2 control-label"></label>
-                                        <div class="col-md-10">
-                                            <input asp-for="CoverPhotoFile" onchange="previewCoverPhoto()" style="width: 400px; margin: 6px 10px" />
-                                            <img src="~/assets/admin/img/defpic.png" id="imgUpload" style="height: 75px; float: left; margin: 0px 0px 10px 25px;" />
-                                        </div>
-                                    </div>
+                            <div class="form-group">
+                                <label asp-for="Slug" class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="Slug" class="form-control" />
+                                    <span class="help-block">URL نوشته</span>
+                                    <span asp-validation-for="Slug" class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Body" class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <textarea class="wysihtml5 form-control" rows="30" asp-for="Body"></textarea>
+                                    <span class="btn-block" asp-validation-for="Body"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Summary" class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <textarea asp-for="Summary" class="wysihtml5 form-control" rows="10">
+                        </textarea>
+                                    <span asp-validation-for="Summary" class="help-block"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-group last">
+                                <label asp-for="CoverPhoto" class="col-md-2 control-label"></label>
+                                <div class="col-md-10">
+                                    <input asp-for="CoverPhotoFile" onchange="previewCoverPhoto()" style="width: 400px; margin: 6px 10px" />
+                                    <img src="~/assets/admin/img/defpic.png" id="imgUpload" style="height: 75px; float: left; margin: 0px 0px 10px 25px;" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="portlet box green-meadow">
-                            <div class="portlet-title">
-                                <div class="caption">
-                                    <i class="fa fa-gear"></i> تنظیمات
-                                </div>
-                                <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                    <a href="javascript:;" class="reload"></a>
-                                </div>
-                            </div>
-                            <div class="portlet-body form">
-                                <div class="form-body">
-                                    <div class="form-group">
-                                        <label asp-for="LangId" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            <select asp-for="LangId"
-                                                    asp-items="Model.LanguageSelectList"
-                                                    class="form-control input-medium">
-                                            </select>
-                                            <span class="btn-block" asp-validation-for="LangId"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="CategoryId" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            <select asp-for="CategoryId"
-                                                    asp-items="Model.CategorySelectList"
-                                                    class="form-control input-medium">
-                                            </select>
-                                            <span class="btn-block" asp-validation-for="CategoryId"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="AltTitle" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            <input asp-for="AltTitle" class="form-control input-large" />
-                                            <span asp-validation-for="AltTitle" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Status" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            <select asp-for="Status"
-                                                    asp-items="Model.StatusSelectList"
-                                                    class="form-control input-medium">
-                                            </select>
-                                            <span asp-validation-for="Status" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="PublishDateValue" class="col-md-4 control-label"></label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </div>
-                                            <input asp-for="PublishDateValue" class="form-control input-large" placeholder="تاریخ انتشار" />
-                                        </div>
-                                        @*<div class="col-md-4">
-
-                                        </div>*@
-                                    </div>
-                                    <div class="form-group">
-                                        @*<label asp-for="Commenting" class="col-md-2 control-label"></label>*@
-                                        <div class="col-md-8">
-                                            <input asp-for="Commenting" class="form-control checkbox" /> فعال برای نظر دادن
-                                            <span asp-validation-for="Commenting" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Password" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            <input asp-for="Password" type="password" class="form-control portlet-input" />
-                                            <span asp-validation-for="Password" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="OrderNumber" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            <input asp-for="OrderNumber" type="number" class="form-control portlet-input" />
-                                            <span asp-validation-for="OrderNumber" class="help-block"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Tags" class="col-md-4 control-label"></label>
-                                        <div class="col-md-8">
-                                            @*<select id="select_tags" class="form-control"></select>*@
-                                            <input type="hidden" id="select_tags" asp-for="Tags" class="form-control" />
-                                            <span asp-validation-for="Tags" class="help-block"></span>
-                                        </div>
-                                    </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" id="btnSubmit" class="btn green">
+                                        <span class="md-click-circle md-click-animate"></span>
+                                        <i class="fa fa-check"></i> ذخیره
+                                    </button>
+                                    <a asp-controller="Post"
+                                       asp-action="Index"
+                                       asp-route-postType="@Model.PostTypeSlug"
+                                       class="btn default">
+                                        <i class="fa fa-remove"></i> انصراف
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-4">
+                <div class="portlet box green-meadow">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-gear"></i> تنظیمات
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse"></a>
+                            <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                            <a href="javascript:;" class="reload"></a>
+                        </div>
+                    </div>
+                    <div class="portlet-body form">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label asp-for="LangId" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <select asp-for="LangId"
+                                            asp-items="Model.LanguageSelectList"
+                                            class="form-control input-medium">
+                                    </select>
+                                    <span class="btn-block" asp-validation-for="LangId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CategoryId" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <select asp-for="CategoryId"
+                                            asp-items="Model.CategorySelectList"
+                                            class="form-control input-medium">
+                                    </select>
+                                    <span class="btn-block" asp-validation-for="CategoryId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="AltTitle" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <input asp-for="AltTitle" class="form-control input-large" />
+                                    <span asp-validation-for="AltTitle" class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Status" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <select asp-for="Status"
+                                            asp-items="Model.StatusSelectList"
+                                            class="form-control input-medium">
+                                    </select>
+                                    <span asp-validation-for="Status" class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PublishDateValue" class="col-md-3 control-label"></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </div>
+                                    <div class="col-sm">
+                                        <select asp-for="PublishDateModel.Day"
+                                                asp-items="Model.PublishDateModel.Days"
+                                                class="form-control input-small">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm">
+                                        <select asp-for="PublishDateModel.Month"
+                                                asp-items="Model.PublishDateModel.Months"
+                                                class="form-control input-small">
+                                        </select>
+                                    </div>
+                                    <div class="col-sm">
+                                        <select asp-for="PublishDateModel.Year"
+                                                asp-items="Model.PublishDateModel.Years"
+                                                class="form-control input-small">
+                                        </select>
+                                    </div>
+                                    @*<input asp-for="PublishDateValue" class="form-control input-large" placeholder="تاریخ انتشار" />*@
+                                </div>
+                                @*<div class="col-md-4">
 
-
-                <div id="tab_gallery" class="tab-pane">
-                    <hr />
-                    <p>ابتدا نوشته را ذخیره کنید تا به این قسمت دسترسی داشته باشید</p>
-                </div>
-                <div id="tab_files" class="tab-pane">
-                    <hr />
-                    <p>ابتدا نوشته را ذخیره کنید تا به این قسمت دسترسی داشته باشید</p>
+                                    </div>*@
+                            </div>
+                            <div class="form-group">
+                                @*<label asp-for="Commenting" class="col-md-2 control-label"></label>*@
+                                <div class="col-md-8">
+                                    <input asp-for="Commenting" class="form-control checkbox" /> فعال برای نظر دادن
+                                    <span asp-validation-for="Commenting" class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <input asp-for="Password" type="password" class="form-control portlet-input" />
+                                    <span asp-validation-for="Password" class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="OrderNumber" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <input asp-for="OrderNumber" type="number" class="form-control portlet-input" />
+                                    <span asp-validation-for="OrderNumber" class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Tags" class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    @*<select id="select_tags" class="form-control"></select>*@
+                                    <input type="hidden" id="select_tags" asp-for="Tags" class="form-control" />
+                                    <span asp-validation-for="Tags" class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
 
         </div>
         <hr />
-        <div class="form-actions">
-            <div class="row">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" id="btnSubmit" class="btn green">
-                        <span class="md-click-circle md-click-animate"></span>
-                        <i class="fa fa-check"></i> ذخیره
-                    </button>
-                    <a asp-controller="Post"
-                       asp-action="Index"
-                       asp-route-postType="@Model.PostTypeSlug"
-                       class="btn default">
-                        <i class="fa fa-remove"></i> انصراف
-                    </a>
-                </div>
-            </div>
-        </div>
+        
     </form>
 </div>
 
@@ -250,7 +238,7 @@
     <link href="~/assets/admin/datepicker/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/admin/datepicker/css/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="~/assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5-rtl.css" />
-    
+
 }
 
 
@@ -261,12 +249,12 @@
     <script src="~/assets/admin/datepicker/js/jalaali.js" type="text/javascript"></script>
     <script src="~/assets/admin/datepicker/js/PersianDateTimePicker.js" type="text/javascript"></script>
     @*<script type="text/javascript">
-        $(document).ready(function() {
-            $('#PublishDateValue').pDatepicker();
-        });
-    </script>*@
+            $(document).ready(function() {
+                $('#PublishDateValue').pDatepicker();
+            });
+        </script>*@
 
-    
+
 
     <script type="text/javascript">
 
@@ -360,31 +348,31 @@
     </script>
 
     @*<script type="text/javascript">
-        $.validator.setDefaults({
-            showErrors: function (errorMap, errorList) {
-                this.defaultShowErrors();
+            $.validator.setDefaults({
+                showErrors: function (errorMap, errorList) {
+                    this.defaultShowErrors();
 
-                // If an element is valid, it doesn't need a tooltip
-                $("." + this.settings.validClass).tooltip("destroy");
-                $("." + this.settings.validClass).parents('.form-group').removeClass('has-error');
+                    // If an element is valid, it doesn't need a tooltip
+                    $("." + this.settings.validClass).tooltip("destroy");
+                    $("." + this.settings.validClass).parents('.form-group').removeClass('has-error');
 
-                // Add tooltips
-                for (var i = 0; i < errorList.length; i++) {
-                    var error = errorList[i];
-                    $(error.element.parents('.form-group').addClass('has-error'));
-                    $(error.element).tooltip({ trigger: "focus" }) // Activate the tooltip on focus
-                        .attr("data-original-title", error.message);
+                    // Add tooltips
+                    for (var i = 0; i < errorList.length; i++) {
+                        var error = errorList[i];
+                        $(error.element.parents('.form-group').addClass('has-error'));
+                        $(error.element).tooltip({ trigger: "focus" }) // Activate the tooltip on focus
+                            .attr("data-original-title", error.message);
+                    }
                 }
-            }
-        });
-    </script>*@
+            });
+        </script>*@
 
     <script type="text/javascript">
         $('#select_tags').select2({
             tags : [ @Html.Raw(Model.TagsSource) ]
         });
 
-        
+
         @*$('#select_tags').select2({
             minimumInputLength: 2,
             ajax: {

@@ -11,6 +11,7 @@ using DNTPersianUtils.Core;
 using Behlog.Web.Core.Extensions;
 using Behlog.Core;
 using Behlog.Web.Common;
+using Behlog.Web.Admin.ViewModels.Components;
 
 namespace Behlog.Web.Admin.ViewModels.Content
 {
@@ -18,6 +19,7 @@ namespace Behlog.Web.Admin.ViewModels.Content
     {
         public PostCreateViewModel() {
             PublishDateValue = DateTime.Now.ToShortPersianDateTimeString();
+            PublishDateModel = new PersianDateViewModel();
         }
 
         [Display(ResourceType = typeof(ModelText), Name = "Title")]
@@ -79,6 +81,7 @@ namespace Behlog.Web.Admin.ViewModels.Content
         public int? RelatedPostId { get; set; }
         public string Template { get; set; }
         public string Tags { get; set; }
+        public PersianDateViewModel PublishDateModel { get; set; }
 
         #region Collections
 

@@ -27,17 +27,38 @@ namespace Behlog.Web.Admin.Areas.Admin.Controllers {
         }
         
         [HttpGet]
-        public async Task<IActionResult> Index() {
-            var result = await _contactService.GetAdminIndexAsync(new AdminContactIndexFilter {
+        public async Task<IActionResult> Index(int page = 1) {
+            var filter = new AdminContactIndexFilter {
                 PageSize = 10,
-                PageIndex = 0
-            });
+                PageIndex = page - 1
+            };
+            var result = await _contactService.GetAdminIndexAsync(filter);
 
             var model = result.Adapt<AdminContactIndexViewModel>();
+
+            model.Filter.PageIndex = filter.PageIndex;
+            model.Filter.PageSize = filter.PageSize;
 
             return await Task.FromResult(
                 View(model)
             );
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(AdminContactIndexViewModel model) {
+            var filter = new AdminContactIndexFilter {
+                Email = model.Filter.Email,
+                Name = model.Filter.Name,
+                PageIndex = model.Filter.PageIndex,
+                PageSize = model.Filter.PageSize
+            };
+
+            var result = await _contactService.GetAdminIndexAsync(filter);
+
+            model = result.Adapt<AdminContactIndexViewModel>();
+            model.DataSource.HasFilter = true;
+
+            return View(model);
         }
     }
 }

@@ -12,6 +12,13 @@ namespace Behlog.Web.Admin.ViewModels.Core
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public int TotalCount { get; set; }
-        public int PageCount => TotalCount / PageSize;
+        public int PageCount { get; set; }
+        public int CurrentPage => PageIndex + 1;
+        public int NextPage => CurrentPage + 1;
+        public int PreviousPage => CurrentPage - 1;
+        public bool CanGoNextPage => NextPage <= PageCount;
+        public bool CanGoPreviousPage => PreviousPage > 0 && PreviousPage <= PageCount;
+        public bool IsNotEmpty => Items != null && Items.Count > 0;
+        public bool HasFilter { get; set; }
     }
 }

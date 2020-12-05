@@ -13,6 +13,8 @@ using Behlog.Services.Dto.Feature;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Behlog.Services.Extensions;
+using Behlog.Core.Models.Feature;
+using Behlog.Core.Models.Enum;
 
 namespace Behlog.Services.Feature
 {
@@ -51,23 +53,51 @@ namespace Behlog.Services.Feature
 
             var query = _repository
                 .Query()
-                .Where(_ => _.WebsiteId == _userContext.WebsiteId);
+                .Where(_ => _.WebsiteId == _userContext.WebsiteId)
+                .SetFilter(filter);
 
             var result = new AdminContactIndexDto();
             result.DataSource.TotalCount = await query.CountAsync();
             result.DataSource.PageIndex = filter.PageIndex;
             result.DataSource.PageSize = filter.PageSize;
 
-            query = query.SetFilter(filter)
+            query = query
                 .Skip(filter.StartIndex)
                 .Take(filter.PageSize);
 
-            result.DataSource.Items = await query
+            var contacts = await query.ToListAsync();
+
+            await setSentMessagesToViewed(contacts);
+            await setViewedMessagesToRead(contacts);
+
+            result.DataSource.Items = contacts
                 .Select(_ => _.Adapt<AdminContactIndexItemDto>())
-                .ToListAsync();
+                .ToList();
 
             return await Task.FromResult(result);
         }
 
+
+        private async Task setSentMessagesToViewed(IList<Contact> contacts) {
+            foreach(var contact in contacts
+                .Where(_=> _.Status == ContactMessageStatus.Sent)
+            ) {
+                contact.Status = ContactMessageStatus.Viewed;
+                _repository.MarkForUpdate(contact);
+            }
+
+            await _repository.SaveChangesAsync();
+        }
+
+        private async Task setViewedMessagesToRead(IList<Contact> contacts) {
+            foreach (var contact in contacts
+                .Where(_ => _.Status == ContactMessageStatus.Viewed)
+            ) {
+                contact.Status = ContactMessageStatus.Read;
+                _repository.MarkForUpdate(contact);
+            }
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }

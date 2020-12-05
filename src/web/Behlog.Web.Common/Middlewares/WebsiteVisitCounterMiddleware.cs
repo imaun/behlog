@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Behlog.Core.Extensions;
@@ -22,6 +23,15 @@ namespace Behlog.Web.Common.Middlewares {
         }
 
         public async Task Invoke(HttpContext context) {
+
+            var path = context.Request.Path;
+            var pathSegments = path.Value.Split('/');
+
+            if (pathSegments.Contains("admin")) {
+                await _requestDelegate(context);
+                return;
+            }
+            
             string visitorId = context.Request.Cookies["VisitorId"];
 
             if (visitorId == null) {

@@ -5,6 +5,7 @@ using Behlog.Core.Extensions;
 using Behlog.Core.Models.Feature;
 using Behlog.Factories.Contracts.Feature;
 using Behlog.Services.Dto.Feature;
+using Behlog.Core.Models.Enum;
 using Mapster;
 
 namespace Behlog.Factories.Feature
@@ -32,8 +33,21 @@ namespace Behlog.Factories.Feature
             result.UserAgent = AppHttpContext.UserAgent; //AppHttpContext.Request.Headers["User-Agent"][0];
             result.SessionId = AppHttpContext.SessionId; //AppHttpContext.Current.Session.Id;
             result.SentDate = _dateService.UtcNow();
+            result.Status = ContactMessageStatus.Sent;
 
             return await Task.FromResult(result);
         }
+
+        public Contact MarkAsViewed(Contact contact) {
+            contact.Status = ContactMessageStatus.Viewed;
+            return contact;
+        }
+
+        public Contact MarkAsRead(Contact contact) {
+            contact.Status = ContactMessageStatus.Read;
+            contact.ReadDate = _dateService.Now();
+            return contact;
+        }
+
     }
 }
