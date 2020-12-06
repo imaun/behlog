@@ -4,6 +4,8 @@
         Waiting = 0,
         Approved = 1,
         Rejected = 2,
-        Spam = 3
+        Spam = 3,
+        Viewed = 4,
+        Read = 5
     }
 }

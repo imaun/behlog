@@ -177,4 +177,100 @@
   <data name="Subscription_Success" xml:space="preserve">
     <value>عضویت شما با موفقیت انجام شد.</value>
   </data>
+  <data name="CommentStatusApproved" xml:space="preserve">
+    <value>تایید شده</value>
+  </data>
+  <data name="CommentStatusDeleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="CommentStatusRead" xml:space="preserve">
+    <value>خوانده شده</value>
+  </data>
+  <data name="CommentStatusRejected" xml:space="preserve">
+    <value>رد شده</value>
+  </data>
+  <data name="CommentStatusSpam" xml:space="preserve">
+    <value>اسپم</value>
+  </data>
+  <data name="CommentStatusViewed" xml:space="preserve">
+    <value>دیده شده</value>
+  </data>
+  <data name="CommentStatusWaiting" xml:space="preserve">
+    <value>در انتظار تایید</value>
+  </data>
+  <data name="ContactMessageStatusDeleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="ContactMessageStatusRead" xml:space="preserve">
+    <value>خوانده شده</value>
+  </data>
+  <data name="ContactMessageStatusSent" xml:space="preserve">
+    <value>ارسالی</value>
+  </data>
+  <data name="ContactMessageStatusSpam" xml:space="preserve">
+    <value>اسپم</value>
+  </data>
+  <data name="ContactMessageStatusViewed" xml:space="preserve">
+    <value>دیده شده</value>
+  </data>
+  <data name="StatusDeleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="FileStatusAttachedToPost" xml:space="preserve">
+    <value>استفاده شده در نوشته</value>
+  </data>
+  <data name="FileStatusDeleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="FileStatusHidden" xml:space="preserve">
+    <value>مخفی</value>
+  </data>
+  <data name="FileStatusUnAttached" xml:space="preserve">
+    <value>استفاده نشده</value>
+  </data>
+  <data name="FormFieldTypeDate" xml:space="preserve">
+    <value>تاریخ</value>
+  </data>
+  <data name="FormFieldTypeDecimal" xml:space="preserve">
+    <value>عدد با اعشار</value>
+  </data>
+  <data name="FormFieldTypeFile" xml:space="preserve">
+    <value>فایل</value>
+  </data>
+  <data name="FormFieldTypeInteger" xml:space="preserve">
+    <value>عدد صحیح</value>
+  </data>
+  <data name="FormFieldTypeMultiSelect" xml:space="preserve">
+    <value>چند انتخابی</value>
+  </data>
+  <data name="FormFieldTypeSelect" xml:space="preserve">
+    <value>انتخابی</value>
+  </data>
+  <data name="FormFieldTypeText" xml:space="preserve">
+    <value>نوشته</value>
+  </data>
+  <data name="PostBodyTypeHtml" xml:space="preserve">
+    <value>HTML</value>
+  </data>
+  <data name="PostBodyTypeMarkdown" xml:space="preserve">
+    <value>مارک داون</value>
+  </data>
+  <data name="PostBodyTypeText" xml:space="preserve">
+    <value>متن ساده</value>
+  </data>
+  <data name="Unsubscribed" xml:space="preserve">
+    <value>لغو اشتراک</value>
+  </data>
+  <data name="UserStatusBlocked" xml:space="preserve">
+    <value>مسدود</value>
+  </data>
+  <data name="UserStatusDeleted" xml:space="preserve">
+    <value>حذف شده</value>
+  </data>
+  <data name="UserStatusDisabled" xml:space="preserve">
+    <value>غیرفعال</value>
+  </data>
+  <data name="UserStatusEnabled" xml:space="preserve">
+    <value>فعال</value>
+  </data>
 </root>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Behlog.Core;
 using Behlog.Core.Contracts.Repository.Content;
@@ -9,18 +8,13 @@ using Behlog.Core.Contracts.Repository.System;
 using Behlog.Core.Contracts.Services.Common;
 using Behlog.Core.Exceptions;
 using Behlog.Core.Extensions;
-using Behlog.Core.Models.Content;
 using Behlog.Core.Models.Enum;
-using Behlog.Core.Models.System;
 using Behlog.Services.Contracts.Content;
 using Behlog.Services.Dto.Content;
 using Behlog.Factories.Contracts.Content;
 using Behlog.Services.Extensions;
-using Behlog.Services.Dto.Core;
-using Behlog.Services.Dto.System;
 using Mapster;
 using System.Globalization;
-using Behlog.Factories.Contracts.System;
 using Behlog.Services.Dto.Admin.Content;
 
 //PostService
@@ -28,7 +22,7 @@ using Behlog.Services.Dto.Admin.Content;
 
 namespace Behlog.Services.Content
 {
-    
+
 
     public partial class PostService: IPostService {
 

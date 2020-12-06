@@ -42,6 +42,38 @@ namespace Behlog.Web.Common.Extensions
                 )
             };
 
+        public static List<SelectListItem> ToSelectListItems(this CommentStatus status) =>
+            new List<SelectListItem> {
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusDeleted,
+                    ((int)CommentStatus.Deleted).ToString(),
+                    status == CommentStatus.Deleted),
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusWaiting,
+                    ((int) CommentStatus.Waiting).ToString(),
+                    status == CommentStatus.Waiting),
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusApproved,
+                    ((int) CommentStatus.Approved).ToString(),
+                    status == CommentStatus.Approved),
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusRejected,
+                    ((int) CommentStatus.Rejected).ToString(),
+                    status == CommentStatus.Rejected),
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusSpam,
+                    ((int) CommentStatus.Spam).ToString(),
+                    status == CommentStatus.Spam),
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusViewed,
+                    ((int) CommentStatus.Viewed).ToString(),
+                    status == CommentStatus.Viewed),
+                new SelectListItem(
+                    AppTextDisplay.CommentStatusRead,
+                    ((int) CommentStatus.Read).ToString(),
+                    status == CommentStatus.Read)
+            };
+
         public static string GetLimitedSummary(this string what, int len = 50) {
             if (string.IsNullOrWhiteSpace(what))
                 return string.Empty;

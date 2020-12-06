@@ -60,6 +60,23 @@ namespace Behlog.Services.Extensions {
 
             return query;
         }
-            
+        
+        public static IQueryable<Comment> SetFilter(
+            this IQueryable<Comment> query,
+            AdminCommentIndexFilter filter) {
+            filter.CheckArgumentIsNull(nameof(filter));
+
+            if (!filter.Title.IsNullOrEmpty())
+                query = query.Where(_ => _.Title.Contains(filter.Title));
+
+            if (!filter.Email.IsNullOrEmpty())
+                query = query.Where(_ => _.Email.Contains(filter.Email));
+
+            if (filter.Status.HasValue)
+                query = query.Where(_ => _.Status == filter.Status);
+
+            return query;
+
+        }
     }
 }

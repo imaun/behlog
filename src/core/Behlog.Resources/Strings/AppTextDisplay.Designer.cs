@@ -70,6 +70,69 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تایید شده.
+        /// </summary>
+        public static string CommentStatusApproved {
+            get {
+                return ResourceManager.GetString("CommentStatusApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حذف شده.
+        /// </summary>
+        public static string CommentStatusDeleted {
+            get {
+                return ResourceManager.GetString("CommentStatusDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خوانده شده.
+        /// </summary>
+        public static string CommentStatusRead {
+            get {
+                return ResourceManager.GetString("CommentStatusRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رد شده.
+        /// </summary>
+        public static string CommentStatusRejected {
+            get {
+                return ResourceManager.GetString("CommentStatusRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسپم.
+        /// </summary>
+        public static string CommentStatusSpam {
+            get {
+                return ResourceManager.GetString("CommentStatusSpam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دیده شده.
+        /// </summary>
+        public static string CommentStatusViewed {
+            get {
+                return ResourceManager.GetString("CommentStatusViewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to در انتظار تایید.
+        /// </summary>
+        public static string CommentStatusWaiting {
+            get {
+                return ResourceManager.GetString("CommentStatusWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لطفاً خطاهای فرم را بررسی نموده و دوباره ارسال کنید..
         /// </summary>
         public static string ContactForm_Error {
@@ -88,11 +151,155 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to حذف شده.
+        /// </summary>
+        public static string ContactMessageStatusDeleted {
+            get {
+                return ResourceManager.GetString("ContactMessageStatusDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خوانده شده.
+        /// </summary>
+        public static string ContactMessageStatusRead {
+            get {
+                return ResourceManager.GetString("ContactMessageStatusRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ارسالی.
+        /// </summary>
+        public static string ContactMessageStatusSent {
+            get {
+                return ResourceManager.GetString("ContactMessageStatusSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسپم.
+        /// </summary>
+        public static string ContactMessageStatusSpam {
+            get {
+                return ResourceManager.GetString("ContactMessageStatusSpam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دیده شده.
+        /// </summary>
+        public static string ContactMessageStatusViewed {
+            get {
+                return ResourceManager.GetString("ContactMessageStatusViewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to استفاده شده در نوشته.
+        /// </summary>
+        public static string FileStatusAttachedToPost {
+            get {
+                return ResourceManager.GetString("FileStatusAttachedToPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حذف شده.
+        /// </summary>
+        public static string FileStatusDeleted {
+            get {
+                return ResourceManager.GetString("FileStatusDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مخفی.
+        /// </summary>
+        public static string FileStatusHidden {
+            get {
+                return ResourceManager.GetString("FileStatusHidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to استفاده نشده.
+        /// </summary>
+        public static string FileStatusUnAttached {
+            get {
+                return ResourceManager.GetString("FileStatusUnAttached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطایی در بارگذاری فایل روی سرور اتفاق افتاده است..
         /// </summary>
         public static string FileUploadError {
             get {
                 return ResourceManager.GetString("FileUploadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ.
+        /// </summary>
+        public static string FormFieldTypeDate {
+            get {
+                return ResourceManager.GetString("FormFieldTypeDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد با اعشار.
+        /// </summary>
+        public static string FormFieldTypeDecimal {
+            get {
+                return ResourceManager.GetString("FormFieldTypeDecimal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فایل.
+        /// </summary>
+        public static string FormFieldTypeFile {
+            get {
+                return ResourceManager.GetString("FormFieldTypeFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد صحیح.
+        /// </summary>
+        public static string FormFieldTypeInteger {
+            get {
+                return ResourceManager.GetString("FormFieldTypeInteger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to چند انتخابی.
+        /// </summary>
+        public static string FormFieldTypeMultiSelect {
+            get {
+                return ResourceManager.GetString("FormFieldTypeMultiSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to انتخابی.
+        /// </summary>
+        public static string FormFieldTypeSelect {
+            get {
+                return ResourceManager.GetString("FormFieldTypeSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوشته.
+        /// </summary>
+        public static string FormFieldTypeText {
+            get {
+                return ResourceManager.GetString("FormFieldTypeText", resourceCulture);
             }
         }
         
@@ -142,6 +349,33 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HTML.
+        /// </summary>
+        public static string PostBodyTypeHtml {
+            get {
+                return ResourceManager.GetString("PostBodyTypeHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مارک داون.
+        /// </summary>
+        public static string PostBodyTypeMarkdown {
+            get {
+                return ResourceManager.GetString("PostBodyTypeMarkdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to متن ساده.
+        /// </summary>
+        public static string PostBodyTypeText {
+            get {
+                return ResourceManager.GetString("PostBodyTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نوشته.
         /// </summary>
         public static string PostEntityDisplay {
@@ -187,6 +421,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to حذف شده.
+        /// </summary>
+        public static string StatusDeleted {
+            get {
+                return ResourceManager.GetString("StatusDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to غیرفعال.
         /// </summary>
         public static string StatusDisable {
@@ -223,6 +466,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لغو اشتراک.
+        /// </summary>
+        public static string Unsubscribed {
+            get {
+                return ResourceManager.GetString("Unsubscribed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to پسوند }0{ فایل برای آپلود معتبر نیست..
         /// </summary>
         public static string UploadFileExtNotValid {
@@ -237,6 +489,42 @@ namespace Behlog.Resources.Strings {
         public static string UserEntityDisplay {
             get {
                 return ResourceManager.GetString("UserEntityDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مسدود.
+        /// </summary>
+        public static string UserStatusBlocked {
+            get {
+                return ResourceManager.GetString("UserStatusBlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حذف شده.
+        /// </summary>
+        public static string UserStatusDeleted {
+            get {
+                return ResourceManager.GetString("UserStatusDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to غیرفعال.
+        /// </summary>
+        public static string UserStatusDisabled {
+            get {
+                return ResourceManager.GetString("UserStatusDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فعال.
+        /// </summary>
+        public static string UserStatusEnabled {
+            get {
+                return ResourceManager.GetString("UserStatusEnabled", resourceCulture);
             }
         }
     }
