@@ -97,9 +97,9 @@ namespace Behlog.Web.Admin.ViewModels.Components {
         }
 
         private void setPersianDate() {
-            Day = _calendar.GetDayOfMonth(Value);
-            Month = _calendar.GetMonth(Value);
-            Year = _calendar.GetYear(Value);
+            Day = _calendar.GetDayOfMonth(Value.Value);
+            Month = _calendar.GetMonth(Value.Value);
+            Year = _calendar.GetYear(Value.Value);
         }
 
         private bool isCurrentMonth(int month) => CurrentMonth == month;

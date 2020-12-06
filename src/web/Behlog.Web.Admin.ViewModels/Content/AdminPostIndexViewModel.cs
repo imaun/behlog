@@ -6,10 +6,9 @@ using Behlog.Web.Admin.ViewModels.Core;
 using Behlog.Web.Core.Extensions;
 using DNTPersianUtils.Core;
 
-namespace Behlog.Web.Admin.ViewModels.Content
-{
-    public class AdminPostIndexViewModel
-    {
+namespace Behlog.Web.Admin.ViewModels.Content {
+    
+    public class AdminPostIndexViewModel {
         public AdminPostIndexViewModel() {
             DataSource = new DataGridViewModel<AdminPostIndexItemViewModel>();
         }
@@ -19,8 +18,8 @@ namespace Behlog.Web.Admin.ViewModels.Content
         public string PostTypeSlug { get; set; }
     }
 
-    public class AdminPostIndexItemViewModel
-    {
+    public class AdminPostIndexItemViewModel {
+
         public AdminPostIndexItemViewModel() {
             Tags = new List<string>();
         }

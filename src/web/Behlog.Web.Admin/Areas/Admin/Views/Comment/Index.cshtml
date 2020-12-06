@@ -1,10 +1,10 @@
-﻿@model AdminContactIndexViewModel
+﻿@model AdminCommentIndexViewModel
 @{
-    ViewData["Title"] = "فرم تماس با ما";
+    ViewData["Title"] = "مدیریت دیدگاه ها";
 }
 
 <h3 class="page-title">
-    تماس با ما
+    مدیریت دیدگاه ها
 </h3>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -14,8 +14,8 @@
             <i class="fa fa-angle-left"></i>
         </li>
         <li>
-            <i class="fa fa-flag"></i>
-            فرم تماس با ما
+            <i class="fa fa-comment-o"></i>
+            دیدگاه ها
         </li>
 
     </ul>
@@ -40,16 +40,16 @@
                 <form id="filter" asp-controller="Contact" asp-action="Index" method="post" class="form-horizontal">
                     <input type="hidden" asp-for="Filter.PageIndex" />
                     <input type="hidden" asp-for="Filter.PageSize" />
-                     <div class="form-body">
+                    <div class="form-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-3">نام</label>
                                     <div class="col-md-9">
-                                        <input asp-for="Filter.Name" type="text" class="form-control" placeholder="نام...">
+                                        <input asp-for="Filter.Title" type="text" class="form-control" placeholder="نام...">
                                         @*<span class="help-block">
 
-                            </span>*@
+                                            </span>*@
                                     </div>
                                 </div>
                             </div>
@@ -60,26 +60,26 @@
                                         <input asp-for="Filter.Email" style="direction: ltr" type="email" class="form-control" placeholder="ایمیل...">
                                         @*<span class="help-block">
 
-                            </span>*@
+                                            </span>*@
                                     </div>
                                 </div>
                             </div>
                             <!--/span-->
                             @*<div class="col-md-6">
-                    <div class="form-group has-error">
-                        <label class="control-label col-md-3">ایمیل</label>
-                        <div class="col-md-9">
-                            <div class="select2-container select2me form-control" id="s2id_autogen5"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-6">Abc</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen6" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="il" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-6" id="s2id_autogen6"><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <label for="s2id_autogen6_search" class="select2-offscreen"></label>       <input type="il" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-6" id="s2id_autogen6_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-6">   </ul></div></div><select name="foo" class="select2me form-control select2-offscreen" tabindex="-1" title="">
-                                <option value="1">Abc</option>
-                                <option value="1">Abc</option>
-                                <option value="1">This is a really long value that breaks the fluid design for a select2</option>
-                            </select>
-                            <span class="help-block">
-                                This field has error.
-                            </span>
-                        </div>
-                    </div>
-                </div>*@
+                                    <div class="form-group has-error">
+                                        <label class="control-label col-md-3">ایمیل</label>
+                                        <div class="col-md-9">
+                                            <div class="select2-container select2me form-control" id="s2id_autogen5"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-6">Abc</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen6" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="il" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-6" id="s2id_autogen6"><div class="select2-drop select2-display-none select2-with-searchbox">   <div class="select2-search">       <label for="s2id_autogen6_search" class="select2-offscreen"></label>       <input type="il" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-6" id="s2id_autogen6_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-6">   </ul></div></div><select name="foo" class="select2me form-control select2-offscreen" tabindex="-1" title="">
+                                                <option value="1">Abc</option>
+                                                <option value="1">Abc</option>
+                                                <option value="1">This is a really long value that breaks the fluid design for a select2</option>
+                                            </select>
+                                            <span class="help-block">
+                                                This field has error.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>*@
                             <!--/span-->
                         </div>
                     </div>
@@ -108,7 +108,7 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-file"></i> لیست پیام ها
+                    <i class="fa fa-comment"></i> لیست دیدگاه ها
                 </div>
                 <div class="actions">
 
@@ -162,64 +162,69 @@
                 @if (Model.DataSource.IsNotEmpty) {
                     <div class="todo-tasklist">
 
-                        @foreach (var contact in Model.DataSource.Items) {
+                        @foreach (var comment in Model.DataSource.Items) {
                             string stateClassName = "todo-tasklist-item-border-yellow";
                             string badgeClassName = "";
-                            switch (contact.Status) {
-                                case Behlog.Core.Models.Enum.ContactMessageStatus.Deleted:
+                            switch (comment.Status) {
+                                case Behlog.Core.Models.Enum.CommentStatus.Deleted:
                                     stateClassName = "todo-tasklist-item-border-red";
                                     badgeClassName = "danger";
                                     break;
-                                case Behlog.Core.Models.Enum.ContactMessageStatus.Sent:
+                                case Behlog.Core.Models.Enum.CommentStatus.Rejected:
+                                    stateClassName = "todo-tasklist-item-border-red";
+                                    badgeClassName = "danger";
+                                    break;
+                                case Behlog.Core.Models.Enum.CommentStatus.Waiting:
                                     stateClassName = "todo-tasklist-item-border-yellow";
                                     badgeClassName = "warning";
                                     break;
-                                case Behlog.Core.Models.Enum.ContactMessageStatus.Spam:
+                                case Behlog.Core.Models.Enum.CommentStatus.Spam:
                                     stateClassName = "todo-tasklist-item-border-gray";
                                     badgeClassName = "primary";
                                     break;
-                                case Behlog.Core.Models.Enum.ContactMessageStatus.Viewed:
+                                case Behlog.Core.Models.Enum.CommentStatus.Viewed:
                                     stateClassName = "todo-tasklist-item-border-blue";
                                     badgeClassName = "success";
                                     break;
-                                case Behlog.Core.Models.Enum.ContactMessageStatus.Read:
+                                case Behlog.Core.Models.Enum.CommentStatus.Read:
+                                    stateClassName = "todo-tasklist-item-border-blue";
+                                    badgeClassName = "success";
+                                    break;
+                                case Behlog.Core.Models.Enum.CommentStatus.Approved:
                                     stateClassName = "todo-tasklist-item-border-green";
                                     badgeClassName = "";
                                     break;
                             }
 
-                            <div id="divContact" data-id="@contact.Id" class="todo-tasklist-item @stateClassName">
+                            <div id="divContact" data-id="@comment.Id" class="todo-tasklist-item @stateClassName">
                                 <span class="pull-left"><i class="fa fa-user-o"></i> </span>
-                                <div id="divContactTitle_@contact.Id" class="todo-tasklist-item-title">
-                                    <input type="checkbox" id="chkSelectContact_@contact.Id" class="form-check-input" />
-                                    @contact.Name
+                                <div id="divContactTitle_@comment.Id" class="todo-tasklist-item-title">
+                                    <input type="checkbox" id="chkSelectContact_@comment.Id" class="form-check-input" />
+                                    @comment.Title
                                 </div>
                                 <div class="todo-tasklist-item-li">
-                                    <b>@contact.Title</b>
+                                    <b>@comment.PostTitle</b>
                                 </div>
                                 <div class="todo-tasklist-item-il">
-                                    @Html.Raw(contact.Message)
+                                    @Html.Raw(comment.Body)
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-8">
 
                                     </div>
                                     <div class="col-sm-4" style="text-align: left">
-                                        <a class="btn btn-danger delete-dialog" id="btnRemove" href="#remove" data-id="@contact.Id" data-toggle="modal"><i class="fa fa-trash-o"></i> حذف</a>
+                                        <a class="btn btn-danger delete-dialog" id="btnRemove" href="#remove" data-id="@comment.Id" data-toggle="modal"><i class="fa fa-trash-o"></i> حذف</a>
                                         @*<a class="btn btn-danger" href="#">حذف <i class="fa fa-trash-o"></i></a>*@
                                     </div>
                                 </div>
                                 <div class="todo-tasklist-controls pull-left">
-                                    <span class="todo-tasklist-date"><i class="fa fa-inbox"></i>آدرس ایمیل :<a href="mailto:@contact.Email">@contact.Email</a> </span>
-                                    <span class="todo-tasklist-date"><i class="fa fa-phone"></i>شماره تماس : <a href="tel://@contact.Phone">@contact.Phone</a>  </span>
+                                    <span class="todo-tasklist-date"><i class="fa fa-inbox"></i>آدرس ایمیل :<a href="mailto:@comment.Email">@comment.Email</a> </span>
+                                    <span class="todo-tasklist-date"><i class="fa fa-phone"></i>شماره تماس : <a href="@comment.WebUrl">@comment.WebUrl </a>  </span>
                                 </div>
                                 <div class="todo-tasklist-controls pull-right">
-                                    <span class="todo-tasklist-date"><i class="fa fa-calendar"></i> تاریخ ارسال : @contact.SentDateDisplay </span>
-                                    <span class="todo-tasklist-date"><i class="fa fa-user"></i> IP :  @contact.Ip </span>
+                                    <span class="todo-tasklist-date"><i class="fa fa-calendar"></i> تاریخ : @comment.CreateDateDisplay </span>
+                                    <span class="todo-tasklist-date"><i class="fa fa-user"></i> IP :  @comment.IP </span>
                                 </div>
-
-
-
                             </div>
                         }
 
@@ -236,10 +241,10 @@
                     }
                     else {
                         <div class="note note-danger">
-                            <h4 class="block">هنوز پیامی برای وب سایت شما ارسال نشده است!</h4>
+                            <h4 class="block">هنوز دیدگاهی برای نوشته های وب سایت شما ارسال نشده است!</h4>
                             <p>
-                                زمانی که بازدیدکنندگان یا کاربران وب سایت برای شما از طریق <b>فرم تماس</b> پیامی ارسال کنند،
-                                لیست پیام های ارسالی را اینجا خواهید دید.
+                                زمانی که بازدیدکنندگان روی نوشته های شما دیدگاه بگذارند،
+                                ما به شما اطلاع می‌دهیم و از اینجا می‌توانید آن دیدگاه ها را مدیریت کنید.
                             </p>
                         </div>
                     }
