@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
+using System.Collections.Generic;
 using DNTPersianUtils.Core;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Behlog.Web.Admin.ViewModels.Components {
 
@@ -53,6 +52,7 @@ namespace Behlog.Web.Admin.ViewModels.Components {
 
         #endregion
 
+        #region Collections
 
         public IList<SelectListItem> Months =>
             new List<SelectListItem> {
@@ -96,10 +96,14 @@ namespace Behlog.Web.Admin.ViewModels.Components {
             }
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void setPersianDate() {
-            Day = _calendar.GetDayOfMonth(Value.Value);
-            Month = _calendar.GetMonth(Value.Value);
-            Year = _calendar.GetYear(Value.Value);
+            Day = _calendar.GetDayOfMonth(_value.Value);
+            Month = _calendar.GetMonth(_value.Value);
+            Year = _calendar.GetYear(_value.Value);
         }
 
         private bool isCurrentMonth(int month) => CurrentMonth == month;
@@ -107,5 +111,7 @@ namespace Behlog.Web.Admin.ViewModels.Components {
         private bool isCurrentDay(int day) => CurrentDay == day;
 
         private bool isCurrentYear(int year) => CurrentYear == year;
+
+        #endregion
     }
 }

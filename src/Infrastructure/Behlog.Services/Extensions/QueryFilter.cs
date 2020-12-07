@@ -6,6 +6,8 @@ using Behlog.Services.Dto.System;
 using Behlog.Services.Dto.Admin.Content;
 using Behlog.Services.Dto.Admin.Feature;
 using Behlog.Core.Models.Feature;
+using Behlog.Core.Models.Security;
+using Behlog.Services.Dto.Admin.Security;
 
 namespace Behlog.Services.Extensions {
     
@@ -73,10 +75,33 @@ namespace Behlog.Services.Extensions {
                 query = query.Where(_ => _.Email.Contains(filter.Email));
 
             if (filter.Status.HasValue)
-                query = query.Where(_ => _.Status == filter.Status);
+                query = query.Where(_ => _.Status == filter.Status.Value);
 
             return query;
 
+        }
+
+        public static IQueryable<User> SetFilter(
+            this IQueryable<User> query,
+            AdminUserIndexFilter filter) {
+            filter.CheckArgumentIsNull(nameof(filter));
+
+            if (!filter.Title.IsNullOrEmpty())
+                query = query.Where(_ => _.Title.Contains(filter.Title));
+
+            if (!filter.UserName.IsNullOrEmpty())
+                query = query.Where(_ => _.UserName.Contains(filter.UserName));
+
+            if (!filter.Email.IsNullOrEmpty())
+                query = query.Where(_ => _.Email.Contains(filter.Email));
+
+            if (!filter.PhoneNumber.IsNullOrEmpty())
+                query = query.Where(_ => _.PhoneNumber.Contains(filter.PhoneNumber));
+
+            if (filter.Status.HasValue)
+                query = query.Where(_ => _.Status == filter.Status.Value);
+
+            return query;
         }
     }
 }

@@ -17,10 +17,12 @@ using Behlog.Core.Models.Security;
 using Behlog.Services.Contracts.Security;
 using Behlog.Core.Contracts.Services.Common;
 using Behlog.Core.Contracts.Repository.System;
+using Behlog.Core.Contracts.Repository.Security;
 using Behlog.Factories.Content;
 using Behlog.Factories.Contracts.Content;
 using Behlog.Factories.Contracts.Feature;
 using Behlog.Factories.Contracts.System;
+using Behlog.Factories.Contracts.Security;
 using Behlog.Factories.Feature;
 using Behlog.Services.Contracts.System;
 using Behlog.Factories.System;
@@ -29,6 +31,7 @@ using Behlog.Core.Contracts.Repository.Feature;
 using Behlog.Repository.Content;
 using Behlog.Repository.Feature;
 using Behlog.Repository.System;
+using Behlog.Repository.Security;
 using Behlog.Services.Content;
 using Behlog.Services.Contracts.Content;
 using Behlog.Services.Contracts.Feature;
@@ -45,6 +48,7 @@ using Behlog.Validation.Feature;
 using Behlog.Web.Common.Tools;
 using Behlog.Web.Admin.Core;
 using Behlog.Web.Core.Settings;
+using Behlog.Factories.Security;
 
 namespace Microsoft.Extensions.DependencyInjection {
 
@@ -127,6 +131,8 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<IWebsiteOptionFactory, WebsiteOptionFactory>();
             services.AddScoped<ITagFactory, TagFactory>();
 
+            //Security
+            services.AddScoped<IUserFactory, UserFactory>();
         }
 
         private static void AddRepositories(
@@ -161,6 +167,9 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IWebsiteOptionRepository, WebsiteOptionRepository>();
             services.AddScoped<IErrorLogRepository, ErrorLogRepository>();
+
+            //Security
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         private static void AddServices(this IServiceCollection services) {
@@ -187,7 +196,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<ITagService, TagService>();
 
             //Security
-            
+            services.AddScoped<IUserService, UserService>();
         }
 
         private static void AddValidators(this IServiceCollection services) {

@@ -1,0 +1,291 @@
+﻿@model AdminUserIndexViewModel
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+}
+
+<h3 class="page-title">
+    مدیریت کاربران
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a asp-controller="Home" asp-action="Index"> داشبرد</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <i class="fa fa-shield"></i>
+            <a href="#"> امنیت</a>
+            <i class="fa fa-angle-left"></i>
+        </li>
+        <li>
+            <i class="fa fa-users"></i>
+            کاربران
+        </li>
+
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-filter"></i> فیلتر
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse" data-original-title="" title="باز شو">
+                    </a>
+                    <a href="" class="fullscreen" data-original-title="" title="تمام صفحه">
+                    </a>
+                    <a href="javascript:;" class="remove" data-original-title="" title="حذف از صفحه">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="filter" asp-controller="User" asp-action="Index" method="post" class="form-horizontal">
+                    <input type="hidden" asp-for="Filter.PageIndex" />
+                    <input type="hidden" asp-for="Filter.PageSize" />
+                    <input type="hidden" asp-for="Filter.Title" />
+                    <input type="hidden" asp-for="Filter.UserName" />
+                    <input type="hidden" asp-for="Filter.PhoneNumber" />
+                    <input type="hidden" asp-for="Filter.Status" />
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">نام</label>
+                                    <div class="col-md-9">
+                                        <input asp-for="Filter.Title" type="text" class="form-control" placeholder="نام...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">ایمیل</label>
+                                    <div class="col-md-9">
+                                        <input asp-for="Filter.Email" style="direction: ltr" type="email" class="form-control" placeholder="ایمیل...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">نام کاربری</label>
+                                    <div class="col-md-9">
+                                        <input asp-for="Filter.UserName" style="direction: ltr" class="form-control" placeholder="نام کاربری...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">شماره موبایل</label>
+                                    <div class="col-md-9">
+                                        <input asp-for="Filter.PhoneNumber" style="direction: ltr" class="form-control" placeholder="شماره موبایل...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">وضعیت</label>
+                                    <div class="col-md-9">
+                                        <select asp-for="Filter.StatusValue"
+                                                asp-items="Model.Filter.StatusSource"
+                                                class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn green"><i class="fa fa-filter"></i> فیلتر</button>
+                                        <a asp-controller="User" asp-action="Index" class="btn default"><i class="fa fa-remove"></i> حذف فیلتر</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-users"></i> لیست کاربران
+                </div>
+                <div class="actions">
+
+                    @if (Model.DataSource.CanGoPreviousPage) {
+                        <a asp-controller="Contact" asp-action="Index" asp-route-page="@Model.DataSource.PreviousPage"
+                           class="btn default green-stripe">
+                            صفحه قبل
+                        </a>
+                    }
+
+                    @if (Model.DataSource.CanGoNextPage) {
+                        <a asp-controller="Contact" asp-action="Index" asp-route-page="@Model.DataSource.NextPage"
+                           class="btn default green-stripe">
+                            صفحه بعد
+                        </a>
+                    }
+
+
+                    <a href="javascript:;" class="btn default btn-sm">
+                        <i class="fa fa-share icon-black"></i> Share
+                    </a>
+
+                    <div class="btn-group">
+                        <a class="btn btn-sm green" href="javascript:;" data-toggle="dropdown">
+                            <i class="fa fa-user"></i> عملیات <i class="fa fa-angle-down "></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right" style="font-family: 'IRANsans'">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-trash-o"></i> حذف انتخاب شده ها
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-ban"></i> Ban
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="i"></i> Make admin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+
+                @if (Model.DataSource.IsNotEmpty) {
+                <div class="">
+                    <table class="table table-striped table-bordered table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-check-square"></i> </th>
+                                <th>عنوان</th>
+                                <th>ایمیل</th>
+                                <th>شماره موبایل</th>
+                                <th>نام کاربری</th>
+                                <th>تاریخ ثبت نام</th>
+                                <th>وضعیت</th>
+                            </tr>
+                        </thead>
+                        @foreach (var user in Model.DataSource.Items) {
+                            string stateClassName = "label label label-success";
+                            string badgeClassName = "";
+                            switch (user.Status) {
+                                case Behlog.Core.Models.Enum.UserStatus.Deleted:
+                                    stateClassName = "label label label-danger";
+                                    badgeClassName = "danger";
+                                    break;
+                                case Behlog.Core.Models.Enum.UserStatus.Blocked:
+                                    stateClassName = "label label label-danger";
+                                    badgeClassName = "danger";
+                                    break;
+                                case Behlog.Core.Models.Enum.UserStatus.Disabled:
+                                    stateClassName = "label label label-warning";
+                                    badgeClassName = "warning";
+                                    break;
+                                case Behlog.Core.Models.Enum.UserStatus.Enabled:
+                                    stateClassName = "label label-sm label-primary label-mini";
+                                    badgeClassName = "primary";
+                                    break;
+                            }
+
+                            <tr>
+                                <td>
+                                    <input asp-for="CheckedItems" type="checkbox" value="@user.Checked" class="form-check-input" />
+                                </td>
+                                <td>@user.Title </td>
+                                <td>@user.Email </td>
+                                <td>@user.PhoneNumber </td>
+                                <td>@user.UserName </td>
+                                <td>@user.RegisterDateDisplay </td>
+                                <td><span class="@stateClassName">@user.StatusDisplay</span></td>
+                            </tr>
+
+                        }
+                    </table>
+                    </div>
+                }
+                else {
+                    if (Model.DataSource.HasFilter) {
+                        <div class="note note-danger">
+                            <h4 class="block">نتیجه ای برای جستجوی شما یافت نشد!</h4>
+                            <p>
+                                لطفاً مقادیر فیلترها را بررسی کنید. اگر مطمئن نیستید، فیلترها را حذف و دوباره سعی نمایید.
+                            </p>
+                        </div>
+                    }
+                    else {
+                        <div class="note note-danger">
+                            <h4 class="block">هنوز دیدگاهی برای نوشته های وب سایت شما ارسال نشده است!</h4>
+                            <p>
+                                زمانی که بازدیدکنندگان روی نوشته های شما دیدگاه بگذارند،
+                                ما به شما اطلاع می‌دهیم و از اینجا می‌توانید آن دیدگاه ها را مدیریت کنید.
+                            </p>
+                        </div>
+                    }
+
+                }
+
+
+            </div>
+            <div class="form-actions" style="padding-top: 15px">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>صفحه @Model.DataSource.CurrentPage از @Model.DataSource.PageCount </span> |
+                        <span>تعداد کل رکوردها: @Model.DataSource.TotalCount.ToString("N0") </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_deleteDlg" />
+
+@section headSection {
+    
+}
+
+@section footerScripts {
+    <script type="text/javascript">
+        $(".delete-dialog").click(function () {
+            //e.preventDefault();
+            var id = $(this).data('id');
+            $('#hidDelete').val(id);
+        });
+        $('#btnDelete').click(function () {
+            var id = $('#hidDelete').val();
+            $.post("@Url.Action("Delete")", { id: id }, function (data) {
+                window.location.href = "@Url.Action("Index")";
+            });
+        });
+
+        //$('.todo-tasklist-item').click(function (e) {
+        //    var id = $(this).attr('data-id');
+        //    var title = $(this).find('#divContactTitle_' + id);
+        //    alert(title.id);
+        //    var chk = title.find('#chkSelectContact_'+id);
+        //    alert(chk.id);
+        //    chk.checked = !chk.checked;
+        //});
+    </script>
+}

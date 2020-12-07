@@ -12,10 +12,10 @@ using Behlog.Web.Admin.ViewModels.Content;
 using Behlog.Web.Admin.ViewModels.Components;
 using Mapster;
 
-namespace Behlog.Web.Data.Content
-{
-    public class PostViewModelProvider
-    {
+namespace Behlog.Web.Data.Content {
+    
+    public class PostViewModelProvider {
+
         private readonly LanguageViewModelProvider _languageViewModelProvider;
         private readonly IPostTypeService _postTypeService;
         private readonly IPostService _postService;
@@ -95,7 +95,7 @@ namespace Behlog.Web.Data.Content
         }
 
         /// <summary>
-        /// Build <see cref="PostCreateViewModel"/> base on PostType.
+        /// Build <see cref="PostCreateViewModel"/> based on PostType.
         /// </summary>
         /// <param name="postType">PostType to load base data for Post.</param>
         /// <returns>A <see cref="PostCreateViewModel"/> populated with base data.</returns>
@@ -110,7 +110,8 @@ namespace Behlog.Web.Data.Content
                 Status = PostStatus.Draft,
                 //PostTypeTitle = postTypeRes.Title,
                 PostTypeSlug = postTypeRes.Slug,
-                PostTypeId = postTypeRes.Id
+                PostTypeId = postTypeRes.Id,
+                PublishDateModel = new PersianDateViewModel()
             };
 
             await setBaseDataAsync(model);
@@ -127,6 +128,11 @@ namespace Behlog.Web.Data.Content
         public async Task<PostCreateViewModel> BuildCreateViewModelAsync(PostCreateViewModel model) {
             model.LanguageSelectList = await _languageViewModelProvider
                 .GetSelectListAsync(model.LangId);
+
+            if (model.Status == PostStatus.Published || model.Status == PostStatus.Planned)
+                model.PublishDateModel = new PersianDateViewModel(model.PublishDate.Value);
+            else
+                model.PublishDateModel = new PersianDateViewModel();
 
             model.CategorySelectList = await _categoryProvider
                 .GetSelectListAsync(

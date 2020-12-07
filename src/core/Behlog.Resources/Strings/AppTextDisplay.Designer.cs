@@ -196,6 +196,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [همه].
+        /// </summary>
+        public static string DropDownNoSelect {
+            get {
+                return ResourceManager.GetString("DropDownNoSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to استفاده شده در نوشته.
         /// </summary>
         public static string FileStatusAttachedToPost {

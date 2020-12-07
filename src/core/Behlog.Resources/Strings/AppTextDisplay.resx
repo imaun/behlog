@@ -273,4 +273,7 @@
   <data name="UserStatusEnabled" xml:space="preserve">
     <value>فعال</value>
   </data>
+  <data name="DropDownNoSelect" xml:space="preserve">
+    <value>[همه]</value>
+  </data>
 </root>
