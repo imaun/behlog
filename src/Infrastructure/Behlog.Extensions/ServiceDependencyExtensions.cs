@@ -209,7 +209,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<LanguageViewModelProvider>();
             services.AddScoped<CategoryViewModelProvider>();
             services.AddScoped<PostViewModelProvider>();
-
+            services.AddScoped<WebsiteOptionsProvider>();
         }
 
         private static void AddExtensions(this IServiceCollection services) {

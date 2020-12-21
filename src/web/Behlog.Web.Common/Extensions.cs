@@ -114,5 +114,12 @@ namespace Behlog.Web.Common.Extensions {
             => virtualPath != null
                 ? virtualPath.Replace("~", AppHttpContext.BaseUrl)
                 : CommonHelper.GetDefaultImagePath();
+
+        public static string GetFullUrl(this string virtualPath) =>
+           string.IsNullOrWhiteSpace(virtualPath)
+                ? string.Empty
+                : virtualPath.Replace("~", AppHttpContext.BaseUrl);
+
     }
+
 }

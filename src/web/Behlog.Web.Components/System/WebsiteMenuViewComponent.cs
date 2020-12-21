@@ -15,11 +15,13 @@ namespace Behlog.Web.Components.System
 
         private readonly IMenuService _menuService;
         private readonly IWebsiteInfo _websiteInfo;
+        private readonly IWebsiteOptionService _websiteOptionService;
         private readonly IUserContext _userContext;
 
         public WebsiteMenuViewComponent(
             IMenuService menuService,
             IWebsiteInfo websiteInfo,
+            IWebsiteOptionService websiteOptionService,
             IUserContext userContext) {
 
             menuService.CheckArgumentIsNull(nameof(menuService));
@@ -27,6 +29,9 @@ namespace Behlog.Web.Components.System
 
             websiteInfo.CheckArgumentIsNull(nameof(websiteInfo));
             _websiteInfo = websiteInfo;
+
+            websiteOptionService.CheckArgumentIsNull(nameof(websiteOptionService));
+            _websiteOptionService = websiteOptionService;
 
             userContext.CheckArgumentIsNull(nameof(userContext));
             _userContext = userContext;

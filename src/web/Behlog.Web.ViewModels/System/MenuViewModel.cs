@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Behlog.Web.Common.Extensions;
 
 namespace Behlog.Web.ViewModels.System
 {
@@ -10,7 +11,8 @@ namespace Behlog.Web.ViewModels.System
         }
 
         public int WebsiteId { get; set; }
-        public string LogoPath { get; set; }
+        public string WebsiteLogo { get; set; }
+        public string WebsiteLogoFullUrl => WebsiteLogo.GetFullUrl();
         public IEnumerable<MenuItemViewModel> Items { get; set; }
 
         public List<MenuItemViewModel> Root => GetSubItems();
