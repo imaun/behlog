@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Behlog.Core.Extensions;
-using Behlog.Services.Contracts.Content;
-using Behlog.Web.ViewModels.Content;
 using Microsoft.AspNetCore.Mvc;
+using Behlog.Core.Extensions;
+using Behlog.Web.ViewModels.Content;
+using Behlog.Services.Contracts.Content;
 
 namespace Behlog.Web.Components.Content {
 
@@ -19,7 +19,8 @@ namespace Behlog.Web.Components.Content {
         public async Task<IViewComponentResult> InvokeAsync(
             string lang,
             string postType,
-            string slug) {
+            string slug
+            ) {
 
             var post = await _postService.GetPostFileGalleryAsync(
                 lang, 
@@ -29,8 +30,7 @@ namespace Behlog.Web.Components.Content {
 
             if (post == null)
                 return await Task.FromResult(
-                    Content(string.Empty)
-                    );
+                    Content(string.Empty));
 
             var result = new SliderViewModel {
                 Images = post.Files.Select(_ => new SliderImageViewModel {
@@ -42,12 +42,10 @@ namespace Behlog.Web.Components.Content {
 
             if(!string.IsNullOrWhiteSpace(post.ViewPath)) 
                 return await Task.FromResult(
-                    View(post.ViewPath, result)
-                    );
+                    View(post.ViewPath, result));
 
             return await Task.FromResult(
-                View(result)
-                );
+                View(result));
         }
     }
 }

@@ -32,6 +32,6 @@ namespace Behlog.Core.Models.System {
     public static class WebsiteOptionCategoryNames {
         public const string SocialNetwork = "social-network";
         public const string ContactInfo = "contact-info";
-
+        public const string General = "general";
     }
 }

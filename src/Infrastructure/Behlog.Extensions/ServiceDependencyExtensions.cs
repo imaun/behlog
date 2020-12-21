@@ -242,7 +242,10 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddExtensions();
             services.AddScoped<IWebsiteInfo>(_ => {
                 var service = _.GetService<IWebsiteService>();
-                return service.GetWebsiteInfo(appSetting.WebsiteId).Result;
+                var result = service.GetWebsiteInfo(appSetting.WebsiteId).Result;
+                if (result == null)
+                    return null;
+                return result;
             });
 
             MappingConfig.AddDtoMappingConfig();

@@ -46,6 +46,14 @@ namespace Behlog.Services.System
             _setting = setting;
         }
 
+        public async Task<WebsiteOptionResultDto> GetOptionAsync(string optionKey) {
+            var option = await _repository.GetEnabledByKey(_websiteInfo.Id, optionKey);
+            option.CheckReferenceIsNull(nameof(option));
+            var result = option.Adapt<WebsiteOptionResultDto>();
+
+            return await Task.FromResult(result);
+        }
+
         public async Task<WebsiteOptionResultDto> CreateOrUpdateAsync(
             CreateWebsiteOptionDto model) {
             var entity = await _repository.GetOptionAsync(

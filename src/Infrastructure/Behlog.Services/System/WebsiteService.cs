@@ -36,6 +36,9 @@ namespace Behlog.Services.System
                 .Include(_=> _.Options)
                 .FirstOrDefaultAsync(_ => _.Id == websiteId);
 
+            if (website == null)
+                return null;
+
             var result = new WebsiteInfo {
                 Title = website.Title,
                 DefaultLangId = website.DefaultLangId,
