@@ -12,7 +12,7 @@ namespace Behlog.Core.Models.Content {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string Target { get; set; }
         public string Description { get; set; }
         public EntityStatus Status { get; set; }

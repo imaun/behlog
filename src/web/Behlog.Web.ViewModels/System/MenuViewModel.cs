@@ -10,6 +10,7 @@ namespace Behlog.Web.ViewModels.System
             Items = new List<MenuItemViewModel>();
         }
 
+        public string WebsiteTitle { get; set; }
         public int WebsiteId { get; set; }
         public string WebsiteLogo { get; set; }
         public string WebsiteLogoFullUrl => WebsiteLogo.GetFullUrl();

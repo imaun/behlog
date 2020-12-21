@@ -114,6 +114,9 @@ namespace Behlog.Storage.Core.Mappings {
                     },
                     new PostType {
                         Id = 7, Title = "News", Status = EntityStatus.Enabled, Slug = "news"
+                    },
+                    new PostType {
+                        Id = 8, Title = "Links", Status = EntityStatus.Enabled, Slug = "link"
                     }
                 });
             });

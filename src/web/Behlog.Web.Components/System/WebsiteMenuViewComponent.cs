@@ -8,6 +8,7 @@ using Behlog.Web.ViewModels.System;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Behlog.Web.Data.System;
 
 namespace Behlog.Web.Components.System
 {
@@ -15,13 +16,13 @@ namespace Behlog.Web.Components.System
 
         private readonly IMenuService _menuService;
         private readonly IWebsiteInfo _websiteInfo;
-        private readonly IWebsiteOptionService _websiteOptionService;
+        private readonly WebsiteOptionsProvider _websiteOptionsProvider;
         private readonly IUserContext _userContext;
 
         public WebsiteMenuViewComponent(
             IMenuService menuService,
             IWebsiteInfo websiteInfo,
-            IWebsiteOptionService websiteOptionService,
+            WebsiteOptionsProvider websiteOptionsProvider,
             IUserContext userContext) {
 
             menuService.CheckArgumentIsNull(nameof(menuService));
@@ -30,8 +31,8 @@ namespace Behlog.Web.Components.System
             websiteInfo.CheckArgumentIsNull(nameof(websiteInfo));
             _websiteInfo = websiteInfo;
 
-            websiteOptionService.CheckArgumentIsNull(nameof(websiteOptionService));
-            _websiteOptionService = websiteOptionService;
+            websiteOptionsProvider.CheckArgumentIsNull(nameof(websiteOptionsProvider));
+            _websiteOptionsProvider = websiteOptionsProvider;
 
             userContext.CheckArgumentIsNull(nameof(userContext));
             _userContext = userContext;
@@ -42,7 +43,15 @@ namespace Behlog.Web.Components.System
             var menu = await _menuService
                 .GetWebsiteMenuAsync(_websiteInfo.Id);
 
+            var logoData = await _websiteOptionsProvider.GetWebsiteLogoOptionAsync();
+
             var result = menu.Adapt<WebsiteMenuViewModel>();
+            result.WebsiteTitle = _websiteInfo.Title;
+
+            if(logoData != null) {
+                result.WebsiteLogo = logoData.Value;
+            }
+
             var menuItems = result.Items.ToList();
 
             foreach(var item in menuItems) {
