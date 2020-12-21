@@ -11,18 +11,18 @@ using Mapster;
 
 namespace Behlog.Web.Components.System {
 
-    [ViewComponent]
-    public class WebsiteSimpleFooterViewComponent: ViewComponent
-    {
-        private readonly IWebsiteOptionService _websiteOptionService;
+    //[ViewComponent]
+    //public class WebsiteSimpleFooterViewComponent: ViewComponent
+    //{
+    //    private readonly IWebsiteOptionService _websiteOptionService;
 
-        public WebsiteSimpleFooterViewComponent(IWebsiteOptionService websiteOptionService) {
-            websiteOptionService.CheckArgumentIsNull(nameof(websiteOptionService));
-            _websiteOptionService = websiteOptionService;
-        }
+    //    public WebsiteSimpleFooterViewComponent(IWebsiteOptionService websiteOptionService) {
+    //        websiteOptionService.CheckArgumentIsNull(nameof(websiteOptionService));
+    //        _websiteOptionService = websiteOptionService;
+    //    }
 
-        public async Task<IViewComponentResult> InvokeAsync() {
-            var model = new WebsiteFooterViewModel();
-        }
-    }
+    //    //public async Task<IViewComponentResult> InvokeAsync() {
+    //    //    var model = new WebsiteFooterViewModel();
+    //    //}
+    //}
 }
