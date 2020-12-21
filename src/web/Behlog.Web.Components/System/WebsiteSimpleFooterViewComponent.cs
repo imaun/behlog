@@ -7,22 +7,47 @@ using Behlog.Core.Extensions;
 using Behlog.Services.Contracts.System;
 using Behlog.Web.ViewModels.System;
 using Mapster;
-
+using Behlog.Web.ViewModels.Feature;
 
 namespace Behlog.Web.Components.System {
 
-    //[ViewComponent]
-    //public class WebsiteSimpleFooterViewComponent: ViewComponent
-    //{
-    //    private readonly IWebsiteOptionService _websiteOptionService;
+    [ViewComponent]
+    public class WebsiteSimpleFooterViewComponent : ViewComponent
+    {
+        private readonly IWebsiteOptionService _websiteOptionService;
 
-    //    public WebsiteSimpleFooterViewComponent(IWebsiteOptionService websiteOptionService) {
-    //        websiteOptionService.CheckArgumentIsNull(nameof(websiteOptionService));
-    //        _websiteOptionService = websiteOptionService;
-    //    }
+        public WebsiteSimpleFooterViewComponent(IWebsiteOptionService websiteOptionService) {
+            websiteOptionService.CheckArgumentIsNull(nameof(websiteOptionService));
+            _websiteOptionService = websiteOptionService;
+        }
 
-    //    //public async Task<IViewComponentResult> InvokeAsync() {
-    //    //    var model = new WebsiteFooterViewModel();
-    //    //}
-    //}
+        public async Task<IViewComponentResult> InvokeAsync(int? categoryId = null) {
+            var model = new WebsiteFooterViewModel();
+
+            if (categoryId.HasValue) {
+
+            }
+            else {
+
+            }
+
+            model.Subscriber = new SubscriberViewModel();
+
+            var socialNetworks = await _websiteOptionService
+                .GetSocialNetworksAsync();
+
+            if (socialNetworks != null)
+                model.SocialNetworks = socialNetworks
+                    .Adapt<WebsiteSocialNetworksViewModel>();
+
+            var contactInfo = await _websiteOptionService.GetContactInfoAsync();
+            if (contactInfo != null)
+                model.ContactInfo = contactInfo.Adapt<WebsiteContactInfoViewModel>();
+
+            return await Task.FromResult(
+                View(model)
+                );
+        }
+        
+    }
 }
