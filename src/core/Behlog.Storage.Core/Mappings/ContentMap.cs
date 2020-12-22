@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Behlog.Core.Models.Content;
+using Behlog.Core.Models.Enum;
 
 namespace Behlog.Storage.Core.Mappings {
     public static partial class TableMapper {
@@ -176,6 +177,10 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.MetaKey).HasMaxLength(1000).IsRequired().IsUnicode();
                 map.Property(_ => _.MetaValue).HasMaxLength(4000).IsUnicode();
                 map.Property(_ => _.Category).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.IconName).HasMaxLength(300).IsUnicode();
+                map.Property(_ => _.CoverPhoto).HasMaxLength(4000).IsUnicode();
+                map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
+                map.Property(_ => _.OrderNumber).HasDefaultValue(0);
 
                 map.HasOne(_=> _.Post)
                     .WithMany(_ => _.Meta)

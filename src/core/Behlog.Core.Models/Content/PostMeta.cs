@@ -1,5 +1,6 @@
 ﻿using Behlog.Core.Models.Base;
 using Behlog.Core.Models.System;
+using Behlog.Core.Models.Enum;
 
 namespace Behlog.Core.Models.Content {
     
@@ -15,7 +16,10 @@ namespace Behlog.Core.Models.Content {
         public string Category { get; set; }
         public int? LangId { get; set; }
         public int PostId { get; set; }
-
+        public string IconName { get; set; }
+        public string CoverPhoto { get; set; }
+        public EntityStatus Status { get; set; }
+        public int OrderNumber { get; set; }
         #endregion
 
         #region Navigations
