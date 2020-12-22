@@ -18,6 +18,8 @@ namespace Behlog.Web.ViewModels.Content
         public long FileId { get; set; }
         public string Title { get; set; }
         public string ImagePath { get; set; }
+        public bool Active { get; set; }
+        public string CssClass { get; set; }
     }
 
     public class GalleryViewModel {

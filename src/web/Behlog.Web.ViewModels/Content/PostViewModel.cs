@@ -76,12 +76,8 @@ namespace Behlog.Web.ViewModels.Content {
             return Title.Substring(0, len) + "...";
         }
         public string Slug { get; set; }
-        private string _summary;
-        public string Summary {
-            get => _summary.StripHtmlTags();
-            set => _summary = value;
-        }
-
+        public string Summary { get; set; }
+        public string SummaryStripped => Summary.StripHtmlTags();
         public string LimitedSummary(int len) => Summary.GetLimitedSummary(len);
             
         public DateTime? PublishDate { get; set; }

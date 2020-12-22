@@ -40,6 +40,11 @@ namespace Behlog.Web.Components.Content {
                 }).ToList()
             };
 
+            if (result.Images.Any()) {
+                result.Images.FirstOrDefault().Active = true;
+                result.Images.FirstOrDefault().CssClass = "active";
+            }
+                
             if(!string.IsNullOrWhiteSpace(post.ViewPath)) 
                 return await Task.FromResult(
                     View(post.ViewPath, result));
