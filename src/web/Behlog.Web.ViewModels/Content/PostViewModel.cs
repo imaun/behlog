@@ -51,14 +51,14 @@ namespace Behlog.Web.ViewModels.Content {
         public string LangKey { get; set; }
         public string CategoryTitle { get; set; }
         public string CategorySlug { get; set; }
-
+        public string ParentTitle { get; set; }
         #endregion
 
         #region Calculated Properties
 
         public string PublishDateDisplay => PublishDate?.ToPersianDateTextify();
         public string StatusDisplay => Status.ToDisplay();
-
+        public bool HasParent => ParentId.HasValue;
 
         #endregion
     }

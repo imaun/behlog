@@ -23,6 +23,9 @@ namespace Behlog.Services.Dto.Content
         public string MetaKey { get; set; }
         public string MetaValue { get; set; }
         public string Category { get; set; }
+        public string IconName { get; set; }
+        public string CoverPhoto { get; set; }
+        public int OrderNumber { get; set; }
     }
 
 }

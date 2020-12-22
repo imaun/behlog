@@ -20,8 +20,7 @@ using Mapster;
 
 namespace Behlog.Services.Content
 {
-    public partial class PostService : IPostService
-    {
+    public partial class PostService : IPostService {
         public async Task<PostDetailDto> GetDetailAsync(int id) {
             //var post = await GetResultByIdAsync(id);
             var post = await buildGetDetailQuery()
@@ -96,7 +95,7 @@ namespace Behlog.Services.Content
             return await Task.FromResult(result);
         }
 
-       
+
         public async Task<PostIndexDto> GetIndexAsync(
             IndexParams<PostIndexFilter> param
         ) {
@@ -112,7 +111,7 @@ namespace Behlog.Services.Content
                        ?? await _languageRepository.GetDefaultLanguage();
 
             var query = _repository.Query();
-            
+
             query = AddIndexFilter(query, param.Filter, lang);
 
             var result = new PostIndexDto {
@@ -132,7 +131,7 @@ namespace Behlog.Services.Content
                 ).Title;
 
             result.Items = await query
-                .Include(_=> _.PostType)
+                .Include(_ => _.PostType)
                 .Skip(param.Skip)
                 .Take(param.PageSize)
                 .OrderByDescending(_ => _.Id)
@@ -204,9 +203,9 @@ namespace Behlog.Services.Content
                 throw new PostTypeNotFoundException();
 
             var query = getPostSummaryQuery()
-                .Where(_=> _.PostType.Slug == postTypeSlug)
+                .Where(_ => _.PostType.Slug == postTypeSlug)
                 .Where(_ => _.Language.LangKey == lang)
-                .Where(_=> _.Category.Slug == categorySlug);
+                .Where(_ => _.Category.Slug == categorySlug);
 
             var result = new PostSummaryGroupDto {
                 PostTypeSlug = postType.Slug,
@@ -240,23 +239,23 @@ namespace Behlog.Services.Content
                 .IncludeFiles()
                 .Where(_ => _.PostTypeId == postType.Id)
                 .Where(_ => _.Status == PostStatus.Published)
-                .Where(_=> _.PublishDate <= _dateService.UtcNow())
+                .Where(_ => _.PublishDate <= _dateService.UtcNow())
                 .Where(_ => _.Language.LangKey == lang)
                 .Where(_ => _.IsComponent == isComponent);
 
             if (categoryId.HasValue)
                 query = query.Where(_ => _.CategoryId == categoryId);
 
-            var queryResult = await query.OrderBy(_=> _.OrderNumber)
+            var queryResult = await query.OrderBy(_ => _.OrderNumber)
                 .ToListAsync();
 
             var result = new GalleryDto {
                 Posts = queryResult.Adapt<List<PostFileGalleryDto>>()
             };
 
-            foreach(var post in result.Posts) {
+            foreach (var post in result.Posts) {
                 post.Files = queryResult.FirstOrDefault(_ => _.Id == post.Id)
-                    .PostFiles.OrderBy(_=> _.OrderNum)
+                    .PostFiles.OrderBy(_ => _.OrderNum)
                     .Select(_ => _.File)
                     .Adapt<List<PostFileGalleryItemDto>>();
             }
@@ -286,8 +285,8 @@ namespace Behlog.Services.Content
         }
 
         public async Task<PostFileGalleryDto> GetPostFileGalleryAsync(
-            string lang, 
-            string postType, 
+            string lang,
+            string postType,
             string slug,
             bool isComponent = false) {
 
@@ -297,8 +296,8 @@ namespace Behlog.Services.Content
 
             var post = await _repository
                 .Query()
-                .Include(_=> _.Language)
-                .Include(_=> _.PostType)
+                .Include(_ => _.Language)
+                .Include(_ => _.PostType)
                 .IncludeFiles()
                 .AddPublishedRules()
                 .FirstOrDefaultAsync(_ => _.Language.LangKey == lang &&
@@ -324,12 +323,12 @@ namespace Behlog.Services.Content
         }
 
         public async Task<CategoryPostListDto> GetCategoryPostListAsync(
-            string postTypeSlug, 
+            string postTypeSlug,
             string lang,
             int pageSize) {
             var postType = await _postTypeRepository
                 .GetBySlugAsync(postTypeSlug);
-            if(postType == null) 
+            if (postType == null)
                 throw new PostTypeNotFoundException();
 
             var result = new CategoryPostListDto {
@@ -339,17 +338,17 @@ namespace Behlog.Services.Content
                     .Query()
                     .Enabled()
                     .Include(_ => _.Posts)
-                    .Where(_=> _.WebsiteId == _websiteInfo.Id)
+                    .Where(_ => _.WebsiteId == _websiteInfo.Id)
                     .Where(_ => _.PostTypeId == postType.Id)
-                    .Where(_=> _.Language.LangKey == lang)
+                    .Where(_ => _.Language.LangKey == lang)
                     .Take(pageSize)
                     .Select(_ => new CategoryPostListItemDto {
-                        Id = _.Id, 
-                        Slug = _.Slug, 
+                        Id = _.Id,
+                        Slug = _.Slug,
                         Title = _.Title,
                         Posts = _.Posts
-                            .Where(post=> post.Status == PostStatus.Published)
-                            .Where(post=> post.PublishDate <= _dateService.UtcNow())
+                            .Where(post => post.Status == PostStatus.Published)
+                            .Where(post => post.PublishDate <= _dateService.UtcNow())
                             .Select(p => p.Adapt<PostItemDto>())
                     })
                     .ToListAsync()
@@ -377,8 +376,8 @@ namespace Behlog.Services.Content
 
             var post = await _repository
                 .Query()
-                .Include(_=> _.PostType)
-                .Include(_=> _.Language)
+                .Include(_ => _.PostType)
+                .Include(_ => _.Language)
                 .AddPublishedRules()
                 .BelongsToWebsite(_websiteInfo.Id)
                 .FirstOrDefaultAsync(_ => _.PostType.Slug == postTypeSlug &&
@@ -477,8 +476,8 @@ namespace Behlog.Services.Content
 
             var query = _repository
                 .Query()
-                .Include(_=> _.PostType)
-                .Include(_=> _.CreatorUser)
+                .Include(_ => _.PostType)
+                .Include(_ => _.CreatorUser)
                 .AddPublishedRules()
                 .BelongsToWebsite(_websiteInfo.Id)
                 .WithPostType(postType.Id)
@@ -494,8 +493,30 @@ namespace Behlog.Services.Content
                     .OrderByDescending(_ => _.PublishDate)
                     .ThenBy(_ => _.OrderNumber)
                     .Take(pageSize)
-                    .Select(_=> _.Adapt<PostItemDto>())
+                    .Select(_ => _.Adapt<PostItemDto>())
                     .ToListAsync()
+            };
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<PostMetaListDto> GetPostMetaListAsync(
+            int postId,
+            int? langId = null,
+            string category = null) {
+            var meta = await _metaRepository
+                .GetPostMetaWithPostAsync(postId, langId, category);
+            string postTitle = string.Empty, postSlug = string.Empty;
+            if(meta.Any()) {
+                var post = meta.ToList()[0].Post;
+                postTitle = post.Title;
+                postSlug = post.Slug;
+            }
+            
+            var result = new PostMetaListDto {
+                Items = meta.Select(_ => _.Adapt<PostMetaItemDto>()).ToList(),
+                PostSlug = postSlug,
+                PostTitle = postTitle
             };
 
             return await Task.FromResult(result);
@@ -515,20 +536,20 @@ namespace Behlog.Services.Content
 
         private IQueryable<Post> buildGetDetailQuery() =>
             buildResultQuery()
-                .Include(_=> _.PostType)
+                .Include(_ => _.PostType)
                 .Include(_ => _.Meta);
 
         private IQueryable<Post> AddIndexFilter(
             IQueryable<Post> query,
             PostIndexFilter filter,
             Language language) {
-            
+
             //Add Mandatory filters
             query = query
                 .Where(_ => _.WebsiteId == _websiteInfo.Id)
                 .Where(_ => _.LangId == language.Id)
                 .Where(_ => _.Status == PostStatus.Published);
-                //.Where(_ => _.PublishDate <= _dateService.UtcNow()); //TODO : fix publishDate issue
+            //.Where(_ => _.PublishDate <= _dateService.UtcNow()); //TODO : fix publishDate issue
 
             if (!string.IsNullOrWhiteSpace(filter.PostTypeSlug))
                 query = query.Where(_ => _.PostType.Slug.ToLower()
@@ -593,6 +614,12 @@ namespace Behlog.Services.Content
                 post.PostTypeId,
                 post.LangId);
             detail.Tags = await getPostTagsAsync(post.Id);
+            //detail.Meta = new PostMetaListDto {
+            //    LangKey = post.LangKey,
+            //    PostSlug = post.Slug,
+            //    PostTitle = post.Title,
+            //    Items = await getPostMetaAsync(postId, )
+            //}
         }
 
         private async Task<PostDetailDto> getPostDetailAsync(PostResultDto post) {
