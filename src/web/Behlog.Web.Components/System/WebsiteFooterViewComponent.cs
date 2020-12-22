@@ -31,23 +31,26 @@ namespace Behlog.Web.Components.System
             var model = new WebsiteFooterViewModel();
 
             var posts = await _postService.GetLatestPostsAsync(
-                            postType,
-                            null,
-                            lang,
-                            pageSize);
+                            postType, null, lang, pageSize);
 
             if(posts != null && posts.Items.Any())
-                model.Posts = posts.Items
-                    .Adapt<List<PostItemViewModel>>();
+                model.Posts = posts.Items.Adapt<List<PostItemViewModel>>();
 
             model.Subscriber = new SubscriberViewModel();
+
+            var contactInfo = await _websiteOptionService.GetContactInfoAsync();
+            if (contactInfo != null)
+                model.ContactInfo = contactInfo.Adapt<WebsiteContactInfoViewModel>();
+
+            var copyrightText = await _websiteOptionService.GetOptionAsync("Copyright");
+            if (copyrightText != null)
+                model.CopyrightText = copyrightText.Value;
 
             var socialNetworks = await _websiteOptionService
                 .GetSocialNetworksAsync();
 
             if (socialNetworks != null)
-                model.SocialNetworks = socialNetworks
-                    .Adapt<WebsiteSocialNetworksViewModel>();
+                model.SocialNetworks = socialNetworks.Adapt<WebsiteSocialNetworksViewModel>();
 
             return await Task.FromResult(
                 View(model)

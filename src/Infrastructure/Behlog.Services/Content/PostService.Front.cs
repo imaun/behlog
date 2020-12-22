@@ -226,7 +226,8 @@ namespace Behlog.Services.Content
 
         public async Task<GalleryDto> GetGalleryAsync(
             int? categoryId = null,
-            string lang = Language.KEY_fa_IR) {
+            string lang = Language.KEY_fa_IR,
+            bool isComponent = false) {
 
             var postType = await _postTypeRepository
                 .GetBySlugAsync(PostType.GALLERY);
@@ -238,26 +239,24 @@ namespace Behlog.Services.Content
                 .Query()
                 .IncludeFiles()
                 .Where(_ => _.PostTypeId == postType.Id)
-                .Where(_ => _.Status == PostStatus.Published) //TODO : Add PublishDate where
+                .Where(_ => _.Status == PostStatus.Published)
+                .Where(_=> _.PublishDate <= _dateService.UtcNow())
                 .Where(_ => _.Language.LangKey == lang)
-                .Where(_ => !_.IsComponent);
+                .Where(_ => _.IsComponent == isComponent);
 
             if (categoryId.HasValue)
                 query = query.Where(_ => _.CategoryId == categoryId);
 
-            var queryResult = await query
-                .OrderBy(_=> _.OrderNumber)
+            var queryResult = await query.OrderBy(_=> _.OrderNumber)
                 .ToListAsync();
 
             var result = new GalleryDto {
-                Posts = queryResult
-                .Adapt<List<PostFileGalleryDto>>()
+                Posts = queryResult.Adapt<List<PostFileGalleryDto>>()
             };
 
             foreach(var post in result.Posts) {
                 post.Files = queryResult.FirstOrDefault(_ => _.Id == post.Id)
-                    .PostFiles
-                    .OrderBy(_=> _.OrderNum)
+                    .PostFiles.OrderBy(_=> _.OrderNum)
                     .Select(_ => _.File)
                     .Adapt<List<PostFileGalleryItemDto>>();
             }

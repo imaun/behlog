@@ -94,7 +94,8 @@ namespace Behlog.Services.Contracts.Content {
 
         Task<GalleryDto> GetGalleryAsync(
             int? categoryId = null,
-            string lang = Language.KEY_fa_IR);
+            string lang = Language.KEY_fa_IR,
+            bool isComponent = false);
 
         Task<PostListDto> GetLatestPostsAsync(
             string postTypeSlug,

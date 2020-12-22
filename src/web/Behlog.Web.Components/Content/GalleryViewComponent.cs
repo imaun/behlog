@@ -19,9 +19,10 @@ namespace Behlog.Web.Components.Content {
 
         public async Task<IViewComponentResult> InvokeAsync(
             int? categoryId, 
-            string lang = Language.KEY_fa_IR) {
+            string lang = Language.KEY_fa_IR,
+            bool isComponent = false) {
 
-            var gallery = await _postService.GetGalleryAsync(categoryId, lang);
+            var gallery = await _postService.GetGalleryAsync(categoryId, lang, isComponent);
 
             if(gallery == null) {
                 return await Task.FromResult(
