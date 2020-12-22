@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Behlog.Core.Models.Enum;
+﻿using Behlog.Core.Models.Enum;
+using Behlog.Web.ViewModels.Core;
 
 namespace Behlog.Web.ViewModels.Content
 {
-    public class FileViewModel
+    public class FileViewModel: BaseViewModel
     {
         public long Id { get; set; }
         public string Title { get; set; }

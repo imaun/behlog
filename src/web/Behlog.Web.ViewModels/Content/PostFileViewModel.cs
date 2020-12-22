@@ -2,10 +2,11 @@
 using Behlog.Core.Models.Enum;
 using Behlog.Core;
 using System.Linq;
+using Behlog.Web.ViewModels.Core;
 
 namespace Behlog.Web.ViewModels.Content
 {
-    public class SliderViewModel
+    public class SliderViewModel: BaseViewModel
     {
         public SliderViewModel() {
             Images = new List<SliderImageViewModel>();
@@ -14,15 +15,13 @@ namespace Behlog.Web.ViewModels.Content
         public IEnumerable<SliderImageViewModel> Images { get; set; }
     }
 
-    public class SliderImageViewModel {
+    public class SliderImageViewModel: BaseViewModel {
         public long FileId { get; set; }
         public string Title { get; set; }
         public string ImagePath { get; set; }
-        public bool Active { get; set; }
-        public string CssClass { get; set; }
     }
 
-    public class GalleryViewModel {
+    public class GalleryViewModel: BaseViewModel {
 
         public GalleryViewModel() {
             Posts = new List<PostFileGalleryViewModel>();

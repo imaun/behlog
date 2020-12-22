@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Behlog.Core.Models.Content;
 using Behlog.Core.Models.System;
 using Behlog.Services.Dto.Admin.Content;
 using Behlog.Services.Dto.Content;
@@ -110,5 +111,15 @@ namespace Behlog.Services.Contracts.Content {
             int month,
             int day
         );
+
+        Task<PostMetaListDto> GetPostMetaListAsync(
+            Post post,
+            int? langId = null,
+            string category = null);
+
+        Task<PostMetaListDto> GetPostMetaListAsync(
+            int postId,
+            int? langId = null,
+            string category = null);
     }
 }

@@ -501,6 +501,22 @@ namespace Behlog.Services.Content
         }
 
         public async Task<PostMetaListDto> GetPostMetaListAsync(
+            Post post,
+            int? langId = null,
+            string category = null) {
+            var meta = await _metaRepository
+                .GetPostMetaWithPostAsync(post.Id, langId, category);
+
+            var result = new PostMetaListDto {
+                Items = meta.Select(_ => _.Adapt<PostMetaItemDto>()).ToList(),
+                PostSlug = post.Slug,
+                PostTitle = post.Title
+            };
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<PostMetaListDto> GetPostMetaListAsync(
             int postId,
             int? langId = null,
             string category = null) {

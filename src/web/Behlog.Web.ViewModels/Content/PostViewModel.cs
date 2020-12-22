@@ -63,7 +63,7 @@ namespace Behlog.Web.ViewModels.Content {
         #endregion
     }
 
-    public abstract class PostItemBaseViewModel {
+    public abstract class PostItemBaseViewModel: BaseViewModel {
         public int Id { get; set; }
         public string Title { get; set; }
         public string LimitedTitle(int len) {
@@ -124,7 +124,7 @@ namespace Behlog.Web.ViewModels.Content {
         public Guid UserId { get; set; }
     }
 
-    public class PostSummaryGroupViewModel {
+    public class PostSummaryGroupViewModel: BaseViewModel {
         public PostSummaryGroupViewModel() {
             Items = new List<PostSummaryViewModel>();
         }
@@ -136,7 +136,7 @@ namespace Behlog.Web.ViewModels.Content {
         public int TotalCount { get; set; }
     }
 
-    public class PostDetailViewModel {
+    public class PostDetailViewModel: BaseViewModel {
 
         public PostDetailViewModel() {
             Categories = new List<CategoryItemViewModel>();
@@ -155,7 +155,7 @@ namespace Behlog.Web.ViewModels.Content {
         public bool Commented { get; set; }
     }
 
-    public class LatestPostsViewModel {
+    public class LatestPostsViewModel: BaseViewModel {
         
         public LatestPostsViewModel() {
             Items = new List<LatestPostsItemViewModel>();

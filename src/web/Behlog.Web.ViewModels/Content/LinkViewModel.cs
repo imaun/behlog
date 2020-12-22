@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Behlog.Web.ViewModels.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Behlog.Web.ViewModels.Content {
 
-    public class LinkViewModel {
+    public class LinkViewModel: BaseViewModel {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
@@ -14,7 +15,7 @@ namespace Behlog.Web.ViewModels.Content {
         public string Description { get; set; }
     }
 
-    public class LinkCategoryViewModel {
+    public class LinkCategoryViewModel: BaseViewModel {
         public LinkCategoryViewModel() {
             Links = new List<LinkViewModel>();
         }

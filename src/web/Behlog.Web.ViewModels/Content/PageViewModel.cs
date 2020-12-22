@@ -2,10 +2,11 @@
 using Behlog.Core;
 using Behlog.Web.Core.Extensions;
 using Behlog.Web.Common.Extensions;
+using Behlog.Web.ViewModels.Core;
 
 namespace Behlog.Web.ViewModels.Content
 {
-    public class PageDetailViewModel
+    public class PageDetailViewModel: BaseViewModel
     {
         public PageDetailViewModel() {
             RelatedPages = new List<RelatedPageViewModel>();
@@ -38,7 +39,7 @@ namespace Behlog.Web.ViewModels.Content
         public bool Commented { get; set; }
     }
 
-    public class RelatedPageViewModel {
+    public class RelatedPageViewModel: BaseViewModel {
         public int Id { get; set; }
         public string Title { get; set; }
         public string AltTitle { get; set; }
@@ -49,7 +50,7 @@ namespace Behlog.Web.ViewModels.Content
         public string IconName { get; set; }
     }
 
-    public class ParentPageViewModel {
+    public class ParentPageViewModel: BaseViewModel {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Slug { get; set; }

@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Behlog.Web.ViewModels.Core;
 using System.ComponentModel.DataAnnotations;
 using Behlog.Resources.Strings;
 
 namespace Behlog.Web.ViewModels.Content
 {
-    public class CommentViewModel
+    public class CommentViewModel: BaseViewModel
     {
         public long Id { get; set; }
         public string Title { get; set; }
@@ -25,7 +26,7 @@ namespace Behlog.Web.ViewModels.Content
         public string PostTitle { get; set; }
     }
 
-    public class CreateCommentViewModel {
+    public class CreateCommentViewModel: BaseViewModel {
 
         [Display(ResourceType = typeof(ModelText), Name = "Comment_Title")]
         [MaxLength(300, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "MaxLen")]

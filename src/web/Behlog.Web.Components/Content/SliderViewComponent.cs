@@ -41,7 +41,6 @@ namespace Behlog.Web.Components.Content {
             };
 
             if (result.Images.Any()) {
-                result.Images.FirstOrDefault().Active = true;
                 result.Images.FirstOrDefault().CssClass = "active";
             }
                 

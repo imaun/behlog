@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Behlog.Web.ViewModels.Core
 {
-    public abstract class IndexBaseViewModel
+    public abstract class IndexBaseViewModel: BaseViewModel
     {
         public int PageSize { get; set; }
         public int PageCount => TotalCount / PageSize;
