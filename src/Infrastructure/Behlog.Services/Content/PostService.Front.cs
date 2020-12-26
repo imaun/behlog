@@ -224,10 +224,12 @@ namespace Behlog.Services.Content
         }
 
         public async Task<GalleryDto> GetGalleryAsync(
+            IndexParams param,
             int? categoryId = null,
             string lang = Language.KEY_fa_IR,
             bool isComponent = false) {
 
+            param.CheckArgumentIsNull(nameof(param));
             var postType = await _postTypeRepository
                 .GetBySlugAsync(PostType.GALLERY);
 
@@ -246,7 +248,14 @@ namespace Behlog.Services.Content
             if (categoryId.HasValue)
                 query = query.Where(_ => _.CategoryId == categoryId);
 
-            var queryResult = await query.OrderBy(_ => _.OrderNumber)
+            if(!param.PagingIsDisabled)
+                query = query
+                    .Skip(param.Skip)
+                    .Take(param.Take);
+            
+            var queryResult = await query
+                .OrderByDescending(_=> _.PublishDate)
+                .ThenBy(_ => _.OrderNumber)
                 .ToListAsync();
 
             var result = new GalleryDto {

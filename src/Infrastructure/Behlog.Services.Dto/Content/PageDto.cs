@@ -45,6 +45,7 @@ namespace Behlog.Services.Dto.Content
         public string IconName { get; set; }
         public string Slug { get; set; }
         public string PostTypeSlug { get; set; }
+        public string LangKey { get; set; }
     }
 
     public class ParentPageDto {

@@ -14,7 +14,7 @@ namespace Behlog.Web.ViewModels.Content
         public string PostTitle { get; set; }
         public string PostSlug { get; set; }
         public string LangKey { get; set; }
-        public IEnumerable<PostMetaItemViewModel> Items { get; set; }
+        public IList<PostMetaItemViewModel> Items { get; set; }
     }
 
     public class PostMetaItemViewModel: BaseViewModel {

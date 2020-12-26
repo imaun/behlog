@@ -5,6 +5,7 @@ using Behlog.Services.Contracts.Content;
 using Behlog.Web.ViewModels.Content;
 using Mapster;
 using Behlog.Core.Extensions;
+using Behlog.Services.Dto.Core;
 
 namespace Behlog.Web.Components.Content {
 
@@ -20,21 +21,29 @@ namespace Behlog.Web.Components.Content {
         public async Task<IViewComponentResult> InvokeAsync(
             int? categoryId, 
             string lang = Language.KEY_fa_IR,
-            bool isComponent = false) {
+            bool isComponent = false,
+            int pageSize = 3) {
 
-            var gallery = await _postService.GetGalleryAsync(categoryId, lang, isComponent);
+            var indexParam = new IndexParams {
+                PageNumber = 1,
+                PageSize = pageSize
+            };
+
+            var gallery = await _postService.GetGalleryAsync(
+                indexParam,
+                categoryId, 
+                lang, 
+                isComponent);
 
             if(gallery == null) {
                 return await Task.FromResult(
-                    Content(string.Empty)
-                    );
+                    Content(string.Empty));
             }
 
             var result = gallery.Adapt<GalleryViewModel>();
 
             return await Task.FromResult(
-                View(result)
-                );
+                View(result));
         }
     }
 }

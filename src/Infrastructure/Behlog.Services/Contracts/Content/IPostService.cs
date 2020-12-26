@@ -94,6 +94,7 @@ namespace Behlog.Services.Contracts.Content {
             string postTypeSlug = PostType.PAGE);
 
         Task<GalleryDto> GetGalleryAsync(
+            IndexParams param,
             int? categoryId = null,
             string lang = Language.KEY_fa_IR,
             bool isComponent = false);

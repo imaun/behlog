@@ -178,10 +178,15 @@ namespace Behlog.Web.Controllers
             );
         }
 
-        [HttpGet("gallery/{categoryId?}/{lang?}", Name = "gallery")]
+        [HttpGet("gallery/{categoryId?}/{lang?}/{page?}", Name = "gallery")]
         //[HttpGet(Name = "gallery")]
-        public async Task<IActionResult> Gallery(int? categoryId, string lang = "fa") {
-            var gallery = await _postService.GetGalleryAsync(categoryId, lang);
+        public async Task<IActionResult> Gallery(int? categoryId, string lang = "fa", int? page = 1) {
+            var indexParam = new IndexParams {
+                PageNumber = page != null ? page.Value : 1,
+                PageSize = 10
+            };
+            var gallery = await _postService
+                .GetGalleryAsync(indexParam, categoryId, lang);
             gallery.Title = "گالری تصاویر";
 
             var result = gallery.Adapt<GalleryViewModel>();

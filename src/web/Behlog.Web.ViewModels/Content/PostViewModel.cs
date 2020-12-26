@@ -87,6 +87,7 @@ namespace Behlog.Web.ViewModels.Content {
         public string Author { get; set; }
         public string IconName { get; set; }
         public string PostTypeSlug { get; set; }
+        public string LangKey { get; set; }
     }
 
     public class PostIndexViewModel: IndexBaseViewModel {
