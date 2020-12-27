@@ -5,7 +5,7 @@
             PageSize = pageSize;
         }
 
-        public bool PagingIsDisabled { get; set; }
+        public bool HasPaging { get; set; } = true;
         public string LangKey { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }

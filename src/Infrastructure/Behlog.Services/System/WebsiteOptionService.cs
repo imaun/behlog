@@ -48,9 +48,10 @@ namespace Behlog.Services.System
 
         public async Task<WebsiteOptionResultDto> GetOptionAsync(string optionKey) {
             var option = await _repository.GetEnabledByKey(_websiteInfo.Id, optionKey);
-            option.CheckReferenceIsNull(nameof(option));
-            var result = option.Adapt<WebsiteOptionResultDto>();
+            if (option == null)
+                return null;
 
+            var result = option.Adapt<WebsiteOptionResultDto>();
             return await Task.FromResult(result);
         }
 

@@ -26,7 +26,8 @@ namespace Behlog.Web.Components.Content {
 
             var indexParam = new IndexParams {
                 PageNumber = 1,
-                PageSize = pageSize
+                PageSize = pageSize,
+                OrderBy = "OrderNumber"
             };
 
             var gallery = await _postService.GetGalleryAsync(

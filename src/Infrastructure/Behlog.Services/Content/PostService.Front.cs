@@ -223,6 +223,10 @@ namespace Behlog.Services.Content
             return await Task.FromResult(result);
         }
 
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         public async Task<GalleryDto> GetGalleryAsync(
             IndexParams param,
             int? categoryId = null,
@@ -248,14 +252,13 @@ namespace Behlog.Services.Content
             if (categoryId.HasValue)
                 query = query.Where(_ => _.CategoryId == categoryId);
 
-            if(!param.PagingIsDisabled)
+            if(param.HasPaging)
                 query = query
                     .Skip(param.Skip)
                     .Take(param.Take);
-            
+
             var queryResult = await query
-                .OrderByDescending(_=> _.PublishDate)
-                .ThenBy(_ => _.OrderNumber)
+                .SetOrder(param.OrderBy, !param.OrderDesc)
                 .ToListAsync();
 
             var result = new GalleryDto {

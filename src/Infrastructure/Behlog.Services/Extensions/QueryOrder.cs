@@ -40,9 +40,11 @@ namespace Behlog.Services.Extensions
             this IQueryable<Post> query,
             string fieldName,
             bool asc = true) {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                return query;
 
+            if (string.IsNullOrWhiteSpace(fieldName))
+                fieldName = "Id";
+
+            fieldName = fieldName.ToLower();
             switch(fieldName) {
                 case "title": return asc
                         ? query.OrderBy(_ => _.Title)
@@ -55,6 +57,22 @@ namespace Behlog.Services.Extensions
                 case "status": return asc
                         ? query.OrderBy(_ => _.Status)
                         : query.OrderByDescending(_ => _.Status);
+
+                case "publishdate": return asc
+                        ? query.OrderBy(_ => _.PublishDate)
+                        : query.OrderByDescending(_ => _.PublishDate);
+
+                case "slug": return asc
+                        ? query.OrderBy(_ => _.Slug)
+                        : query.OrderByDescending(_ => _.Slug);
+
+                case "posttypeid": return asc
+                        ? query.OrderBy(_ => _.PostTypeId)
+                        : query.OrderByDescending(_ => _.PostTypeId);
+
+                case "ordernumber": return asc
+                        ? query.OrderBy(_ => _.OrderNumber)
+                        : query.OrderByDescending(_ => _.OrderNumber);
 
                 default:
                     return asc

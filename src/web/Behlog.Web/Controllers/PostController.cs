@@ -86,7 +86,6 @@ namespace Behlog.Web.Controllers
                 LangKey = lang
             };
 
-
             var result = await _postService.GetIndexAsync(param);
 
             var model = result.Adapt<PostIndexViewModel>();
@@ -183,7 +182,9 @@ namespace Behlog.Web.Controllers
         public async Task<IActionResult> Gallery(int? categoryId, string lang = "fa", int? page = 1) {
             var indexParam = new IndexParams {
                 PageNumber = page != null ? page.Value : 1,
-                PageSize = 10
+                PageSize = 10,
+                OrderBy = "OrderNumber",
+                OrderDesc = false
             };
             var gallery = await _postService
                 .GetGalleryAsync(indexParam, categoryId, lang);
