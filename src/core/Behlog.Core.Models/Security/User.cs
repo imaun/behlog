@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Content;
 using Behlog.Core.Models.System;
+using Behlog.Core.Models.Shop;
 
 namespace Behlog.Core.Models.Security {
 
@@ -18,6 +19,7 @@ namespace Behlog.Core.Models.Security {
             Likes = new HashSet<PostLike>();
             Websites = new HashSet<Website>();
             Logins = new HashSet<UserLogin>();
+            Customers = new HashSet<Customer>();
         }
 
         #region Properties
@@ -41,6 +43,7 @@ namespace Behlog.Core.Models.Security {
         public ICollection<Website> Websites { get; set; }
         public ICollection<UserLogin> Logins { get; set; }
         public ICollection<UserMeta> Meta { get; set; }
+        public ICollection<Customer> Customers { get; set; }
         #endregion
 
     }
