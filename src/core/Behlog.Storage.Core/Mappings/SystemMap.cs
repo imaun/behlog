@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Behlog.Core.Models.System;
 using Behlog.Core.Models.Enum;
-using System.Runtime.CompilerServices;
 
 namespace Behlog.Storage.Core.Mappings {
     public partial class TableMapper {
