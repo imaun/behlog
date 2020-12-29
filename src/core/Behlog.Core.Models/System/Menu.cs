@@ -18,6 +18,9 @@ namespace Behlog.Core.Models.System {
         public int LangId { get; set; }
         public string RouteName { get; set; }
         public int OrderNumber { get; set; }
+        public string CssClass { get; set; }
+        public string CssStyle { get; set; }
+        public string Target { get; set; }
         #endregion
 
         #region Navigations

@@ -71,6 +71,9 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Controller).HasMaxLength(1000).IsUnicode();
                 map.Property(_ => _.Parameters).HasMaxLength(2000).IsUnicode();
                 map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
+                map.Property(_ => _.CssClass).HasMaxLength(500).IsUnicode();
+                map.Property(_ => _.CssStyle).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.Target).HasMaxLength(200).IsUnicode();
 
                 map.HasOne(_=> _.Website)
                     .WithMany(__ => __.MenuItems)
