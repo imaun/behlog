@@ -35,11 +35,9 @@ namespace Behlog.Storage.Core.Mappings {
         public static void AddLanguageMapping(this ModelBuilder builder) {
             builder.Entity<Language>(map => {
                 map.ToTable(DbConst.Language_Table_Name).HasKey(_ => _.Id);
-
                 map.Property(_ => _.Title).HasMaxLength(1000).IsUnicode().IsRequired();
                 map.Property(_ => _.LangKey).HasMaxLength(20).IsUnicode().IsRequired();
                 map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
-                
             });
         }
 
