@@ -35,6 +35,7 @@ using Behlog.Repository.Security;
 using Behlog.Services.Content;
 using Behlog.Services.Contracts.Content;
 using Behlog.Services.Contracts.Feature;
+using Behlog.Services.Contracts.Http;
 using Behlog.Services.System;
 using Behlog.Web.Data.Content;
 using Behlog.Web.Data.System;
@@ -49,6 +50,7 @@ using Behlog.Web.Common.Tools;
 using Behlog.Web.Admin.Core;
 using Behlog.Web.Core.Settings;
 using Behlog.Factories.Security;
+using Behlog.Services.Http;
 
 namespace Microsoft.Extensions.DependencyInjection {
 
@@ -197,6 +199,9 @@ namespace Microsoft.Extensions.DependencyInjection {
 
             //Security
             services.AddScoped<IUserService, UserService>();
+
+            //Http
+            services.AddScoped<ILinkBuilder, LinkBuilder>();
         }
 
         private static void AddValidators(this IServiceCollection services) {

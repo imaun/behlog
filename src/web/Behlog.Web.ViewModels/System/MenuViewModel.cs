@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Routing;
+using Behlog.Core.Extensions;
 using Behlog.Web.Common.Extensions;
+using Behlog.Services.Contracts.Http;
 
 namespace Behlog.Web.ViewModels.System
 {
-    public class WebsiteMenuViewModel
-    {
-        public WebsiteMenuViewModel() {
+    public class WebsiteMenuViewModel {
+
+        private readonly ILinkBuilder _linkBuilder;
+
+        public WebsiteMenuViewModel(ILinkBuilder linkBuilder) {
             Items = new List<MenuItemViewModel>();
+            _linkBuilder = linkBuilder;
         }
 
         public string WebsiteTitle { get; set; }
@@ -15,9 +21,7 @@ namespace Behlog.Web.ViewModels.System
         public string WebsiteLogo { get; set; }
         public string WebsiteLogoFullUrl => WebsiteLogo.GetFullUrl();
         public IEnumerable<MenuItemViewModel> Items { get; set; }
-
         public List<MenuItemViewModel> Root => GetSubItems();
-
         public List<MenuItemViewModel> GetSubItems(int? parentId = null)
             => Items.Where(_ => _.ParentId == parentId)
                 .OrderBy(_=> _.OrderNumber)
@@ -26,6 +30,17 @@ namespace Behlog.Web.ViewModels.System
         public bool HasSubItems(int itemId) =>
             Items.Any(_ => _.ParentId == itemId);
 
+        public void BuildMenuLinks() {
+            var menuItems = Items.ToList();
+            foreach(var item in menuItems) {
+                if (item.Url.IsNotNullOrEmpty() && _linkBuilder.UrlIsValid(item.Url))
+                    item.FullActionUrl = item.Url;
+                if (item.RouteName.IsNotNullOrEmpty())
+                    item.FullActionUrl = _linkBuilder
+                        .BuildFromRoute(item.RouteName, item.RouteValues);
+            }
+            Items = menuItems;
+        }
     }
 
     public class MenuItemViewModel {
@@ -52,22 +67,39 @@ namespace Behlog.Web.ViewModels.System
             }
         }
         public bool Active { get; set; }
-        public string StyleClassName { get; set; }
-        //public string FullActionUrl {
-        //    get {
-        //        if (!string.IsNullOrWhiteSpace(Url))
-        //            return Url;
-        //        var rootUrl = AppHttpContext.BaseUrl;
-        //        var result = $"{rootUrl}/{Controller}/{Action}/";
-                
-        //        return result;
-        //    }
-        //}
         public string RouteName { get; set; }
         public string FullActionUrl { get; set; }
+        //public string FullActionUrl {
+        //    get {
+        //        if (Url.IsNotNullOrEmpty())
+        //            return Url;
+
+        //        if (RouteName.IsNotNullOrEmpty())
+        //            return _linkBuilder
+        //                .BuildFromRoute(RouteName, getRouteValues());
+
+        //        return string.Empty;
+        //    }
+        //}
         public int OrderNumber { get; set; }
         public Dictionary<string, string> ParameterPairs { get; set; }
-     
+        public RouteValueDictionary RouteValues => getRouteValues();
+        
+        private RouteValueDictionary getRouteValues() {
+            var routeVlaues = new RouteValueDictionary();
+
+            if (!string.IsNullOrWhiteSpace(Controller))
+                routeVlaues.Add("controller", Controller);
+            if (!string.IsNullOrWhiteSpace(Action))
+                routeVlaues.Add("action", Action);
+
+            foreach (var p in ParameterPairs) {
+                routeVlaues.Add(p.Key, p.Value);
+            }
+
+            return routeVlaues;
+        }
+
         private void loadParametersPairs() {
             if (string.IsNullOrWhiteSpace(_parameters))
                 return;
