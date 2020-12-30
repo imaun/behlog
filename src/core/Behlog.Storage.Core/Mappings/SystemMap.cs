@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using DNTPersianUtils.Core;
+﻿using Microsoft.EntityFrameworkCore;
 using Behlog.Core.Models.System;
 using Behlog.Core.Models.Enum;
 using Behlog.Storage.Core.Internal;
@@ -37,7 +34,7 @@ namespace Behlog.Storage.Core.Mappings {
         
         public static void AddCityMapping(this ModelBuilder builder) {
             builder.Entity<City>(map => {
-                map.ToTable(DbConst.Brand_Table_Name)
+                map.ToTable(DbConst.City_Table_Name)
                     .HasKey(_ => _.Id);
 
                 map.Property(_ => _.Title).HasMaxLength(500).IsUnicode().IsRequired();

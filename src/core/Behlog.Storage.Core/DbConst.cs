@@ -41,6 +41,7 @@ namespace Behlog.Storage.Core {
 
         //System
         public const string Category_Table_Name = "System.Categories";
+        public const string City_Table_Name = "System.Cities";
         public const string Language_Table_Name = "System.Languages";
         public const string Layout_Table_Name = "System.Layouts";
         public const string Menu_Table_Name = "System.Menu_Items";
@@ -51,7 +52,6 @@ namespace Behlog.Storage.Core {
         public const string WebsiteOptions_Table_Name = "System.Website_Options";
         public const string ErrorLogs_Table_Name = "System.ErrorLogs";
         public const string Currency_Table_Name = "System.Currencies";
-        public const string City_Table_Name = "System.Cities";
 
         //Security
         public const string User_Table_Name = "Security.Users";
