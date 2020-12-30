@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using DNTPersianUtils.Core;
 using Behlog.Core.Models.System;
 using Behlog.Core.Models.Enum;
+using Behlog.Storage.Core.Internal;
 
 namespace Behlog.Storage.Core.Mappings {
     public partial class TableMapper {
@@ -42,6 +46,7 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Kind).HasDefaultValue(CityType.City);
                 map.Property(_ => _.Description).HasMaxLength(1000).IsUnicode();
 
+                map.HasData(CityDataProvider.GetIranCities());
             });
         }
 
