@@ -17,12 +17,17 @@ namespace Behlog.Core.Models.Shop {
         /// <summary>
         /// The invoice that this payment belongs to.
         /// </summary>
-        public int InvoiceId { get; set; }
+        public int? InvoiceId { get; set; }
 
         /// <summary>
         /// This payment belongs to which customer. The customer's Id will saved for easier access.
         /// </summary>
         public int CustomerId { get; set; }
+
+        /// <summary>
+        /// Get or sets FirstName & LastName of customer that creates the payment at the time.
+        /// </summary>
+        public string CustomerTitle { get; set; }
 
         /// <summary>
         /// Total amount paid for this payment. The payment Fee.

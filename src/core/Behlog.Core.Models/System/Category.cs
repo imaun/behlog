@@ -2,6 +2,7 @@
 using Behlog.Core.Models.Base;
 using Behlog.Core.Models.Content;
 using Behlog.Core.Models.Enum;
+using Behlog.Core.Models.Shop;
 
 namespace Behlog.Core.Models.System {
     
@@ -10,6 +11,7 @@ namespace Behlog.Core.Models.System {
         public Category() {
             Posts = new HashSet<Post>();
             Links = new HashSet<Link>();
+            Products = new HashSet<Product>();
         }
 
         #region Properties
@@ -31,6 +33,7 @@ namespace Behlog.Core.Models.System {
         public Language Language { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<Link> Links { get; set; }
+        public ICollection<Product> Products { get; set; }
         #endregion
 
     }

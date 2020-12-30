@@ -21,6 +21,8 @@ namespace Behlog.Core.Models.Security {
             Logins = new HashSet<UserLogin>();
             Customers = new HashSet<Customer>();
             Vendors = new HashSet<Vendor>();
+            CreatedProductPrices = new HashSet<ProductPrice>();
+            ModifiedProductPrices = new HashSet<ProductPrice>();
         }
 
         #region Properties
@@ -46,6 +48,9 @@ namespace Behlog.Core.Models.Security {
         public ICollection<UserMeta> Meta { get; set; }
         public ICollection<Customer> Customers { get; set; }
         public ICollection<Vendor> Vendors { get; set; }
+        public ICollection<ProductPrice> CreatedProductPrices { get; set; }
+        public ICollection<ProductPrice> ModifiedProductPrices { get; set; }
+        public ICollection<ProductReview> ModifiedProductReviews { get; set; }
         #endregion
 
     }

@@ -4,7 +4,9 @@ using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Security;
 
 namespace Behlog.Core.Models.Shop {
-
+    /// <summary>
+    /// Someone or some company that sells the product on our shop.
+    /// </summary>
     public class Vendor {
         public Vendor() {
             Products = new HashSet<Product>();
@@ -19,9 +21,9 @@ namespace Behlog.Core.Models.Shop {
         public string Website { get; set; }
         public string Description { get; set; }
         public Guid? UserId { get; set; }
-        public EntityStatus Status { get; set; }
-
-
+        public VendorStatus Status { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime ModifyDate { get; set; }
         #endregion
 
         #region Navigations

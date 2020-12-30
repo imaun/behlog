@@ -1,5 +1,6 @@
 ﻿using System;
 using Behlog.Core.Models.Enum;
+using Behlog.Core.Models.Security;
 
 namespace Behlog.Core.Models.Shop
 {
@@ -8,7 +9,8 @@ namespace Behlog.Core.Models.Shop
     /// </summary>
     public class ProductReview {
 
-        public ProductReview() { }
+        public ProductReview() {
+        }
 
         #region Properties
         public int Id { get; set; }
@@ -19,19 +21,21 @@ namespace Behlog.Core.Models.Shop
         public int VoteNoCount { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
-        public int? ReplyToReviewId { get; set; }
+        public PostBodyType BodyType { get; set; }
+        public int? ParentId { get; set; }
         public ProductReviewStatus Status { get; set; }
         public string Ip { get; set; }
         public string UserAgent { get; set; }
         public string SessionId { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
+        public Guid? ModifierUserId { get; set; }
         #endregion
 
         #region Navigations
         public Product Product { get; set; }
         public Customer Customer { get; set; }
-
+        public User ModifierUser { get; set; }
         #endregion
     }
 }

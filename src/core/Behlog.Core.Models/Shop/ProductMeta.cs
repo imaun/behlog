@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Behlog.Core.Models.Enum;
+﻿using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.System;
 
 namespace Behlog.Core.Models.Shop {
@@ -23,7 +20,7 @@ namespace Behlog.Core.Models.Shop {
         #endregion
 
         #region Navigations
-        public Product Post { get; set; }
+        public Product Product { get; set; }
         public Language Language { get; set; }
         #endregion
     }

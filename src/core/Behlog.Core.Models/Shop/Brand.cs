@@ -23,7 +23,6 @@ namespace Behlog.Core.Models.Shop {
         #endregion
 
         #region Navigations
-
         public ICollection<Product> Products { get; set; }
         #endregion
     }

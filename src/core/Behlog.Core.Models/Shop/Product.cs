@@ -12,6 +12,9 @@ namespace Behlog.Core.Models.Shop {
         public Product() {
             Posts = new HashSet<Post>();
             Orders = new HashSet<Order>();
+            Meta = new HashSet<ProductMeta>();
+            PriceHistory = new HashSet<ProductPrice>();
+            Reviews = new HashSet<ProductReview>();
         }
 
         #region Properties
@@ -21,9 +24,22 @@ namespace Behlog.Core.Models.Shop {
 
         public string Slug { get; set; }
 
+        #region Content
         public string ShortDescription { get; set; }
 
         public string Description { get; set; }
+
+        /// <summary>
+        /// An Html or Markdown template that contains parameters and renders on runtime.
+        /// </summary>
+        public string Template { get; set; }
+
+        /// <summary>
+        /// Get or sets a value determines the type of description's body that renders in runtime.
+        /// </summary>
+        public PostBodyType BodyType { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Get or sets <see cref="Category"/> Id. If null, the product will uncategorized.
@@ -98,7 +114,8 @@ namespace Behlog.Core.Models.Shop {
         public bool Downloadable { get; set; }
 
         /// <summary>
-        /// Get or sets a valude that limit the number of times this digital product can be downloaded. Set to 0 for unlimited downloads.
+        /// Get or sets a valude that limit the number of times this digital product can be downloaded.
+        /// Set to 0 to allow unlimited downloads.
         /// </summary>
         public int MaxDownloads { get; set; }
 
@@ -124,17 +141,39 @@ namespace Behlog.Core.Models.Shop {
         public DateTime? NewProductFinishDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the product weight
+        /// Gets or sets the product's weight.
         /// </summary>
         public decimal Weight { get; set; }
 
         /// <summary>
-        /// Get or sets the start date of product availability for sale. If set, Before this date, product is not available for sale.
+        /// Get or sets the product's height.
+        /// </summary>
+        public decimal Height { get; set; }
+
+        /// <summary>
+        /// Get or sets the product's width.
+        /// </summary>
+        public decimal Width { get; set; }
+
+        /// <summary>
+        /// Get or sets the product's size.
+        /// </summary>
+        public string Size { get; set; }
+
+        /// <summary>
+        /// Get or sets the product's color.
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
+        /// Get or sets the start date of product availability for sale. 
+        /// If set, Before this date, product is not available for sale.
         /// </summary>
         public DateTime? AvailabilityStartDate { get; set; }
 
         /// <summary>
-        /// Get or sets the finish date of product availibility for sale. If set, After this date, product will no longer available for sale.
+        /// Get or sets the finish date of product availibility for sale. 
+        /// If set, After this date, product will no longer available for sale.
         /// </summary>
         public DateTime? AvailabilityFinishDate { get; set; }
 
@@ -145,7 +184,16 @@ namespace Behlog.Core.Models.Shop {
 
         #region SEO Related
 
+        /// <summary>
+        /// Get or sets a value determines meta description that can be placed in meta 
+        /// tag of the HTML document containing the product's detail.
+        /// </summary>
         public string MetaDescription { get; set; }
+
+        /// <summary>
+        /// Get or sets a value determines meta robots that can be placed in meta tag 
+        /// of the HTML document containing the product's detail.
+        /// </summary>
         public string MetaRobots { get; set; }
 
         #endregion
@@ -162,6 +210,9 @@ namespace Behlog.Core.Models.Shop {
         public Brand Brand { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<Order> Orders { get; set; }
-        #endregion
+        public ICollection<ProductMeta> Meta { get; set; }
+        public ICollection<ProductPrice> PriceHistory { get; set; }
+        public ICollection<ProductReview> Reviews { get; set; }
+        #endregion 
     }
 }

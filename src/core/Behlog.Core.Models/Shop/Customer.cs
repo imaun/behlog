@@ -11,6 +11,7 @@ namespace Behlog.Core.Models.Shop {
             ShippingAddresses = new HashSet<ShippingAddress>();
             Invoices = new HashSet<Invoice>();
             Payments = new HashSet<Payment>();
+            Reviews = new HashSet<ProductReview>();
         }
 
         #region Properties
@@ -49,6 +50,7 @@ namespace Behlog.Core.Models.Shop {
         public ICollection<ShippingAddress> ShippingAddresses { get; set; }
         public ICollection<Invoice> Invoices { get; set; }
         public ICollection<Payment> Payments { get; set; }
+        public ICollection<ProductReview> Reviews { get; set; }
         #endregion
     }
 }

@@ -92,7 +92,6 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.ViewPath).HasMaxLength(1000).IsUnicode();
                 map.Property(_ => _.MetaDescription).HasMaxLength(1000).IsUnicode();
                 map.Property(_ => _.MetaRobots).HasMaxLength(100).IsUnicode();
-                map.Property(_ => _.MetaDescription).HasMaxLength(1000);
 
                 map.HasOne(_=> _.Website)
                     .WithMany(_ => _.Posts)
