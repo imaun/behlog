@@ -20,6 +20,7 @@ namespace Behlog.Core.Models.Security {
             Websites = new HashSet<Website>();
             Logins = new HashSet<UserLogin>();
             Customers = new HashSet<Customer>();
+            Vendors = new HashSet<Vendor>();
         }
 
         #region Properties
@@ -44,6 +45,7 @@ namespace Behlog.Core.Models.Security {
         public ICollection<UserLogin> Logins { get; set; }
         public ICollection<UserMeta> Meta { get; set; }
         public ICollection<Customer> Customers { get; set; }
+        public ICollection<Vendor> Vendors { get; set; }
         #endregion
 
     }

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using Behlog.Core.Models.Enum;
 
-namespace Behlog.Core.Models.Shop
-{
-    public class Brand
-    {
+namespace Behlog.Core.Models.Shop {
+    public class Brand {
         public Brand() {
             Products = new HashSet<Product>();
         }
@@ -21,7 +19,6 @@ namespace Behlog.Core.Models.Shop
         public string CoverPhoto { get; set; }
 
         public EntityStatus Status { get; set; }
-
 
         #endregion
 

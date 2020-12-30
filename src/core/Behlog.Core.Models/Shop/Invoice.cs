@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Behlog.Core.Models.Enum;
 
 namespace Behlog.Core.Models.Shop
@@ -19,7 +18,7 @@ namespace Behlog.Core.Models.Shop
 
         public string InvoiceNumnber { get; set; }
 
-        public DateTime InvoiceDate { get; set; }
+        public DateTime DueDate { get; set; }
 
         public InvoiceStatus Status { get; set; }
 
