@@ -51,6 +51,7 @@ namespace Behlog.Storage.Core {
         public const string WebsiteOptions_Table_Name = "System.Website_Options";
         public const string ErrorLogs_Table_Name = "System.ErrorLogs";
         public const string Currency_Table_Name = "System.Currencies";
+        public const string City_Table_Name = "System.Cities";
 
         //Security
         public const string User_Table_Name = "Security.Users";

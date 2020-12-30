@@ -30,6 +30,51 @@ namespace Behlog.Storage.Core.Mappings {
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }
+        
+        public static void AddCityMapping(this ModelBuilder builder) {
+            builder.Entity<City>(map => {
+                map.ToTable(DbConst.Brand_Table_Name)
+                    .HasKey(_ => _.Id);
+
+                map.Property(_ => _.Title).HasMaxLength(500).IsUnicode().IsRequired();
+                map.Property(_ => _.Code).HasMaxLength(50).IsUnicode();
+                map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
+                map.Property(_ => _.Kind).HasDefaultValue(CityType.City);
+                map.Property(_ => _.Description).HasMaxLength(1000).IsUnicode();
+
+            });
+        }
+
+        public static void AddCurrencyMapping(this ModelBuilder builder) {
+            builder.Entity<Currency>(map => {
+                map.ToTable(DbConst.Currency_Table_Name).HasKey(_ => _.Id);
+
+                map.Property(_ => _.Title).HasMaxLength(100).IsUnicode().IsRequired();
+                map.Property(_ => _.Sign).HasMaxLength(50).IsUnicode();
+                map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
+                map.Property(_ => _.Description).HasMaxLength(1000).IsUnicode();
+
+                map.HasData(new[] {
+                    new Currency {
+                        Id = 1,
+                        Title = "ریال",
+                        Sign = "ریال",
+                        IsBase = true,
+                        Rate = 1,
+                        Status = EntityStatus.Enabled
+                    },
+                    new Currency {
+                        Id = 2,
+                        Title = "تومان",
+                        Sign = "T",
+                        IsBase = false,
+                        Rate = 0.1m,
+                        Status = EntityStatus.Enabled
+                    }
+                });
+
+            });
+        }
 
         public static void AddLanguageMapping(this ModelBuilder builder) {
             builder.Entity<Language>(map => {
@@ -234,35 +279,6 @@ namespace Behlog.Storage.Core.Mappings {
             });
         }
 
-        public static void AddCurrencyMapping(this ModelBuilder builder) {
-            builder.Entity<Currency>(map => {
-                map.ToTable(DbConst.Currency_Table_Name).HasKey(_ => _.Id);
-
-                map.Property(_ => _.Title).HasMaxLength(100).IsUnicode().IsRequired();
-                map.Property(_ => _.Sign).HasMaxLength(50).IsUnicode();
-                map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
-                map.Property(_ => _.Description).HasMaxLength(1000).IsUnicode();
-
-                map.HasData(new[] {
-                    new Currency {
-                        Id = 1,
-                        Title = "ریال",
-                        Sign = "ریال",
-                        IsBase = true,
-                        Rate = 1,
-                        Status = EntityStatus.Enabled
-                    },
-                    new Currency {
-                        Id = 2,
-                        Title = "تومان",
-                        Sign = "T",
-                        IsBase = false,
-                        Rate = 0.1m,
-                        Status = EntityStatus.Enabled
-                    }
-                });
-
-            });
-        }
+        
     }
 }

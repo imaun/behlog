@@ -22,7 +22,6 @@ namespace Behlog.Core.Models.System
         #endregion
 
         #region Navigations
-        public City Parent { get; set; }
         public ICollection<ShippingAddress> ShippingAddresses { get; set; }
 
         #endregion
