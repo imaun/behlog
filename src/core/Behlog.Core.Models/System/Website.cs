@@ -36,6 +36,7 @@ namespace Behlog.Core.Models.System {
         public EntityStatus Status { get; set; }
         public Guid OwnerId { get; set; }
         public int DefaultLangId { get; set; }
+        public int? DefaultCurrencyId { get; set; }
         public int LayoutId { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
@@ -45,6 +46,7 @@ namespace Behlog.Core.Models.System {
         public User Owner { get; set; }
         public Language DefaultLanguage { get; set; }
         public Layout Layout { get; set; }
+        public Currency DefaultCurrency { get; set; }
         public ICollection<File> Files { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<Contact> Contacts { get; set; }

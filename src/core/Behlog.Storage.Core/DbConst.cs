@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.Contracts;
-using Behlog.Core.Models.Content;
+﻿using Behlog.Core.Models.Content;
 
 namespace Behlog.Storage.Core {
     public static class DbConst {
 
+        //Content
         public const string Comment_Table_Name = "Content.Comments";
         public const string File_Table_Name = "Content.Files";
         public const string Link_Table_Name = "Content.Links";
@@ -15,6 +15,7 @@ namespace Behlog.Storage.Core {
         public const string SectionGroup_Table_Name = "Content.SectionGroups";
         public const string Section_Table_Name = "Content.Sections";
 
+        //Feature
         public const string Contact_Table_Name = "Feature.Contacts";
         public const string Form_Table_Name = "Feature.Forms";
         public const string FormField_Table_Name = "Feature.Form_Fields";
@@ -24,7 +25,23 @@ namespace Behlog.Storage.Core {
         public const string WebsiteVisit_Table_Name = "Feature.Website_Visits";
         public const string Subscription_Table_Name = "Feature.Subscriptions";
 
+        //Shop
+        public const string Brand_Table_Name = "Shop.Brands";
+        public const string Customer_Table_Name = "Shop.Customers";
+        public const string Invoice_Table_Name = "Shop.Invoices";
+        public const string Order_Table_Name = "Shop.Orders";
+        public const string Payment_Table_Name = "Shop.Payments";
+        public const string Product_Table_Name = "Shop.Products";
+        public const string ProductMeta_Table_Name = "Shop.ProductMeta";
+        public const string ProductPrice_Table_Name = "Shop.Product_Prices";
+        public const string ProductReview_Table_Name = "Shop.Product_Reviews";
+        public const string Shipping_Table_Name = "Shop.Shippings";
+        public const string ShippingAddress_Table_Name = "Shop.Shipping_Addresses";
+        public const string Vendor_Table_Name = "Shop.Vendors";
+
+        //System
         public const string Category_Table_Name = "System.Categories";
+        public const string City_Table_Name = "System.Cities";
         public const string Language_Table_Name = "System.Languages";
         public const string Layout_Table_Name = "System.Layouts";
         public const string Menu_Table_Name = "System.Menu_Items";
@@ -34,7 +51,9 @@ namespace Behlog.Storage.Core {
         public const string Website_Table_Name = "System.Websites";
         public const string WebsiteOptions_Table_Name = "System.Website_Options";
         public const string ErrorLogs_Table_Name = "System.ErrorLogs";
+        public const string Currency_Table_Name = "System.Currencies";
 
+        //Security
         public const string User_Table_Name = "Security.Users";
         public const string UserLogin_Table_Name = "Security.User_Logins";
         public const string UserClaim_Table_Name = "Security.User_Claims";
@@ -42,7 +61,5 @@ namespace Behlog.Storage.Core {
         public const string UserRole_Table_Name = "Security.User_Roles";
         public const string Role_Table_Name = "Security.Roles";
         public const string RoleClaims_Table_Name = "Security.Role_Claims";
-
-        public static string GetTableName(this Comment model) => Comment_Table_Name;
     }
 }

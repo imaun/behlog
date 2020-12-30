@@ -4,6 +4,7 @@ using Behlog.Core.Models.Base;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Feature;
 using Behlog.Core.Models.Security;
+using Behlog.Core.Models.Shop;
 using Behlog.Core.Models.System;
 
 namespace Behlog.Core.Models.Content {
@@ -41,11 +42,26 @@ namespace Behlog.Core.Models.Content {
         public int? LayoutId { get; set; }
         public int OrderNumber { get; set; }
         public int WebsiteId { get; set; }
+        /// <summary>
+        /// Determines that this Post will be used as a ViewComponent.
+        /// </summary>
         public bool IsComponent { get; set; }
         public string IconName { get; set; }
         public int? RelatedPostId { get; set; }
-        public string Template { get; set; } //An Html or Markdown template which contains fields that will be replaced by it's data and display instead of Body
+        /// <summary>
+        /// An Html or Markdown template which contains fields that will be replaced by it's data and display instead of the <see cref="Body"/>.
+        /// </summary>
+        public string Template { get; set; }
+        /// <summary>
+        /// Path of the View
+        /// </summary>
         public string ViewPath { get; set; }
+
+        #endregion
+
+        #region Shopping 
+
+        public int? ProductId { get; set; }
 
         #endregion
 
@@ -64,6 +80,7 @@ namespace Behlog.Core.Models.Content {
         public Language Language { get; set; }
         public Category Category { get; set; }
         public Layout Layout { get; set; }
+        public Product Product { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<PostFile> PostFiles { get; set; }
         public ICollection<PostLike> Likes { get; set; }

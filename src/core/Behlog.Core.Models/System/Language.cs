@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Content;
+using Behlog.Core.Models.Shop;
 
 namespace Behlog.Core.Models.System {
 
@@ -13,6 +14,7 @@ namespace Behlog.Core.Models.System {
             Categories = new HashSet<Category>();
             Posts = new HashSet<Post>();
             PostMeta = new HashSet<PostMeta>();
+            ProductMeta = new HashSet<ProductMeta>();
             UserMeta = new HashSet<UserMeta>();
             Websites = new HashSet<Website>();
             Options = new HashSet<WebsiteOption>();
@@ -32,6 +34,7 @@ namespace Behlog.Core.Models.System {
         public ICollection<Category> Categories { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<PostMeta> PostMeta { get; set; }
+        public ICollection<ProductMeta> ProductMeta { get; set; }
         public ICollection<UserMeta> UserMeta { get; set; }
         public ICollection<Website> Websites { get; set; }
         public ICollection<Menu> MenuItems { get; set; }

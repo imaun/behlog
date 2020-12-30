@@ -12,6 +12,7 @@ using Behlog.Core.Models.Content;
 using Behlog.Core.Models.System;
 using Behlog.Core.Models.Feature;
 using Behlog.Storage.Core.Mappings;
+using Behlog.Core.Models.Shop;
 
 namespace Behlog.Storage.Core {
 
@@ -30,7 +31,7 @@ namespace Behlog.Storage.Core {
 
         #region Tables
 
-        //Contents
+        #region Content Sets
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<File> Files { get; set; }
@@ -42,7 +43,9 @@ namespace Behlog.Storage.Core {
         public virtual DbSet<Section> Sections { get; set; }
         public virtual DbSet<SectionGroup> SectionGroups { get; set; }
 
-        //Features
+        #endregion
+
+        #region Feature Sets
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Form> Forms { get; set; }
         public virtual DbSet<FormField> FormFields { get; set; }
@@ -52,20 +55,38 @@ namespace Behlog.Storage.Core {
         public virtual DbSet<Subscriber> Subscribers { get; set; }
         public virtual DbSet<WebsiteVisit> WebsiteVisits { get; set; }
 
-        //Security
-        
+        #endregion
 
-
-        //System
+        #region System Sets
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Layout> Layouts { get; set; }
         public virtual DbSet<Menu> MenuItems { get; set; }
-        public virtual DbSet<PostType> PostTypes { get; set; } 
+        public virtual DbSet<PostType> PostTypes { get; set; }
         public virtual DbSet<Website> Websites { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<UserMeta> UserMeta { get; set; }
         public virtual DbSet<WebsiteOption> Options { get; set; }
+
+        #endregion
+
+        #region Shop Module Sets
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductMeta> ProductMeta { get; set; }
+        public virtual DbSet<ProductPrice> ProductPrices { get; set; } 
+        public virtual DbSet<ProductReview> ProductReviews { get; set; }
+        public virtual DbSet<Shipping> Shippings { get; set; }
+        public virtual DbSet<ShippingAddress> ShippingAddresses { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
+        #endregion
 
         #endregion
 
@@ -177,27 +198,45 @@ namespace Behlog.Storage.Core {
         protected override void OnModelCreating(ModelBuilder builder) {
             base.OnModelCreating(builder);
 
-            builder.AddCategoryMapping();
+            #region Content
             builder.AddCommentMapping();
-            builder.AddContactMapping();
             builder.AddFileMapping();
+            builder.AddLinkMapping();
+            builder.AddPostFileMapping();
+            builder.AddPostLikeMapping();
+            builder.AddPostMapping();
+            builder.AddPostMetaMapping();
+            builder.AddPostTagMapping();
+            builder.AddSectionGroupMapping();
+            builder.AddSectionMapping();
+            #endregion
+
+            #region Feature
+            builder.AddContactMapping();
             builder.AddFormFieldItemMapping();
             builder.AddFormFieldMapping();
             builder.AddFormFieldValueMapping();
             builder.AddFormMapping();
+            builder.AddPostVisitMapping();
+            builder.AddWebsiteVisitMapping();
+            builder.AddSubscriberMapping();
+            #endregion
+
+            #region System
+            builder.AddCategoryMapping();
+            builder.AddCityMapping();
+            builder.AddCurrencyMapping();
+            builder.AddErrorLogMapping();
             builder.AddLanguageMapping();
             builder.AddLayoutMapping();
-            builder.AddLinkMapping();
             builder.AddMenuMapping();
-            builder.AddPostFileMapping();
-            builder.AddPostLikeMapping();
-            builder.AddPostMapping();
-            builder.AddLanguageMapping();
-            builder.AddPostMetaMapping();
-            builder.AddPostTagMapping();
             builder.AddPostTypeMapping();
-            builder.AddPostVisitMapping();
             builder.AddTagMapping();
+            builder.AddWebsiteMapping();
+            builder.AddWebsiteOptionMapping();
+            #endregion
+
+            #region Security 
             builder.AddUserMapping();
             builder.AddUserLoginMapping();
             builder.AddUserClaimMapping();
@@ -206,13 +245,23 @@ namespace Behlog.Storage.Core {
             builder.AddUserRoleMapping();
             builder.AddRoleMapping();
             builder.AddRoleClaimMapping();
-            builder.AddWebsiteMapping();
-            builder.AddWebsiteVisitMapping();
-            builder.AddWebsiteOptionMapping();
-            builder.AddErrorLogMapping();
-            builder.AddSectionGroupMapping();
-            builder.AddSectionMapping();
-            builder.AddSubscriberMapping();
+            #endregion
+
+            #region Shop 
+            builder.AddBrandMapping();
+            builder.AddCustomerMapping();
+            builder.AddInvoiceMapping();
+            builder.AddOrderMapping();
+            builder.AddPaymentMapping();
+            builder.AddProductMapping();
+            builder.AddProductMetaMapping();
+            builder.AddProductPriceMapping();
+            builder.AddProductReviewMapping();
+            builder.AddShippingMapping();
+            builder.AddShippingAddressMapping();
+            builder.AddVendorMapping();
+
+            #endregion
 
         }
 

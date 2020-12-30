@@ -1,8 +1,8 @@
 ﻿namespace Behlog.Core.Models.Enum {
-    public enum EntityStatus {
+    public enum CustomerStatus {
         Deleted = -1,
-        Disabled = 0,
+        Disbaled = 0,
         Enabled = 1,
-        Default = 2
+        Special = 2,
     }
 }
