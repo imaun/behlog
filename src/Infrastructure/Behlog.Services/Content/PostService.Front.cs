@@ -252,14 +252,14 @@ namespace Behlog.Services.Content
             if (categoryId.HasValue)
                 query = query.Where(_ => _.CategoryId == categoryId);
 
+            query = query.SetOrder(param.OrderBy, !param.OrderDesc);
+
             if(param.HasPaging)
                 query = query
                     .Skip(param.Skip)
                     .Take(param.Take);
 
-            var queryResult = await query
-                .SetOrder(param.OrderBy, !param.OrderDesc)
-                .ToListAsync();
+            var queryResult = await query.ToListAsync();
 
             var result = new GalleryDto {
                 Posts = queryResult.Adapt<List<PostFileGalleryDto>>()
