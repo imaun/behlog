@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Behlog.Core.Models.Enum;
 
 namespace Behlog.Core.Models.Shop {
@@ -53,6 +51,12 @@ namespace Behlog.Core.Models.Shop {
         /// Get or sets the Method used to create payment.
         /// </summary>
         public PaymentMethod Method { get; set; }
+
+        /// <summary>
+        /// Get or sets Status of Payment.
+        /// Determines Payment proccess success.
+        /// </summary>
+        public PaymentStatus Status { get; set; }
 
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
