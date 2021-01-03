@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Web.Core", "src\web\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VarzeshAfarinan", "VarzeshAfarinan", "{EB3A412A-3DD9-4FAD-BDAF-E4FBD18DDC6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Web.Shop", "src\web\Behlog.Web.Shop\Behlog.Web.Shop.csproj", "{A827B0FF-8CA4-4929-BCE6-6E556CBA2FAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,10 @@ Global
 		{67CE4457-C977-4F48-AFC4-D0D35538B3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67CE4457-C977-4F48-AFC4-D0D35538B3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67CE4457-C977-4F48-AFC4-D0D35538B3D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A827B0FF-8CA4-4929-BCE6-6E556CBA2FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A827B0FF-8CA4-4929-BCE6-6E556CBA2FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A827B0FF-8CA4-4929-BCE6-6E556CBA2FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A827B0FF-8CA4-4929-BCE6-6E556CBA2FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,6 +208,7 @@ Global
 		{1D21C9F8-9332-478C-A375-E1613DA7E7C6} = {2DBF0A84-6110-4C43-ACD1-77A11419A6C3}
 		{67CE4457-C977-4F48-AFC4-D0D35538B3D9} = {2DBF0A84-6110-4C43-ACD1-77A11419A6C3}
 		{EB3A412A-3DD9-4FAD-BDAF-E4FBD18DDC6F} = {4578C55D-9AAA-40ED-BEAC-C5235CD2E863}
+		{A827B0FF-8CA4-4929-BCE6-6E556CBA2FAB} = {2DBF0A84-6110-4C43-ACD1-77A11419A6C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8492108F-61A7-4788-8ADA-0398E12219FA}

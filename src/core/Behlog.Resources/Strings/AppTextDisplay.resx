@@ -276,4 +276,13 @@
   <data name="DropDownNoSelect" xml:space="preserve">
     <value>[همه]</value>
   </data>
+  <data name="ProductStatusOurOfStock" xml:space="preserve">
+    <value>محصول در انبار موجود نیست</value>
+  </data>
+  <data name="ProductStatusPreOrder" xml:space="preserve">
+    <value>پیش فروش</value>
+  </data>
+  <data name="ProductStatusWaitingToProduce" xml:space="preserve">
+    <value>در انتظار تولید</value>
+  </data>
 </root>

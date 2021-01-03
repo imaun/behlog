@@ -93,5 +93,17 @@ namespace Behlog.Core.Extensions
                 UserStatus.Enabled => AppTextDisplay.UserStatusEnabled,
                 _=> AppTextDisplay.StatusUnknown
             };
+
+        public static string ToDisplay(this ProductStatus status) =>
+            status switch
+            {
+                ProductStatus.Deleted => AppTextDisplay.StatusDeleted,
+                ProductStatus.Disbaled => AppTextDisplay.StatusDisable,
+                ProductStatus.Enabled => AppTextDisplay.StatusEnable,
+                ProductStatus.OutOfStock => AppTextDisplay.ProductStatusOurOfStock,
+                ProductStatus.WaitingToProduce => AppTextDisplay.ProductStatusWaitingToProduce,
+                ProductStatus.PreOrder => AppTextDisplay.ProductStatusPreOrder,
+                _ => AppTextDisplay.StatusUnknown
+            };
     }
 }

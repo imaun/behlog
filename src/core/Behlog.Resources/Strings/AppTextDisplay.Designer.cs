@@ -430,6 +430,33 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to محصول در انبار موجود نیست.
+        /// </summary>
+        public static string ProductStatusOurOfStock {
+            get {
+                return ResourceManager.GetString("ProductStatusOurOfStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پیش فروش.
+        /// </summary>
+        public static string ProductStatusPreOrder {
+            get {
+                return ResourceManager.GetString("ProductStatusPreOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to در انتظار تولید.
+        /// </summary>
+        public static string ProductStatusWaitingToProduce {
+            get {
+                return ResourceManager.GetString("ProductStatusWaitingToProduce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حذف شده.
         /// </summary>
         public static string StatusDeleted {
