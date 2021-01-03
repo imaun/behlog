@@ -16,6 +16,7 @@ using Behlog.Services.Security;
 using Behlog.Core.Models.Security;
 using Behlog.Services.Contracts.Security;
 using Behlog.Core.Contracts.Services.Common;
+using Behlog.Core.Contracts.Repository.Shop;
 using Behlog.Core.Contracts.Repository.System;
 using Behlog.Core.Contracts.Repository.Security;
 using Behlog.Factories.Content;
@@ -32,6 +33,7 @@ using Behlog.Repository.Content;
 using Behlog.Repository.Feature;
 using Behlog.Repository.System;
 using Behlog.Repository.Security;
+using Behlog.Repository.Shop;
 using Behlog.Services.Content;
 using Behlog.Services.Contracts.Content;
 using Behlog.Services.Contracts.Feature;
@@ -159,7 +161,23 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<IWebsiteVisitRepository, WebsiteVisitRepository>();
             services.AddScoped<ISubscriberRepository, SubscriberRepository>();
 
+            //Shop
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IProductMetaRepository, ProductMetaRepository>();
+            services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductReviewRepository, ProductReviewRepository>();
+            services.AddScoped<IShippingAddressRepository, ShippingAddressRepository>();
+            services.AddScoped<IShippingRepository, ShippingRepository>();
+            services.AddScoped<IVendorRepository, VendorRepository>();
+
             //System
+            services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<ICurrencyRepository, CurrencyRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<ILayoutRepository, LayoutRepository>();
             services.AddScoped<IWebsiteRepository, WebsiteRepository>();
@@ -169,7 +187,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IWebsiteOptionRepository, WebsiteOptionRepository>();
             services.AddScoped<IErrorLogRepository, ErrorLogRepository>();
-
+            
             //Security
             services.AddScoped<IUserRepository, UserRepository>();
         }
@@ -187,6 +205,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<ISubscriberService, SubscriberService>();
 
             //System
+            services.AddScoped<ICityService, CityService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ILayoutService, LayoutService>();
             services.AddScoped<IWebsiteService, WebsiteService>();
@@ -248,9 +267,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<IWebsiteInfo>(_ => {
                 var service = _.GetService<IWebsiteService>();
                 var result = service.GetWebsiteInfo(appSetting.WebsiteId).Result;
-                if (result == null)
-                    return null;
-                return result;
+                return result != null ? result : null;
             });
 
             MappingConfig.AddDtoMappingConfig();
