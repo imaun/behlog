@@ -230,10 +230,12 @@ namespace Microsoft.Extensions.DependencyInjection {
         }
 
         private static void AddViewModelProviders(this IServiceCollection services) {
-            services.AddScoped<LanguageViewModelProvider>();
             services.AddScoped<CategoryViewModelProvider>();
+            services.AddScoped<CityViewModelProvider>();
+            services.AddScoped<LanguageViewModelProvider>();
             services.AddScoped<PostViewModelProvider>();
             services.AddScoped<WebsiteOptionsProvider>();
+
         }
 
         private static void AddExtensions(this IServiceCollection services) {

@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\Common\" />
+    <Folder Include="Contracts\Shop\" />
   </ItemGroup>
 </Project>
