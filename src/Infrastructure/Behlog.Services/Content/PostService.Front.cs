@@ -14,6 +14,8 @@ using Behlog.Services.Dto.Core;
 using Behlog.Services.Dto.System;
 using Behlog.Core.Contracts;
 using Mapster;
+using System.Linq.Expressions;
+using System;
 
 //PostService
 //Front Related Methods
@@ -21,6 +23,29 @@ using Mapster;
 namespace Behlog.Services.Content
 {
     public partial class PostService : IPostService {
+
+        /// <inheritdoc/>
+        public async Task<PostResultDto> GetPostForViewAsync(int id)
+            => await getPostForViewAsync(_ => _.Id == id);
+
+        /// <inheritdoc/>
+        public async Task<PostResultDto> GetPostForViewAsync(string slug)
+            => await getPostForViewAsync(_ => _.Slug.ToUpper() == slug.ToUpper());
+
+        /// <inheritdoc/>
+        public async Task<PostResultDto> GetPostForViewAsync(string langKey, string slug)
+            => await getPostForViewAsync(_ => _.Language.LangKey == langKey && _.Slug.ToUpper() == slug.ToUpper());
+
+        private async Task<PostResultDto> getPostForViewAsync(Expression<Func<Post, bool>> predicate) {
+            var post = await buildResultQuery()
+                .AddPublishedRules()
+                .BelongsToWebsite(_websiteInfo.Id)
+                .SingleOrDefaultAsync(predicate);
+
+            var result = post.Adapt<PostResultDto>();
+            return await Task.FromResult(result);
+        }
+
         public async Task<PostDetailDto> GetDetailAsync(int id) {
             //var post = await GetResultByIdAsync(id);
             var post = await buildGetDetailQuery()
@@ -42,7 +67,7 @@ namespace Behlog.Services.Content
             var post = await buildGetDetailQuery()
                 .AddPublishedRules()
                 .BelongsToWebsite(_websiteInfo.Id)
-                .FirstOrDefaultAsync(_ => _.Slug.ToLower() == slug.ToLower());
+                .FirstOrDefaultAsync(_ => _.Slug.ToUpper() == slug.ToUpper());
 
             var postResult = post.Adapt<PostResultDto>();
             var result = new PostDetailDto();

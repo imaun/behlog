@@ -59,6 +59,5 @@ namespace Behlog.Web.Shop.ViewModels {
         public IEnumerable<ShippingViewModel> ShippingMethods { get; set; }
         public PostViewModel Post { get; set; }
 
-
     }
 }

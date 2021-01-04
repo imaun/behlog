@@ -26,6 +26,28 @@ namespace Behlog.Services.Contracts.Content {
 
         #endregion
 
+        /// <summary>
+        /// Get <see cref="Post"/> by it's Id for showing on Website's Views.
+        /// </summary>
+        /// <param name="id">Id of Post</param>
+        /// <returns>Post's data</returns>
+        Task<PostResultDto> GetPostForViewAsync(int id);
+
+        /// <summary>
+        /// Get <see cref="Post"/> by it's Slug for shwoing on website's views.
+        /// </summary>
+        /// <param name="slug">Slug of post.</param>
+        /// <returns>Post's data</returns>
+        Task<PostResultDto> GetPostForViewAsync(string slug);
+
+        /// <summary>
+        /// Get <see cref="Post"/> by it's Slug and language for shwoing on website's views.
+        /// </summary>
+        /// <param name="slug">Slug of post.</param>
+        /// <param name="langKey">LangKey of the language (ex: 'fa')</param>
+        /// <returns>Post's data</returns>
+        Task<PostResultDto> GetPostForViewAsync(string langKey, string slug);
+
         Task<PostResultDto> GetResultByIdAsync(int id);
 
         Task<PostResultDto> GetResultAsync(string slug);

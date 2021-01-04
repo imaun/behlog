@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\core\Behlog.Core.Models\Behlog.Core.Models.csproj" />
     <ProjectReference Include="..\..\core\Behlog.Core\Behlog.Core.csproj" />
-    <ProjectReference Include="..\Behlog.Web.ViewModels\Behlog.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\..\web\Behlog.Web.ViewModels\Behlog.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

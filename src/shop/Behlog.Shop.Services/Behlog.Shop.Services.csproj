@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Behlog.Core.Models\Behlog.Core.Models.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Behlog.Repository\Behlog.Repository.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Behlog.Services\Behlog.Services.csproj" />
+    <ProjectReference Include="..\Behlog.Shop.Services.Data\Behlog.Shop.Services.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.0.1" />
+  </ItemGroup>
+
 </Project>
