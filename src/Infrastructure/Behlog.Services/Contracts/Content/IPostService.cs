@@ -48,6 +48,18 @@ namespace Behlog.Services.Contracts.Content {
         /// <returns>Post's data</returns>
         Task<PostResultDto> GetPostForViewAsync(string langKey, string slug);
 
+        /// <summary>
+        /// Get Post for showing on website's views.
+        /// </summary>
+        /// <param name="postType">PostType slug</param>
+        /// <param name="slug">Slug of Post</param>
+        /// <param name="lang">LangKey of Language</param>
+        /// <returns>Post's data</returns>
+        Task<PostResultDto> GetPostForViewAsync(
+            string postType,
+            string slug,
+            string lang);
+
         Task<PostResultDto> GetResultByIdAsync(int id);
 
         Task<PostResultDto> GetResultAsync(string slug);

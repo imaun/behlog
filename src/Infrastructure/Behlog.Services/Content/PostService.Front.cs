@@ -35,9 +35,19 @@ namespace Behlog.Services.Content
             => await getPostForViewAsync(_ => _.Slug.ToUpper() == slug.ToUpper());
 
         /// <inheritdoc/>
-        public async Task<PostResultDto> GetPostForViewAsync(string langKey, string slug)
+        public async Task<PostResultDto> GetPostForViewAsync(
+            string langKey, 
+            string slug)
             => await getPostForViewAsync(_ => _.Language.LangKey == langKey && 
                                                 _.Slug.ToUpper() == slug.ToUpper());
+        /// <inheritdoc/> 
+        public async Task<PostResultDto> GetPostForViewAsync(
+            string postType,
+            string slug,
+            string lang)
+            => await getPostForViewAsync(_ => _.PostType.Slug.ToUpper() == postType.ToUpper() &&
+                                                _.Slug.ToUpper() == slug.ToUpper() &&
+                                                _.Language.LangKey.ToUpper() == lang.ToUpper());
 
         private async Task<PostResultDto> getPostForViewAsync(Expression<Func<Post, bool>> predicate) {
             var post = await buildResultQuery()

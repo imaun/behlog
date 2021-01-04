@@ -11,6 +11,11 @@ using Behlog.Web.Core.Extensions;
 namespace Behlog.Web.ViewModels.Content {
 
     public class PostViewModel {
+
+        public PostViewModel() {
+            Meta = new PostMetaListViewModel();
+        }
+
         #region Properties
         public int Id { get; set; }
         public string Title { get; set; }
@@ -61,6 +66,8 @@ namespace Behlog.Web.ViewModels.Content {
         public bool HasParent => ParentId.HasValue;
 
         #endregion
+
+        public PostMetaListViewModel Meta { get; set; }
     }
 
     public abstract class PostItemBaseViewModel: BaseViewModel {
