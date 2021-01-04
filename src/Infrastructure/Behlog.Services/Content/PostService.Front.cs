@@ -36,7 +36,8 @@ namespace Behlog.Services.Content
 
         /// <inheritdoc/>
         public async Task<PostResultDto> GetPostForViewAsync(string langKey, string slug)
-            => await getPostForViewAsync(_ => _.Language.LangKey == langKey && _.Slug.ToUpper() == slug.ToUpper());
+            => await getPostForViewAsync(_ => _.Language.LangKey == langKey && 
+                                                _.Slug.ToUpper() == slug.ToUpper());
 
         private async Task<PostResultDto> getPostForViewAsync(Expression<Func<Post, bool>> predicate) {
             var post = await buildResultQuery()
@@ -44,6 +45,7 @@ namespace Behlog.Services.Content
                 .BelongsToWebsite(_websiteInfo.Id)
                 .SingleOrDefaultAsync(predicate);
 
+            await renderTemplateToBody(post);
             var result = post.Adapt<PostResultDto>();
             return await Task.FromResult(result);
         }
@@ -52,68 +54,28 @@ namespace Behlog.Services.Content
 
         #region Get Post details for showing on Views, Pages , etc
 
-        public async Task<PostDetailDto> GetDetailAsync(int id) {
-            //var post = await GetResultByIdAsync(id);
-            var post = await buildGetDetailQuery()
-                .AddPublishedRules()
-                .BelongsToWebsite(_websiteInfo.Id)
-                .FirstOrDefaultAsync(_ => _.Id == id);
+        public async Task<PostDetailDto> GetDetailAsync(int id)
+            => await getDetailAsync(_ => _.Id == id);
 
-            var postResult = post.Adapt<PostResultDto>();
-            var result = new PostDetailDto();
-            await addRelatedDataToPostDetailAsync(result, postResult);
-            result.PostTypeSlug = postResult.PostTypeSlug;
-            result.PostTypeTitle = postResult.PostTypeTitle;
+        public async Task<PostDetailDto> GetDetailAsync(string slug)
+            => await getDetailAsync(_ => _.Slug.ToUpper() == slug.ToUpper());
 
-            return await Task.FromResult(result);
-            //return await getPostDetailAsync(post);
-        }
-
-        public async Task<PostDetailDto> GetDetailAsync(string slug) {
-            var post = await buildGetDetailQuery()
-                .AddPublishedRules()
-                .BelongsToWebsite(_websiteInfo.Id)
-                .FirstOrDefaultAsync(_ => _.Slug.ToUpper() == slug.ToUpper());
-
-            var postResult = post.Adapt<PostResultDto>();
-            var result = new PostDetailDto();
-            await addRelatedDataToPostDetailAsync(result, postResult);
-            result.PostTypeSlug = postResult.PostTypeSlug;
-            result.PostTypeTitle = postResult.PostTypeTitle;
-
-            return await Task.FromResult(result);
-            //return await getPostDetailAsync(post);
-        }
-
-        public async Task<PostDetailDto> GetDetailAsync(string lang, string slug) {
-            //var post = await GetResultAsync(lang, slug);
-
-            var post = await buildGetDetailQuery()
-                .AddPublishedRules()
-                .BelongsToWebsite(_websiteInfo.Id)
-                .FirstOrDefaultAsync(_ => _.Language.LangKey == lang &&
+        public async Task<PostDetailDto> GetDetailAsync(string lang, string slug)
+            => await getDetailAsync(_ => _.Language.LangKey == lang &&
                                           _.Slug == slug);
-            var postResult = post.Adapt<PostResultDto>();
-            var result = new PostDetailDto();
-            await addRelatedDataToPostDetailAsync(result, postResult);
-            result.PostTypeSlug = postResult.PostTypeSlug;
-            result.PostTypeTitle = postResult.PostTypeTitle;
-
-            return await Task.FromResult(result);
-            //return await getPostDetailAsync(post);
-        }
 
         public async Task<PostDetailDto> GetDetailAsync(
             string postTypeSlug,
             string lang,
-            string slug) {
+            string slug) => await getDetailAsync(_ => _.PostType.Slug == postTypeSlug &&
+                                                      _.Language.LangKey == lang &&
+                                                      _.Slug == slug);
 
+        private async Task<PostDetailDto> getDetailAsync(Expression<Func<Post, bool>> predicate) {
             var post = await buildGetDetailQuery()
                 .AddPublishedRules()
                 .BelongsToWebsite(_websiteInfo.Id)
-                .FirstOrDefaultAsync(_ => _.PostType.Slug == postTypeSlug &&
-                                          _.Language.LangKey == lang &&
-                                          _.Slug == slug);
+                .FirstOrDefaultAsync(predicate);
 
             await renderTemplateToBody(post);
 
