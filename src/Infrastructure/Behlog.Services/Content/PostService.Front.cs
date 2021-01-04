@@ -45,6 +45,7 @@ namespace Behlog.Services.Content
                 .BelongsToWebsite(_websiteInfo.Id)
                 .SingleOrDefaultAsync(predicate);
 
+            if (post == null) return null;
             await renderTemplateToBody(post);
             var result = post.Adapt<PostResultDto>();
             return await Task.FromResult(result);
@@ -160,7 +161,6 @@ namespace Behlog.Services.Content
 
             return await Task.FromResult(result);
         }
-
 
         #endregion
 
@@ -329,7 +329,7 @@ namespace Behlog.Services.Content
 
         private async Task<PageDetailDto> getPageDetailAsync(Post post) {
             if (post == null)
-                throw new PostNotFoundException();
+                return null;
 
             string postTypeSlug = post.PostType.Slug;
             string lang = post.Language.LangKey;
