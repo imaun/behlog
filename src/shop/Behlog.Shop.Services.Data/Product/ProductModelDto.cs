@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Behlog.Shop.Services.Data
 {
-    public class ProductColor {
+    public class ProductModelDto {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Key { get; set; }

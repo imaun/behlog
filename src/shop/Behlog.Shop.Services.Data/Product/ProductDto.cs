@@ -45,7 +45,7 @@ namespace Behlog.Shop.Services.Data {
     public class ProductPageDto: ProductResultDto { 
 
         public PostResultDto Post { get; set; }
-        public IEnumerable<ProductColor> AvailableColors { get; set; }
+        public IEnumerable<ProductColor> AvailableModels { get; set; }
         public IEnumerable<ShippingResultDto> ShippingMethods { get; set; }
         public IEnumerable<ProductMetaResultDto> Meta { get; set; }
     }

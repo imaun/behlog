@@ -15,6 +15,7 @@ namespace Behlog.Core.Models.Shop {
             Meta = new HashSet<ProductMeta>();
             PriceHistory = new HashSet<ProductPrice>();
             Reviews = new HashSet<ProductReview>();
+            Models = new HashSet<ProductModel>();
         }
 
         #region Properties
@@ -213,6 +214,7 @@ namespace Behlog.Core.Models.Shop {
         public ICollection<ProductMeta> Meta { get; set; }
         public ICollection<ProductPrice> PriceHistory { get; set; }
         public ICollection<ProductReview> Reviews { get; set; }
+        public ICollection<ProductModel> Models { get; set; }
         #endregion 
     }
 }
