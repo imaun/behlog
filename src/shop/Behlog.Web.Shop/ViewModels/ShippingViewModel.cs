@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Behlog.Web.Shop.ViewModels {
+﻿namespace Behlog.Web.Shop.ViewModels {
 
     public class ShippingViewModel {
         public int Id { get; set; }

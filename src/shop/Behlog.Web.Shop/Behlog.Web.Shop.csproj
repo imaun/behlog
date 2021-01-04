@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DNTPersianUtils.Core" Version="3.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Behlog.Core.Models\Behlog.Core.Models.csproj" />
+    <ProjectReference Include="..\..\core\Behlog.Core\Behlog.Core.csproj" />
+    <ProjectReference Include="..\Behlog.Web.ViewModels\Behlog.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
