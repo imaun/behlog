@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +16,6 @@ using Behlog.Services.Dto.Core;
 using Behlog.Services.Dto.System;
 using Behlog.Core.Contracts;
 using Mapster;
-using System.Linq.Expressions;
-using System;
 
 //PostService
 //Front Related Methods
@@ -23,6 +23,8 @@ using System;
 namespace Behlog.Services.Content
 {
     public partial class PostService : IPostService {
+
+        #region Get Post for showing on Views
 
         /// <inheritdoc/>
         public async Task<PostResultDto> GetPostForViewAsync(int id)
@@ -45,6 +47,10 @@ namespace Behlog.Services.Content
             var result = post.Adapt<PostResultDto>();
             return await Task.FromResult(result);
         }
+
+        #endregion
+
+        #region Get Post details for showing on Views, Pages , etc
 
         public async Task<PostDetailDto> GetDetailAsync(int id) {
             //var post = await GetResultByIdAsync(id);
@@ -120,64 +126,9 @@ namespace Behlog.Services.Content
             return await Task.FromResult(result);
         }
 
+        #endregion
 
-        public async Task<PostIndexDto> GetIndexAsync(
-            IndexParams<PostIndexFilter> param
-        ) {
-            param.CheckArgumentIsNull(nameof(param));
-
-            var postType = await _postTypeRepository
-                .GetBySlugAsync(param.Filter.PostTypeSlug);
-
-            if (postType == null)
-                throw new PostTypeNotFoundException();
-
-            var lang = await _languageRepository.GetByLangKeyAsync(param.LangKey)
-                       ?? await _languageRepository.GetDefaultLanguage();
-
-            var query = _repository.Query();
-
-            query = AddIndexFilter(query, param.Filter, lang);
-
-            var result = new PostIndexDto {
-                CategoryId = param.Filter.CategoryId,
-                PostTypeId = postType.Id,
-                PostTypeSlug = postType.Slug,
-                LangKey = lang.LangKey,
-                PageSize = param.PageSize,
-                CurrentPageNumber = param.PageNumber,
-                TotalCount = await query.CountAsync(),
-                Categories = await getCategoryItemsAsync(postType.Id, lang.Id)
-            };
-
-            if (result.CategoryId.HasValue)
-                result.CategoryTitle = (await _categoryRepository
-                    .FindAsync(result.CategoryId.Value)
-                ).Title;
-
-            result.Items = await query
-                .Include(_ => _.PostType)
-                .Skip(param.Skip)
-                .Take(param.PageSize)
-                .OrderByDescending(_ => _.Id)
-                .ThenByDescending(_ => _.PublishDate)
-                .Select(_ => new PostIndexItemDto {
-                    CoverPhoto = _.CoverPhoto,
-                    Slug = _.Slug,
-                    PublishDate = _.PublishDate,
-                    Status = _.Status,
-                    Summary = _.Summary,
-                    Title = _.Title,
-                    UserId = _.CreatorUserId,
-                    AltTitle = _.AltTitle,
-                    Author = _.CreatorUser.Title,
-                    Id = _.Id,
-                    PostTypeSlug = _.PostType.Slug
-                }).ToListAsync();
-
-            return await Task.FromResult(result);
-        }
-
+        #region Get Post to show in ViewComponents 
         public async Task<PostSummaryDto> GetPostSummaryAsync(
             string postType,
             string slug) {
@@ -249,112 +200,62 @@ namespace Behlog.Services.Content
         }
 
 
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public async Task<GalleryDto> GetGalleryAsync(
-            IndexParams param,
-            int? categoryId = null,
-            string lang = Language.KEY_fa_IR,
-            bool isComponent = false) {
+        #endregion
 
+        #region Get Post collections data for showing on PostType Index pages, lists, etc.
+        public async Task<PostIndexDto> GetIndexAsync(
+            IndexParams<PostIndexFilter> param
+        ) {
             param.CheckArgumentIsNull(nameof(param));
+
             var postType = await _postTypeRepository
-                .GetBySlugAsync(PostType.GALLERY);
+                .GetBySlugAsync(param.Filter.PostTypeSlug);
 
             if (postType == null)
                 throw new PostTypeNotFoundException();
 
-            var query = _repository
-                .Query()
-                .IncludeFiles()
-                .Where(_ => _.PostTypeId == postType.Id)
-                .Where(_ => _.Status == PostStatus.Published)
-                .Where(_ => _.PublishDate <= _dateService.UtcNow())
-                .Where(_ => _.Language.LangKey == lang)
-                .Where(_ => _.IsComponent == isComponent);
+            var lang = await _languageRepository.GetByLangKeyAsync(param.LangKey)
+                       ?? await _languageRepository.GetDefaultLanguage();
 
-            if (categoryId.HasValue)
-                query = query.Where(_ => _.CategoryId == categoryId);
+            var query = _repository.Query();
 
-            query = query.SetOrder(param.OrderBy, !param.OrderDesc);
+            query = AddIndexFilter(query, param.Filter, lang);
 
-            if(param.HasPaging)
-                query = query
-                    .Skip(param.Skip)
-                    .Take(param.Take);
-
-            var queryResult = await query.ToListAsync();
-
-            var result = new GalleryDto {
-                Posts = queryResult.Adapt<List<PostFileGalleryDto>>()
+            var result = new PostIndexDto {
+                CategoryId = param.Filter.CategoryId,
+                PostTypeId = postType.Id,
+                PostTypeSlug = postType.Slug,
+                LangKey = lang.LangKey,
+                PageSize = param.PageSize,
+                CurrentPageNumber = param.PageNumber,
+                TotalCount = await query.CountAsync(),
+                Categories = await getCategoryItemsAsync(postType.Id, lang.Id)
             };
 
-            foreach (var post in result.Posts) {
-                post.Files = queryResult.FirstOrDefault(_ => _.Id == post.Id)
-                    .PostFiles.OrderBy(_ => _.OrderNum)
-                    .Select(_ => _.File)
-                    .Adapt<List<PostFileGalleryItemDto>>();
-            }
+            if (result.CategoryId.HasValue)
+                result.CategoryTitle = (await _categoryRepository
+                    .FindAsync(result.CategoryId.Value)
+                ).Title;
 
-            return await Task.FromResult(result);
-        }
-
-        public async Task<PostFileGalleryDto> GetPostFileGalleryAsync(int id) {
-            //var files = await _repository.GetFilesAsync()
-            //var query = _repository.Query();
-            //includeFiles(query);
-            //query = addPublishedRules(query);
-            var post = await _repository
-                .Query()
-                .IncludeFiles()
-                .AddPublishedRules()
-                .FirstOrDefaultAsync(_ => _.Id == id);
-
-            if (post == null) return null;
-
-            var result = post.Adapt<PostFileGalleryDto>();
-            result.Files = post.PostFiles
-                .Select(_ => _.File)
-                .Adapt<List<PostFileGalleryItemDto>>();
-
-            return await Task.FromResult(result);
-        }
-
-        public async Task<PostFileGalleryDto> GetPostFileGalleryAsync(
-            string lang,
-            string postType,
-            string slug,
-            bool isComponent = false) {
-
-            //var query = _repository.Query();
-            //query = includeFiles(query);
-            //query = addPublishedRules(query);
-
-            var post = await _repository
-                .Query()
-                .Include(_ => _.Language)
+            result.Items = await query
                 .Include(_ => _.PostType)
-                .IncludeFiles()
-                .AddPublishedRules()
-                .FirstOrDefaultAsync(_ => _.Language.LangKey == lang &&
-                                        _.PostType.Slug == postType &&
-                                        _.Slug == slug &&
-                                        _.IsComponent == isComponent);
-
-            //var post = await query
-            //    .Include(_=> _.Language)
-            //    .Include(_=> _.PostType)
-            //    .FirstOrDefaultAsync(_ => _.LangId == 1 &&
-            //                            _.PostTypeId == 5 &&
-            //                            _.Slug == slug);
-
-            if (post == null) return null;
-
-            var result = post.Adapt<PostFileGalleryDto>();
-            result.Files = post.PostFiles
-                .Select(_ => _.File)
-                .Adapt<List<PostFileGalleryItemDto>>();
+                .Skip(param.Skip)
+                .Take(param.PageSize)
+                .OrderByDescending(_ => _.Id)
+                .ThenByDescending(_ => _.PublishDate)
+                .Select(_ => new PostIndexItemDto {
+                    CoverPhoto = _.CoverPhoto,
+                    Slug = _.Slug,
+                    PublishDate = _.PublishDate,
+                    Status = _.Status,
+                    Summary = _.Summary,
+                    Title = _.Title,
+                    UserId = _.CreatorUserId,
+                    AltTitle = _.AltTitle,
+                    Author = _.CreatorUser.Title,
+                    Id = _.Id,
+                    PostTypeSlug = _.PostType.Slug
+                }).ToListAsync();
 
             return await Task.FromResult(result);
         }
@@ -394,7 +295,46 @@ namespace Behlog.Services.Content
             return await Task.FromResult(result);
         }
 
+        public async Task<PostListDto> GetLatestPostsAsync(
+           string postTypeSlug,
+           int? categoryId = null,
+           string lang = Language.KEY_fa_IR,
+           int pageSize = 10
+       ) {
+            var postType = await _postTypeRepository
+                .GetBySlugAsync(postTypeSlug);
 
+            if (postType == null)
+                throw new PostTypeNotFoundException();
+
+            var query = _repository
+                .Query()
+                .Include(_ => _.PostType)
+                .Include(_ => _.CreatorUser)
+                .AddPublishedRules()
+                .BelongsToWebsite(_websiteInfo.Id)
+                .WithPostType(postType.Id)
+                .HasLanguage(lang);
+
+            if (categoryId.HasValue)
+                query = query.HasCategory(categoryId.Value);
+
+            var result = new PostListDto {
+                PostTypeSlug = postType.Slug,
+                Title = postType.Title,
+                Items = await query
+                    .OrderByDescending(_ => _.PublishDate)
+                    .ThenBy(_ => _.OrderNumber)
+                    .Take(pageSize)
+                    .Select(_ => _.Adapt<PostItemDto>())
+                    .ToListAsync()
+            };
+
+            return await Task.FromResult(result);
+        }
+        #endregion
+
+        #region Get Post for building pages
         public async Task<PageDetailDto> GetPageDetailAsync(int id) {
             var post = await _repository
                 .Query()
@@ -499,44 +439,122 @@ namespace Behlog.Services.Content
             return await Task.FromResult(result);
         }
 
-        public async Task<PostListDto> GetLatestPostsAsync(
-            string postTypeSlug,
+        #endregion
+
+        #region Get Post to build Galleries
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public async Task<GalleryDto> GetGalleryAsync(
+            IndexParams param,
             int? categoryId = null,
             string lang = Language.KEY_fa_IR,
-            int pageSize = 10
-        ) {
+            bool isComponent = false) {
+
+            param.CheckArgumentIsNull(nameof(param));
             var postType = await _postTypeRepository
-                .GetBySlugAsync(postTypeSlug);
+                .GetBySlugAsync(PostType.GALLERY);
 
             if (postType == null)
                 throw new PostTypeNotFoundException();
 
             var query = _repository
                 .Query()
-                .Include(_ => _.PostType)
-                .Include(_ => _.CreatorUser)
-                .AddPublishedRules()
-                .BelongsToWebsite(_websiteInfo.Id)
-                .WithPostType(postType.Id)
-                .HasLanguage(lang);
+                .IncludeFiles()
+                .Where(_ => _.PostTypeId == postType.Id)
+                .Where(_ => _.Status == PostStatus.Published)
+                .Where(_ => _.PublishDate <= _dateService.UtcNow())
+                .Where(_ => _.Language.LangKey == lang)
+                .Where(_ => _.IsComponent == isComponent);
 
             if (categoryId.HasValue)
-                query = query.HasCategory(categoryId.Value);
+                query = query.Where(_ => _.CategoryId == categoryId);
 
-            var result = new PostListDto {
-                PostTypeSlug = postType.Slug,
-                Title = postType.Title,
-                Items = await query
-                    .OrderByDescending(_ => _.PublishDate)
-                    .ThenBy(_ => _.OrderNumber)
-                    .Take(pageSize)
-                    .Select(_ => _.Adapt<PostItemDto>())
-                    .ToListAsync()
+            query = query.SetOrder(param.OrderBy, !param.OrderDesc);
+
+            if (param.HasPaging)
+                query = query
+                    .Skip(param.Skip)
+                    .Take(param.Take);
+
+            var queryResult = await query.ToListAsync();
+
+            var result = new GalleryDto {
+                Posts = queryResult.Adapt<List<PostFileGalleryDto>>()
             };
+
+            foreach (var post in result.Posts) {
+                post.Files = queryResult.FirstOrDefault(_ => _.Id == post.Id)
+                    .PostFiles.OrderBy(_ => _.OrderNum)
+                    .Select(_ => _.File)
+                    .Adapt<List<PostFileGalleryItemDto>>();
+            }
 
             return await Task.FromResult(result);
         }
 
+        public async Task<PostFileGalleryDto> GetPostFileGalleryAsync(int id) {
+            //var files = await _repository.GetFilesAsync()
+            //var query = _repository.Query();
+            //includeFiles(query);
+            //query = addPublishedRules(query);
+            var post = await _repository
+                .Query()
+                .IncludeFiles()
+                .AddPublishedRules()
+                .FirstOrDefaultAsync(_ => _.Id == id);
+
+            if (post == null) return null;
+
+            var result = post.Adapt<PostFileGalleryDto>();
+            result.Files = post.PostFiles
+                .Select(_ => _.File)
+                .Adapt<List<PostFileGalleryItemDto>>();
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<PostFileGalleryDto> GetPostFileGalleryAsync(
+            string lang,
+            string postType,
+            string slug,
+            bool isComponent = false) {
+
+            //var query = _repository.Query();
+            //query = includeFiles(query);
+            //query = addPublishedRules(query);
+
+            var post = await _repository
+                .Query()
+                .Include(_ => _.Language)
+                .Include(_ => _.PostType)
+                .IncludeFiles()
+                .AddPublishedRules()
+                .FirstOrDefaultAsync(_ => _.Language.LangKey == lang &&
+                                        _.PostType.Slug == postType &&
+                                        _.Slug == slug &&
+                                        _.IsComponent == isComponent);
+
+            //var post = await query
+            //    .Include(_=> _.Language)
+            //    .Include(_=> _.PostType)
+            //    .FirstOrDefaultAsync(_ => _.LangId == 1 &&
+            //                            _.PostTypeId == 5 &&
+            //                            _.Slug == slug);
+
+            if (post == null) return null;
+
+            var result = post.Adapt<PostFileGalleryDto>();
+            result.Files = post.PostFiles
+                .Select(_ => _.File)
+                .Adapt<List<PostFileGalleryItemDto>>();
+
+            return await Task.FromResult(result);
+        }
+        #endregion
+
+        #region Get PostMeta data 
         public async Task<PostMetaListDto> GetPostMetaListAsync(
             Post post,
             int? langId = null,
@@ -560,12 +578,12 @@ namespace Behlog.Services.Content
             var meta = await _metaRepository
                 .GetPostMetaWithPostAsync(postId, langId, category);
             string postTitle = string.Empty, postSlug = string.Empty;
-            if(meta.Any()) {
+            if (meta.Any()) {
                 var post = meta.ToList()[0].Post;
                 postTitle = post.Title;
                 postSlug = post.Slug;
             }
-            
+
             var result = new PostMetaListDto {
                 Items = meta.Select(_ => _.Adapt<PostMetaItemDto>()).ToList(),
                 PostSlug = postSlug,
@@ -574,6 +592,10 @@ namespace Behlog.Services.Content
 
             return await Task.FromResult(result);
         }
+
+
+
+        #endregion
 
         #region Private Methods
 
