@@ -10,6 +10,7 @@ namespace Behlog.Core.Models.Shop {
     public class Vendor {
         public Vendor() {
             Products = new HashSet<Product>();
+            ProductModels = new HashSet<ProductModel>();
         }
 
         #region Properties
@@ -29,7 +30,7 @@ namespace Behlog.Core.Models.Shop {
         #region Navigations
         public User User { get; set; }
         public ICollection<Product> Products { get; set; }
-
+        public ICollection<ProductModel> ProductModels { get; set; }
         #endregion
     }
 }

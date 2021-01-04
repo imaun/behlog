@@ -179,6 +179,33 @@ namespace Behlog.Storage.Core.Mappings {
             });
         }
 
+        public static void AddProductModelMapping(this ModelBuilder builder) {
+            builder.Entity<ProductModel>(map => {
+                map.ToTable(DbConst.ProductModel_Table_Name)
+                    .HasKey(_ => _.Id);
+
+                map.Property(_ => _.Title).HasMaxLength(1000).IsUnicode().IsRequired();
+                map.Property(_ => _.ModelName).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.ColorName).HasMaxLength(200).IsUnicode();
+                map.Property(_ => _.ColorValue).HasMaxLength(100).IsUnicode();
+                map.Property(_ => _.Description).HasMaxLength(2000).IsUnicode();
+                map.Property(_ => _.CoverPhoto).HasMaxLength(2000).IsUnicode();
+                map.Property(_ => _.OrderNumber).HasDefaultValue(1);
+                map.Property(_ => _.Status).HasDefaultValue(ProductStatus.Enabled);
+                map.Property(_ => _.NewModel).HasDefaultValue(false);
+
+                map.HasOne(_ => _.Product)
+                    .WithMany(_ => _.Models)
+                    .HasForeignKey(_ => _.ProductId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Vendor)
+                    .WithMany(_ => _.ProductModels)
+                    .HasForeignKey(_ => _.VendorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+        }
+
         public static void AddProductPriceMapping(this ModelBuilder builder) {
             builder.Entity<ProductPrice>(map => {
                 map.ToTable(DbConst.ProductPrice_Table_Name)

@@ -1,6 +1,7 @@
-﻿using Behlog.Core.Models.Content;
-
-namespace Behlog.Storage.Core {
+﻿namespace Behlog.Storage.Core {
+    /// <summary>
+    /// Includes Database constants
+    /// </summary>
     public static class DbConst {
 
         //Content
@@ -33,6 +34,7 @@ namespace Behlog.Storage.Core {
         public const string Payment_Table_Name = "Shop.Payments";
         public const string Product_Table_Name = "Shop.Products";
         public const string ProductMeta_Table_Name = "Shop.ProductMeta";
+        public const string ProductModel_Table_Name = "Shop.Product_Models";
         public const string ProductPrice_Table_Name = "Shop.Product_Prices";
         public const string ProductReview_Table_Name = "Shop.Product_Reviews";
         public const string Shipping_Table_Name = "Shop.Shippings";

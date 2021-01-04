@@ -255,6 +255,7 @@ namespace Behlog.Storage.Core {
             builder.AddPaymentMapping();
             builder.AddProductMapping();
             builder.AddProductMetaMapping();
+            builder.AddProductMapping();
             builder.AddProductPriceMapping();
             builder.AddProductReviewMapping();
             builder.AddShippingMapping();
