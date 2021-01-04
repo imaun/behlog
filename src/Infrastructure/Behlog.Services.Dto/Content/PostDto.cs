@@ -34,7 +34,9 @@ namespace Behlog.Services.Dto.Content
         public int? RelatedPostId { get; set; }
         public string Template { get; set; }
         public string ViewPath { get; set; }
-
+        public int? ProductId { get; set; }
+        public string MetaDescription { get; set; }
+        public string MetaRobots { get; set; }
         #endregion
 
         #region Navigation's Data
@@ -47,6 +49,7 @@ namespace Behlog.Services.Dto.Content
         public int CommentCount { get; set; }
         public int LikeCount { get; set; }
         public string Author { get; set; }
+        public string PorductTitle { get; set; }
         public IEnumerable<PostTagItemDto> Tags { get; set; }
         #endregion
     }

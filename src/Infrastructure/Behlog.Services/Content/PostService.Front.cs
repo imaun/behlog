@@ -45,19 +45,24 @@ namespace Behlog.Services.Content
             string postType,
             string slug,
             string lang)
-            => await getPostForViewAsync(_ => _.PostType.Slug.ToUpper() == postType.ToUpper() &&
-                                                _.Slug.ToUpper() == slug.ToUpper() &&
-                                                _.Language.LangKey.ToUpper() == lang.ToUpper());
+            => await getPostForViewAsync(_ => _.PostType.Slug == postType &&
+                        _.Slug.ToUpper() == slug.ToUpper() &&
+                        _.Language.LangKey.ToUpper() == lang.ToUpper());
 
-        private async Task<PostResultDto> getPostForViewAsync(Expression<Func<Post, bool>> predicate) {
+        private async Task<PostResultDto> getPostForViewAsync(
+            Expression<Func<Post, bool>> predicate) {
+            
             var post = await buildResultQuery()
                 .AddPublishedRules()
                 .BelongsToWebsite(_websiteInfo.Id)
                 .SingleOrDefaultAsync(predicate);
 
             if (post == null) return null;
+
             await renderTemplateToBody(post);
             var result = post.Adapt<PostResultDto>();
+            result.Tags = await getPostTagsAsync(post.Id);
+
             return await Task.FromResult(result);
         }
 

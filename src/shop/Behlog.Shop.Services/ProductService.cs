@@ -35,5 +35,9 @@ namespace Behlog.Shop.Services
         }
 
 
+        //public async Task<IEnumerable<ProductColor>> GetAvailableColorsAsync(int productId) {
+
+        //}
+
     }
 }

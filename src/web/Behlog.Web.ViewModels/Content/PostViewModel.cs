@@ -14,6 +14,7 @@ namespace Behlog.Web.ViewModels.Content {
 
         public PostViewModel() {
             Meta = new PostMetaListViewModel();
+            Tags = new List<PostTagItemViewModel>();
         }
 
         #region Properties
@@ -42,12 +43,13 @@ namespace Behlog.Web.ViewModels.Content {
         public int? RelatedPostId { get; set; }
         public string Template { get; set; }
         public string ViewPath { get; set; }
-
+        public string MetaDescription { get; set; }
+        public string MetaRobots { get; set; }
         #endregion
 
         #region Navigation's Data
         /// <summary>
-        /// <see cref="User"/>'s Title
+        /// <see cref="Behlog.Core.Models.Security.User"/>'s Title
         /// </summary>
         public string Author { get; set; }
         public string PostTypeTitle => PostTypeSlug.GetPostTypeDisplayName();
@@ -57,6 +59,7 @@ namespace Behlog.Web.ViewModels.Content {
         public string CategoryTitle { get; set; }
         public string CategorySlug { get; set; }
         public string ParentTitle { get; set; }
+        public string PorductTitle { get; set; }
         #endregion
 
         #region Calculated Properties
@@ -67,6 +70,7 @@ namespace Behlog.Web.ViewModels.Content {
 
         #endregion
 
+        public IEnumerable<PostTagItemViewModel> Tags { get; set; }
         public PostMetaListViewModel Meta { get; set; }
     }
 
