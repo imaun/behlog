@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Behlog.Core.Models.Enum;
+using Behlog.Core.Models.System;
 
 namespace Behlog.Core.Models.Shop
 {
@@ -37,6 +38,7 @@ namespace Behlog.Core.Models.Shop
 
         #region Navigations
         public Customer Customer { get; set; }
+        public Website Website { get; set; }
         public Shipping Shipping { get; set; }
         public ShippingAddress ShippingAddress { get; set; }
         public ICollection<Order> Orders { get; set; }

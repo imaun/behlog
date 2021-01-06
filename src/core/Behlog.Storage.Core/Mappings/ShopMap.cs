@@ -19,6 +19,57 @@ namespace Behlog.Storage.Core.Mappings {
             });
         }
 
+        public static void AddBasketMapping(this ModelBuilder builder) {
+            builder.Entity<Basket>(map => {
+                map.ToTable(DbConst.Basket_Table_Name)
+                    .HasKey(_ => _.Id);
+
+                map.Property(_ => _.Status).HasDefaultValue(BasketStatus.Active);
+                map.Property(_ => _.SessionId).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.Ip).HasMaxLength(50).IsUnicode();
+                map.Property(_ => _.UserAgent).HasMaxLength(500).IsUnicode();
+                map.Property(_ => _.CreatedFormUrl).HasMaxLength(2000).IsUnicode();
+
+                map.HasOne(_ => _.Website)
+                    .WithMany(_ => _.Baskets)
+                    .HasForeignKey(_ => _.WebsiteId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Customer)
+                    .WithMany(_ => _.Baskets)
+                    .HasForeignKey(_ => _.CustomerId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+        }
+
+        public static void AddBasketItemMapping(this ModelBuilder builder) {
+            builder.Entity<BasketItem>(map => {
+                map.ToTable(DbConst.BasketItem_Table_Name)
+                    .HasKey(_ => _.Id);
+
+                map.Property(_ => _.ProductTitle).HasMaxLength(1000).IsUnicode().IsRequired();
+                map.Property(_ => _.ProductModelTitle).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.Quantity).HasDefaultValue(1);
+                map.Property(_ => _.UnitName).HasMaxLength(300).IsUnicode();
+                map.Property(_ => _.Status).HasDefaultValue(BasketItemStatus.Added);
+
+                map.HasOne(_ => _.Basket)
+                    .WithMany(_ => _.Items)
+                    .HasForeignKey(_ => _.BasketId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Product)
+                    .WithMany(_ => _.BasketItems)
+                    .HasForeignKey(_ => _.ProductId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Model)
+                    .WithMany(_ => _.BasketItems)
+                    .HasForeignKey(_ => _.ProductModelId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+        }
+
         public static void AddCustomerMapping(this ModelBuilder builder) {
             builder.Entity<Customer>(map => {
                 map.ToTable(DbConst.Customer_Table_Name)
@@ -38,6 +89,11 @@ namespace Behlog.Storage.Core.Mappings {
                 map.HasOne(_ => _.User)
                     .WithMany(_ => _.Customers)
                     .HasForeignKey(_ => _.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Website)
+                    .WithMany(_ => _.Customers)
+                    .HasForeignKey(_ => _.WebsiteId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }
@@ -64,6 +120,11 @@ namespace Behlog.Storage.Core.Mappings {
                     .WithMany(_ => _.Invoices)
                     .HasForeignKey(_ => _.ShippingAddressId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Website)
+                    .WithMany(_ => _.Invoices)
+                    .HasForeignKey(_ => _.WebsiteId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
 
@@ -73,12 +134,19 @@ namespace Behlog.Storage.Core.Mappings {
                     .HasKey(_ => _.Id);
 
                 map.Property(_ => _.ProductTitle).HasMaxLength(1000).IsUnicode().IsRequired();
+                map.Property(_ => _.ProductModelTitle).HasMaxLength(1000).IsUnicode();
                 map.Property(_ => _.UnitName).HasMaxLength(300).IsUnicode();
                 map.Property(_ => _.Quantity).HasDefaultValue(1);
+                map.Property(_ => _.Status).HasDefaultValue(InvoiceOrderStatus.Added);
 
                 map.HasOne(_ => _.Product)
                     .WithMany(_ => _.Orders)
                     .HasForeignKey(_ => _.ProductId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.Model)
+                    .WithMany(_ => _.Orders)
+                    .HasForeignKey(_ => _.ProductModelId)
                     .OnDelete(DeleteBehavior.Restrict);
 
                 map.HasOne(_ => _.Shipping)
@@ -149,7 +217,11 @@ namespace Behlog.Storage.Core.Mappings {
                     .WithMany(_ => _.Products)
                     .HasForeignKey(_ => _.BrandId)
                     .OnDelete(DeleteBehavior.Restrict);
-                    
+
+                map.HasOne(_ => _.Website)
+                    .WithMany(_ => _.Products)
+                    .HasForeignKey(_ => _.WebsiteId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
 

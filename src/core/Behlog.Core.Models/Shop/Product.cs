@@ -204,9 +204,12 @@ namespace Behlog.Core.Models.Shop {
 
         public int? BrandId { get; set; }
 
+        public int WebsiteId { get; set; }
+
         #endregion
 
         #region Navigations
+        public Website Website { get; set; }
         public Category Category { get; set; }
         public Vendor Vendor { get; set; }
         public Brand Brand { get; set; }

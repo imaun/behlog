@@ -28,6 +28,8 @@
 
         //Shop
         public const string Brand_Table_Name = "Shop.Brands";
+        public const string Basket_Table_Name = "Shop.Baskets";
+        public const string BasketItem_Table_Name = "Shop.Basket_Items";
         public const string Customer_Table_Name = "Shop.Customers";
         public const string Invoice_Table_Name = "Shop.Invoices";
         public const string Order_Table_Name = "Shop.Orders";
