@@ -1,4 +1,8 @@
-﻿namespace Behlog.Web.Shop.ViewModels
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Behlog.Web.ViewModels.System;
+
+namespace Behlog.Web.Shop.ViewModels
 {
     /// <summary>
     /// A ViewModel containing ShippingAddress data when visitor (not user) wants to
@@ -12,5 +16,7 @@
         public string Street { get; set; }
         public string Address { get; set; }
         public string PostalCode { get; set; }
+        public IEnumerable<SelectListItem> ProvinceSelectList { get; set; }
+        
     }
 }

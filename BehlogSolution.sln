@@ -67,11 +67,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VarzeshAfarinan", "VarzeshA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shop", "Shop", "{9532B7BE-C19A-4F0D-B44A-CA5BE96DA88D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Web.Shop", "src\shop\Behlog.Web.Shop\Behlog.Web.Shop.csproj", "{523A0A53-2523-4DC9-AE48-FBC04B71F77E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Web.Shop.ViewModels", "src\shop\Behlog.Web.Shop\Behlog.Web.Shop.ViewModels.csproj", "{523A0A53-2523-4DC9-AE48-FBC04B71F77E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Shop.Services", "src\shop\Behlog.Shop.Services\Behlog.Shop.Services.csproj", "{95E8764D-9133-4AC3-B75B-03582E9CC65D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Shop.Services", "src\shop\Behlog.Shop.Services\Behlog.Shop.Services.csproj", "{95E8764D-9133-4AC3-B75B-03582E9CC65D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Shop.Services.Data", "src\shop\Behlog.Shop.Services.Data\Behlog.Shop.Services.Data.csproj", "{0DFDA5E1-2310-49BE-9196-51980940A5D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behlog.Shop.Services.Data", "src\shop\Behlog.Shop.Services.Data\Behlog.Shop.Services.Data.csproj", "{0DFDA5E1-2310-49BE-9196-51980940A5D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

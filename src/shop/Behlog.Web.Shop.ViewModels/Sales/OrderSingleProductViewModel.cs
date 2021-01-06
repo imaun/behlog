@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Behlog.Web.Shop.ViewModels {
+﻿namespace Behlog.Web.Shop.ViewModels {
     
     public class OrderSingleProductViewModel {
 
@@ -10,6 +6,8 @@ namespace Behlog.Web.Shop.ViewModels {
             ShippingAddress = new OrderNewShippingAddressViewModel();
         }
 
+        public int ProductId { get; set; }
+        public int? ProductModelId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NationalCode { get; set; }
