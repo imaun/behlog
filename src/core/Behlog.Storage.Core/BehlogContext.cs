@@ -249,6 +249,8 @@ namespace Behlog.Storage.Core {
 
             #region Shop 
             builder.AddBrandMapping();
+            builder.AddBasketMapping();
+            builder.AddBasketItemMapping();
             builder.AddCustomerMapping();
             builder.AddInvoiceMapping();
             builder.AddOrderMapping();
