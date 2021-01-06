@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\Behlog.Core\Behlog.Core.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Behlog.Services.Dto\Behlog.Services.Dto.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Behlog.Services\Behlog.Services.csproj" />
+    <ProjectReference Include="..\Behlog.Shop.Services.Data\Behlog.Shop.Services.Data.csproj" />
+    <ProjectReference Include="..\Behlog.Shop.Services\Behlog.Shop.Services.csproj" />
+    <ProjectReference Include="..\Behlog.Web.Shop.ViewModels\Behlog.Web.Shop.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
