@@ -16,6 +16,8 @@ namespace Behlog.Core.Models.Shop
 
         public int CustomerId { get; set; }
 
+        public int WebsiteId { get; set; }
+
         public string InvoiceNumnber { get; set; }
 
         public DateTime DueDate { get; set; }

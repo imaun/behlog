@@ -4,6 +4,7 @@ using Behlog.Core.Models.Content;
 using Behlog.Core.Models.Feature;
 using Behlog.Core.Models.Security;
 using Behlog.Core.Models.Enum;
+using Behlog.Core.Models.Shop;
 
 namespace Behlog.Core.Models.System {
     
@@ -24,6 +25,10 @@ namespace Behlog.Core.Models.System {
             SectionGroups = new HashSet<SectionGroup>();
             Subscribers = new HashSet<Subscriber>();
             Tags = new HashSet<Tag>();
+            Customers = new HashSet<Customer>();
+            Products = new HashSet<Product>();
+            Invoices = new HashSet<Invoice>();
+            Baskets = new HashSet<Basket>();
         }
 
         #region Proeprties
@@ -61,6 +66,10 @@ namespace Behlog.Core.Models.System {
         public ICollection<SectionGroup> SectionGroups { get; set; }
         public ICollection<Subscriber> Subscribers { get; set; }
         public ICollection<Tag> Tags { get; set; }
+        public ICollection<Customer> Customers { get; set; }
+        public ICollection<Basket> Baskets { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
         #endregion
 
     }

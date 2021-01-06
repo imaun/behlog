@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Behlog.Core.Models.Base;
 using Behlog.Core.Models.Enum;
 
@@ -7,7 +8,8 @@ namespace Behlog.Core.Models.Shop {
     public class ProductModel: HasMetaData {
 
         public ProductModel() {
-
+            Orders = new HashSet<Order>();
+            BasketItems = new HashSet<BasketItem>();
         }
 
         #region Properties
@@ -34,7 +36,8 @@ namespace Behlog.Core.Models.Shop {
         #region Navigations
         public Product Product { get; set; }
         public Vendor Vendor { get; set; }
-
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<BasketItem> BasketItems { get; set; }
         #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Security;
+using Behlog.Core.Models.System;
 
 namespace Behlog.Core.Models.Shop {
 
@@ -12,6 +13,7 @@ namespace Behlog.Core.Models.Shop {
             Invoices = new HashSet<Invoice>();
             Payments = new HashSet<Payment>();
             Reviews = new HashSet<ProductReview>();
+            Baskets = new HashSet<Basket>();
         }
 
         #region Properties
@@ -34,6 +36,7 @@ namespace Behlog.Core.Models.Shop {
         public string Phone { get; set; }
         public string Email { get; set; }
         public Guid? UserId { get; set; }
+        public int WebsiteId { get; set; }
         public CustomerStatus Status { get; set; }
         /// <summary>
         /// Get or sets حقیقی یا حقوقی
@@ -47,10 +50,12 @@ namespace Behlog.Core.Models.Shop {
 
         #region Navigations
         public User User { get; set; }
+        public Website Website { get; set; }
         public ICollection<ShippingAddress> ShippingAddresses { get; set; }
         public ICollection<Invoice> Invoices { get; set; }
         public ICollection<Payment> Payments { get; set; }
         public ICollection<ProductReview> Reviews { get; set; }
+        public ICollection<Basket> Baskets { get; set; }
         #endregion
     }
 }
