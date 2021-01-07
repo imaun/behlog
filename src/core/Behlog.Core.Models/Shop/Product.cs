@@ -93,7 +93,7 @@ namespace Behlog.Core.Models.Shop {
         /// <summary>
         /// Get or sets a value that determines Tax percentage that will add to total price.
         /// </summary>
-        public decimal TaxPercent { get; set; }
+        public decimal? TaxPercent { get; set; }
 
         /// <summary>
         /// Get or sets a value indicating total Tax value that will add to total price of the product.
@@ -108,7 +108,7 @@ namespace Behlog.Core.Models.Shop {
         /// <summary>
         /// Get ot sets a valude indicating minimum <see cref="Stock"/> value for this product.
         /// </summary>
-        public int MinStock { get; set; }
+        public int? MinStock { get; set; }
 
         /// <summary>
         /// Get or sets a valude indicating the product is a digital downloadable product.

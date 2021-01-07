@@ -52,6 +52,8 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Quantity).HasDefaultValue(1);
                 map.Property(_ => _.UnitName).HasMaxLength(300).IsUnicode();
                 map.Property(_ => _.Status).HasDefaultValue(BasketItemStatus.Added);
+                map.Property(_ => _.DiscountValue).HasDefaultValue(0);
+                map.Property(_ => _.TaxAmount).HasDefaultValue(0);
 
                 map.HasOne(_ => _.Basket)
                     .WithMany(_ => _.Items)
@@ -138,6 +140,8 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.UnitName).HasMaxLength(300).IsUnicode();
                 map.Property(_ => _.Quantity).HasDefaultValue(1);
                 map.Property(_ => _.Status).HasDefaultValue(InvoiceOrderStatus.Added);
+                map.Property(_ => _.DiscountValue).HasDefaultValue(0);
+                map.Property(_ => _.TaxAmount).HasDefaultValue(0);
 
                 map.HasOne(_ => _.Product)
                     .WithMany(_ => _.Orders)
@@ -202,6 +206,17 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.MetaRobots).HasMaxLength(100).IsUnicode();
                 map.Property(_ => _.Template).HasMaxLength(4000).IsUnicode();
                 map.Property(_ => _.BodyType).HasDefaultValue(PostBodyType.Html);
+                map.Property(_ => _.AvailableForPreOrder).HasDefaultValue(false);
+                map.Property(_ => _.Stock).HasDefaultValue(0);
+                map.Property(_ => _.TaxAmount).HasDefaultValue(0);
+                map.Property(_ => _.CheckStockBeforeOrder).HasDefaultValue(false);
+                map.Property(_ => _.Downloadable).HasDefaultValue(false);
+                map.Property(_ => _.MaxDownloads).HasDefaultValue(0);
+                map.Property(_ => _.NewProduct).HasDefaultValue(false);
+                map.Property(_ => _.Width).HasDefaultValue(0);
+                map.Property(_ => _.Weight).HasDefaultValue(0);
+                map.Property(_ => _.Width).HasDefaultValue(0);
+                map.Property(_ => _.OrderNumber).HasDefaultValue(1);
 
                 map.HasOne(_ => _.Category)
                     .WithMany(_ => _.Products)
@@ -265,6 +280,8 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.OrderNumber).HasDefaultValue(1);
                 map.Property(_ => _.Status).HasDefaultValue(ProductStatus.Enabled);
                 map.Property(_ => _.NewModel).HasDefaultValue(false);
+                map.Property(_ => _.Stock).HasDefaultValue(0);
+                map.Property(_ => _.Orderable).HasDefaultValue(true);
 
                 map.HasOne(_ => _.Product)
                     .WithMany(_ => _.Models)
@@ -284,6 +301,7 @@ namespace Behlog.Storage.Core.Mappings {
                     .HasKey(_ => _.Id);
 
                 map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
+                map.Property(_ => _.DiscountValue).HasDefaultValue(0);
 
                 map.HasOne(_ => _.Product)
                     .WithMany(_ => _.PriceHistory)
@@ -314,6 +332,10 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Ip).HasMaxLength(100).IsUnicode();
                 map.Property(_ => _.UserAgent).HasMaxLength(500).IsUnicode();
                 map.Property(_ => _.SessionId).HasMaxLength(1000).IsUnicode();
+                map.Property(_ => _.Rating).HasDefaultValue(0);
+                map.Property(_ => _.VoteNoCount).HasDefaultValue(0);
+                map.Property(_ => _.VoteYesCount).HasDefaultValue(0);
+
 
                 map.HasOne(_ => _.Product)
                     .WithMany(_ => _.Reviews)
@@ -341,6 +363,9 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Title).HasMaxLength(300).IsUnicode().IsRequired();
                 map.Property(_ => _.Description).HasMaxLength(1000).IsUnicode();
                 map.Property(_ => _.Status).HasDefaultValue(EntityStatus.Enabled);
+                map.Property(_ => _.IsFree).HasDefaultValue(false);
+                map.Property(_ => _.MinDeliveryDays).HasDefaultValue(0);
+                map.Property(_ => _.MaxDeliveryDays).HasDefaultValue(0);
 
                 map.HasData(new[] { 
                     new Shipping {

@@ -17,7 +17,7 @@ namespace Behlog.Core.Models.Shop {
         public DateTime StartDate { get; set; }
         public DateTime? FinishDate { get; set; }
         public decimal DiscountValue { get; set; }
-        public decimal DiscountPercent { get; set; }
+        public decimal? DiscountPercent { get; set; }
         public EntityStatus Status { get; set; }
 
         #endregion

@@ -27,9 +27,9 @@ namespace Behlog.Core.Models.Shop
 
         public decimal TotalPrice { get; set; }
 
-        public int? ShippingId { get; set; }
+        public int ShippingId { get; set; }
 
-        public int? ShippingAddressId { get; set; }
+        public int ShippingAddressId { get; set; }
 
         public DateTime CreateDate { get; set; }
 

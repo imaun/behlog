@@ -24,19 +24,19 @@ namespace Behlog.Core.Models.Shop {
 
         public decimal DiscountValue { get; set; }
 
-        public int DiscountPercent { get; set; }
+        public decimal? DiscountPercent { get; set; }
 
         public int Quantity { get; set; }
 
         public decimal TaxAmount { get; set; }
 
-        public decimal TaxPercent { get; set; }
+        public decimal? TaxPercent { get; set; }
 
-        public int ShippingId { get; set; }
+        public int? ShippingId { get; set; }
 
-        public int ShippingAddressId { get; set; }
+        public int? ShippingAddressId { get; set; }
 
-        public decimal ShippingAmount { get; set; }
+        public decimal? ShippingAmount { get; set; }
 
         public decimal TotalPrice { get; set; }
 
