@@ -74,6 +74,26 @@ namespace Behlog.Core {
             );
             return app;
         }
+
+        //public static IApplicationBuilder MapBehlogStaticFiles(this IApplicationBuilder app) {
+        //    app.MapWhen(context => {
+        //        var path = context.Request.Path.Value.ToLower();
+        //        return
+        //            path.StartsWith("/assets") ||
+        //            path.StartsWith("/lib") ||
+        //            path.StartsWith("/themes") ||
+        //            path.StartsWith("/app_data") ||
+        //            path.StartsWith("/images") ||
+        //            path.StartsWith("/uploads") ||
+        //            path.StartsWith("/favicon") ||
+        //            path.StartsWith("/fonts") ||
+        //            path.StartsWith("/js") ||
+        //            path.EndsWith("html") ||
+        //            path.EndsWith("htm") ||
+        //            path.EndsWith("robots.txt") ||
+        //            path.StartsWith("/css");
+        //    }, config => config.UseStaticFiles());
+        //}
     }
 
     

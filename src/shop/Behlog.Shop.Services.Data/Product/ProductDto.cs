@@ -7,6 +7,11 @@ using Behlog.Services.Dto.Content;
 namespace Behlog.Shop.Services.Data {
 
     public class ProductResultDto {
+        
+        public ProductResultDto() {
+            Models = new List<ProductModelDto>();
+        }
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Slug { get; set; }
@@ -40,6 +45,7 @@ namespace Behlog.Shop.Services.Data {
         public int? BrandId { get; set; }
         public string BrandTitle { get; set; }
         public string BrandSlug { get; set; }
+        public IEnumerable<ProductModelDto> Models { get; set; }
     }
 
     public class ProductPageDto: ProductResultDto { 

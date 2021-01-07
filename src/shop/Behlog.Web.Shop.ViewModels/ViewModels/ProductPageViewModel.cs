@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
 using Behlog.Web.ViewModels.Content;
@@ -12,8 +11,8 @@ namespace Behlog.Web.Shop.ViewModels {
 
         public ProductPageViewModel() {
             Meta = new List<ProductMetaViewModel>();
-            AvailableColors = new List<ProductColorViewModel>();
             ShippingMethods = new List<ShippingViewModel>();
+            AvailableModels = new List<ProductModelViewModel>();
         }
 
         public int Id { get; set; }
@@ -55,7 +54,7 @@ namespace Behlog.Web.Shop.ViewModels {
         public string BrandTitle { get; set; }
         public string BrandSlug { get; set; }
         public IEnumerable<ProductMetaViewModel> Meta { get; set; }
-        public IEnumerable<ProductColorViewModel> AvailableColors { get; set; }
+        public IEnumerable<ProductModelViewModel> AvailableModels { get; set; }
         public IEnumerable<ShippingViewModel> ShippingMethods { get; set; }
         public PostViewModel Post { get; set; }
 

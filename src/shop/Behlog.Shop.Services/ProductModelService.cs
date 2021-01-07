@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
-using Behlog.Core.Contracts.Repository.Shop;
 using Behlog.Shop.Services.Data;
+using Behlog.Shop.Services.Contracts;
+using Behlog.Core.Contracts.Repository.Shop;
 using Mapster;
 
 namespace Behlog.Shop.Services {
 
-    public class ProductModelService {
+    public class ProductModelService: IProductModelService {
 
         private readonly IProductModelRepository _productModelRepository;
 

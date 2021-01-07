@@ -53,6 +53,8 @@ using Behlog.Web.Admin.Core;
 using Behlog.Web.Core.Settings;
 using Behlog.Factories.Security;
 using Behlog.Services.Http;
+using Microsoft.AspNetCore.Routing;
+using Behlog.Web.Common.Routing;
 
 namespace Microsoft.Extensions.DependencyInjection {
 
@@ -168,6 +170,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IProductMetaRepository, ProductMetaRepository>();
+            services.AddScoped<IProductModelRepository, ProductModelRepository>();
             services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductReviewRepository, ProductReviewRepository>();
@@ -274,6 +277,17 @@ namespace Microsoft.Extensions.DependencyInjection {
 
             MappingConfig.AddDtoMappingConfig();
             Behlog.Web.Mapping.MappingConfig.AddViewModelMappingConfig();
+        }
+
+        public static void ConfigureBehlogReservedRoutes(this IServiceCollection services) {
+            services.Configure<RouteOptions>(_ => {
+                _.ConstraintMap.Add("reserved", typeof(BehlogReservedRouteConstraint));
+            });
+        }
+
+
+        public static void ConfigureBehlogHelpers(this IApplicationBuilder app) {
+            Behlog.Web.Common.CommonHelper.Configure(app.ApplicationServices);
         }
 
         public static BehlogSetting GetAppSetting(this IServiceCollection services) {

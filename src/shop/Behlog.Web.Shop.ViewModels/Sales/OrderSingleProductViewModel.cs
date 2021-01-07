@@ -10,6 +10,7 @@ namespace Behlog.Web.Shop.ViewModels {
         }
 
         public int ProductId { get; set; }
+        public string Title { get; set; }
         public int? SelectedProductModelId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
