@@ -217,6 +217,7 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.Weight).HasDefaultValue(0);
                 map.Property(_ => _.Width).HasDefaultValue(0);
                 map.Property(_ => _.OrderNumber).HasDefaultValue(1);
+                map.Property(_ => _.Height).HasDefaultValue(0);
 
                 map.HasOne(_ => _.Category)
                     .WithMany(_ => _.Products)
