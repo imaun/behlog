@@ -15,4 +15,9 @@ namespace Behlog.Shop.Services.Data {
         public int Quantity { get; set; }
         public CreateShippingAddressDto ShippingAddress { get; set; }
     }
+
+    public class OrderSingleProductResultDto
+    {
+
+    }
 }

@@ -26,8 +26,10 @@ namespace Behlog.Shop.Factories.Extensions
             return totoalPrice * quantity;
         }
 
-        public static decimal Calculate(this IEnumerable<Order> orders)
+        public static decimal CalculateTotalPrice(this IEnumerable<Order> orders)
             => orders.Sum(_ => _.TotalPrice);
 
+        public static decimal CalculateTotalPrice(this IEnumerable<BasketItem> items)
+            => items.Sum(_ => _.TotalPrice);
     }
 }

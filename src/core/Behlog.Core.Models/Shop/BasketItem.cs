@@ -30,6 +30,8 @@ namespace Behlog.Core.Models.Shop {
 
         public decimal DiscountValue { get; set; }
 
+        //TODO : Add DiscountPercent
+
         public decimal TaxAmount { get; set; }
 
         public decimal TotalPrice { get; set; }

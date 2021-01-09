@@ -9,6 +9,12 @@ namespace Behlog.Shop.Factories.Contracts {
 
         Customer BuildRealCustomerFromOrder(OrderSingleProductDto model);
 
+        Task<Basket> AddBasketAsync(
+            Customer customer,
+            Product product,
+            ProductModel productModel,
+            OrderSingleProductDto order);
+
         Task<Invoice> AddInvoiceAsync(
             Customer customer,
             IEnumerable<Order> orders,

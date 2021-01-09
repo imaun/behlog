@@ -38,9 +38,9 @@ namespace Behlog.Factories.Content
             model.CheckArgumentIsNull(nameof(model));
             var entity = model.Adapt<Comment>();
             entity.CreateDate = _dateService.UtcNow();
-            entity.IP = AppHttpContext.Current.Connection.RemoteIpAddress?.ToString();
-            entity.UserAgent = AppHttpContext.Request.Headers["User-Agent"][0];
-            entity.SessionId = AppHttpContext.Current.Session.Id;
+            entity.IP = AppHttpContext.IpAddress;
+            entity.UserAgent = AppHttpContext.UserAgent;
+            entity.SessionId = AppHttpContext.SessionId;
             entity.Status = CommentStatus.Waiting;
             if (_userContext.IsAuthenticated)
                 entity.UserId = _userContext.UserId;

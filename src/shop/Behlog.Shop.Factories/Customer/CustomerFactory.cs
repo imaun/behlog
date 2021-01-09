@@ -54,6 +54,52 @@ namespace Behlog.Shop.Factories
         }
 
 
+        public async Task<Basket> AddBasketAsync(
+            Customer customer, 
+            Product product, 
+            ProductModel productModel,
+            OrderSingleProductDto order) {
+            customer.CheckArgumentIsNull(nameof(customer));
+            order.CheckArgumentIsNull(nameof(order));
+
+            var basket = new Basket {
+                CreateDate = _dateService.UtcNow(),
+                CreatedFormUrl = AppHttpContext.AbsoluteUrl,
+                Ip = AppHttpContext.IpAddress,
+                ModifyDate = _dateService.UtcNow(),
+                SessionId = AppHttpContext.SessionId,
+                UserAgent = AppHttpContext.UserAgent,
+                Status = BasketStatus.Active,
+                WebsiteId = _websiteInfo.Id,
+                Items = new List<BasketItem> {
+                    new BasketItem {
+                        CreateDate = _dateService.UtcNow(),
+                        ModifyDate = _dateService.UtcNow(),
+                        ProductId = product.Id,
+                        ProductTitle = product.Title,
+                        ProductModelId = productModel?.Id,
+                        ProductModelTitle = productModel?.Title,
+                        Quantity = order.Quantity,
+                        Status = BasketItemStatus.Added,
+                        UnitName = product.UnitName,
+                        UnitPrice = (productModel != null ? productModel.Price : product.Price),
+                        //DiscountValue TODO: Calculate Discount
+                        TaxAmount = product.TaxAmount,
+                        TotalPrice = product.Price.Calculate(taxAmount: product.TaxAmount,
+                                                                taxPercent: product.TaxPercent,
+                                                                discountValue: 0,
+                                                                discountPercent: null,
+                                                                quantity: order.Quantity)
+                    }
+                }
+            };
+            basket.TotalPrice = basket.Items.CalculateTotalPrice();
+            customer.Baskets.Add(basket);
+
+            return await Task.FromResult(basket);
+        }
+            
+
         public async Task<Invoice> AddInvoiceAsync(Customer customer, 
             IEnumerable<Order> orders,
             ShippingAddress address,
@@ -65,7 +111,7 @@ namespace Behlog.Shop.Factories
                 ShippingAddress = address,
                 Shipping = shipping,
                 Status = InvoiceStatus.Issued,
-                TotalPrice = orders.Calculate(),
+                TotalPrice = orders.CalculateTotalPrice(),
                 WebsiteId = _websiteInfo.Id
             };
 
