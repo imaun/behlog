@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Behlog.Core.Models.Enum;
+using Behlog.Core.Models.System;
 
 namespace Behlog.Core.Models.Shop
 {
@@ -9,6 +10,7 @@ namespace Behlog.Core.Models.Shop
         public Shipping() {
             Invoices = new HashSet<Invoice>();
             Orders = new HashSet<Order>();
+            WebsitesHasThisAsDefaultShipping = new HashSet<Website>();
         }
 
         #region Properties
@@ -35,6 +37,7 @@ namespace Behlog.Core.Models.Shop
         #endregion
 
         #region Navigations
+        public ICollection<Website> WebsitesHasThisAsDefaultShipping { get; set; }
         public ICollection<Invoice> Invoices { get; set; }
         public ICollection<Order> Orders { get; set; }
         #endregion

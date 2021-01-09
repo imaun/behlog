@@ -238,6 +238,11 @@ namespace Behlog.Storage.Core.Mappings {
                     .WithMany(_ => _.WebsitesHasThisAsDefault)
                     .HasForeignKey(_ => _.DefaultCurrencyId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                map.HasOne(_ => _.DefaultShipping)
+                    .WithMany(_ => _.WebsitesHasThisAsDefaultShipping)
+                    .HasForeignKey(_ => _.DefaultShippingId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
         }
 
