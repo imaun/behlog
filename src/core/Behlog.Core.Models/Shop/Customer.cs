@@ -45,7 +45,6 @@ namespace Behlog.Core.Models.Shop {
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
         
-
         #endregion
 
         #region Navigations

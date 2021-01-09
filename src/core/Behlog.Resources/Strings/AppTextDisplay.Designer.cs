@@ -70,6 +70,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شهر.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تایید شده.
         /// </summary>
         public static string CommentStatusApproved {
@@ -196,11 +205,47 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آدرس پستی.
+        /// </summary>
+        public static string Customer_Address {
+            get {
+                return ResourceManager.GetString("Customer_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام.
+        /// </summary>
+        public static string Customer_FirstName {
+            get {
+                return ResourceManager.GetString("Customer_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام خانوادگی.
+        /// </summary>
+        public static string Customer_LastName {
+            get {
+                return ResourceManager.GetString("Customer_LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [همه].
         /// </summary>
         public static string DropDownNoSelect {
             get {
                 return ResourceManager.GetString("DropDownNoSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to آدرس ایمیل.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
@@ -331,6 +376,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to موبایل.
+        /// </summary>
+        public static string Mobile {
+            get {
+                return ResourceManager.GetString("Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} با موفقیت افزود شد..
         /// </summary>
         public static string ModelAddedMsg {
@@ -354,6 +408,24 @@ namespace Behlog.Resources.Strings {
         public static string ModelUpdatedMsg {
             get {
                 return ResourceManager.GetString("ModelUpdatedMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی.
+        /// </summary>
+        public static string NationalCode {
+            get {
+                return ResourceManager.GetString("NationalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد پستی.
+        /// </summary>
+        public static string PostalCode {
+            get {
+                return ResourceManager.GetString("PostalCode", resourceCulture);
             }
         }
         
@@ -453,6 +525,24 @@ namespace Behlog.Resources.Strings {
         public static string ProductStatusWaitingToProduce {
             get {
                 return ResourceManager.GetString("ProductStatusWaitingToProduce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to استان.
+        /// </summary>
+        public static string Province {
+            get {
+                return ResourceManager.GetString("Province", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تعداد.
+        /// </summary>
+        public static string Quantity {
+            get {
+                return ResourceManager.GetString("Quantity", resourceCulture);
             }
         }
         

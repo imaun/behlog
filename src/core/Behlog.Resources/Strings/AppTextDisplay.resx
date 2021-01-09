@@ -285,4 +285,34 @@
   <data name="ProductStatusWaitingToProduce" xml:space="preserve">
     <value>در انتظار تولید</value>
   </data>
+  <data name="City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="Customer_Address" xml:space="preserve">
+    <value>آدرس پستی</value>
+  </data>
+  <data name="Customer_FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="Customer_LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>موبایل</value>
+  </data>
+  <data name="NationalCode" xml:space="preserve">
+    <value>کد ملی</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>کد پستی</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>تعداد</value>
+  </data>
 </root>

@@ -140,5 +140,14 @@ namespace Behlog.Resources.Strings {
                 return ResourceManager.GetString("Subscriber_Email_Required", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد وارد شده اشتباه است..
+        /// </summary>
+        public static string Wrong_Number {
+            get {
+                return ResourceManager.GetString("Wrong_Number", resourceCulture);
+            }
+        }
     }
 }

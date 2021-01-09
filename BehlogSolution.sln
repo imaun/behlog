@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Web.Shop.Components"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Shop.Extensions", "src\shop\Behlog.Shop.Extensions\Behlog.Shop.Extensions.csproj", "{2AA3332C-7303-4637-BD20-891C559B5D0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behlog.Shop.Factories", "src\shop\Behlog.Shop.Factories\Behlog.Shop.Factories.csproj", "{80351F39-24C3-499F-B456-87BFE065E0CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +207,10 @@ Global
 		{2AA3332C-7303-4637-BD20-891C559B5D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA3332C-7303-4637-BD20-891C559B5D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA3332C-7303-4637-BD20-891C559B5D0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80351F39-24C3-499F-B456-87BFE065E0CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80351F39-24C3-499F-B456-87BFE065E0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80351F39-24C3-499F-B456-87BFE065E0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80351F39-24C3-499F-B456-87BFE065E0CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -247,6 +253,7 @@ Global
 		{43F3E034-8C99-4D0E-B8C1-DDB5C2479659} = {9532B7BE-C19A-4F0D-B44A-CA5BE96DA88D}
 		{489860AC-DC86-4BCD-97B7-1085A45631B7} = {9532B7BE-C19A-4F0D-B44A-CA5BE96DA88D}
 		{2AA3332C-7303-4637-BD20-891C559B5D0F} = {9532B7BE-C19A-4F0D-B44A-CA5BE96DA88D}
+		{80351F39-24C3-499F-B456-87BFE065E0CD} = {9532B7BE-C19A-4F0D-B44A-CA5BE96DA88D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8492108F-61A7-4788-8ADA-0398E12219FA}

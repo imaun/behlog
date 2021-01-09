@@ -144,4 +144,7 @@
   <data name="Subscriber_Email_Required" xml:space="preserve">
     <value>لطفاً آدرس ایمیل تان را وارد کنید.</value>
   </data>
+  <data name="Wrong_Number" xml:space="preserve">
+    <value>عدد وارد شده اشتباه است.</value>
+  </data>
 </root>

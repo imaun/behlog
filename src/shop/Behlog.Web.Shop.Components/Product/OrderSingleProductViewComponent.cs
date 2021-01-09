@@ -31,7 +31,8 @@ namespace Behlog.Web.Shop.Components {
 
             var model = new OrderSingleProductViewModel {
                 ProductId = productId,
-                Title = product.Title,    
+                Price = product.Price,
+                Title = product.Title,
                 ShippingAddress = await _shippingAddressDataProvider
                     .GetOrderNewShippingAddressAsync(),
             };
