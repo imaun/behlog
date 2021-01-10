@@ -1,13 +1,11 @@
 ﻿using System.Threading.Tasks;
-using System.Collections.Generic;
 using Behlog.Core.Extensions;
-using System.Text;
-using Behlog.Shop.Services.Data;
-using Behlog.Shop.Factories.Contracts;
-using Behlog.Shop.Services.Validation;
-using Behlog.Shop.Services.Contracts;
 using Behlog.Core.Exceptions;
 using Behlog.Core.Models.Shop;
+using Behlog.Shop.Services.Data;
+using Behlog.Shop.Services.Contracts;
+using Behlog.Shop.Factories.Contracts;
+using Behlog.Shop.Services.Validation;
 using Behlog.Core.Contracts.Repository.Shop;
 
 namespace Behlog.Shop.Services {
@@ -54,7 +52,7 @@ namespace Behlog.Shop.Services {
         }
 
 
-        public async Task OrderProductAsync(OrderSingleProductDto model) {
+        public async Task<CustomerBasketDto> OrderProductAsync(OrderSingleProductDto model) {
             model.CheckArgumentIsNull();
             
             if (model.NationalCode.IsNullOrEmpty())
@@ -74,10 +72,14 @@ namespace Behlog.Shop.Services {
             }
             customer.ShippingAddresses.Add(shippingAddress);
 
-            await _customerFactory
+            var basket = await _customerFactory
                 .AddBasketAsync(customer, product, productModel, order: model);
+
             _customerRepository.MarkForAdd(customer);
+
             await _customerRepository.SaveChangesAsync();
+
+            return customer.MapToResult(basket);
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Security;
 using Behlog.Core.Models.System;
@@ -55,6 +56,13 @@ namespace Behlog.Core.Models.Shop {
         public ICollection<Payment> Payments { get; set; }
         public ICollection<ProductReview> Reviews { get; set; }
         public ICollection<Basket> Baskets { get; set; }
+        #endregion
+
+        #region Calculated 
+
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
+
         #endregion
     }
 }
