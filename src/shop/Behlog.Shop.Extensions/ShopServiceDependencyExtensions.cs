@@ -19,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddFactories();
             services.AddServices();
             services.AddDataProviders();
+            
         }
 
         private static void AddServices(this IServiceCollection services) {

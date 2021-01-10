@@ -105,5 +105,23 @@ namespace Behlog.Core.Extensions
                 ProductStatus.PreOrder => AppTextDisplay.ProductStatusPreOrder,
                 _ => AppTextDisplay.StatusUnknown
             };
+
+        public static string ToDisplay(this BasketStatus status) =>
+            status switch
+            {
+                BasketStatus.Abandoned => "",
+                BasketStatus.Active => "",
+                BasketStatus.Completed => "",
+                BasketStatus.Deleted => "",
+                BasketStatus.Failed => ""
+            };
+
+        public static string ToDisplay(this BasketItemStatus status) =>
+            status switch
+            {
+                BasketItemStatus.Added => "",
+                BasketItemStatus.Deleted => "",
+                BasketItemStatus.Invoiced => ""
+            };
     }
 }
