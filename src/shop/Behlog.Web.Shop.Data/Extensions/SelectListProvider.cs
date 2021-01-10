@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Behlog.Web.ViewModels.System;
+using Behlog.Web.Shop.ViewModels;
 
 namespace Behlog.Web.Shop.Data.Extensions {
 
@@ -24,6 +25,21 @@ namespace Behlog.Web.Shop.Data.Extensions {
             return result;
         }
 
+        public static IList<SelectListItem> ToSelectListItems(
+           this IEnumerable<ProductModelViewModel> models,
+           int? selectedProductModelId = null) {
+            var result = new List<SelectListItem>();
+            if (models == null || !models.Any())
+                return result;
 
+            foreach (var item in models)
+                result.Add(new SelectListItem {
+                    Text = item.Title,
+                    Value = item.Id.ToString(),
+                    Selected = item.Id == selectedProductModelId
+                });
+
+            return result;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using Behlog.Resources.Strings;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Behlog.Web.Shop.ViewModels {
     
@@ -15,6 +16,8 @@ namespace Behlog.Web.Shop.ViewModels {
         public decimal Price { get; set; }
         public string PriceDisplay => Price.ToString("N0");
         public string Title { get; set; }
+
+        [Display(Name = "Select_ProductModel", ResourceType = typeof(ModelText))]
         public int? SelectedProductModelId { get; set; }
 
         [Display(Name = "Customer_FirstName", ResourceType = typeof(AppTextDisplay))]
@@ -48,6 +51,7 @@ namespace Behlog.Web.Shop.ViewModels {
         public int Quantity { get; set; }
 
         public IEnumerable<ProductModelViewModel> AvailableModels { get; set; }
+        public IEnumerable<SelectListItem> AvailableModelsSource { get; set; }
         public OrderNewShippingAddressViewModel ShippingAddress { get; set; }
 
     }

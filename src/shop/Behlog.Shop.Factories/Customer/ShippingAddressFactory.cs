@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
-using Behlog.Core.Extensions;
 using Behlog.Core.Models.Shop;
-using Behlog.Shop.Factories.Contracts;
 using Behlog.Shop.Services.Data;
+using Behlog.Shop.Factories.Contracts;
 
 namespace Behlog.Shop.Factories {
 

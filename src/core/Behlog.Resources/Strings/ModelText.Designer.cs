@@ -241,6 +241,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to انتخاب مدل محصول.
+        /// </summary>
+        public static string Select_ProductModel {
+            get {
+                return ResourceManager.GetString("Select_ProductModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to دسته بندی.
         /// </summary>
         public static string SelectCategory {

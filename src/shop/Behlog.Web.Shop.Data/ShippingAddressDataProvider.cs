@@ -41,7 +41,7 @@ namespace Behlog.Web.Shop.Data {
             int? selectedProvinceId = null)
             => new OrderNewShippingAddressViewModel {
                 ProvinceSelectList = (await GetProvincesAsync())
-                    .ToSelectListItems()
+                    .ToSelectListItems(selectedProvinceId)
             };
 
     }

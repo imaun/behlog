@@ -69,6 +69,7 @@ namespace Behlog.Shop.Services {
             var shippingAddress = _shippingAddressFactory.BuildShippingAddress(model.ShippingAddress);
             if (customer == null) {
                 customer = _customerFactory.BuildRealCustomerFromOrder(model);
+                _customerValidator.ValidateCreate(customer);
             }
             customer.ShippingAddresses.Add(shippingAddress);
 

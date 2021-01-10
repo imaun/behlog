@@ -180,6 +180,9 @@
   <data name="SelectCategory" xml:space="preserve">
     <value>دسته بندی</value>
   </data>
+  <data name="Select_ProductModel" xml:space="preserve">
+    <value>انتخاب مدل محصول</value>
+  </data>
   <data name="Slug" xml:space="preserve">
     <value>نامک</value>
   </data>
