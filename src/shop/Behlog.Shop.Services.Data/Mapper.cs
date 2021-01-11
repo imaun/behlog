@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using Behlog.Core.Models.Shop;
 using Mapster;
 
@@ -19,6 +20,7 @@ namespace Behlog.Shop.Services.Data {
                 CustomerShippingAddress = address.Address,
                 Id = basket.Id,
                 TotalPrice = basket.TotalPrice,
+                TotalTaxAmount = basket.Items.Sum(_=> _.TaxAmount),
                 UserId = basket.UserId,
                 Items = basket.Items.Adapt<List<CustomerBasketItemDto>>()
             };

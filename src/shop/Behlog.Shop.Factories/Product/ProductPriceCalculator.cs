@@ -40,5 +40,8 @@ namespace Behlog.Shop.Factories.Extensions
 
         public static decimal CalculateTotalPrice(this IEnumerable<BasketItem> items)
             => items.Sum(_ => _.TotalPrice);
+
+        public static decimal CalculateTotalTaxAmount(this IEnumerable<BasketItem> items)
+            => items.Sum(_ => _.TaxAmount);
     }
 }

@@ -16,6 +16,7 @@ namespace Behlog.Shop.Services.Data {
         public string CustomerMobile { get; set; }
         public string CustomerPostalCode { get; set; }
         public decimal TotalPrice { get; set; }
+        public decimal TotalTaxAmount { get; set; }
         public Guid? UserId { get; set; }
         public DateTime CreateDate { get; set; }
         public IEnumerable<CustomerBasketItemDto> Items { get; set; }

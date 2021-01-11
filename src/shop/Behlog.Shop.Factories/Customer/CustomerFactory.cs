@@ -95,6 +95,7 @@ namespace Behlog.Shop.Factories
                 .CalculateTaxAmount(basketItem.TotalPrice, product.TaxPercent);
             basket.Items.Add(basketItem);
             basket.TotalPrice = basket.Items.CalculateTotalPrice();
+            
             customer.Baskets.Add(basket);
 
             return await Task.FromResult(basket);
