@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using DNTPersianUtils.Core;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
+using Behlog.Core;
 
 namespace Behlog.Web.Shop.ViewModels {
 
     public class CustomerBasketViewModel {
+
         public CustomerBasketViewModel() {
             Items = new List<CustomerBasketItemViewModel>();
             InvoiceInfo = new InvoiceInfoViewModel();

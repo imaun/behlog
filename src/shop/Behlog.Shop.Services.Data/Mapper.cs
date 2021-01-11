@@ -11,19 +11,19 @@ namespace Behlog.Shop.Services.Data {
             this Customer customer, 
             Basket basket,
             ShippingAddress address) 
-            => new CustomerBasketDto {
-                CreateDate = basket.CreateDate,
-                CustomerFullName = customer.FullName,
-                CustomerEmail = customer.Email,
-                CustomerMobile = customer.Mobile,
-                CustomerPostalCode = address.PostalCode,
-                CustomerShippingAddress = address.Address,
-                Id = basket.Id,
-                TotalPrice = basket.TotalPrice,
-                TotalTaxAmount = basket.Items.Sum(_=> _.TaxAmount),
-                UserId = basket.UserId,
-                Items = basket.Items.Adapt<List<CustomerBasketItemDto>>()
-            };
+                => new CustomerBasketDto {
+                    CreateDate = basket.CreateDate,
+                    CustomerFullName = customer.FullName,
+                    CustomerEmail = customer.Email,
+                    CustomerMobile = customer.Mobile,
+                    CustomerPostalCode = address.PostalCode,
+                    CustomerShippingAddress = address.Address,
+                    Id = basket.Id,
+                    TotalPrice = basket.TotalPrice,
+                    TotalTaxAmount = basket.Items.Sum(_=> _.TaxAmount),
+                    UserId = basket.UserId,
+                    Items = basket.Items.Adapt<List<CustomerBasketItemDto>>()
+                };
         
     }
 }

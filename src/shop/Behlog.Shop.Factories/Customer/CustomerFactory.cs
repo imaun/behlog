@@ -102,7 +102,8 @@ namespace Behlog.Shop.Factories
         }
             
 
-        public async Task<Invoice> AddInvoiceAsync(Customer customer, 
+        public async Task<Invoice> AddInvoiceAsync(
+            Customer customer, 
             IEnumerable<Order> orders,
             ShippingAddress address,
             Shipping shipping) {
