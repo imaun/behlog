@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Behlog.Core
 {
@@ -17,11 +15,13 @@ namespace Behlog.Core
         string Description { get; set; }
         string ContactEmail { get; set; }
         string ContactPhone { get; set; }
+        WebsiteCurrencyInfo CurrencyInfo { get; set; }
     }
 
     public class WebsiteInfo : IWebsiteInfo {
-        public WebsiteInfo() {
 
+        public WebsiteInfo() {
+            CurrencyInfo = new WebsiteCurrencyInfo();
         }
 
         public int Id { get; set; }
@@ -35,5 +35,15 @@ namespace Behlog.Core
         public string Description { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
+        public WebsiteCurrencyInfo CurrencyInfo { get; set; }
+    }
+
+    public class WebsiteCurrencyInfo
+    {
+        public string BaseCurrencyTitle { get; set; }
+        public string BaseCurrencySign { get; set; }
+        public string DefaultCurrencyTitle { get; set; }
+        public string DefaultCurrencySign { get; set; }
+        public decimal Rate { get; set; }
     }
 }

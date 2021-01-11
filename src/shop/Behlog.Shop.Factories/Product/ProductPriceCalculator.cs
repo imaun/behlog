@@ -26,6 +26,15 @@ namespace Behlog.Shop.Factories.Extensions
             return totoalPrice * quantity;
         }
 
+        public static decimal CalculateTaxAmount(
+            this decimal taxAmount,
+            decimal totoalPrice,
+            decimal? taxPercent = null) {
+            if (taxPercent.HasValue)
+                return taxAmount + ((taxPercent.Value / 100) * totoalPrice);
+            return totoalPrice + taxAmount;
+        }
+
         public static decimal CalculateTotalPrice(this IEnumerable<Order> orders)
             => orders.Sum(_ => _.TotalPrice);
 

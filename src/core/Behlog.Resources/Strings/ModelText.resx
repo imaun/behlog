@@ -144,6 +144,9 @@
   <data name="CoverPhoto" xml:space="preserve">
     <value>تصویر کاور</value>
   </data>
+  <data name="Customer_Email" xml:space="preserve">
+    <value>آدرس ایمیل</value>
+  </data>
   <data name="Description" xml:space="preserve">
     <value>توضیحات</value>
   </data>

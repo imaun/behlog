@@ -4,19 +4,25 @@ using DNTPersianUtils.Core;
 using Behlog.Core.Extensions;
 using Behlog.Core.Models.Enum;
 
-namespace Behlog.Web.Shop.ViewModels
-{
-    public class CustomerBasketViewModel
-    {
+namespace Behlog.Web.Shop.ViewModels {
+
+    public class CustomerBasketViewModel {
         public CustomerBasketViewModel() {
             Items = new List<CustomerBasketItemViewModel>();
+            InvoiceInfo = new InvoiceInfoViewModel();
         }
 
         public Guid Id { get; set; }
         public string CustomerFullName { get; set; }
+        public string CustomerShippingAddress { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerMobile { get; set; }
+        public string CustomerPostalCode { get; set; }
         public decimal TotalPrice { get; set; }
         public Guid? UserId { get; set; }
         public DateTime CreateDate { get; set; }
+        public string CreateDateDisplay => CreateDate.ToPersianDateTextify();
+        public InvoiceInfoViewModel InvoiceInfo { get; set; }
         public IEnumerable<CustomerBasketItemViewModel> Items { get; set; }
     }
 

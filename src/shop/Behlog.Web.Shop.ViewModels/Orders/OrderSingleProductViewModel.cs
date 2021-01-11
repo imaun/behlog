@@ -40,15 +40,16 @@ namespace Behlog.Web.Shop.ViewModels {
         [Required(ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Required")]
         public string Mobile { get; set; }
 
-        [Display(Name = "Customer_FirstName", ResourceType = typeof(AppTextDisplay))]
+        [Display(Name = "Customer_Email", ResourceType = typeof(ModelText))]
         [MaxLength(1000, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "MaxLen")]
         [Required(ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Required")]
+        [EmailAddress(ErrorMessageResourceName = "Email_Wrong", ErrorMessageResourceType = typeof(ModelError))]
         public string Email { get; set; }
 
         [Display(Name = "Quantity", ResourceType = typeof(AppTextDisplay))]
-        [Range(minimum:0, maximum: int.MaxValue, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Wrong_Number")]
+        [Range(minimum: 1, maximum: int.MaxValue, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Wrong_Number")]
         [Required(ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Required")]
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 1;
 
         public IEnumerable<ProductModelViewModel> AvailableModels { get; set; }
         public IEnumerable<SelectListItem> AvailableModelsSource { get; set; }

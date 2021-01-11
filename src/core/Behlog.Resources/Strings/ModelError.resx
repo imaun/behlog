@@ -133,7 +133,7 @@
     <value>لطفاً شماره تماس را به درستی وارد نمایید.</value>
   </data>
   <data name="Email_Wrong" xml:space="preserve">
-    <value>لطفاً آدرس ایمیل خود را به درستی وارد نمایید.</value>
+    <value>فرمت آدرس ایمیل اشتباه است</value>
   </data>
   <data name="MaxLen" xml:space="preserve">
     <value>تعداد کاراکترها بیشتر از حد مجاز است.</value>

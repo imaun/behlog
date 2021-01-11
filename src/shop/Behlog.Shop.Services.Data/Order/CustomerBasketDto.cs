@@ -11,6 +11,10 @@ namespace Behlog.Shop.Services.Data {
 
         public Guid Id { get; set; }
         public string CustomerFullName { get; set; }
+        public string CustomerShippingAddress { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerMobile { get; set; }
+        public string CustomerPostalCode { get; set; }
         public decimal TotalPrice { get; set; }
         public Guid? UserId { get; set; }
         public DateTime CreateDate { get; set; }

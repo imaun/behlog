@@ -70,29 +70,30 @@ namespace Behlog.Shop.Factories
                 SessionId = AppHttpContext.SessionId,
                 UserAgent = AppHttpContext.UserAgent,
                 Status = BasketStatus.Active,
-                WebsiteId = _websiteInfo.Id,
-                Items = new List<BasketItem> {
-                    new BasketItem {
-                        CreateDate = _dateService.UtcNow(),
-                        ModifyDate = _dateService.UtcNow(),
-                        ProductId = product.Id,
-                        ProductTitle = product.Title,
-                        ProductModelId = productModel?.Id,
-                        ProductModelTitle = productModel?.Title,
-                        Quantity = order.Quantity,
-                        Status = BasketItemStatus.Added,
-                        UnitName = product.UnitName,
-                        UnitPrice = (productModel != null ? productModel.Price : product.Price),
-                        //DiscountValue TODO: Calculate Discount
-                        TaxAmount = product.TaxAmount,
-                        TotalPrice = product.Price.Calculate(taxAmount: product.TaxAmount,
+                WebsiteId = _websiteInfo.Id
+            };
+            var basketItem = new BasketItem {
+                CreateDate = _dateService.UtcNow(),
+                ModifyDate = _dateService.UtcNow(),
+                ProductId = product.Id,
+                ProductTitle = product.Title,
+                ProductModelId = productModel?.Id,
+                ProductModelTitle = productModel?.Title,
+                Quantity = order.Quantity,
+                Status = BasketItemStatus.Added,
+                UnitName = product.UnitName,
+                UnitPrice = (productModel != null ? productModel.Price : product.Price),
+                //DiscountValue TODO: Calculate Discount
+                TaxAmount = product.TaxAmount,
+                TotalPrice = product.Price.Calculate(taxAmount: product.TaxAmount,
                                                                 taxPercent: product.TaxPercent,
                                                                 discountValue: 0,
                                                                 discountPercent: null,
                                                                 quantity: order.Quantity)
-                    }
-                }
             };
+            basketItem.TaxAmount = basketItem.TaxAmount
+                .CalculateTaxAmount(basketItem.TotalPrice, product.TaxPercent);
+            basket.Items.Add(basketItem);
             basket.TotalPrice = basket.Items.CalculateTotalPrice();
             customer.Baskets.Add(basket);
 

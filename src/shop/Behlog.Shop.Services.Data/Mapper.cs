@@ -6,10 +6,17 @@ namespace Behlog.Shop.Services.Data {
 
     public static class Mapper {
 
-        public static CustomerBasketDto MapToResult(this Customer customer, Basket basket) 
+        public static CustomerBasketDto MapToResult(
+            this Customer customer, 
+            Basket basket,
+            ShippingAddress address) 
             => new CustomerBasketDto {
                 CreateDate = basket.CreateDate,
                 CustomerFullName = customer.FullName,
+                CustomerEmail = customer.Email,
+                CustomerMobile = customer.Mobile,
+                CustomerPostalCode = address.PostalCode,
+                CustomerShippingAddress = address.Address,
                 Id = basket.Id,
                 TotalPrice = basket.TotalPrice,
                 UserId = basket.UserId,

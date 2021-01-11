@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Strings\ModelText.resx~RF52d04f4.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Strings\AppErrorText.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -54,5 +54,6 @@ namespace Behlog.Services.Extensions
 
             return result;
         }
+
     }
 }

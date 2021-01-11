@@ -106,7 +106,7 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to لطفاً آدرس ایمیل خود را به درستی وارد نمایید..
+        ///   Looks up a localized string similar to فرمت آدرس ایمیل اشتباه است.
         /// </summary>
         public static string Email_Wrong {
             get {

@@ -70,17 +70,16 @@ namespace Behlog.Shop.Services {
             if (customer == null) {
                 customer = _customerFactory.BuildRealCustomerFromOrder(model);
                 _customerValidator.ValidateCreate(customer);
+                _customerRepository.MarkForAdd(customer);
             }
             customer.ShippingAddresses.Add(shippingAddress);
 
             var basket = await _customerFactory
                 .AddBasketAsync(customer, product, productModel, order: model);
 
-            _customerRepository.MarkForAdd(customer);
-
             await _customerRepository.SaveChangesAsync();
 
-            return customer.MapToResult(basket);
+            return customer.MapToResult(basket, shippingAddress);
         }
 
     }

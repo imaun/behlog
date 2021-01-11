@@ -142,6 +142,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آدرس ایمیل.
+        /// </summary>
+        public static string Customer_Email {
+            get {
+                return ResourceManager.GetString("Customer_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to توضیحات.
         /// </summary>
         public static string Description {

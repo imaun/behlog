@@ -13,18 +13,22 @@ namespace Behlog.Services.System
 {
     public class WebsiteService: IWebsiteService 
     {
-
+        private readonly ICurrencyRepository _currencyRepository;
         private readonly IWebsiteRepository _repository;
         private readonly IWebsiteFactory _factory;
 
         public WebsiteService(
+            ICurrencyRepository currencyRepository,
             IWebsiteRepository repository,
             IWebsiteFactory factory) 
         {
-            repository.CheckArgumentIsNull();
+            currencyRepository.CheckArgumentIsNull(nameof(currencyRepository));
+            _currencyRepository = currencyRepository;
+
+            repository.CheckArgumentIsNull(nameof(repository));
             _repository = repository;
 
-            factory.CheckArgumentIsNull();
+            factory.CheckArgumentIsNull(nameof(factory));
             _factory = factory;
         }
 
@@ -34,11 +38,14 @@ namespace Behlog.Services.System
                 .Include(_ => _.Layout)
                 .Include(_ => _.DefaultLanguage)
                 .Include(_=> _.Options)
+                .Include(_=> _.DefaultCurrency)
                 .FirstOrDefaultAsync(_ => _.Id == websiteId);
 
             if (website == null)
                 return null;
 
+            var baseCurrency = await _currencyRepository.GetBaseCurrencyAsync();
+            
             var result = new WebsiteInfo {
                 Title = website.Title,
                 DefaultLangId = website.DefaultLangId,
@@ -48,14 +55,24 @@ namespace Behlog.Services.System
                 Name = website.Name,
                 OwnerId = website.OwnerId,
                 Description = website.Description,
-                Keywords = website.Keywords
+                Keywords = website.Keywords,
+                CurrencyInfo = new WebsiteCurrencyInfo {
+                    BaseCurrencySign = baseCurrency.Sign,
+                    BaseCurrencyTitle = baseCurrency.Title
+                }
             };
 
+            if(website.DefaultCurrency != null) {
+                result.CurrencyInfo.DefaultCurrencySign = website.DefaultCurrency.Sign;
+                result.CurrencyInfo.DefaultCurrencyTitle = website.DefaultCurrency.Title;
+                result.CurrencyInfo.Rate = website.DefaultCurrency.Rate;
+            }
+
             var websitePhone = website.Options
-                .FirstOrDefault(_ => _.Key.ToLower() == "website_phone");
+                .FirstOrDefault(_ => _.Key.ToLower() == "website.phone");
 
             var websiteEmail = website.Options
-                .FirstOrDefault(_ => _.Key.ToLower() == "email");
+                .FirstOrDefault(_ => _.Key.ToLower() == "website.email");
 
             if (websitePhone != null)
                 result.ContactPhone = websitePhone.Value;
