@@ -7,6 +7,7 @@ using Behlog.Shop.Services.Contracts;
 using Behlog.Shop.Factories.Contracts;
 using Behlog.Shop.Services.Validation;
 using Behlog.Core.Contracts.Repository.Shop;
+using System;
 
 namespace Behlog.Shop.Services {
 
@@ -19,12 +20,14 @@ namespace Behlog.Shop.Services {
         private readonly IProductModelRepository _productModelRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IShippingAddressFactory _shippingAddressFactory;
+        private readonly IBasketRepository _basketRepository;
 
         public OrderProductService(
             IProductFactory productFactory,
             IProductRepository productRepository,
             IProductModelRepository productModelRepository,
             ICustomerRepository customerRepository,
+            IBasketRepository basketRepository,
             IShippingAddressFactory shippingAddressFactory,
             ICustomerFactory customerFactory,
             ICustomerValidator customerValidator) {
@@ -41,6 +44,9 @@ namespace Behlog.Shop.Services {
             customerRepository.CheckArgumentIsNull(nameof(customerRepository));
             _customerRepository = customerRepository;
 
+            basketRepository.CheckArgumentIsNull(nameof(basketRepository));
+            _basketRepository = basketRepository;
+
             shippingAddressFactory.CheckArgumentIsNull(nameof(shippingAddressFactory));
             _shippingAddressFactory = shippingAddressFactory;
 
@@ -49,6 +55,12 @@ namespace Behlog.Shop.Services {
 
             customerValidator.CheckArgumentIsNull(nameof(customerValidator));
             _customerValidator = customerValidator;
+        }
+
+        public async Task CreateInvoiceAndPayAsync(Guid basketId) {
+            var basket = await _basketRepository.GetWithCustomerInfoAsync(basketId);
+            basket.CheckReferenceIsNull(nameof(basket));
+
         }
 
         public async Task<CustomerBasketDto> OrderProductAsync(OrderSingleProductDto model) {
