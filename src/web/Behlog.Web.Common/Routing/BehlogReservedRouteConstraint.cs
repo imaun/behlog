@@ -42,7 +42,13 @@ namespace Behlog.Web.Common.Routing {
             "contact",
             "search",
             "error",
-            
+            "pay",
+            "order",
+            "category",
+            "gallery",
+            "product",
+            "shop",
+            "verify"
         };
     }
 }
