@@ -51,7 +51,6 @@ namespace Behlog.Shop.Services {
             _customerValidator = customerValidator;
         }
 
-
         public async Task<CustomerBasketDto> OrderProductAsync(OrderSingleProductDto model) {
             model.CheckArgumentIsNull();
             
