@@ -45,8 +45,6 @@ namespace Behlog.Web.Common.Routing {
             "pay",
             "order",
             "category",
-            "gallery",
-            "product",
             "shop",
             "verify"
         };

@@ -59,7 +59,40 @@ using Behlog.Web.Common.Routing;
 namespace Microsoft.Extensions.DependencyInjection {
 
     public static class ServiceDependencyExtensions {
-        
+
+        public static void AddBehlogServices(
+            this IServiceCollection services,
+            IConfiguration configuration) {
+
+            services.Configure<BehlogSetting>(configuration.Bind);
+            var appSetting = GetAppSetting(services);
+
+            services.AddSingleton<BehlogSetting>(appSetting);
+            services.AddSingleton<GlobalViewData>(appSetting.ViewData);
+            services.AddScoped<IDateService, DateService>();
+            services.AddIdentityOptions(appSetting);
+            services.AddSecurityServices();
+            services.AddDatabaseServices(appSetting);
+            services.AddHttpServices();
+            services.AddDatabaseCacheStores(appSetting);
+            services.AddDynamicPermissions();
+            services.AddFactories();
+            services.AddRepositories();
+            services.AddValidators();
+            services.AddServices();
+            services.AddViewModelProviders();
+            services.AddExtensions();
+            services.AddScoped<IWebsiteInfo>(_ => {
+                var service = _.GetService<IWebsiteService>();
+                var result = service.GetWebsiteInfo(appSetting.WebsiteId).Result;
+                return result != null ? result : null;
+            });
+
+            MappingConfig.AddDtoMappingConfig();
+            Behlog.Web.Mapping.MappingConfig.AddViewModelMappingConfig();
+        }
+
+
         private static void AddHttpServices(
             this IServiceCollection services) {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -247,38 +280,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<TagsLoader>();
         }
 
-        public static void AddBehlogServices(
-            this IServiceCollection services, 
-            IConfiguration configuration) {
-
-            services.Configure<BehlogSetting>(configuration.Bind);
-            var appSetting = GetAppSetting(services);
-            
-            services.AddSingleton<BehlogSetting>(appSetting);
-            services.AddSingleton<GlobalViewData>(appSetting.ViewData);
-            services.AddScoped<IDateService, DateService>();
-            services.AddIdentityOptions(appSetting);
-            services.AddSecurityServices();
-            services.AddDatabaseServices(appSetting);
-            services.AddHttpServices();
-            services.AddDatabaseCacheStores(appSetting);
-            services.AddDynamicPermissions();
-            services.AddFactories();
-            services.AddRepositories();
-            services.AddValidators();
-            services.AddServices();
-            services.AddViewModelProviders();
-            services.AddExtensions();
-            services.AddScoped<IWebsiteInfo>(_ => {
-                var service = _.GetService<IWebsiteService>();
-                var result = service.GetWebsiteInfo(appSetting.WebsiteId).Result;
-                return result != null ? result : null;
-            });
-
-            MappingConfig.AddDtoMappingConfig();
-            Behlog.Web.Mapping.MappingConfig.AddViewModelMappingConfig();
-        }
-
+        
         public static void ConfigureBehlogReservedRoutes(this IServiceCollection services) {
             services.Configure<RouteOptions>(_ => {
                 _.ConstraintMap.Add("reserved", typeof(BehlogReservedRouteConstraint));
@@ -305,5 +307,28 @@ namespace Microsoft.Extensions.DependencyInjection {
             this IApplicationBuilder app) 
                 => app.UseMiddleware<WebsiteVisitCounterMiddleware>();
 
+        /// <summary>
+        /// Map Behlog static paths to serve as static files in application pipeline.
+        /// </summary>
+        /// <param name="app">ApplicationBuilder</param>
+        /// <returns></returns>
+        public static IApplicationBuilder MapBehlogStaticPaths(this IApplicationBuilder app) 
+            => app.MapWhen(context => {
+                    var path = context.Request.Path.Value.ToLower();
+                    return
+                        path.StartsWith("/assets") ||
+                        path.StartsWith("/lib") ||
+                        path.StartsWith("/themes") ||
+                        path.StartsWith("/app_data") ||
+                        path.StartsWith("/images") ||
+                        path.StartsWith("/uploads") ||
+                        path.StartsWith("/favicon") ||
+                        path.StartsWith("/fonts") ||
+                        path.StartsWith("/js") ||
+                        path.EndsWith("html") ||
+                        path.EndsWith("htm") ||
+                        path.EndsWith("robots.txt") ||
+                        path.StartsWith("/css");
+                }, config => config.UseStaticFiles());
     }
 }
