@@ -35,7 +35,7 @@ namespace Behlog.Core.Models.Shop {
         /// <summary>
         /// Get or sets the Payment date and time.
         /// </summary>
-        public DateTime PayDate { get; set; }
+        public DateTime? PayDate { get; set; }
 
         /// <summary>
         /// If the invoice will fully paid with this payment, this will set to true.

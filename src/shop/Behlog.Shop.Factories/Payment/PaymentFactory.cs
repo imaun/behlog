@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
 using Behlog.Core.Extensions;
 using Behlog.Core.Exceptions;
 using Behlog.Core.Models.Shop;
@@ -44,12 +42,48 @@ namespace Behlog.Shop.Factories {
                 GatewayUrl = model.GatewayUrl,
                 Method = PaymentMethod.Online,
                 ModifyDate = _dateService.UtcNow(),
-                PayDate = _dateService.UtcNow(),
                 Status = PaymentStatus.Created,
                 Paid = false
             };
 
             return await Task.FromResult(result);
+        }
+
+        /// <inheritdoc/>
+        public void SetStatus(Payment payment, PaymentStatus status)
+            => payment.Status = status;
+
+        /// <inheritdoc/>
+        public void SetTransactionId(Payment payment, string transactionId) {
+            if (transactionId != null) payment.TransactionId = transactionId;
+        }
+
+        /// <inheritdoc/>
+        public void SetStatus(Payment payment, 
+            bool succeded, 
+            bool fullyPaid = false,
+            bool paidButHasRemain = false) {
+
+            if (!succeded) {
+                payment.Status = PaymentStatus.Unsuccessful;
+                return;
+            }
+            
+            if (succeded && !fullyPaid && !paidButHasRemain) {
+                payment.Status = PaymentStatus.Successful;
+                return;
+            }
+            
+            if (succeded && fullyPaid && !paidButHasRemain) {
+                payment.Status = PaymentStatus.SuccessfulAndFullyPaid;
+                return;
+            }
+            
+            if (succeded && !fullyPaid && paidButHasRemain) {
+                payment.Status = PaymentStatus.SuccessfulButHasRemaining;
+                return;
+            }
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Behlog.Core.Models.Shop;
+using Behlog.Core.Models.Enum;
 using Behlog.Shop.Services.Data;
 
 namespace Behlog.Shop.Factories.Contracts {
@@ -13,5 +14,15 @@ namespace Behlog.Shop.Factories.Contracts {
         /// <param name="model">Payment's data</param>
         /// <returns><see cref="Payment"/> entity</returns>
         Task<Payment> BuildOnlinePaymentAsync(CreateOnlinePaymentDto model);
+
+        void SetStatus(Payment payment,
+            bool succeded,
+            bool fullyPaid = false,
+            bool paidButHasRemain = false);
+
+        void SetStatus(Payment payment, PaymentStatus status);
+
+        void SetTransactionId(Payment payment, string transactionId);
+
     }
 }
