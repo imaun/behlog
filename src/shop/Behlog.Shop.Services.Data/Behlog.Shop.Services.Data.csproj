@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\Infrastructure\Behlog.Services.Dto\Behlog.Services.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Payment\" />
+  </ItemGroup>
+
 </Project>
