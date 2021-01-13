@@ -1,9 +1,10 @@
 ﻿namespace Behlog.Core.Models.Enum {
     public enum PaymentStatus {
         Deleted = -1,
-        Unsuccessful = 0,
+        Created = 0,
         Successful = 1,
         SuccessfulAndFullyPaid = 2,
-        SuccessfulButHasRemaining = 3
+        SuccessfulButHasRemaining = 3,
+        Unsuccessful = 4,
     }
 }
