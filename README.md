@@ -25,5 +25,12 @@ Manage N Websites with one CMS with all this features :
 - Search Engine Optiomized, using custome slugs.
 - Supports multiple databases, SQL Server, SQLite and more.
 ---
-
+## Contribution
+This is an active repository, If you want to contribute to this repository, please contact me via imun22[at]gmail.com.
+You can help this project with any level of skills.
+- Fron-end developer (HTML, CSS, JavaScript) for developing Admin dashboard.
+- Web designer (HTML, CSS) for creating themes.
+- C# Back-end developer for assisting me on developing core features.
+- Someone with good english writing skill to write documentations.
+- Translate resources
 
