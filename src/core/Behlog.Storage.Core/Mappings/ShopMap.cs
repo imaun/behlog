@@ -173,6 +173,9 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.CustomerTitle).HasMaxLength(600).IsUnicode().IsRequired();
                 map.Property(_ => _.TransactionId).HasMaxLength(500).IsUnicode();
                 map.Property(_ => _.Method).HasDefaultValue(PaymentMethod.Online);
+                map.Property(_ => _.GatewayUrl).HasMaxLength(2000).IsUnicode();
+                map.Property(_ => _.CallbackUrl).HasMaxLength(2000).IsUnicode();
+                map.Property(_ => _.Description).HasMaxLength(2000).IsUnicode();
 
                 map.HasOne(_ => _.Invoice)
                     .WithMany(_ => _.Payments)

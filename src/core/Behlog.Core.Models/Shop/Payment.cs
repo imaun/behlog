@@ -58,6 +58,12 @@ namespace Behlog.Core.Models.Shop {
         /// </summary>
         public PaymentStatus Status { get; set; }
 
+        public string GatewayUrl { get; set; }
+
+        public string CallbackUrl { get; set; }
+
+        public string Description { get; set; }
+
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
 
