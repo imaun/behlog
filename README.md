@@ -34,10 +34,10 @@ You can help this project with any level of skills.
 - Someone with good english writing skill to write documentations.
 - Translate resources
 ---
-## Planned Features
-[ ] Add Customer's Basket
-[ ] Generate Invoice based on Customer's basket
-[ ] Add Payment service
-[ ] Add Payment gateway (currently support Zarinpal)
-[ ] Admin panel
-[ ] ...
+## Planned Features (list is not complete)
+- [ ] Add Customer's Basket
+- [ ] Generate Invoice based on Customer's basket
+- [ ] Add Payment service
+- [ ] Add Payment gateway (currently support Zarinpal)
+- [ ] Admin panel
+- [ ] ...
