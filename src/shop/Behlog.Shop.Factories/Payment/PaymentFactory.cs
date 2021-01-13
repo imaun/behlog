@@ -71,19 +71,25 @@ namespace Behlog.Shop.Factories {
             
             if (succeded && !fullyPaid && !paidButHasRemain) {
                 payment.Status = PaymentStatus.Successful;
+                SetPayDate(payment);
                 return;
             }
             
             if (succeded && fullyPaid && !paidButHasRemain) {
                 payment.Status = PaymentStatus.SuccessfulAndFullyPaid;
+                SetPayDate(payment);
                 return;
             }
             
             if (succeded && !fullyPaid && paidButHasRemain) {
                 payment.Status = PaymentStatus.SuccessfulButHasRemaining;
+                SetPayDate(payment);
                 return;
             }
             
         }
+
+        public void SetPayDate(Payment payment)
+            => payment.PayDate = _dateService.UtcNow();
     }
 }

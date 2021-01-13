@@ -37,6 +37,7 @@ namespace Behlog.Shop.Services {
             );
         }
 
+        /// <inheritdoc/>
         public async Task VerifyFullPaymentAsync(
             int paymentId, 
             string transactionId = null, 
