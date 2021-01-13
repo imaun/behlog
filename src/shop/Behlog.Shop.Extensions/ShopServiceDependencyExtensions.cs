@@ -23,9 +23,12 @@ namespace Microsoft.Extensions.DependencyInjection {
         }
 
         private static void AddServices(this IServiceCollection services) {
+            services.AddScoped<IBasketService, BasketService>();
+            //services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IOrderProductService, OrderProductService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductModelService, ProductModelService>();
-            services.AddScoped<IOrderProductService, OrderProductService>();
             services.AddScoped<IProductModelService, ProductModelService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IShippingService, ShippingService>();
@@ -34,10 +37,13 @@ namespace Microsoft.Extensions.DependencyInjection {
 
         private static void AddValidators(this IServiceCollection services) {
             services.AddScoped<ICustomerValidator, CustomerValidator>();
+            services.AddScoped<IPaymentValidator, PaymentValidator>();
         }
 
         private static void AddFactories(this IServiceCollection services) {
             services.AddScoped<ICustomerFactory, CustomerFactory>();
+            services.AddScoped<IInvoiceFactory, InvoiceFactory>();
+            services.AddScoped<IPaymentFactory, PaymentFactory>();
             services.AddScoped<IProductFactory, ProductFactory>();
             services.AddScoped<IShippingAddressFactory, ShippingAddressFactory>();
         }
