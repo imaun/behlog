@@ -9,8 +9,8 @@ using Mapster;
 
 namespace Behlog.Shop.Services {
 
-    public class InvoiceService : IInvoiceService
-    {
+    public class InvoiceService : IInvoiceService {
+
         private readonly IInvoiceRepository _invoiceRepository;
 
         public InvoiceService(IInvoiceRepository invoiceRepository) {
