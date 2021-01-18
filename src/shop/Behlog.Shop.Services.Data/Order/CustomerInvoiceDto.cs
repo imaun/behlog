@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Behlog.Core.Models.Enum;
+using System;
 using System.Collections.Generic;
 
 namespace Behlog.Shop.Services.Data {
@@ -9,7 +10,8 @@ namespace Behlog.Shop.Services.Data {
             Items = new List<CustomerInvoiceItemDto>();
         }
 
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
+        public int InvoiceId { get; set; }
         public string CustomerFullName { get; set; }
         public string CustomerShippingAddress { get; set; }
         public string CustomerEmail { get; set; }
@@ -17,6 +19,7 @@ namespace Behlog.Shop.Services.Data {
         public string CustomerPostalCode { get; set; }
         public decimal TotalPrice { get; set; }
         public decimal TotalTaxAmount { get; set; }
+        public InvoiceStatus InvoiceStatus { get; set; } 
         public Guid? UserId { get; set; }
         public DateTime CreateDate { get; set; }
         public IEnumerable<CustomerInvoiceItemDto> Items { get; set; }

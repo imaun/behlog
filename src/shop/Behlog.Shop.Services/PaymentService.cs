@@ -21,9 +21,18 @@ namespace Behlog.Shop.Services {
         private readonly IPaymentValidator _paymentValidator;
         private readonly IPaymentFactory _paymentFactory;
 
-        public PaymentService(IPaymentRepository paymentRepository) {
+        public PaymentService(
+            IPaymentRepository paymentRepository,
+            IPaymentValidator paymentValidator,
+            IPaymentFactory paymentFactory) {
             paymentRepository.CheckArgumentIsNull(nameof(paymentRepository));
             _paymentRepository = paymentRepository;
+
+            paymentValidator.CheckArgumentIsNull(nameof(paymentValidator));
+            _paymentValidator = paymentValidator;
+
+            paymentFactory.CheckArgumentIsNull(nameof(paymentFactory));
+            _paymentFactory = paymentFactory;
         }
 
         /// <inheritdoc/>
@@ -44,13 +53,18 @@ namespace Behlog.Shop.Services {
             string transactionId = null, 
             string message = null,
             bool success = false) {
-            var payment = await _paymentRepository.FindAsync(paymentId);
+            var payment = await _paymentRepository.GetWithInvoiceAsync(paymentId);
             payment.CheckReferenceIsNull(nameof(payment));
+
             _paymentFactory.SetStatus(payment, success, fullyPaid: true);
             _paymentFactory.SetTransactionId(payment, transactionId);
             payment.Description = message;
             payment.InvoiceId = invoiceId;
             
+            if(payment.InvoiceId.HasValue) {
+                payment.Invoice.Status = InvoiceStatus.Paid;
+            }
+
             await _paymentRepository.UpdateAndSaveAsync(payment);
         }
 

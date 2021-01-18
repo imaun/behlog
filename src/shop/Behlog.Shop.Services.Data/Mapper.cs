@@ -30,6 +30,7 @@ namespace Behlog.Shop.Services.Data {
             Invoice invoice,
             ShippingAddress address)
             => new CustomerInvoiceDto {
+                CustomerId = customer.Id,
                 CreateDate = invoice.CreateDate,
                 CustomerEmail = customer.Email,
                 CustomerFullName = customer.FullName,
@@ -37,9 +38,10 @@ namespace Behlog.Shop.Services.Data {
                 CustomerPostalCode = address.PostalCode,
                 CustomerShippingAddress = address.Address,
                 Items = invoice.Orders.Adapt<List<CustomerInvoiceItemDto>>(),
-                Id = invoice.Id,
+                InvoiceId = invoice.Id,
                 TotalPrice = invoice.TotalPrice,
-                TotalTaxAmount = invoice.Orders.Sum(_=> _.TaxAmount)
+                TotalTaxAmount = invoice.Orders.Sum(_=> _.TaxAmount),
+                InvoiceStatus = invoice.Status
             };
     }
 }

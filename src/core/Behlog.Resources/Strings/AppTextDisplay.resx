@@ -315,4 +315,19 @@
   <data name="Quantity" xml:space="preserve">
     <value>تعداد</value>
   </data>
+  <data name="InvoiceStatusIssued" xml:space="preserve">
+    <value>صادرشده</value>
+  </data>
+  <data name="InvoiceStatusPaid" xml:space="preserve">
+    <value>پرداخت شده</value>
+  </data>
+  <data name="InvoiceStatusPreOrder" xml:space="preserve">
+    <value>پیش فاکتور</value>
+  </data>
+  <data name="OrderStatusAddedd" xml:space="preserve">
+    <value>اضافه شده</value>
+  </data>
+  <data name="OrderStatusPaid" xml:space="preserve">
+    <value>پرداخت شده</value>
+  </data>
 </root>

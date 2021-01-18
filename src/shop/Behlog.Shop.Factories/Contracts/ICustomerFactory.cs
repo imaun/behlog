@@ -28,7 +28,7 @@ namespace Behlog.Shop.Factories.Contracts {
             ProductModel productModel,
             OrderSingleProductDto order,
             DateTime dueDate,
-            int shippingAddressId,
+            ShippingAddress shippingAddress,
             int? shippingId = null);
     }
 }

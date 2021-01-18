@@ -358,6 +358,33 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to صادرشده.
+        /// </summary>
+        public static string InvoiceStatusIssued {
+            get {
+                return ResourceManager.GetString("InvoiceStatusIssued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پرداخت شده.
+        /// </summary>
+        public static string InvoiceStatusPaid {
+            get {
+                return ResourceManager.GetString("InvoiceStatusPaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پیش فاکتور.
+        /// </summary>
+        public static string InvoiceStatusPreOrder {
+            get {
+                return ResourceManager.GetString("InvoiceStatusPreOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string LangEnTItle {
@@ -417,6 +444,24 @@ namespace Behlog.Resources.Strings {
         public static string NationalCode {
             get {
                 return ResourceManager.GetString("NationalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافه شده.
+        /// </summary>
+        public static string OrderStatusAddedd {
+            get {
+                return ResourceManager.GetString("OrderStatusAddedd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پرداخت شده.
+        /// </summary>
+        public static string OrderStatusPaid {
+            get {
+                return ResourceManager.GetString("OrderStatusPaid", resourceCulture);
             }
         }
         

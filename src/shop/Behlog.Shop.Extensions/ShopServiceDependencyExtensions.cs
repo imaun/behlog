@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection {
 
         private static void AddServices(this IServiceCollection services) {
             services.AddScoped<IBasketService, BasketService>();
-            //services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<IOrderProductService, OrderProductService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IProductService, ProductService>();

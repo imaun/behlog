@@ -122,7 +122,7 @@ namespace Behlog.Shop.Services {
 
             var invoice = _customerFactory.AddInvoice(
                 customer, product, productModel, model, 
-                _dateService.UtcNow(), shippingAddress.Id);
+                _dateService.UtcNow(), shippingAddress);
 
             await _customerRepository.SaveChangesAsync();
 

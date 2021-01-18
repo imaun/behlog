@@ -107,7 +107,7 @@ namespace Behlog.Shop.Factories
             ProductModel productModel,
             OrderSingleProductDto order,
             DateTime dueDate,
-            int shippingAddressId,
+            ShippingAddress shippingAddress,
             int? shippingId = null) 
         {
         
@@ -118,7 +118,7 @@ namespace Behlog.Shop.Factories
                 CreateDate = _dateService.UtcNow(),
                 CustomerId = customer.Id,
                 ModifyDate = _dateService.UtcNow(),
-                ShippingAddressId = shippingAddressId,
+                ShippingAddress = shippingAddress,
                 ShippingId = shippingId != null 
                     ? shippingId.Value 
                     : _websiteInfo.DefaultShippingId.Value,
@@ -136,7 +136,7 @@ namespace Behlog.Shop.Factories
                 ProductModelId = productModel?.Id,
                 ProductModelTitle = productModel?.Title,
                 Quantity = order.Quantity,
-                ShippingAddressId = shippingAddressId,
+                ShippingAddress = shippingAddress,
                 Status = invoice.Status.GetOrderStatus(),
                 ShippingId = invoice.ShippingId,
                 TaxAmount = product.TaxAmount,
@@ -150,6 +150,14 @@ namespace Behlog.Shop.Factories
                                                                 discountPercent: null,
                                                                 quantity: order.Quantity)
             };
+            if(productModel != null) {
+                invoiceItem.TotalPrice = productModel.Price.Calculate(
+                    taxAmount: product.TaxAmount,
+                    taxPercent: product.TaxPercent,
+                    discountValue: 0,
+                    discountPercent: null,
+                    quantity: order.Quantity);
+            }
             invoiceItem.TaxAmount = invoiceItem.TaxAmount
                 .CalculateTaxAmount(invoiceItem.TotalPrice, product.TaxPercent);
             invoice.Orders.Add(invoiceItem);

@@ -5,6 +5,7 @@ namespace Behlog.Core.Extensions
 {
     public static class ModelExtensions
     {
+
         public static string ToDisplay(this PostStatus status) =>
             status switch {
                 PostStatus.Deleted => AppTextDisplay.PostStatusDeleted,
@@ -113,7 +114,8 @@ namespace Behlog.Core.Extensions
                 BasketStatus.Active => "",
                 BasketStatus.Completed => "",
                 BasketStatus.Deleted => "",
-                BasketStatus.Failed => ""
+                BasketStatus.Failed => "",
+                _ => AppTextDisplay.StatusUnknown
             };
 
         public static string ToDisplay(this BasketItemStatus status) =>
@@ -121,7 +123,27 @@ namespace Behlog.Core.Extensions
             {
                 BasketItemStatus.Added => "",
                 BasketItemStatus.Deleted => "",
-                BasketItemStatus.Invoiced => ""
+                BasketItemStatus.Invoiced => "",
+                _ => AppTextDisplay.StatusUnknown
+            };
+
+        public static string ToDisplay(this InvoiceStatus status)
+            => status switch
+            {
+                InvoiceStatus.Deleted => AppTextDisplay.StatusDeleted,
+                InvoiceStatus.Issued => AppTextDisplay.InvoiceStatusIssued,
+                InvoiceStatus.Paid => AppTextDisplay.InvoiceStatusPaid,
+                InvoiceStatus.PreOrder => AppTextDisplay.InvoiceStatusPreOrder,
+                _ => AppTextDisplay.StatusUnknown
+            };
+
+        public static string ToDisplay(this InvoiceOrderStatus status)
+            => status switch
+            {
+                InvoiceOrderStatus.Added => AppTextDisplay.OrderStatusAddedd,
+                InvoiceOrderStatus.Deleted => AppTextDisplay.StatusDeleted,
+                InvoiceOrderStatus.Paid => AppTextDisplay.OrderStatusPaid,
+                _=> AppTextDisplay.OrderStatusAddedd
             };
 
         public static InvoiceOrderStatus GetOrderStatus(this InvoiceStatus status)
@@ -130,7 +152,8 @@ namespace Behlog.Core.Extensions
                 InvoiceStatus.Deleted => InvoiceOrderStatus.Deleted,
                 InvoiceStatus.Issued => InvoiceOrderStatus.Added,
                 InvoiceStatus.Paid => InvoiceOrderStatus.Paid,
-                InvoiceStatus.PreOrder => InvoiceOrderStatus.Added
+                InvoiceStatus.PreOrder => InvoiceOrderStatus.Added,
+                _ => InvoiceOrderStatus.Added
             };
     }
 }
