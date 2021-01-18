@@ -16,6 +16,7 @@ namespace Behlog.Core
         string ContactEmail { get; set; }
         string ContactPhone { get; set; }
         WebsiteCurrencyInfo CurrencyInfo { get; set; }
+        int? DefaultShippingId { get; set; }
     }
 
     public class WebsiteInfo : IWebsiteInfo {
@@ -36,6 +37,7 @@ namespace Behlog.Core
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
         public WebsiteCurrencyInfo CurrencyInfo { get; set; }
+        public int? DefaultShippingId { get; set; }
     }
 
     public class WebsiteCurrencyInfo

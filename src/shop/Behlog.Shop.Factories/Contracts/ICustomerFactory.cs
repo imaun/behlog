@@ -1,5 +1,6 @@
 ﻿using Behlog.Core.Models.Shop;
 using Behlog.Shop.Services.Data;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,5 +21,14 @@ namespace Behlog.Shop.Factories.Contracts {
             IEnumerable<Order> orders,
             ShippingAddress address,
             Shipping shipping);
+
+        Invoice AddInvoice(
+            Customer customer,
+            Product product,
+            ProductModel productModel,
+            OrderSingleProductDto order,
+            DateTime dueDate,
+            int shippingAddressId,
+            int? shippingId = null);
     }
 }

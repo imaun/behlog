@@ -123,5 +123,14 @@ namespace Behlog.Core.Extensions
                 BasketItemStatus.Deleted => "",
                 BasketItemStatus.Invoiced => ""
             };
+
+        public static InvoiceOrderStatus GetOrderStatus(this InvoiceStatus status)
+            => status switch
+            {
+                InvoiceStatus.Deleted => InvoiceOrderStatus.Deleted,
+                InvoiceStatus.Issued => InvoiceOrderStatus.Added,
+                InvoiceStatus.Paid => InvoiceOrderStatus.Paid,
+                InvoiceStatus.PreOrder => InvoiceOrderStatus.Added
+            };
     }
 }

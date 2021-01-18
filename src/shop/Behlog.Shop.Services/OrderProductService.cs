@@ -8,11 +8,13 @@ using Behlog.Shop.Factories.Contracts;
 using Behlog.Shop.Services.Validation;
 using Behlog.Core.Contracts.Repository.Shop;
 using System;
+using Behlog.Core.Contracts.Services.Common;
 
 namespace Behlog.Shop.Services {
 
     public class OrderProductService: IOrderProductService {
 
+        private readonly IDateService _dateService;
         private readonly IProductFactory _productFactory;
         private readonly ICustomerFactory _customerFactory;
         private readonly ICustomerValidator _customerValidator;
@@ -23,6 +25,7 @@ namespace Behlog.Shop.Services {
         private readonly IBasketRepository _basketRepository;
 
         public OrderProductService(
+            IDateService dateService,
             IProductFactory productFactory,
             IProductRepository productRepository,
             IProductModelRepository productModelRepository,
@@ -31,6 +34,9 @@ namespace Behlog.Shop.Services {
             IShippingAddressFactory shippingAddressFactory,
             ICustomerFactory customerFactory,
             ICustomerValidator customerValidator) {
+
+            dateService.CheckArgumentIsNull(nameof(dateService));
+            _dateService = dateService;
 
             productFactory.CheckArgumentIsNull(nameof(productFactory));
             _productFactory = productFactory;
@@ -65,13 +71,13 @@ namespace Behlog.Shop.Services {
 
         public async Task<CustomerBasketDto> OrderProductAsync(OrderSingleProductDto model) {
             model.CheckArgumentIsNull();
-            
+
             if (model.NationalCode.IsNullOrEmpty())
                 throw new EntityInsufficientDataException(nameof(model.NationalCode));
 
             var product = await _productRepository.FindAsync(model.ProductId);
             ProductModel productModel = null;
-            if(model.SelectedProductModelId.HasValue) {
+            if (model.SelectedProductModelId.HasValue) {
                 productModel = await _productModelRepository
                     .FindAsync(model.SelectedProductModelId.Value);
             }
@@ -92,6 +98,38 @@ namespace Behlog.Shop.Services {
 
             return customer.MapToResult(basket, shippingAddress);
         }
+
+
+        public async Task<CustomerInvoiceDto> CreateInvoiceAsync(OrderSingleProductDto model) {
+            model.CheckArgumentIsNull(nameof(model));
+            if (model.NationalCode.IsNullOrEmpty())
+                throw new EntityInsufficientDataException(nameof(model.NationalCode));
+
+            var product = await _productRepository.FindAsync(model.ProductId);
+            ProductModel productModel = null;
+            if (model.SelectedProductModelId.HasValue) {
+                productModel = await _productModelRepository
+                    .FindAsync(model.SelectedProductModelId.Value);
+            }
+            var customer = await _customerRepository.GetByNationalCodeAsync(model.NationalCode);
+            var shippingAddress = _shippingAddressFactory.BuildShippingAddress(model.ShippingAddress);
+            if (customer == null) {
+                customer = _customerFactory.BuildRealCustomerFromOrder(model);
+                _customerValidator.ValidateCreate(customer);
+                _customerRepository.MarkForAdd(customer);
+            }
+            customer.ShippingAddresses.Add(shippingAddress);
+
+            var invoice = _customerFactory.AddInvoice(
+                customer, product, productModel, model, 
+                _dateService.UtcNow(), shippingAddress.Id);
+
+            await _customerRepository.SaveChangesAsync();
+
+            return customer.MapToResult(invoice, shippingAddress);
+        }
+        
+
 
     }
 }

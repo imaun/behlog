@@ -40,6 +40,7 @@ namespace Behlog.Shop.Services {
         /// <inheritdoc/>
         public async Task VerifyFullPaymentAsync(
             int paymentId, 
+            int? invoiceId = null,
             string transactionId = null, 
             string message = null,
             bool success = false) {
@@ -47,7 +48,9 @@ namespace Behlog.Shop.Services {
             payment.CheckReferenceIsNull(nameof(payment));
             _paymentFactory.SetStatus(payment, success, fullyPaid: true);
             _paymentFactory.SetTransactionId(payment, transactionId);
-
+            payment.Description = message;
+            payment.InvoiceId = invoiceId;
+            
             await _paymentRepository.UpdateAndSaveAsync(payment);
         }
 

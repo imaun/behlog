@@ -59,20 +59,15 @@ namespace Behlog.Core.Extensions {
             }
         }
 
-        public static string ToText(this EntityStatus status) {
-            switch (status) {
-                case EntityStatus.Enabled:
-                    return "فعال";
-                case EntityStatus.Disabled:
-                    return "غیرفعال";
-                case EntityStatus.Deleted:
-                    return "حذف شده";
-                default:
-                    return "نامشخص";
-            }
-        }
-
-
+        public static string ToText(this EntityStatus status) 
+            => status switch
+            {
+                EntityStatus.Enabled => "فعال",
+                EntityStatus.Disabled => "غیرفعال",
+                EntityStatus.Deleted => "حذف شده",
+                _ => "نامشخص",
+            };
+        
         public static bool IsNullOrEmpty(this string value)
             => string.IsNullOrWhiteSpace(value);
 

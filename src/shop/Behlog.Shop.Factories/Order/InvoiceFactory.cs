@@ -7,10 +7,9 @@ using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Shop;
 using Behlog.Shop.Factories.Contracts;
 
-namespace Behlog.Shop.Factories
-{
-    public class InvoiceFactory : IInvoiceFactory
-    {
+namespace Behlog.Shop.Factories {
+
+    public class InvoiceFactory : IInvoiceFactory {
 
         //private readonly InvoiceRepository 
         private readonly IDateService _dateService;
@@ -19,6 +18,51 @@ namespace Behlog.Shop.Factories
         public InvoiceFactory(IDateService dateService) {
             dateService.CheckArgumentIsNull(nameof(dateService));
             _dateService = dateService;
+        }
+
+        public Invoice BuildInvoiceFromBasket(
+            Basket basket,
+            int shippingAddressId,
+            int shippingId,
+            InvoiceStatus status) {
+            basket.CheckArgumentIsNull(nameof(basket));
+            var invoice = new Invoice {
+                CreateDate = _dateService.UtcNow(),
+                CustomerId = basket.CustomerId,
+                DueDate = _dateService.UtcNow(),
+                ModifyDate = _dateService.UtcNow(),
+                ShippingAddressId = shippingAddressId,
+                ShippingId = shippingId,
+                Status = status,
+                WebsiteId = _websiteInfo.Id
+            };
+
+            foreach (var item in basket.Items) {
+                invoice.Orders.Add(new Order {
+                    CreateDate = _dateService.UtcNow(),
+                    ModifyDate = _dateService.UtcNow(),
+                    DiscountPercent = null, //Add DicsountPercent to BasketItem
+                    DiscountValue = item.DiscountValue,
+                    ProductId = item.ProductId,
+                    ProductModelId = item.ProductModelId,
+                    ProductModelTitle = item.ProductModelTitle,
+                    ProductTitle = item.ProductTitle,
+                    Quantity = item.Quantity,
+                    ShippingAddressId = invoice.ShippingAddressId,
+                    ShippingAmount = 0, //TODO 
+                    ShippingId = invoice.ShippingId,
+                    Status = status.GetOrderStatus(),
+                    TaxAmount = item.TaxAmount,
+                    TaxPercent = null, //TODO
+                    TotalPrice = item.TotalPrice,
+                    UnitName = item.UnitName,
+                    UnitPrice = item.UnitPrice
+                });
+            }
+
+            invoice.TotalPrice = invoice.Orders.Sum(_ => _.TotalPrice);
+
+            return invoice;
         }
 
         public async Task<Invoice> BuildInvoiceAndPayAsync(Basket basket) {
@@ -31,11 +75,10 @@ namespace Behlog.Shop.Factories
                 ShippingAddressId = 1, //TODO : Think about it from where??
                 ShippingId = 1, //TODO : from where?
                 Status = InvoiceStatus.Paid,
-                WebsiteId = _websiteInfo.Id,
-                TotalPrice = 0 //TODO 
+                WebsiteId = _websiteInfo.Id
             };
 
-            foreach(var item in basket.Items) {
+            foreach (var item in basket.Items) {
                 invoice.Orders.Add(new Order {
                     CreateDate = _dateService.UtcNow(),
                     ModifyDate = _dateService.UtcNow(),
@@ -78,5 +121,6 @@ namespace Behlog.Shop.Factories
 
             return await Task.FromResult(invoice);
         }
+
     }
 }

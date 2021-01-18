@@ -59,7 +59,8 @@ namespace Behlog.Services.System
                 CurrencyInfo = new WebsiteCurrencyInfo {
                     BaseCurrencySign = baseCurrency.Sign,
                     BaseCurrencyTitle = baseCurrency.Title
-                }
+                },
+                DefaultShippingId = website.DefaultShippingId
             };
 
             if(website.DefaultCurrency != null) {

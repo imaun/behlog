@@ -197,6 +197,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<ISubscriberRepository, SubscriberRepository>();
 
             //Shop
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();

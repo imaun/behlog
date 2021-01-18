@@ -6,6 +6,7 @@ namespace Behlog.Shop.Services.Contracts {
 
     public interface IOrderProductService {
         Task<CustomerBasketDto> OrderProductAsync(OrderSingleProductDto model);
+        Task<CustomerInvoiceDto> CreateInvoiceAsync(OrderSingleProductDto model);
         Task CreateInvoiceAndPayAsync(Guid basketId);
     }
 }

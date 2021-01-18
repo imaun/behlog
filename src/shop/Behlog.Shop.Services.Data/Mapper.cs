@@ -24,6 +24,22 @@ namespace Behlog.Shop.Services.Data {
                     UserId = basket.UserId,
                     Items = basket.Items.Adapt<List<CustomerBasketItemDto>>()
                 };
-        
+
+        public static CustomerInvoiceDto MapToResult(
+            this Customer customer,
+            Invoice invoice,
+            ShippingAddress address)
+            => new CustomerInvoiceDto {
+                CreateDate = invoice.CreateDate,
+                CustomerEmail = customer.Email,
+                CustomerFullName = customer.FullName,
+                CustomerMobile = customer.Mobile,
+                CustomerPostalCode = address.PostalCode,
+                CustomerShippingAddress = address.Address,
+                Items = invoice.Orders.Adapt<List<CustomerInvoiceItemDto>>(),
+                Id = invoice.Id,
+                TotalPrice = invoice.TotalPrice,
+                TotalTaxAmount = invoice.Orders.Sum(_=> _.TaxAmount)
+            };
     }
 }

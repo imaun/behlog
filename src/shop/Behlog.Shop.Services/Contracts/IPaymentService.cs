@@ -24,6 +24,7 @@ namespace Behlog.Shop.Services.Contracts {
         /// <returns></returns>
         Task VerifyFullPaymentAsync(
             int paymentId,
+            int? invoiceId = null,
             string transactionId = null,
             string message = null,
             bool success = false);

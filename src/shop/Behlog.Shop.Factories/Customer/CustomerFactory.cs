@@ -53,7 +53,6 @@ namespace Behlog.Shop.Factories
             return customer;
         }
 
-
         public async Task<Basket> AddBasketAsync(
             Customer customer, 
             Product product, 
@@ -101,6 +100,66 @@ namespace Behlog.Shop.Factories
             return await Task.FromResult(basket);
         }
             
+
+        public Invoice AddInvoice(
+            Customer customer,
+            Product product,
+            ProductModel productModel,
+            OrderSingleProductDto order,
+            DateTime dueDate,
+            int shippingAddressId,
+            int? shippingId = null) 
+        {
+        
+            customer.CheckArgumentIsNull(nameof(customer));
+            order.CheckArgumentIsNull(nameof(order));
+
+            var invoice = new Invoice {
+                CreateDate = _dateService.UtcNow(),
+                CustomerId = customer.Id,
+                ModifyDate = _dateService.UtcNow(),
+                ShippingAddressId = shippingAddressId,
+                ShippingId = shippingId != null 
+                    ? shippingId.Value 
+                    : _websiteInfo.DefaultShippingId.Value,
+                Status = InvoiceStatus.Issued,
+                DueDate = dueDate,
+                WebsiteId = _websiteInfo.Id
+            };
+
+            var invoiceItem = new Order {
+                CreateDate = _dateService.UtcNow(),
+                DiscountPercent = null,
+                DiscountValue = 0,
+                ModifyDate = _dateService.UtcNow(),
+                ProductId = product.Id,
+                ProductModelId = productModel?.Id,
+                ProductModelTitle = productModel?.Title,
+                Quantity = order.Quantity,
+                ShippingAddressId = shippingAddressId,
+                Status = invoice.Status.GetOrderStatus(),
+                ShippingId = invoice.ShippingId,
+                TaxAmount = product.TaxAmount,
+                ProductTitle = product.Title,
+                TaxPercent = product.TaxPercent,
+                UnitPrice = (productModel != null ? productModel.Price : product.Price),
+                UnitName = product.UnitName,
+                TotalPrice = product.Price.Calculate(taxAmount: product.TaxAmount,
+                                                                taxPercent: product.TaxPercent,
+                                                                discountValue: 0,
+                                                                discountPercent: null,
+                                                                quantity: order.Quantity)
+            };
+            invoiceItem.TaxAmount = invoiceItem.TaxAmount
+                .CalculateTaxAmount(invoiceItem.TotalPrice, product.TaxPercent);
+            invoice.Orders.Add(invoiceItem);
+            invoice.TotalPrice = invoice.Orders.CalculateTotalPrice();
+
+            customer.Invoices.Add(invoice);
+
+            return invoice;
+        }
+
 
         public async Task<Invoice> AddInvoiceAsync(
             Customer customer, 
