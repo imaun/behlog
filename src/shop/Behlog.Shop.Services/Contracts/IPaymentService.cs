@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.Shop;
 using Behlog.Shop.Services.Data;
 
@@ -28,5 +29,11 @@ namespace Behlog.Shop.Services.Contracts {
             string transactionId = null,
             string message = null,
             bool success = false);
+
+        /// <summary>
+        /// Set Payment status to <see cref="PaymentStatus.Unsuccessful"/> when a payment has failed.
+        /// </summary>
+        /// <param name="paymentId">Which payment Id</param>
+        Task FailedAsync(int paymentId);
     }
 }

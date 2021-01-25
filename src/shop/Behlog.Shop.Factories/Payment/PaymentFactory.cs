@@ -43,7 +43,8 @@ namespace Behlog.Shop.Factories {
                 Method = PaymentMethod.Online,
                 ModifyDate = _dateService.UtcNow(),
                 Status = PaymentStatus.Created,
-                Paid = false
+                Paid = false,
+                InvoiceId = model.InvoiceId
             };
 
             return await Task.FromResult(result);
@@ -91,5 +92,8 @@ namespace Behlog.Shop.Factories {
 
         public void SetPayDate(Payment payment)
             => payment.PayDate = _dateService.UtcNow();
+
+        public void Modified(Payment payment)
+            => payment.ModifyDate = _dateService.UtcNow();
     }
 }

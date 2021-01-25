@@ -24,5 +24,7 @@ namespace Behlog.Shop.Factories.Contracts {
 
         void SetTransactionId(Payment payment, string transactionId);
 
+        void Modified(Payment payment);
+
     }
 }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using Behlog.Core.Extensions;
-using Behlog.Core.Exceptions;
-using Behlog.Core.Models.Shop;
 using Behlog.Core.Models.Enum;
 using Behlog.Shop.Services.Data;
 using Behlog.Shop.Services.Contracts;
@@ -64,6 +59,16 @@ namespace Behlog.Shop.Services {
             if(payment.InvoiceId.HasValue) {
                 payment.Invoice.Status = InvoiceStatus.Paid;
             }
+
+            await _paymentRepository.UpdateAndSaveAsync(payment);
+        }
+
+        /// <inheritdoc/>
+        public async Task FailedAsync(int paymentId) {
+            var payment = await _paymentRepository.FindAsync(paymentId);
+            payment.CheckReferenceIsNull(nameof(payment));
+            _paymentFactory.SetStatus(payment, PaymentStatus.Unsuccessful);
+            _paymentFactory.Modified(payment);
 
             await _paymentRepository.UpdateAndSaveAsync(payment);
         }
