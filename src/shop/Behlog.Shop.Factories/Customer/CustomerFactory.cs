@@ -47,9 +47,9 @@ namespace Behlog.Shop.Factories
                 Status = CustomerStatus.Enabled,
                 WebsiteId = _websiteInfo.Id
             };
-            customer.ShippingAddresses
-                .Add(_shippingAddressFactory
-                        .BuildShippingAddress(model.ShippingAddress));
+            //customer.ShippingAddresses
+            //    .Add(_shippingAddressFactory
+            //            .BuildShippingAddress(model.ShippingAddress));
             return customer;
         }
 

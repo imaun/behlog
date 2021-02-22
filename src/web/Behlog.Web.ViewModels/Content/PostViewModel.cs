@@ -89,8 +89,7 @@ namespace Behlog.Web.ViewModels.Content {
         public string Slug { get; set; }
         public string Summary { get; set; }
         public string SummaryStripped => Summary.StripHtmlTags();
-        public string LimitedSummary(int len) => Summary.GetLimitedSummary(len);
-            
+        public string LimitedSummary(int len) => SummaryStripped.GetLimitedSummary(len);
         public DateTime? PublishDate { get; set; }
         public string PublishDateDisplay => PublishDate?.ToPersianDateTextify();
         public string CoverPhoto { get; set; }
@@ -125,6 +124,10 @@ namespace Behlog.Web.ViewModels.Content {
         public PostStatus Status { get; set; }
         public string StatusDisplay => Status.ToDisplay();
         public Guid UserId { get; set; }
+        public int CommentCount { get; set; }
+        public int LikeCount { get; set; }
+        public string CategoryTitle { get; set; }
+        public IEnumerable<PostTagItemViewModel> Tags { get; set; }
     }
 
     public class PostItemViewModel: PostItemBaseViewModel {

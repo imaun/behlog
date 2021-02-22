@@ -93,6 +93,8 @@ namespace Behlog.Services.Dto.Content
         public int LikeCount { get; set; }
         public string IconName { get; set; }
         public string PostTypeSlug { get; set; }
+        public string CategoryTitle { get; set; }
+        public IEnumerable<PostTagItemDto> Tags { get; set; }
     }
 
     public class PostCreateDto

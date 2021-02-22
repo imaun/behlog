@@ -216,6 +216,11 @@ namespace Behlog.Services.Content
 
             result.Items = await query
                 .Include(_ => _.PostType)
+                .Include(_=> _.Category)
+                .Include(_=> _.Comments)
+                .Include(_=> _.Likes)
+                .Include(_=> _.PostTags)
+                .ThenInclude(_=> _.Tag)
                 .Skip(param.Skip)
                 .Take(param.PageSize)
                 .OrderByDescending(_ => _.Id)
@@ -231,7 +236,18 @@ namespace Behlog.Services.Content
                     AltTitle = _.AltTitle,
                     Author = _.CreatorUser.Title,
                     Id = _.Id,
-                    PostTypeSlug = _.PostType.Slug
+                    PostTypeSlug = _.PostType.Slug,
+                    Body = _.Body,
+                    CategoryTitle = _.Category != null ? _.Category.Title : string.Empty,
+                    CommentCount = _.Comments.Count(),
+                    IconName = _.IconName,
+                    LikeCount = _.Likes.Count(),
+                    Tags = _.PostTags.Select(_=> new PostTagItemDto {
+                        Title = _.Tag.Title,
+                        Id = _.Tag.Id,
+                        Description = _.Tag.Description,
+                        Slug = _.Tag.Slug
+                    })
                 }).ToListAsync();
 
             return await Task.FromResult(result);

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Behlog.Core.Extensions;
 using Behlog.Core.Exceptions;
 using Behlog.Core.Models.Shop;
@@ -7,7 +8,6 @@ using Behlog.Shop.Services.Contracts;
 using Behlog.Shop.Factories.Contracts;
 using Behlog.Shop.Services.Validation;
 using Behlog.Core.Contracts.Repository.Shop;
-using System;
 using Behlog.Core.Contracts.Services.Common;
 
 namespace Behlog.Shop.Services {
@@ -121,8 +121,12 @@ namespace Behlog.Shop.Services {
             customer.ShippingAddresses.Add(shippingAddress);
 
             var invoice = _customerFactory.AddInvoice(
-                customer, product, productModel, model, 
-                _dateService.UtcNow(), shippingAddress);
+                            customer,
+                            product,
+                            productModel,
+                            model,
+                            _dateService.UtcNow(),
+                            shippingAddress);
 
             await _customerRepository.SaveChangesAsync();
 
