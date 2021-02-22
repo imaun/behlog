@@ -7,6 +7,9 @@ namespace Behlog.Web.Core.Settings
     public class WebsiteOptionSetting
     {
         public int WebsiteId { get; set; }
+        public string LangKey { get; set; }
+        public string LogoPath { get; set; }
+        public string FavIconPath { get; set; }
         public WebsiteContactSetting Contact { get; set; }
         public WebsiteSocialNetworksSetting SocialNetworks { get; set; }
     }
@@ -28,4 +31,6 @@ namespace Behlog.Web.Core.Settings
         public string Facebook { get; set; }
         public string YouTube { get; set; }
     }
+
+
 }

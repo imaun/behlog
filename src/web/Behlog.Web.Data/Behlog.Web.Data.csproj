@@ -5,9 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Behlog.Resources\Behlog.Resources.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Behlog.Services.Dto\Behlog.Services.Dto.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Behlog.Services\Behlog.Services.csproj" />
     <ProjectReference Include="..\Behlog.Web.Admin.ViewModels\Behlog.Web.Admin.ViewModels.csproj" />
+    <ProjectReference Include="..\Behlog.Web.Core\Behlog.Web.Core.csproj" />
     <ProjectReference Include="..\Behlog.Web.ViewModels\Behlog.Web.ViewModels.csproj" />
   </ItemGroup>
 

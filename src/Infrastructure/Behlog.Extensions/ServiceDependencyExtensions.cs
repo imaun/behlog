@@ -66,8 +66,10 @@ namespace Microsoft.Extensions.DependencyInjection {
 
             services.Configure<BehlogSetting>(configuration.Bind);
             var appSetting = GetAppSetting(services);
+            var websiteOptions = appSetting.WebsiteSeedInfo.Options;
 
             services.AddSingleton<BehlogSetting>(appSetting);
+            services.AddSingleton<WebsiteOptionSetting>(websiteOptions);
             services.AddSingleton<GlobalViewData>(appSetting.ViewData);
             services.AddScoped<IDateService, DateService>();
             services.AddIdentityOptions(appSetting);
@@ -303,6 +305,7 @@ namespace Microsoft.Extensions.DependencyInjection {
 
             return appSetting;
         }
+
 
         public static IApplicationBuilder UseWebsiteVisitCounterMiddleware(
             this IApplicationBuilder app) 
