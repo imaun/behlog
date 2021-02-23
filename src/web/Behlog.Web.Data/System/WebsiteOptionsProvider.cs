@@ -11,8 +11,8 @@ using Behlog.Services.Contracts.System;
 using Behlog.Core.Contracts.Repository.System;
 using Mapster;
 
-namespace Behlog.Web.Data.System
-{
+namespace Behlog.Web.Data.System {
+
     public class WebsiteOptionsProvider {
 
         private readonly ILanguageRepository _langRepository;

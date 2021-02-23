@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Behlog.Services.Dto.System;
 
-namespace Behlog.Services.Contracts.System
-{
-    public interface IWebsiteOptionService {
+namespace Behlog.Services.Contracts.System {
 
+    public interface IWebsiteOptionService {
         Task<WebsiteOptionResultDto> GetOptionAsync(string optionKey);
         Task<WebsiteContactInfoDto> GetContactInfoAsync(int? langId = null);
         Task<WebsiteSocialNetworkDto> GetSocialNetworksAsync();
