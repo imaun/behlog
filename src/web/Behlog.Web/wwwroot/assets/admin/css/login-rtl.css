@@ -3,8 +3,8 @@ Login page
 ***/
 /* logo page */
 .login {
-  background-color: #364150 !important;
-  /*background-image: url(../Css/layout/img/AdminBGTile.png);*/ 
+    background-color: #1fa67a !important;
+    /*background-image: url(../Css/layout/img/AdminBGTile.png);*/
 }
 
 .login .logo {
@@ -73,7 +73,7 @@ Login page
 }
 
 .login .content .form-title {
-  font-family: BYekan, BNazanin, Arial;  
+  font-family: IRANsans, BNazanin, Arial;  
   font-weight: 300;
   margin-bottom: 25px;
 }

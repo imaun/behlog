@@ -15,7 +15,6 @@ using Behlog.Web.Core.Settings;
 using Behlog.Web.Admin.ViewModels.Identity;
 using Behlog.Core;
 
-// ReSharper disable once CheckNamespace
 namespace Behlog.Web.Identity.Controllers
 {
     [Area(AreaNames.IdentityArea)]

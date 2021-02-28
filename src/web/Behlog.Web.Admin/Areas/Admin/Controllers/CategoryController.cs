@@ -14,8 +14,8 @@ using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Behlog.Web.Admin.Controllers
-{
+namespace Behlog.Web.Admin.Controllers {
+
     [Area(AreaNames.AdminArea)]
     [Authorize(Policy = ConstantPolicies.DynamicPermission)]
     [Route("[area]/[controller]")]

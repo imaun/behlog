@@ -9,8 +9,8 @@ using Behlog.Services.Contracts.Content;
 using Behlog.Services.Dto.Admin.Content;
 using Behlog.Web.Admin.ViewModels.Content;
 
-namespace Behlog.Web.Admin.Areas.Admin.Controllers
-{
+namespace Behlog.Web.Admin.Controllers {
+
     [Area(AreaNames.AdminArea)]
     [Authorize(Policy = ConstantPolicies.DynamicPermission)]
     [Route("[area]/[controller]")]

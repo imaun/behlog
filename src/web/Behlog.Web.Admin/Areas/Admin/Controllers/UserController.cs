@@ -9,7 +9,7 @@ using Behlog.Services.Security;
 using Behlog.Services.Contracts.Security;
 using Behlog.Web.Admin.ViewModels.Security;
 
-namespace Behlog.Web.Admin.Areas.Admin.Controllers {
+namespace Behlog.Web.Admin.Controllers {
 
     [Area(AreaNames.AdminArea)]
     [Authorize(Policy = ConstantPolicies.DynamicPermission)]

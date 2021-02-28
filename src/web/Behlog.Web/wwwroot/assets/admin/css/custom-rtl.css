@@ -19,11 +19,11 @@ Rounded Portlets
 */
 
 body {
-    font-family: BYekan;
+    font-family: 'IRANsans';
 }
 
 .page-title {
-    font-family: BYekan;
+    font-family: 'IRANsans';
 }
 
 .input-validation-error {
@@ -37,7 +37,7 @@ body {
 }
 
 .Admin-Index-Title {
-    font-family: BYekan;
+    font-family: 'IRANsans', BYekan, Arial;
     font-size: 20px;
     color: #333;
     text-shadow: #999 1px 1px 5px;

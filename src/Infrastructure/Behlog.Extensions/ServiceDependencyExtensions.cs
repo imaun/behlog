@@ -55,6 +55,8 @@ using Behlog.Factories.Security;
 using Behlog.Services.Http;
 using Microsoft.AspNetCore.Routing;
 using Behlog.Web.Common.Routing;
+using Behlog.Services.Contracts.Admin;
+using Behlog.Services.Admin;
 
 namespace Microsoft.Extensions.DependencyInjection {
 
@@ -82,6 +84,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddRepositories();
             services.AddValidators();
             services.AddServices();
+            services.AddAdminServices();
             services.AddViewModelProviders();
             services.AddExtensions();
             services.AddScoped<IWebsiteInfo>(_ => {
@@ -156,6 +159,7 @@ namespace Microsoft.Extensions.DependencyInjection {
             services.AddScoped<IPostFactory, PostFactory>();
             services.AddScoped<ICommentFactory, CommentFactory>();
             services.AddScoped<IFileFactory, FileFactory>();
+            services.AddScoped<IPostFileFactory, PostFileFactory>();
 
             //Feature
             services.AddScoped<IContactFactory, ContactFactory>();
@@ -229,6 +233,11 @@ namespace Microsoft.Extensions.DependencyInjection {
             
             //Security
             services.AddScoped<IUserRepository, UserRepository>();
+        }
+
+
+        private static void AddAdminServices(this IServiceCollection services) {
+            services.AddScoped<IAdminSliderService, AdminSliderService>();
         }
 
         private static void AddServices(this IServiceCollection services) {

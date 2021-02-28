@@ -3791,13 +3791,15 @@ Text states
 }
 
 .label {
-  text-transform: uppercase;
-  padding: 2px 6px 4px 6px;
-  font-size: 10px;
-  font-weight: 600;
+    font-family: 'IranSans', Tahoma, Arial;
+    text-transform: uppercase;
+    padding: 2px 6px 4px 6px;
+    font-size: 12px;
+    font-weight: 600;
 }
 .label.label-sm {
-  font-size: 10px;
+    font-family: 'IranSans', Tahoma, Arial;
+  font-size: 12px;
   font-weight: 600;
   padding: 3px 6px 3px 6px;
 }

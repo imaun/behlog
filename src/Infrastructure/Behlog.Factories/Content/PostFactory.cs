@@ -14,10 +14,10 @@ using Behlog.Factories.Extensions;
 using Behlog.Services.Dto.Content;
 using Mapster;
 
-namespace Behlog.Factories.Content
-{
-    public class PostFactory : IPostFactory
-    {
+namespace Behlog.Factories.Content {
+
+    public class PostFactory : IPostFactory {
+
         private readonly IDateService _dateService;
         private readonly IUserContext _userContext;
         private readonly IPostRepository _postRepository;
@@ -68,7 +68,6 @@ namespace Behlog.Factories.Content
             else
                 post.PublishDate = null;
 
-
             if(!model.Tags.IsNullOrEmpty())
                 foreach (var tag in model.Tags.Split(',')) {
                     var existingTag = await _tagRepository.GetByTitleAsync(tag, _websiteInfo.Id);
@@ -108,6 +107,35 @@ namespace Behlog.Factories.Content
             var post = await _postRepository.FindAsync(postId);
             post.CheckReferenceIsNull();
             post.Status = PostStatus.Deleted;
+
+            return await Task.FromResult(post);
+        }
+
+        public async Task<Post> MakeSliderPostAsync(
+            string title, 
+            string slug, 
+            int langId, 
+            bool enabled) {
+
+            var post = new Post {
+                Title = title.ApplyCorrectYeKe(),
+                Slug = slug,
+                LangId = langId,
+                Status = enabled ? PostStatus.Published : PostStatus.Draft,
+                CreateDate = _dateService.UtcNow(),
+                ModifyDate = _dateService.UtcNow(),
+                WebsiteId = _userContext.WebsiteId,
+                CreatorUserId = _userContext.UserId,
+                ModifierUserId = _userContext.UserId,
+            };
+
+            if (post.Slug.IsNotNullOrEmpty())
+                post.Slug = title.MakeSlug();
+            else
+                post.Slug = slug.MakeSlug();
+
+            if (enabled)
+                post.PublishDate = _dateService.UtcNow();
 
             return await Task.FromResult(post);
         }

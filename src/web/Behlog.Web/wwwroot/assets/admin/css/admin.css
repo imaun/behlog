@@ -6,7 +6,7 @@ html {
 
 body {
     overflow-x: hidden;
-    font-family: 'irsans', 'Yekan', 'Tahoma', 'sans-serif';
+    font-family: 'IRANsans', 'Yekan', 'Tahoma', 'sans-serif';
     font-size: 14px;
 }
 
@@ -20,7 +20,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'DroidNaskh', 'Yekan', 'irsans', 'Arial', 'sans-serif'
+    font-family: 'DroidNaskh', 'Yekan', 'IRANsans', 'Arial', 'sans-serif'
 }
 
 

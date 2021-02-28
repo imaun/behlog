@@ -317,3 +317,5 @@ ASALocalRun/
 
 # Behlog projects
 projects/
+
+src/web/behlog.web/wwwroot

@@ -9,6 +9,8 @@ using Behlog.Core.Models.Enum;
 using Behlog.Core.Utils.IO;
 using Behlog.Factories.Extensions;
 using Behlog.Factories.Contracts.Content;
+using Behlog.Services.Dto.Admin.Content;
+using Behlog.Core.Contracts.Repository.Content;
 
 namespace Behlog.Factories.Content
 {
@@ -16,12 +18,14 @@ namespace Behlog.Factories.Content
     {
         private readonly IUserContext _userContext;
         private readonly IDateService _dateService;
-        private readonly IWebsiteInfo _websiteInfo; 
+        private readonly IWebsiteInfo _websiteInfo;
+        private readonly IFileRepository _fileRepository;
 
         public FileFactory(
             IUserContext userContext,
             IDateService dateService,
-            IWebsiteInfo websiteInfo) {
+            IWebsiteInfo websiteInfo,
+            IFileRepository fileRepository) {
 
             userContext.CheckArgumentIsNull(nameof(userContext));
             _userContext = userContext;
@@ -31,6 +35,9 @@ namespace Behlog.Factories.Content
 
             websiteInfo.CheckArgumentIsNull(nameof(websiteInfo));
             _websiteInfo = websiteInfo;
+
+            fileRepository.CheckArgumentIsNull(nameof(fileRepository));
+            _fileRepository = fileRepository;
         }
 
 
@@ -65,7 +72,34 @@ namespace Behlog.Factories.Content
         }
 
 
+        public async Task<File> MakeAsync(AdminCreateSliderItemDto model) {
+            model.CheckArgumentIsNull(nameof(model));
+            if (model.FileId.HasValue)
+                return await _fileRepository.FindAsync(model.FileId.Value);
 
+            var file = new File {
+                CreateDate = _dateService.UtcNow(),
+                CreatorUserId = _userContext.UserId,
+                ModifierUserId = _userContext.UserId,
+                Status = FileStatus.AttachedToPost,
+                WebsiteId = _websiteInfo.Id,
+                Title = model.Title
+            };
+
+            if(model.FilePath.IsNotNullOrEmpty()) {
+                file.FilePath = model.FilePath;
+                file.Extension = model.FilePath.GetFileExtension();
+                file.FileType = model.FilePath.GetPostFileType();
+            }
+
+            if (model.Url.IsNotNullOrEmpty())
+                file.Url = model.Url;
+
+            if (file.Title.IsNullOrEmpty())
+                file.Title = model.FilePath.GetFileTitle();
+
+            return await Task.FromResult(file);
+        }
 
     }
 }

@@ -12,7 +12,7 @@ using Behlog.Services.Contracts.Feature;
 using Behlog.Services.Dto.Admin.Feature;
 using Behlog.Web.Admin.ViewModels.Feature;
 
-namespace Behlog.Web.Admin.Areas.Admin.Controllers {
+namespace Behlog.Web.Admin.Controllers {
 
     [Area(AreaNames.AdminArea)]
     [Authorize(Policy = ConstantPolicies.DynamicPermission)]
