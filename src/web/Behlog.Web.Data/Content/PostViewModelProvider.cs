@@ -171,5 +171,12 @@ namespace Behlog.Web.Data.Content {
             return await Task.FromResult(model);
         }
         
+
+        public async Task<CreateSliderViewModel> BuildCreateSliderViewModelAsync() {
+            var result = new CreateSliderViewModel();
+            result.LanguageSelectList = await _languageViewModelProvider
+                .GetSelectListAsync();
+            return result;
+        }
     }
 }

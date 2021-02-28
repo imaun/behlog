@@ -9,6 +9,7 @@ namespace Behlog.Core.Contracts.Repository.Content
         Task<int> GetMaxOrderNumberAsync(int categoryId);
         Task<IEnumerable<Tag>> GetTagsAsync(int postId);
         Task<IEnumerable<File>> GetFilesAsync(int postId);
+        Task<Post> GetWithPostFilesAsync(int postId);
         Task<(IEnumerable<Post>, int)> FrontSearchAsync(
             int websiteId,
             string searchPhrase,

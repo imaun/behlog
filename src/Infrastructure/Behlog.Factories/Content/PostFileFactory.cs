@@ -74,6 +74,7 @@ namespace Behlog.Factories.Content
             var result = new PostFile {
                 CreateDate = _dateService.UtcNow(),
                 CreatorUserId = _userContext.UserId,
+                File = file,
                 FileId = file.Id,
                 ModifierUserId = _userContext.UserId,
                 ModifyDate = _dateService.UtcNow(),

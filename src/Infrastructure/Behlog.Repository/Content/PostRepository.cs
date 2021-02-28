@@ -93,5 +93,13 @@ namespace Behlog.Repository.Content
             return (result, totalCount);
         }
 
+        public async Task<Post> GetWithPostFilesAsync(int postId) {
+            var post = await _dbSet
+                .Include(_ => _.PostFiles)
+                .ThenInclude(_ => _.File)
+                .FirstOrDefaultAsync(_ => _.Id == postId);
+
+            return post;
+        }
     }
 }
