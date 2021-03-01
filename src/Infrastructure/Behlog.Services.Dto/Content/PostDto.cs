@@ -198,6 +198,7 @@ namespace Behlog.Services.Dto.Content
         public string Author { get; set; }
         public DateTime PublishDate { get; set; }
         public string IconName { get; set; }
+        public string ViewPath { get; set; }
     }
 
     public class PostSummaryGroupDto {

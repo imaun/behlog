@@ -38,9 +38,10 @@ namespace Behlog.Web.Components.Content
             if (post == null)
                 return await Task.FromResult(Content(string.Empty));
 
-            var result = await Task.FromResult(
-                post.Adapt<PostSummaryViewModel>()
-            );
+            var result = post.Adapt<PostSummaryViewModel>();
+
+            if (post.ViewPath.IsNotNullOrEmpty())
+                return View(post.ViewPath, result);
 
             return View(result);
         }
