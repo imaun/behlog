@@ -1,16 +1,12 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Behlog.Core;
-using Behlog.Core.Extensions;
-using Behlog.Core.Security;
-using Behlog.Services.Contracts.System;
-using Behlog.Web.ViewModels.System;
-using Mapster;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Behlog.Web.Data.System;
-using Behlog.Services.Contracts.Http;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Behlog.Web.Data.System;
+using Behlog.Core.Extensions;
+using Behlog.Web.ViewModels.System;
+using Behlog.Services.Contracts.Http;
+using Behlog.Services.Contracts.System;
+using Mapster;
 
 namespace Behlog.Web.Components.System
 {
@@ -36,7 +32,8 @@ namespace Behlog.Web.Components.System
         }
 
 
-        public async Task<IViewComponentResult> InvokeAsync(string viewName = null) {
+        public async Task<IViewComponentResult> InvokeAsync(
+            string viewName = null) {
             var menu = await _menuService.GetWebsiteMenuAsync();
 
             var result = new WebsiteMenuViewModel(_linkBuilder) {
