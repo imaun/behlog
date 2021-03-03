@@ -53,8 +53,14 @@ namespace Behlog.Web.ViewModels.Feature
     }
 
     public class ContactInfoWidgetViewModel {
+        public ContactInfoWidgetViewModel() {
+            SocialNetworks = new WebsiteSocialNetworksViewModel();
+        }
+
         public string Address { get; set; }
         public string Phones { get; set; }
         public string Email { get; set; }
+        public string Description { get; set; }
+        public WebsiteSocialNetworksViewModel SocialNetworks { get; set; }
     }
 }

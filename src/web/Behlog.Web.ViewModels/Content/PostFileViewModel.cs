@@ -3,6 +3,7 @@ using Behlog.Core.Models.Enum;
 using Behlog.Core;
 using System.Linq;
 using Behlog.Web.ViewModels.Core;
+using Behlog.Web.Common.Extensions;
 
 namespace Behlog.Web.ViewModels.Content
 {
@@ -19,6 +20,7 @@ namespace Behlog.Web.ViewModels.Content
         public long FileId { get; set; }
         public string Title { get; set; }
         public string ImagePath { get; set; }
+        public string ImagePathFullUrl => ImagePath.GetFullUrl();
     }
 
     public class GalleryViewModel: BaseViewModel {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Behlog.Web.ViewModels.Feature;
+using Behlog.Core.Extensions;
 
 namespace Behlog.Web.Components.Feature {
     public class CallToActionViewComponent : ViewComponent
@@ -9,7 +10,8 @@ namespace Behlog.Web.Components.Feature {
         public async Task<IViewComponentResult> InvokeAsync(
             string title, 
             string actionUrl, 
-            string description) {
+            string description,
+            string viewName = null) {
 
             var model = new CallToActionViewModel {
                 ActionUrl = actionUrl,
@@ -17,9 +19,14 @@ namespace Behlog.Web.Components.Feature {
                 Description = description
             };
 
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(model)
+                );
+
             return await Task.FromResult(
                 View(model)
-                );
+            );
         }
 
     }

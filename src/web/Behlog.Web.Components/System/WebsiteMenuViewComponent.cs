@@ -17,46 +17,33 @@ namespace Behlog.Web.Components.System
     public class WebsiteMenuViewComponent: ViewComponent {
 
         private readonly IMenuService _menuService;
-        private readonly IWebsiteInfo _websiteInfo;
         private readonly WebsiteOptionsProvider _websiteOptionsProvider;
-        private readonly IUserContext _userContext;
         private readonly ILinkBuilder _linkBuilder;
 
         public WebsiteMenuViewComponent(
             IMenuService menuService,
-            IWebsiteInfo websiteInfo,
             WebsiteOptionsProvider websiteOptionsProvider,
-            IUserContext userContext,
             ILinkBuilder linkBuilder) {
 
             menuService.CheckArgumentIsNull(nameof(menuService));
             _menuService = menuService;
 
-            websiteInfo.CheckArgumentIsNull(nameof(websiteInfo));
-            _websiteInfo = websiteInfo;
-
             websiteOptionsProvider.CheckArgumentIsNull(nameof(websiteOptionsProvider));
             _websiteOptionsProvider = websiteOptionsProvider;
-
-            userContext.CheckArgumentIsNull(nameof(userContext));
-            _userContext = userContext;
 
             linkBuilder.CheckArgumentIsNull(nameof(linkBuilder));
             _linkBuilder = linkBuilder;
         }
 
 
-        public async Task<IViewComponentResult> InvokeAsync() {
-            var menu = await _menuService
-                .GetWebsiteMenuAsync(_websiteInfo.Id);
-
-            var logoData = await _websiteOptionsProvider.GetWebsiteLogoOptionAsync();
+        public async Task<IViewComponentResult> InvokeAsync(string viewName = null) {
+            var menu = await _menuService.GetWebsiteMenuAsync();
 
             var result = new WebsiteMenuViewModel(_linkBuilder) {
                 Items = menu.Items.Adapt<IEnumerable<MenuItemViewModel>>(),
                 WebsiteId = menu.WebsiteId,
-                WebsiteLogo = logoData?.Value,
-                WebsiteTitle = _websiteInfo.Title
+                WebsiteLogo = menu.LogoPath,
+                WebsiteTitle = menu.WebsiteTitle
             };
             //result.WebsiteTitle = _websiteInfo.Title;
 
@@ -86,7 +73,14 @@ namespace Behlog.Web.Components.System
 
             //result.Items = menuItems;
 
-            return View(result);
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, result)
+                );
+
+            return await Task.FromResult(
+                View(result)
+            );
         }
 
     }

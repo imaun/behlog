@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Behlog.Core.Extensions;
 using Behlog.Web.ViewModels.Feature;
 using Behlog.Services.Contracts.System;
+using Mapster;
 
 namespace Behlog.Web.Components.Widgets {
 
@@ -15,15 +16,25 @@ namespace Behlog.Web.Components.Widgets {
             _optionService = optionService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync() {
+        public async Task<IViewComponentResult> InvokeAsync(
+            string description = "",
+            string viewName = null) {
             var contactInfo = await _optionService
                 .GetContactInfoAsync();
 
             var model = new ContactInfoWidgetViewModel {
                 Address = contactInfo.Address1,
                 Email = contactInfo.Email,
-                Phones = contactInfo.Phones
+                Phones = contactInfo.Phones,
+                Description = description
             };
+
+            var socialNetworks = await _optionService.GetSocialNetworksAsync();
+            if (socialNetworks != null)
+                model.SocialNetworks = socialNetworks.Adapt<WebsiteSocialNetworksViewModel>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return View(viewName, model);
 
             return await Task.FromResult(
                 View(model)

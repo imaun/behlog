@@ -4,6 +4,6 @@ using Behlog.Services.Dto.System;
 namespace Behlog.Services.Contracts.System
 {
     public interface IMenuService {
-        Task<WebsiteMenuDto> GetWebsiteMenuAsync(int websiteId);
+        Task<WebsiteMenuDto> GetWebsiteMenuAsync(string lang = null);
     }
 }

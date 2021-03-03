@@ -25,7 +25,8 @@ namespace Behlog.Web.Components.Content {
             string postTypeSlug,
             int? categoryId = null,
             string lang = Language.KEY_fa_IR,
-            int pageSize = 10
+            int pageSize = 10,
+            string viewName = null
         ) {
 
             PostListDto result;
@@ -48,6 +49,9 @@ namespace Behlog.Web.Components.Content {
             }
 
             var model = result.Adapt<LatestPostsViewModel>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return View(viewName, model);
 
             return await Task.FromResult(
                 View(model)

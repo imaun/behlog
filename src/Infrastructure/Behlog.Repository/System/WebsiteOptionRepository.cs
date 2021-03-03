@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Behlog.Core.Extensions;
 using Behlog.Core.Contracts;
-using Behlog.Core.Contracts.Repository.System;
 using Behlog.Core.Models.Enum;
 using Behlog.Core.Models.System;
-using Microsoft.EntityFrameworkCore;
+using Behlog.Core.Contracts.Repository.System;
 
-namespace Behlog.Repository.System
-{
-    public class WebsiteOptionRepository: BaseRepository<WebsiteOption, int>, 
-        IWebsiteOptionRepository
-    {
+namespace Behlog.Repository.System {
+
+    public class WebsiteOptionRepository
+        : BaseRepository<WebsiteOption, int>, IWebsiteOptionRepository {
+
         public WebsiteOptionRepository(IBehlogContext context) : base(context) {
         }
 
-        public async Task<IEnumerable<WebsiteOption>> GetEnabledOptions(int websiteId, string category = null) {
+        public async Task<IEnumerable<WebsiteOption>> GetEnabledOptions(
+            int websiteId, 
+            string category = null) {
             var query = Query()
                 .Where(_=> _.WebsiteId == websiteId)
                 .Where(_ => _.Status == EntityStatus.Enabled);
@@ -31,17 +31,26 @@ namespace Behlog.Repository.System
         }
 
         public async Task<WebsiteOption> GetEnabledByKey(int websiteId, string key) 
-            => await SingleOrDefaultAsync(_ => _.WebsiteId == websiteId &&
-                                               _.Key.ToLower() == key.ToLower());
+            => await FirstOrDefaultAsync(_ => _.WebsiteId == websiteId &&
+                                            _.Status == EntityStatus.Enabled &&
+                                            _.Key.ToLower() == key.ToLower());
 
         public async Task<WebsiteOption> GetOptionAsync(
             string category,
             string key,
-            int? langId) => await SingleOrDefaultAsync(_ => _.Category.ToLower() == category.ToLower() &&
+            int? langId) => await FirstOrDefaultAsync(_ => _.Category.ToLower() == category.ToLower() &&
                                                       _.Key.ToLower() == key.ToLower() &&
                                                       _.LangId == langId);
 
-
+        public async Task<WebsiteOption> GetByKeyAsync(
+            int websiteId,
+            string key,
+            string lang = null) => lang.IsNotNullOrEmpty()
+                ? await FirstOrDefaultAsync(_ => _.WebsiteId == websiteId &&
+                                                 _.Language.LangKey.ToUpper() == lang.ToUpper() &&
+                                                 _.Key.ToUpper() == key.ToUpper())
+                : await FirstOrDefaultAsync(_ => _.WebsiteId == websiteId &&
+                                                 _.Key.ToUpper() == key.ToUpper());
 
     }
 }

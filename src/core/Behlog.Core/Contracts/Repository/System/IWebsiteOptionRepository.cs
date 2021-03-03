@@ -18,5 +18,10 @@ namespace Behlog.Core.Contracts.Repository.System
             string key,
             int? langId);
 
+        Task<WebsiteOption> GetByKeyAsync(
+            int websiteId, 
+            string key, 
+            string lang = null);
+
     }
 }

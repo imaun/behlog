@@ -9,6 +9,7 @@ namespace Behlog.Services.Dto.System
         }
 
         public int WebsiteId { get; set; }
+        public string WebsiteTitle { get; set; }
         public string LogoPath { get; set; }
         public IEnumerable<MenuItemDto> Items { get; set; }
     }
