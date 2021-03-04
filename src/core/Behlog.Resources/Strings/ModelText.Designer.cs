@@ -133,6 +133,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to موضوع.
+        /// </summary>
+        public static string Contact_Title {
+            get {
+                return ResourceManager.GetString("Contact_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تصویر کاور.
         /// </summary>
         public static string CoverPhoto {

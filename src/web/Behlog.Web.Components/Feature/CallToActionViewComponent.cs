@@ -4,8 +4,8 @@ using Behlog.Web.ViewModels.Feature;
 using Behlog.Core.Extensions;
 
 namespace Behlog.Web.Components.Feature {
-    public class CallToActionViewComponent : ViewComponent
-    {
+
+    public class CallToActionViewComponent : ViewComponent {
 
         public async Task<IViewComponentResult> InvokeAsync(
             string title, 

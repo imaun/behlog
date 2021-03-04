@@ -2,14 +2,18 @@
 using Behlog.Resources.Strings;
 using Behlog.Web.Core.Models;
 
-namespace Behlog.Web.ViewModels.Feature
-{
-    public class CreateContactViewModel: ViewModelBase
-    {
+namespace Behlog.Web.ViewModels.Feature {
+
+    public class CreateContactViewModel: WidgetViewModelBase {
+
         [Display(ResourceType = typeof(ModelText), Name = "Contact_Name")]
         [Required(ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Contact_Name_Required")]
         [MaxLength(100, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "MaxLen")]
         public string Name { get; set; }
+
+        [Display(ResourceType = typeof(ModelText), Name = "Contact_Title")]
+        [MaxLength(300, ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "MaxLen")]
+        public string Title { get; set; }
 
         [Display(ResourceType = typeof(ModelText), Name = "Contact_Email")]
         [EmailAddress(ErrorMessageResourceType = typeof(ModelError), ErrorMessageResourceName = "Email_Wrong")]

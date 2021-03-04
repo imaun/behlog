@@ -115,6 +115,15 @@ namespace Behlog.Resources.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفاً خطاهای فرم را بررسی کرده و دوباره ارسال نمایید..
+        /// </summary>
+        public static string Form_Input_Error {
+            get {
+                return ResourceManager.GetString("Form_Input_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تعداد کاراکترها بیشتر از حد مجاز است..
         /// </summary>
         public static string MaxLen {

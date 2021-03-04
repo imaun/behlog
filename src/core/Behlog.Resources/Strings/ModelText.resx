@@ -141,6 +141,9 @@
   <data name="Contact_Phone" xml:space="preserve">
     <value>شماره تماس</value>
   </data>
+  <data name="Contact_Title" xml:space="preserve">
+    <value>موضوع</value>
+  </data>
   <data name="CoverPhoto" xml:space="preserve">
     <value>تصویر کاور</value>
   </data>

@@ -135,6 +135,9 @@
   <data name="Email_Wrong" xml:space="preserve">
     <value>فرمت آدرس ایمیل اشتباه است</value>
   </data>
+  <data name="Form_Input_Error" xml:space="preserve">
+    <value>لطفاً خطاهای فرم را بررسی کرده و دوباره ارسال نمایید.</value>
+  </data>
   <data name="MaxLen" xml:space="preserve">
     <value>تعداد کاراکترها بیشتر از حد مجاز است.</value>
   </data>
