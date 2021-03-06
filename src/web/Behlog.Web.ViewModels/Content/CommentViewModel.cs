@@ -26,6 +26,31 @@ namespace Behlog.Web.ViewModels.Content
         public string PostTitle { get; set; }
     }
 
+
+    public class PostCommentViewModel {
+
+        public PostCommentViewModel() {
+            Items = new List<PostCommentViewModel>();
+        }
+
+        public string Description { get; set; }
+        public IEnumerable<PostCommentViewModel> Items { get; set; }
+    }
+
+    public class PostCommentItemViewModel
+    {
+        public long Id { get; set; }
+        public string UserPhotoUrl { get; set; }
+        public string Title { get; set; }
+        public string Email { get; set; }
+        public string WebUrl { get; set; }
+        public string Body { get; set; }
+        public string IP { get; set; }
+        public long? ParentId { get; set; }
+        public Guid? UserId { get; set; }
+        public string UserTitle { get; set; }
+    }
+
     public class CreateCommentViewModel: BaseViewModel {
 
         [Display(ResourceType = typeof(ModelText), Name = "Comment_Title")]

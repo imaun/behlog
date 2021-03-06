@@ -165,6 +165,7 @@ namespace Behlog.Web.ViewModels.Content {
         public IEnumerable<PostItemViewModel> RelatedPosts { get; set; }
         public IEnumerable<CategoryItemViewModel> Categories { get; set; }
         public IEnumerable<PostTagItemViewModel> Tags { get; set; }
+        public IEnumerable<PostCommentItemViewModel> Comments { get; set; }
         public PostViewModel Post { get; set; }
         public PostMetaListViewModel Meta { get; set; }
         public bool Commented { get; set; }
@@ -182,6 +183,9 @@ namespace Behlog.Web.ViewModels.Content {
     }
 
     public class LatestPostsItemViewModel: PostItemBaseViewModel {
-
+        public int? CategoryId { get; set; }
+        public string CategoryTitle { get; set; }
+        public string CategorySlug { get; set; }
+        public IEnumerable<PostTagItemViewModel> Tags { get; set; }
     }
 }

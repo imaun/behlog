@@ -19,7 +19,8 @@ namespace Behlog.Web.Components.Content {
         public async Task<IViewComponentResult> InvokeAsync(
             string lang,
             string postType,
-            string slug
+            string slug,
+            string viewName = ""
             ) {
 
             var post = await _postService.GetPostFileGalleryAsync(
@@ -30,7 +31,8 @@ namespace Behlog.Web.Components.Content {
 
             if (post == null)
                 return await Task.FromResult(
-                    Content(string.Empty));
+                    Content(string.Empty)
+                    );
 
             var result = new SliderViewModel {
                 Images = post.Files.Select(_ => new SliderImageViewModel {
@@ -40,16 +42,21 @@ namespace Behlog.Web.Components.Content {
                 }).ToList()
             };
 
-            if (result.Images.Any()) {
+            if (result.Images.Any()) 
                 result.Images.FirstOrDefault().CssClass = "active";
-            }
-                
-            if(!string.IsNullOrWhiteSpace(post.ViewPath)) 
+            
+            if(post.ViewPath.IsNotNullOrEmpty()) 
                 return await Task.FromResult(
                     View(post.ViewPath, result));
 
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, result)
+                    );
+
             return await Task.FromResult(
-                View(result));
+                View(result)
+                );
         }
     }
 }

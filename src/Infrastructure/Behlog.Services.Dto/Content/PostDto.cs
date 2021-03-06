@@ -183,6 +183,12 @@ namespace Behlog.Services.Dto.Content
         public string IconName { get; set; }
         public string CoverPhoto { get; set; }
         public string Author { get; set; }
+        public int? CategoryId { get; set; }
+        public string CategoryTitle { get; set; }
+        public string CategorySlug { get; set; }
+        public int LikeCount { get; set; }
+        public int CommentCount { get; set; }
+        public IEnumerable<PostTagItemDto> Tags { get; set; }
     }
 
     public class PostSummaryDto {

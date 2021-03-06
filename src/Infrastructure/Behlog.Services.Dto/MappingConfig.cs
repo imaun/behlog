@@ -34,7 +34,13 @@ namespace Behlog.Services.Dto {
             TypeAdapterConfig<Post, PostItemDto>
                 .NewConfig()
                 .Map(d => d.Author, s => s.CreatorUser != null ? s.CreatorUser.Title : "")
-                .Map(d => d.PostTypeSlug, s => s.PostType != null ? s.PostType.Slug : "");
+                .Map(d => d.PostTypeSlug, s => s.PostType != null ? s.PostType.Slug : "")
+                .Map(d => d.CategoryTitle, s => s.Category != null ? s.Category.Title : "")
+                .Map(d => d.CategorySlug, s => s.Category != null ? s.Category.Slug : "")
+                .Map(d => d.Tags, s => s.PostTags != null
+                     ? s.PostTags.ExtractTags()
+                     : new List<PostTagItemDto>())
+                ;
 
             TypeAdapterConfig<Comment, CommentResultDto>
                 .NewConfig()
