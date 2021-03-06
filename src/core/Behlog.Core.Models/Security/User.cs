@@ -32,6 +32,7 @@ namespace Behlog.Core.Models.Security {
         public string Phone { get; set; }
         public DateTime RegisterDate { get; set; }
         public string Description { get; set; }
+        public string PhotoUrl { get; set; }
         #endregion
 
         #region Navigations

@@ -15,6 +15,7 @@ namespace Behlog.Storage.Core.Mappings {
                 map.Property(_ => _.WebUrl).HasMaxLength(2000);
                 map.Property(_ => _.Phone).HasMaxLength(100).IsUnicode();
                 map.Property(_ => _.Status).HasDefaultValue(UserStatus.Enabled);
+                map.Property(_ => _.PhotoUrl).HasMaxLength(2000).IsUnicode();
                 
             });
         }
