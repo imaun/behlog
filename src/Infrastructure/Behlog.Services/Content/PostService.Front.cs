@@ -59,7 +59,7 @@ namespace Behlog.Services.Content
 
             if (post == null) return null;
 
-            await renderTemplateToBody(post);
+            renderTemplateToBody(post);
             var result = post.Adapt<PostResultDto>();
             result.Tags = await getPostTagsAsync(post.Id);
 
@@ -93,7 +93,7 @@ namespace Behlog.Services.Content
                 .BelongsToWebsite(_websiteInfo.Id)
                 .FirstOrDefaultAsync(predicate);
 
-            await renderTemplateToBody(post);
+            renderTemplateToBody(post);
 
             var postResult = post.Adapt<PostResultDto>();
             var result = new PostDetailDto();
@@ -356,8 +356,8 @@ namespace Behlog.Services.Content
                 .FirstOrDefaultAsync(_ => _.PostType.Slug == postTypeSlug &&
                                           _.Slug == slug &&
                                           _.Language.LangKey == lang);
+            renderTemplateToBody(post);
 
-            await renderTemplateToBody(post);
             return await getPageDetailAsync(post);
         }
 
@@ -709,7 +709,7 @@ namespace Behlog.Services.Content
                     .ThenInclude(_ => _.File);
         }
 
-        private async Task renderTemplateToBody(Post post) {
+        private  void renderTemplateToBody(Post post) {
             if (string.IsNullOrWhiteSpace(post.Template))
                 return;
 

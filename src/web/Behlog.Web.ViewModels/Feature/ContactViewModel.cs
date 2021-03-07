@@ -43,6 +43,7 @@ namespace Behlog.Web.ViewModels.Feature {
         public string[] PhoneList => Phones.Split(",");
         public string Email { get; set; }
         public string Copyright { get; set; }
+        public string GoogleMapCode { get; set; }
     }
 
     public class WebsiteSocialNetworksViewModel

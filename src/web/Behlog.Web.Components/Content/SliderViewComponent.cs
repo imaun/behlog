@@ -35,6 +35,10 @@ namespace Behlog.Web.Components.Content {
                     );
 
             var result = new SliderViewModel {
+                CoverPhoto = post.CoverPhoto,
+                Slug = post.Slug,
+                Title = post.Title,
+                AltTitle = post.AltTitle,
                 Images = post.Files.Select(_ => new SliderImageViewModel {
                     Title = _.Title,
                     FileId = _.Id,

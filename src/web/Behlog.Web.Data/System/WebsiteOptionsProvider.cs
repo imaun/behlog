@@ -191,6 +191,7 @@ namespace Behlog.Web.Data.System {
         public static string Social_Twitter = "twitter";
         public static string Social_Facebook = "facebook";
         public static string Social_YouTube = "youtube";
+        public static string Contact_GoogleMapCode = "googlemapcode";
     } 
 
 }

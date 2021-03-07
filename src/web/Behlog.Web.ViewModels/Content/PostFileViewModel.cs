@@ -13,6 +13,11 @@ namespace Behlog.Web.ViewModels.Content
             Images = new List<SliderImageViewModel>();
         }
 
+        public string Title { get; set; }
+        public string AltTitle { get; set; }
+        public string Slug { get; set; }
+        public string CoverPhoto { get; set; }
+        public string CoverPhotoDisplay => CoverPhoto.GetFullUrl();
         public IEnumerable<SliderImageViewModel> Images { get; set; }
     }
 
