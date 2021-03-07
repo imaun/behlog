@@ -6,10 +6,14 @@ using Behlog.Core.Extensions;
 using Microsoft.Extensions.Logging;
 using Behlog.Web.Core.Settings;
 
-namespace Behlog.Web.Common.Controllers
-{
-    public class BehlogController: Controller
-    {
+namespace Behlog.Web.Common.Controllers {
+
+    /// <summary>
+    /// Base Controller class for Behlog front controllers.
+    /// Use it for End-user Website's controllers.
+    /// </summary>
+    public abstract class BehlogController: Controller {
+
         private readonly IWebsiteInfo _websiteInfo;
         private readonly IUserContext _userContext;
         private readonly IOptionsSnapshot<BehlogSetting> _setting;
