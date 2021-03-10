@@ -517,10 +517,6 @@ namespace Behlog.Services.Content
             string slug,
             bool isComponent = false) {
 
-            //var query = _repository.Query();
-            //query = includeFiles(query);
-            //query = addPublishedRules(query);
-
             var post = await _repository
                 .Query()
                 .Include(_ => _.Language)
@@ -532,22 +528,23 @@ namespace Behlog.Services.Content
                                         _.Slug == slug &&
                                         _.IsComponent == isComponent);
 
-            //var post = await query
-            //    .Include(_=> _.Language)
-            //    .Include(_=> _.PostType)
-            //    .FirstOrDefaultAsync(_ => _.LangId == 1 &&
-            //                            _.PostTypeId == 5 &&
-            //                            _.Slug == slug);
-
             if (post == null) return null;
 
             var result = post.Adapt<PostFileGalleryDto>();
             result.Files = post.PostFiles
-                .Select(_ => _.File)
-                .Adapt<List<PostFileGalleryItemDto>>();
+                .Select(_ => new PostFileGalleryItemDto {
+                    Id = _.Id,
+                    Extension = _.File.Extension,
+                    Description = _.Title,
+                    FilePath = _.File.FilePath,
+                    FileType = _.File.FileType,
+                    Title = _.Title,
+                    Url = _.File.Url
+                });
 
             return await Task.FromResult(result);
         }
+
         #endregion
 
         #region Get PostMeta data 

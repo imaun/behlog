@@ -27,7 +27,12 @@ namespace Behlog.Web.Components.System
             _websiteOptionService = websiteOptionService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string postType, string lang = "fa", int pageSize = 5) {
+        public async Task<IViewComponentResult> InvokeAsync(
+            string postType, 
+            string aboutText,
+            string aboutUrl,
+            string lang = "fa", 
+            int pageSize = 5) {
             var model = new WebsiteFooterViewModel();
 
             var posts = await _postService.GetLatestPostsAsync(
@@ -51,6 +56,9 @@ namespace Behlog.Web.Components.System
 
             if (socialNetworks != null)
                 model.SocialNetworks = socialNetworks.Adapt<WebsiteSocialNetworksViewModel>();
+
+            model.AboutText = aboutText;
+            model.AboutUrl = aboutUrl;
 
             return await Task.FromResult(
                 View(model)

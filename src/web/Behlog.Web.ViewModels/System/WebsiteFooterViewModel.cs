@@ -15,6 +15,8 @@ namespace Behlog.Web.ViewModels.System {
 
         public int WebsiteId { get; set;}
         public string CopyrightText { get; set; }
+        public string AboutText { get; set; }
+        public string AboutUrl { get; set; }
         public WebsiteContactInfoViewModel ContactInfo { get; set; }
         public IEnumerable<PostItemViewModel> Posts { get; set; }
         public IEnumerable<LinkViewModel> Links { get; set; }
