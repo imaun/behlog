@@ -53,32 +53,27 @@ namespace Behlog.Services.Security {
             _users = _db.Set<User>();
         }
 
-        public IList<Role> FindCurrentUserRoles() {
-            var userId = getCurrentUserId();
-            return FindUserRoles(userId);
-        }
+        private long _currentUserId => _contextAccessor.HttpContext.User.Identity.GetUserId();
 
-        public IList<Role> FindUserRoles(Guid userId) {
-            var userRolesQuery = from role in Roles
-                                 from user in role.Users
-                                 where user.UserId == userId
-                                 select role;
+        public IList<Role> FindCurrentUserRoles() +> FindUserRoles(_currentUserId);
 
-            return userRolesQuery.OrderBy(x => x.Name).ToList();
-        }
+        public IList<Role> FindUserRoles(Guid userId) 
+            => (from role in Roles
+                from user in role.Users
+                where user.UserId == userId
+                select role).OrderBy(_=> _.Name)
+                            .ToList();
 
-        public Task<List<Role>> GetAllCustomRolesAsync() {
-            return Roles.ToListAsync();
-        }
-
-        public IList<RoleUsersCountViewModel> GetAllCustomRolesAndUsersCountList() {
-            return Roles.Select(role =>
+        public async Task<List<Role>> GetAllCustomRolesAsync() => await Roles.ToListAsync();
+        
+        public IList<RoleUsersCountViewModel> GetAllCustomRolesAndUsersCountList() 
+            => Roles.Select(role =>
                                     new RoleUsersCountViewModel {
                                         Role = role,
                                         UsersCount = role.Users.Count()
-                                    }).ToList();
-        }
-
+                                    }
+                            ).ToList();
+        
         public async Task<UserListViewModel> GetUsersInRoleListAsync(
                 Guid roleId,
                 int pageNumber, int recordsPerPage,
@@ -116,19 +111,15 @@ namespace Behlog.Services.Security {
             };
         }
 
-        public IList<User> GetUsersInRole(string roleName) {
-            var roleUserIdsQuery = from role in Roles
-                                   where role.Name == roleName
-                                   from user in role.Users
-                                   select user.UserId;
-            return _users.Where(_ => roleUserIdsQuery.Contains(_.Id))
-                         .ToList();
-        }
+        public IList<User> GetUsersInRole(string roleName) 
+            => _users.Where(_ => (from role in Roles
+                                    where role.Name == roleName
+                                    from user in role.UserRoles
+                                    select user.UserId)
+                                .Contains(_.Id))
+                                .ToList();
 
-        public IList<Role> GetRolesForCurrentUser() {
-            var userId = getCurrentUserId();
-            return GetRolesForUser(userId);
-        }
+        public IList<Role> GetRolesForCurrentUser() => GetRolesForUser(_currentUserId);
 
         public IList<Role> GetRolesForUser(Guid userId) {
             var roles = FindUserRoles(userId);
@@ -139,30 +130,22 @@ namespace Behlog.Services.Security {
             return roles.ToList();
         }
 
-        public IList<UserRole> GetUserRolesInRole(string roleName) {
-            return Roles.Where(role => role.Name == roleName)
-                             .SelectMany(role => role.Users)
-                             .ToList();
-        }
+        public IList<UserRole> GetUserRolesInRole(string roleName)
+            => Roles.Where(_ => _.Name == roleName)
+                    .SelectMany(_ => _.UserRoles)
+                    .ToList();
 
-        public bool IsCurrentUserInRole(string roleName) {
-            var userId = getCurrentUserId();
-            return IsUserInRole(userId, roleName);
-        }
+        public bool IsCurrentUserInRole(string roleName) => IsUserInRole(_currentUserId, roleName);
 
-        public bool IsUserInRole(Guid userId, string roleName) {
-            var userRolesQuery = from role in Roles
-                                 where role.Name == roleName
-                                 from user in role.Users
-                                 where user.UserId == userId
-                                 select role;
-            var userRole = userRolesQuery.FirstOrDefault();
-            return userRole != null;
-        }
+        public bool IsUserInRole(Guid userId, string roleName) 
+            => (from role in Roles
+                    where role.Name == roleName
+                    from user in role.UserRoles
+                    where user.UserId == userId
+                    select role).FirstOrDefault() != null;
 
-        public Task<Role> FindRoleIncludeRoleClaimsAsync(Guid roleId) {
-            return Roles.Include(x => x.Claims).FirstOrDefaultAsync(x => x.Id == roleId);
-        }
+        public async Task<Role> FindRoleIncludeRoleClaimsAsync(Guid roleId) 
+            => await Roles.Include(x => x.Claims).FirstOrDefaultAsync(x => x.Id == roleId);
 
         public async Task<IdentityResult> AddOrUpdateRoleClaimsAsync(
             Guid roleId,

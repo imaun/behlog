@@ -706,7 +706,7 @@ namespace Behlog.Services.Content
                     .ThenInclude(_ => _.File);
         }
 
-        private  void renderTemplateToBody(Post post) {
+        private void renderTemplateToBody(Post post) {
             if (string.IsNullOrWhiteSpace(post.Template))
                 return;
 
