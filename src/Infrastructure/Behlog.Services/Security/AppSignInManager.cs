@@ -40,37 +40,31 @@ namespace Behlog.Services.Security {
 
         #region BaseClass
 
-        Task<bool> IAppSignInManager.IsLockedOut(User user) {
-            return base.IsLockedOut(user);
-        }
+        Task<bool> IAppSignInManager.IsLockedOut(User user) => base.IsLockedOut(user);
 
-        Task<SignInResult> IAppSignInManager.LockedOut(User user) {
-            return base.LockedOut(user);
-        }
+        Task<SignInResult> IAppSignInManager.LockedOut(User user) 
+            => base.LockedOut(user);
+        
+        Task<SignInResult> IAppSignInManager.PreSignInCheck(User user) 
+            => base.PreSignInCheck(user);
+        
 
-        Task<SignInResult> IAppSignInManager.PreSignInCheck(User user) {
-            return base.PreSignInCheck(user);
-        }
+        Task IAppSignInManager.ResetLockout(User user) 
+            => base.ResetLockout(user);
 
-        Task IAppSignInManager.ResetLockout(User user) {
-            return base.ResetLockout(user);
-        }
-
-        Task<SignInResult> IAppSignInManager.SignInOrTwoFactorAsync(User user, bool isPersistent, string loginProvider, bool bypassTwoFactor) {
-            return base.SignInOrTwoFactorAsync(user, isPersistent, loginProvider, bypassTwoFactor);
-        }
-
+        Task<SignInResult> IAppSignInManager.SignInOrTwoFactorAsync(User user, bool isPersistent, string loginProvider, bool bypassTwoFactor)
+            => base.SignInOrTwoFactorAsync(user, isPersistent, loginProvider, bypassTwoFactor);
+        
         #endregion
 
         #region CustomMethods
 
-        public bool IsCurrentUserSignedIn() {
-            return IsSignedIn(_contextAccessor.HttpContext.User);
-        }
+        public bool IsCurrentUserSignedIn() 
+            => IsSignedIn(_contextAccessor.HttpContext.User);
+        
 
-        public Task<User> ValidateCurrentUserSecurityStampAsync() {
-            return ValidateSecurityStampAsync(_contextAccessor.HttpContext.User);
-        }
+        public Task<User> ValidateCurrentUserSecurityStampAsync()
+            => ValidateSecurityStampAsync(_contextAccessor.HttpContext.User);
 
         #endregion
     }
