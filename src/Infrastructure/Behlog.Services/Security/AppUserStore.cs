@@ -62,37 +62,29 @@ namespace Behlog.Services.Security {
             };
         }
 
-        Task IAppUserStore.AddUserTokenAsync(UserToken token) {
-            return base.AddUserTokenAsync(token);
-        }
+        Task IAppUserStore.AddUserTokenAsync(UserToken token) 
+            => base.AddUserTokenAsync(token);
 
-        Task<Role> IAppUserStore.FindRoleAsync(string normalizedRoleName, CancellationToken cancellationToken) {
-            return base.FindRoleAsync(normalizedRoleName, cancellationToken);
-        }
+        Task<Role> IAppUserStore.FindRoleAsync(string normalizedRoleName, CancellationToken cancellationToken) 
+            => base.FindRoleAsync(normalizedRoleName, cancellationToken);
+        
+        Task<UserToken> IAppUserStore.FindTokenAsync(User user, string loginProvider, string name, CancellationToken cancellationToken)
+            => base.FindTokenAsync(user, loginProvider, name, cancellationToken);
 
-        Task<UserToken> IAppUserStore.FindTokenAsync(User user, string loginProvider, string name, CancellationToken cancellationToken) {
-            return base.FindTokenAsync(user, loginProvider, name, cancellationToken);
-        }
+        Task<User> IAppUserStore.FindUserAsync(Guid userId, CancellationToken cancellationToken) 
+            => base.FindUserAsync(userId, cancellationToken);
+        
+        Task<UserLogin> IAppUserStore.FindUserLoginAsync(Guid userId, string loginProvider, string providerKey, CancellationToken cancellationToken)
+            => base.FindUserLoginAsync(userId, loginProvider, providerKey, cancellationToken);
 
-        Task<User> IAppUserStore.FindUserAsync(Guid userId, CancellationToken cancellationToken) {
-            return base.FindUserAsync(userId, cancellationToken);
-        }
+        Task<UserLogin> IAppUserStore.FindUserLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken)
+            => base.FindUserLoginAsync(loginProvider, providerKey, cancellationToken);
 
-        Task<UserLogin> IAppUserStore.FindUserLoginAsync(Guid userId, string loginProvider, string providerKey, CancellationToken cancellationToken) {
-            return base.FindUserLoginAsync(userId, loginProvider, providerKey, cancellationToken);
-        }
+        Task<UserRole> IAppUserStore.FindUserRoleAsync(Guid userId, Guid roleId, CancellationToken cancellationToken)
+            => base.FindUserRoleAsync(userId, roleId, cancellationToken);
 
-        Task<UserLogin> IAppUserStore.FindUserLoginAsync(string loginProvider, string providerKey, CancellationToken cancellationToken) {
-            return base.FindUserLoginAsync(loginProvider, providerKey, cancellationToken);
-        }
-
-        Task<UserRole> IAppUserStore.FindUserRoleAsync(Guid userId, Guid roleId, CancellationToken cancellationToken) {
-            return base.FindUserRoleAsync(userId, roleId, cancellationToken);
-        }
-
-        Task IAppUserStore.RemoveUserTokenAsync(UserToken token) {
-            return base.RemoveUserTokenAsync(token);
-        }
+        Task IAppUserStore.RemoveUserTokenAsync(UserToken token)
+            => base.RemoveUserTokenAsync(token);
 
         #endregion
 
