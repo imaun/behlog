@@ -53,9 +53,9 @@ namespace Behlog.Services.Security {
             _users = _db.Set<User>();
         }
 
-        private long _currentUserId => _contextAccessor.HttpContext.User.Identity.GetUserId();
+        private Guid _currentUserId => _contextAccessor.HttpContext.User.Identity.GetUserId();
 
-        public IList<Role> FindCurrentUserRoles() +> FindUserRoles(_currentUserId);
+        public IList<Role> FindCurrentUserRoles() => FindUserRoles(_currentUserId);
 
         public IList<Role> FindUserRoles(Guid userId) 
             => (from role in Roles
@@ -114,7 +114,7 @@ namespace Behlog.Services.Security {
         public IList<User> GetUsersInRole(string roleName) 
             => _users.Where(_ => (from role in Roles
                                     where role.Name == roleName
-                                    from user in role.UserRoles
+                                    from user in role.Users
                                     select user.UserId)
                                 .Contains(_.Id))
                                 .ToList();
@@ -132,7 +132,7 @@ namespace Behlog.Services.Security {
 
         public IList<UserRole> GetUserRolesInRole(string roleName)
             => Roles.Where(_ => _.Name == roleName)
-                    .SelectMany(_ => _.UserRoles)
+                    .SelectMany(_ => _.Users)
                     .ToList();
 
         public bool IsCurrentUserInRole(string roleName) => IsUserInRole(_currentUserId, roleName);
@@ -140,7 +140,7 @@ namespace Behlog.Services.Security {
         public bool IsUserInRole(Guid userId, string roleName) 
             => (from role in Roles
                     where role.Name == roleName
-                    from user in role.UserRoles
+                    from user in role.Users
                     where user.UserId == userId
                     select role).FirstOrDefault() != null;
 
