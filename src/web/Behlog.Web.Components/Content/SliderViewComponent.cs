@@ -20,6 +20,7 @@ namespace Behlog.Web.Components.Content {
             string lang,
             string postType,
             string slug,
+            string activeStyleName = "",
             string viewName = ""
             ) {
 
@@ -46,8 +47,12 @@ namespace Behlog.Web.Components.Content {
                 }).ToList()
             };
 
+            string activeCss = "active";
+            if (activeStyleName.IsNotNullOrEmpty())
+                activeCss = activeStyleName;
+
             if (result.Images.Any()) 
-                result.Images.FirstOrDefault().CssClass = "active";
+                result.Images.FirstOrDefault().CssClass = activeCss;
             
             if(post.ViewPath.IsNotNullOrEmpty()) 
                 return await Task.FromResult(

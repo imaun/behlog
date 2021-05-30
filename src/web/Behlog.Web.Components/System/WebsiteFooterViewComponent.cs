@@ -32,7 +32,8 @@ namespace Behlog.Web.Components.System
             string aboutText,
             string aboutUrl,
             string lang = "fa", 
-            int pageSize = 5) {
+            int pageSize = 5,
+            string viewName = "") {
             var model = new WebsiteFooterViewModel();
 
             var posts = await _postService.GetLatestPostsAsync(
@@ -59,6 +60,11 @@ namespace Behlog.Web.Components.System
 
             model.AboutText = aboutText;
             model.AboutUrl = aboutUrl;
+
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
                 View(model)

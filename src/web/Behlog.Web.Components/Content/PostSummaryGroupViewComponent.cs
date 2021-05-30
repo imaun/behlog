@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Behlog.Core.Extensions;
-using Behlog.Core.Models.System;
-using Behlog.Services.Contracts.Content;
-using Behlog.Web.ViewModels.Content;
+﻿using System.Threading.Tasks;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Behlog.Core.Extensions;
+using Behlog.Web.ViewModels.Content;
+using Behlog.Services.Contracts.Content;
 
 namespace Behlog.Web.Components.Content
 {
@@ -25,7 +21,8 @@ namespace Behlog.Web.Components.Content
             string postType,
             string categorySlug,
             string lang,
-            int take) {
+            int take,
+            string viewName = "") {
 
             var post = await _postService
                 .GetPostSummaryGroupAsync(
@@ -39,10 +36,15 @@ namespace Behlog.Web.Components.Content
                     Content(string.Empty)
                     );
 
-            var result = post.Adapt<PostSummaryGroupViewModel>();
+            var model = post.Adapt<PostSummaryGroupViewModel>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
-                View(result)
+                View(model)
                 );
         }
 

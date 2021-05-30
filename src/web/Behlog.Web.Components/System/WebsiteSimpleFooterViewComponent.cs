@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Behlog.Core.Extensions;
 using Behlog.Services.Contracts.System;
@@ -21,7 +18,10 @@ namespace Behlog.Web.Components.System {
             _websiteOptionService = websiteOptionService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int? categoryId = null) {
+        public async Task<IViewComponentResult> InvokeAsync(
+            int? categoryId = null,
+            string viewName = "") {
+
             var model = new WebsiteFooterViewModel();
 
             if (categoryId.HasValue) {
@@ -43,6 +43,11 @@ namespace Behlog.Web.Components.System {
             var contactInfo = await _websiteOptionService.GetContactInfoAsync();
             if (contactInfo != null)
                 model.ContactInfo = contactInfo.Adapt<WebsiteContactInfoViewModel>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
                 View(model)

@@ -31,19 +31,26 @@ namespace Behlog.Web.Components.Content
         public async Task<IViewComponentResult> InvokeAsync(
             string lang, 
             string postType, 
-            string slug) {
+            string slug,
+            string viewName = "") {
+            
             var post = await _postService
                 .GetPostSummaryAsync(lang, postType, slug);
 
             if (post == null)
                 return await Task.FromResult(Content(string.Empty));
 
-            var result = post.Adapt<PostSummaryViewModel>();
+            var model = post.Adapt<PostSummaryViewModel>();
 
             if (post.ViewPath.IsNotNullOrEmpty())
-                return View(post.ViewPath, result);
+                return View(post.ViewPath, model);
 
-            return View(result);
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
+
+            return View(model);
         }
 
         //public async Task<IViewComponentResult> InvokeAsync(int id) {

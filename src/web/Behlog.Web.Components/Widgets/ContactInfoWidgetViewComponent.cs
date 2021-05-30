@@ -34,7 +34,9 @@ namespace Behlog.Web.Components.Widgets {
                 model.SocialNetworks = socialNetworks.Adapt<WebsiteSocialNetworksViewModel>();
 
             if (viewName.IsNotNullOrEmpty())
-                return View(viewName, model);
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
                 View(model)

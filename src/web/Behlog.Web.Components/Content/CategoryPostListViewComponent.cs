@@ -21,7 +21,8 @@ namespace Behlog.Web.Components.Content
         public async Task<IViewComponentResult> InvokeAsync(
             string postTypeSlug,
             string lang,
-            int pageSize) {
+            int pageSize,
+            string viewName = "") {
 
             CategoryPostListDto result;
             try {
@@ -42,6 +43,11 @@ namespace Behlog.Web.Components.Content
             }
 
             var model = result.Adapt<CategoryPostListViewModel>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
                 View(model)

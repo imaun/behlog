@@ -7,10 +7,10 @@ using Behlog.Web.ViewModels.Content;
 using Behlog.Services.Contracts.Content;
 using Mapster;
 
-namespace Behlog.Web.Components.Widgets
-{
-    public class RelatedPostsWidgetViewComponent: ViewComponent
-    {
+namespace Behlog.Web.Components.Widgets {
+
+    public class RelatedPostsWidgetViewComponent: ViewComponent {
+
         private readonly IPostService _postService;
 
         public RelatedPostsWidgetViewComponent(
@@ -23,8 +23,9 @@ namespace Behlog.Web.Components.Widgets
         public async Task<IViewComponentResult> InvokeAsync(
             string postType,
             string lang = "fa",
-            int pageSize = 10
-            ) {
+            int pageSize = 10,
+            string viewName = "") {
+
             var result = await _postService.GetLatestPostsAsync(
                 postType,
                 null,

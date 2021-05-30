@@ -22,7 +22,8 @@ namespace Behlog.Web.Components.Widgets
 
         public async Task<IViewComponentResult> InvokeAsync(
             string postType,
-            string lang = Language.KEY_fa_IR) {
+            string lang = Language.KEY_fa_IR,
+            string viewName = "") {
 
             var result = await _categoryService.GetPostTypeCategoriesAsync(
                 postType,
@@ -35,6 +36,11 @@ namespace Behlog.Web.Components.Widgets
                 );
 
             var model = result.Adapt<List<CategoryItemViewModel>>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
                 View(model)

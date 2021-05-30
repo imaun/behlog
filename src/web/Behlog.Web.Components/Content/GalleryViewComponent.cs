@@ -22,7 +22,8 @@ namespace Behlog.Web.Components.Content {
             int? categoryId, 
             string lang = Language.KEY_fa_IR,
             bool isComponent = false,
-            int pageSize = 3) {
+            int pageSize = 3,
+            string viewName = "") {
 
             var indexParam = new IndexParams {
                 PageNumber = 1,
@@ -42,6 +43,11 @@ namespace Behlog.Web.Components.Content {
             }
 
             var result = gallery.Adapt<GalleryViewModel>();
+
+            if (viewName.IsNotNullOrEmpty())
+                return await Task.FromResult(
+                    View(viewName, model)
+                    );
 
             return await Task.FromResult(
                 View(result));
