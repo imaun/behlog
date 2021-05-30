@@ -33,8 +33,10 @@ namespace Behlog.Web.Components.System
 
 
         public async Task<IViewComponentResult> InvokeAsync(
-            string viewName = null) {
-            var menu = await _menuService.GetWebsiteMenuAsync();
+            string lang = null,
+            string viewName = null
+        ) {
+            var menu = await _menuService.GetWebsiteMenuAsync(lang);
 
             var result = new WebsiteMenuViewModel(_linkBuilder) {
                 Items = menu.Items.Adapt<IEnumerable<MenuItemViewModel>>(),
