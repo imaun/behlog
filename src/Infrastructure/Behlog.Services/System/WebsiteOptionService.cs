@@ -106,6 +106,7 @@ namespace Behlog.Services.System
             var categoryData = await _repository
                 .GetEnabledOptions(
                     _websiteInfo.Id,
+                    langId,
                     WebsiteOptionCategoryNames.ContactInfo
                 );
 
@@ -118,6 +119,7 @@ namespace Behlog.Services.System
             var categoryData = await _repository
                 .GetEnabledOptions(
                     _websiteInfo.Id,
+                    langId: null,
                     WebsiteOptionCategoryNames.SocialNetwork
                 );
 

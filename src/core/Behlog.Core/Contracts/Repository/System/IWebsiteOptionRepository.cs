@@ -6,7 +6,8 @@ namespace Behlog.Core.Contracts.Repository.System
 {
     public interface IWebsiteOptionRepository: IBaseRepository<WebsiteOption, int> {
         Task<IEnumerable<WebsiteOption>> GetEnabledOptions(
-            int websiteId, 
+            int websiteId,
+            int? langId = null,
             string category = null);
 
         Task<WebsiteOption> GetEnabledByKey(

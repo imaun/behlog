@@ -42,7 +42,7 @@ namespace Behlog.Web.Components.Content {
                     Content(string.Empty));
             }
 
-            var result = gallery.Adapt<GalleryViewModel>();
+            var model = gallery.Adapt<GalleryViewModel>();
 
             if (viewName.IsNotNullOrEmpty())
                 return await Task.FromResult(
@@ -50,7 +50,7 @@ namespace Behlog.Web.Components.Content {
                     );
 
             return await Task.FromResult(
-                View(result));
+                View(model));
         }
     }
 }
