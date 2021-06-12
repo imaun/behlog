@@ -31,11 +31,20 @@ namespace Behlog.Core.Models.System {
         #endregion
     }
 
-    public static class MenuRouteName
-    {
+    public static class MenuRouteName {
+
         public const string Default = "default";
         public const string PostDetaitlById = "postDetailById";
         public const string PostDetail = "postDetail";
         public const string PostIndex = "postIndex";
+        public const string Gallery = "gallery";
+
+        public const string PostIndexByLang = "postIndexByLang";
+        public const string PostDetailByLang = "postDetailByLang";
+        public const string GalleryByLang = "galleryByLang";
+
+        public const string PostIndexEn = "postIndexEn";
+        public const string PostDetailEn = "postDetailEn";
+        public const string GalleryEn = "galleryEn";
     }
 }
