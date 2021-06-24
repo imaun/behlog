@@ -43,6 +43,7 @@ namespace Behlog.Core.Models.System {
         public const string PostDetailByLang = "postDetailByLang";
         public const string GalleryByLang = "galleryByLang";
 
+        public const string DefaultEn = "defaultEn";
         public const string PostIndexEn = "postIndexEn";
         public const string PostDetailEn = "postDetailEn";
         public const string GalleryEn = "galleryEn";

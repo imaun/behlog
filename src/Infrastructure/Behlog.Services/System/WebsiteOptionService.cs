@@ -102,6 +102,14 @@ namespace Behlog.Services.System
             await _repository.SaveChangesAsync();
         }
 
+        public async Task<WebsiteContactInfoDto> GetContactInfoAsync(string langKey) {
+            var lang = _langRepository.GetByLangKeyAsync(langKey);]
+            lang.CheckReferenceIsNull(nameof(lang));
+
+            return await GetContactInfoAsync(lang.Id);
+        }
+
+
         public async Task<WebsiteContactInfoDto> GetContactInfoAsync(int? langId = null) {
             var categoryData = await _repository
                 .GetEnabledOptions(
