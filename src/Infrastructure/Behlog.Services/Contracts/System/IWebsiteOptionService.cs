@@ -7,6 +7,11 @@ namespace Behlog.Services.Contracts.System {
 
         Task<WebsiteOptionResultDto> GetOptionAsync(string optionKey);
 
+        Task<WebsiteOptionResultDto> GetOptionAsync(
+            string optionKey,
+            string lang,
+            bool enabled = true);
+
         Task<WebsiteContactInfoDto> GetContactInfoAsync(int? langId = null);
 
         Task<WebsiteContactInfoDto> GetContactInfoAsync(string langKey);

@@ -46,6 +46,23 @@ namespace Behlog.Services.System
             _setting = setting;
         }
 
+        public async Task<WebsiteOptionResultDto> GetOptionAsync(
+            string optionKey,
+            string lang,
+            bool enabled = true) {
+            var option = await _repository.GetByKeyAsync(_websiteInfo.Id, optionKey, lang);
+            
+            if(option == null)
+                return null;
+
+            if (enabled && option.Status != EntityStatus.Enabled)
+                return null;
+
+            var result = option.Adapt<WebsiteOptionResultDto>();
+            return await Task.FromResult(result);
+        }
+
+
         public async Task<WebsiteOptionResultDto> GetOptionAsync(string optionKey) {
             var option = await _repository.GetEnabledByKey(_websiteInfo.Id, optionKey);
             if (option == null)
@@ -103,7 +120,7 @@ namespace Behlog.Services.System
         }
 
         public async Task<WebsiteContactInfoDto> GetContactInfoAsync(string langKey) {
-            var lang = _langRepository.GetByLangKeyAsync(langKey);]
+            var lang = _langRepository.GetByLangKeyAsync(langKey);
             lang.CheckReferenceIsNull(nameof(lang));
 
             return await GetContactInfoAsync(lang.Id);

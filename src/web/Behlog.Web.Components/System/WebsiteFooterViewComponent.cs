@@ -34,6 +34,7 @@ namespace Behlog.Web.Components.System
             string lang = "fa", 
             int pageSize = 5,
             string viewName = "") {
+
             var model = new WebsiteFooterViewModel();
 
             var posts = await _postService.GetLatestPostsAsync(
@@ -44,11 +45,11 @@ namespace Behlog.Web.Components.System
 
             model.Subscriber = new SubscriberViewModel();
 
-            var contactInfo = await _websiteOptionService.GetContactInfoAsync();
+            var contactInfo = await _websiteOptionService.GetContactInfoAsync(lang);
             if (contactInfo != null)
                 model.ContactInfo = contactInfo.Adapt<WebsiteContactInfoViewModel>();
 
-            var copyrightText = await _websiteOptionService.GetOptionAsync("Copyright");
+            var copyrightText = await _websiteOptionService.GetOptionAsync("Copyright", lang);
             if (copyrightText != null)
                 model.CopyrightText = copyrightText.Value;
 
