@@ -10,8 +10,7 @@ using Behlog.Core.Contracts.Repository.System;
 
 namespace Behlog.Repository.System {
 
-    public class WebsiteOptionRepository
-        : BaseRepository<WebsiteOption, int>, IWebsiteOptionRepository {
+    public class WebsiteOptionRepository: BaseRepository<WebsiteOption, int>, IWebsiteOptionRepository {
 
         public WebsiteOptionRepository(IBehlogContext context) : base(context) {
         }
@@ -20,9 +19,10 @@ namespace Behlog.Repository.System {
             int websiteId, 
             int? langId = null,
             string category = null) {
-            
-            var query = Query()
-                .Where(_=> _.WebsiteId == websiteId)
+
+
+            var query = _dbSet
+                .Where(_ => _.WebsiteId == websiteId)
                 .Where(_ => _.Status == EntityStatus.Enabled);
 
             if (langId.HasValue)
@@ -31,9 +31,11 @@ namespace Behlog.Repository.System {
             if (!string.IsNullOrWhiteSpace(category))
                 query = query.Where(_ => _.Category.ToLower() == category.ToLower());
 
-            return await query
-                .OrderBy(_ => _.OrderNum)
-                .ToListAsync();
+            //query = query.OrderBy(_ => _.OrderNum);
+
+            var result = await query.ToListAsync();
+
+            return result;
         }
 
         public async Task<WebsiteOption> GetEnabledByKey(int websiteId, string key) 

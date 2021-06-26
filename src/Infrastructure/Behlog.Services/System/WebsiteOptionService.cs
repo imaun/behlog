@@ -93,20 +93,23 @@ namespace Behlog.Services.System
 
         public async Task CreateOrUpdateOptionsAsync(WebsiteOptionCategoryDto model) {
             var options = await _factory.MakeAsync(model);
+            
             if(!options.Any()) return;
+            
             options = options.ToList();
+
             foreach(var item in options) {
                 var entity = await _repository.GetOptionAsync(
                     model.Category,
                     item.Key,
                     model.LangId) ?? new WebsiteOption();
+
                 entity.Title = item.Title;
                 entity.WebsiteId = _websiteInfo.Id;
                 entity.Key = item.Key;
                 entity.Value = item.Value;
                 entity.OrderNum = item.OrderNum;
-                if(entity.Id == 0)
-                {
+                if(entity.Id == 0) {
                     entity.Category = model.Category;
                     entity.LangId = model.LangId;
                     entity.Status = EntityStatus.Enabled;
