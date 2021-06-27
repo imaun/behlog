@@ -46,6 +46,7 @@ namespace Behlog.Web.Components.System
             model.Subscriber = new SubscriberViewModel();
 
             var contactInfo = await _websiteOptionService.GetContactInfoAsync(lang);
+            //var contactInfo = _websiteOptionService.GetContactInfo(lang);
             if (contactInfo != null)
                 model.ContactInfo = contactInfo.Adapt<WebsiteContactInfoViewModel>();
 

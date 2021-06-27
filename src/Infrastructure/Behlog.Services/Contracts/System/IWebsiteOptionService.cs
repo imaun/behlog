@@ -12,6 +12,8 @@ namespace Behlog.Services.Contracts.System {
             string lang,
             bool enabled = true);
 
+        WebsiteContactInfoDto GetContactInfo(int? langId);
+
         Task<WebsiteContactInfoDto> GetContactInfoAsync(int? langId = null);
 
         Task<WebsiteContactInfoDto> GetContactInfoAsync(string langKey);

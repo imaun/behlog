@@ -123,16 +123,15 @@ namespace Behlog.Services.System
         }
 
         public async Task<WebsiteContactInfoDto> GetContactInfoAsync(string langKey) {
-            var lang = _langRepository.GetByLangKeyAsync(langKey);
+            var lang = await _langRepository.GetByLangKeyAsync(langKey);
             lang.CheckReferenceIsNull(nameof(lang));
 
             return await GetContactInfoAsync(lang.Id);
         }
 
-
         public async Task<WebsiteContactInfoDto> GetContactInfoAsync(int? langId = null) {
             var categoryData = await _repository
-                .GetEnabledOptions(
+                .GetEnabledOptionsAsync(
                     _websiteInfo.Id,
                     langId,
                     WebsiteOptionCategoryNames.ContactInfo
@@ -143,9 +142,21 @@ namespace Behlog.Services.System
                 .ExtractContactInfo();
         }
 
+        public WebsiteContactInfoDto GetContactInfo(int? langId) {
+            var categoryData = _repository.GetEnabledOptions(
+                _websiteInfo.Id,
+                langId,
+                WebsiteOptionCategoryNames.ContactInfo
+            );
+
+            return categoryData?
+                .ToList()
+                .ExtractContactInfo();
+        }
+
         public async Task<WebsiteSocialNetworkDto> GetSocialNetworksAsync() {
             var categoryData = await _repository
-                .GetEnabledOptions(
+                .GetEnabledOptionsAsync(
                     _websiteInfo.Id,
                     langId: null,
                     WebsiteOptionCategoryNames.SocialNetwork

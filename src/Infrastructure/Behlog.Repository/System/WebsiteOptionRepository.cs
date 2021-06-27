@@ -15,11 +15,10 @@ namespace Behlog.Repository.System {
         public WebsiteOptionRepository(IBehlogContext context) : base(context) {
         }
 
-        public async Task<IEnumerable<WebsiteOption>> GetEnabledOptions(
+        public async Task<IEnumerable<WebsiteOption>> GetEnabledOptionsAsync(
             int websiteId, 
             int? langId = null,
             string category = null) {
-
 
             var query = _dbSet
                 .Where(_ => _.WebsiteId == websiteId)
@@ -31,11 +30,31 @@ namespace Behlog.Repository.System {
             if (!string.IsNullOrWhiteSpace(category))
                 query = query.Where(_ => _.Category.ToLower() == category.ToLower());
 
-            //query = query.OrderBy(_ => _.OrderNum);
+            query = query.OrderBy(_ => _.OrderNum);
 
             var result = await query.ToListAsync();
 
             return result;
+        }
+
+
+        public IEnumerable<WebsiteOption> GetEnabledOptions(
+            int websiteId,
+            int? langId = null,
+            string category = null) {
+            var query = _dbSet
+                .Where(_ => _.WebsiteId == websiteId)
+                .Where(_ => _.Status == EntityStatus.Enabled);
+
+            if (langId.HasValue)
+                query = query.Where(_ => _.LangId == langId.Value);
+
+            if (!string.IsNullOrWhiteSpace(category))
+                query = query.Where(_ => _.Category.ToLower() == category.ToLower());
+
+            query = query.OrderBy(_ => _.OrderNum);
+
+            return query.ToList();
         }
 
         public async Task<WebsiteOption> GetEnabledByKey(int websiteId, string key) 
