@@ -10,9 +10,10 @@ using Behlog.Web.ViewModels.Feature;
 using Behlog.Web.ViewModels.System;
 using Mapster;
 
-namespace Behlog.Web.Components.System
-{
+namespace Behlog.Web.Components.System {
+
     public class WebsiteFooterViewComponent : ViewComponent {
+
         private readonly IPostService _postService;
         private readonly IWebsiteOptionService _websiteOptionService;
 
