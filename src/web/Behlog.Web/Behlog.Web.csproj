@@ -40,7 +40,6 @@
     <ProjectReference Include="..\..\Core\Behlog.Resources\Behlog.Resources.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Behlog.Extensions\Behlog.Extensions.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Behlog.Services\Behlog.Services.csproj" />
-    <ProjectReference Include="..\Behlog.Web.Admin\Behlog.Web.Admin.csproj" />
     <ProjectReference Include="..\Behlog.Web.Common\Behlog.Web.Common.csproj" />
     <ProjectReference Include="..\Behlog.Web.Identity\Behlog.Web.Identity.csproj" />
     <ProjectReference Include="..\Behlog.Web.ViewModels\Behlog.Web.ViewModels.csproj" />

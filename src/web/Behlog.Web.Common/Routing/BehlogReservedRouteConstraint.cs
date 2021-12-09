@@ -32,6 +32,7 @@ namespace Behlog.Web.Common.Routing {
 
         private static List<string> _ReservedWords => new List<string> {
             "admin",
+            "manage",
             "identity",
             "account",
             "login",
